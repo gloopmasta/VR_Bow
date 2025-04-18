@@ -37,7 +37,7 @@ public class PotentiometerReader : MonoBehaviour
             }
         }
 
-        movementSpeed = maxSpeed * Mathf.Pow(potValue, accelerationRate); // Exponential scaling
+        movementSpeed = maxSpeed * Mathf.Pow((potValue -0.5f), accelerationRate); // Exponential scaling
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 

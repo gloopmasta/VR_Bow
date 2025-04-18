@@ -12,4 +12,5 @@ potVal = analogRead(A0);
 adjustedVal = (float)potVal / 1023;
  
 Serial.println(potVal);
+delay(5);
 }
