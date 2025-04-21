@@ -13,6 +13,6 @@ void setup() {
 
 void loop() {
   int potValue = analogRead(A0); // Read potentiometer value
-  radio.write(&potValue, sizeof(potValue)); // Transmit value
-  delay(500); // Wait for half a second
+  radio.write(&potValue, sizeof(potValue)); // pointer adress of potvalue (&) and the size of potvalue in bytes
+  delay(0); // Wait for half a second
 }
