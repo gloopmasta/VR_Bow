@@ -1,4 +1,4 @@
-#include <SPI.h>
+a very #include <SPI.h>
 #include <RF24.h>
 
 RF24 radio(9, 10); // CE, CSN
@@ -13,6 +13,9 @@ void setup() {
 
 void loop() {
   int potValue = analogRead(A0); // Read potentiometer value
+
+  radio.write(&delayValue, sizeof(delayValue));
+
   radio.write(&potValue, sizeof(potValue)); // pointer adress of potvalue (&) and the size of potvalue in bytes
   delay(0); // Wait for half a second
 }

@@ -15,7 +15,10 @@ void setup() {
 void loop() {
   if (radio.available()) {
     int potValue;
+    int delayValue;
     radio.read(&potValue, sizeof(potValue));
+    radio.read(&delayValue, sizeof(delayValue));
+
     Serial.println(potValue);
   }
 }
