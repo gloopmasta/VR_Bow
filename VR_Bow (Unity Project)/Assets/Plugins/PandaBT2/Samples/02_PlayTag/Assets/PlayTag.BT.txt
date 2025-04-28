@@ -1,0 +1,22 @@
+// Play tag
+#PlayTag fallback 
+	#ChasePlayer
+	#AvoidPlayer 
+	#Idle
+
+// Move to the player while we are 'it'.
+#ChasePlayer while IsIt sequence
+	SetDestination @playerPosition
+	MoveTo @destination
+	Wait 1.0
+
+// Avoid the player while we are not 'it'.
+#AvoidPlayer while not IsIt sequence
+	IsPlayerNear
+	SetDestination @randomPosition
+	IsDirectionSafe
+	MoveTo @destination
+
+// Idle when we are not 'it' and the player is far.
+#Idle while (!IsIt & !IsPlayerNear)
+	Running // Do nothing.

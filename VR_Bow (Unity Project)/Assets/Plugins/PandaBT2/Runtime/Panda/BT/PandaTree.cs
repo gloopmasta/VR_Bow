@@ -1,0 +1,68 @@
+﻿/*
+Copyright (c) 2015 Eric Begue (ericbeg@gmail.com)
+
+This source file is part of the Panda BT package, which is licensed under
+the Unity's standard Unity Asset Store End User License Agreement ("Unity-EULA").
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+
+using PandaBT.Runtime;
+
+namespace PandaBT
+{
+    public class PandaTree
+    {
+        public BTTreeReference tree;
+
+
+        /// <summary>
+        /// The tree name
+        /// </summary>
+        public string name
+        {
+            get
+            {
+                return tree.name;
+            }
+        }
+
+        /// <summary>
+        /// Tree status
+        /// </summary>
+        public PandaBT.Status status
+        {
+            get
+            {
+                return tree.status;
+            }
+        }
+
+        /// <summary>
+        /// Tick the tree
+        /// </summary>
+        public void Tick()
+        {
+            tree.Tick();
+        }
+
+        /// <summary>
+        /// Reset the tree
+        /// </summary>
+        public void Reset()
+        {
+            tree.Reset();
+        }
+
+
+    
+    }
+}
+

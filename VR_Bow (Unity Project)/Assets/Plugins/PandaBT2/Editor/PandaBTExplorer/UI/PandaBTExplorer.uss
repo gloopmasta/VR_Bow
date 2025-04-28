@@ -1,0 +1,39 @@
+VisualElement {
+}
+
+.task {
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+}
+
+.name {
+    -unity-font-style: bold;
+}
+
+.type {
+    color: rgb(78, 201, 158);
+}
+
+.param {
+    color: rgb(154, 201, 197);
+}
+
+.declaringType {
+}
+
+#SearchBar > DropdownField > Label {
+    min-width: 0;
+}
+
+#SearchBar > DropdownField > .unity-base-popup-field__input {
+    flex-grow: 0;
+    min-width: 268px;
+}
+
+#SearchBar > * {
+    margin-right: 7px;
+}
+
+#signature :hover {
+    background-color: rgba(70, 96, 124, 255);
+}

@@ -1,0 +1,28 @@
+{
+    "name": "PBT2PandaBehaviourEditor",
+    "rootNamespace": "",
+    "references": [
+        "PBT2PandaBehaviour",
+        "PBT2UnityRuntime",
+        "PBT2UnityEditor",
+        "PBT2Core",
+        "Unity.Nuget.Mono-Cecil"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.nuget.mono-cecil",
+            "expression": "",
+            "define": "PANDA_BT_WITH_CECIL"
+        }
+    ],
+    "noEngineReferences": false
+}

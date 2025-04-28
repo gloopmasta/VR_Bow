@@ -1,0 +1,25 @@
+{
+    "name": "PBT2UnityRuntime",
+    "rootNamespace": "",
+    "references": [
+        "PBT2Core",
+        "Unity.VisualStudio.Editor",
+        "Unity.VisualScripting.Core",
+        "Unity.VisualScripting.Flow"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "",
+            "define": "PANDA_BT_WITH_VISUAL_SCRIPTING"
+        }
+    ],
+    "noEngineReferences": false
+}
