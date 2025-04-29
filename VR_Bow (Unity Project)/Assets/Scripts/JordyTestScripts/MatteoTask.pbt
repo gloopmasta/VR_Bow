@@ -18,6 +18,7 @@
 
 
 
-#Rotate	sequence
-	Rotate 900.0
+#Rotate	random
+	Rotate -45.0
+	Rotate 45.0
 	
