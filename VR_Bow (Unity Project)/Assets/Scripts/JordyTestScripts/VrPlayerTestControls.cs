@@ -62,6 +62,15 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightTrigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c3ee293-566a-4cdc-b832-1ddf1f18c1b5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5130d5e9-a95d-464f-8654-a7b4c750403e"",
+                    ""path"": ""<OculusTouchController>{RightHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,6 +162,7 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
         m_VrPlayerController_SetMin = m_VrPlayerController.FindAction("SetMin", throwIfNotFound: true);
         m_VrPlayerController_SetMax = m_VrPlayerController.FindAction("SetMax", throwIfNotFound: true);
         m_VrPlayerController_Shoot = m_VrPlayerController.FindAction("Shoot", throwIfNotFound: true);
+        m_VrPlayerController_RightTrigger = m_VrPlayerController.FindAction("RightTrigger", throwIfNotFound: true);
     }
 
     ~@VrPlayerTestControls()
@@ -212,6 +233,7 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_VrPlayerController_SetMin;
     private readonly InputAction m_VrPlayerController_SetMax;
     private readonly InputAction m_VrPlayerController_Shoot;
+    private readonly InputAction m_VrPlayerController_RightTrigger;
     public struct VrPlayerControllerActions
     {
         private @VrPlayerTestControls m_Wrapper;
@@ -220,6 +242,7 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
         public InputAction @SetMin => m_Wrapper.m_VrPlayerController_SetMin;
         public InputAction @SetMax => m_Wrapper.m_VrPlayerController_SetMax;
         public InputAction @Shoot => m_Wrapper.m_VrPlayerController_Shoot;
+        public InputAction @RightTrigger => m_Wrapper.m_VrPlayerController_RightTrigger;
         public InputActionMap Get() { return m_Wrapper.m_VrPlayerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +264,9 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @RightTrigger.started += instance.OnRightTrigger;
+            @RightTrigger.performed += instance.OnRightTrigger;
+            @RightTrigger.canceled += instance.OnRightTrigger;
         }
 
         private void UnregisterCallbacks(IVrPlayerControllerActions instance)
@@ -257,6 +283,9 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @RightTrigger.started -= instance.OnRightTrigger;
+            @RightTrigger.performed -= instance.OnRightTrigger;
+            @RightTrigger.canceled -= instance.OnRightTrigger;
         }
 
         public void RemoveCallbacks(IVrPlayerControllerActions instance)
@@ -280,5 +309,6 @@ public partial class @VrPlayerTestControls: IInputActionCollection2, IDisposable
         void OnSetMin(InputAction.CallbackContext context);
         void OnSetMax(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnRightTrigger(InputAction.CallbackContext context);
     }
 }
