@@ -17,7 +17,7 @@ public class DriveControls : MonoBehaviour
     [SerializeField] float rotOffset = 90f;
 
     [Header("Bash Settings")]
-    [SerializeField] float bashStrength;
+    [SerializeField] float bashStrength = 5f;
     [SerializeField] int bashDamage = 1;
 
     [Header("Jump Settings")]
@@ -46,9 +46,14 @@ public class DriveControls : MonoBehaviour
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            if (leftVelocity.z >= 2.5f)
+            if (leftVelocity.z >= 2.5f) //swing forward
             { 
                 Bash();
+                TriggerHapticFeedback();
+            }
+            if (leftVelocity.y >= 2.5f)
+            {
+                Jump();
                 TriggerHapticFeedback();
             }
         }
@@ -56,11 +61,15 @@ public class DriveControls : MonoBehaviour
 
     void Bash()
     {
-        //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * bashStrength, ForceMode.Impulse);
         TriggerHapticFeedback();
         Debug.Log("Bashed");
     }
 
+    void Jump()
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+    }
     void Drive()
     {
         // Only accelerate if below max speed
