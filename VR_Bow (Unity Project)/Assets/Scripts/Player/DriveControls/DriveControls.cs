@@ -12,16 +12,25 @@ public class DriveControls : MonoBehaviour
     [Header("Speed Settings")]
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float maxSpeed = 100f;
-    [SerializeField] float turnSpeed;
-    [SerializeField] float driftSpeed;
+    
     [SerializeField] float rotOffset = 90f;
 
     [Header("Bash Settings")]
     [SerializeField] float bashStrength = 5f;
     [SerializeField] int bashDamage = 1;
+    [SerializeField] private float bashCooldown = 1.5f; // Cooldown duration in seconds
+    private float nextBashTime = 0f; // Time when the next bash is allowed
 
     [Header("Jump Settings")]
     [SerializeField] float jumpStrength = 5f;
+
+    [Header("Steering & drift")]
+    [SerializeField] float turnSpeed;
+    [SerializeField] float driftSpeed;
+    private float currentSteeringInput = 0f;
+    [SerializeField] float steeringSmoothness = 5f; // Adjust for desired smoothness
+    [SerializeField] float deadZone = 20f;
+    private float lastSteeringInput;
 
 
     [Header("Scripts")]
@@ -38,21 +47,24 @@ public class DriveControls : MonoBehaviour
     {
         UpdateControllerData();
         Drive();
-        Steer();
-
+        Steer2();
     }
 
     private void UpdateControllerData()
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            if (leftVelocity.z >= 2.5f) //swing forward
-            { 
+            //BASH CHECK
+            if (leftVelocity.z >= 2.5f && Time.time >= nextBashTime) // Swing forward and cooldown check
+            {
                 Bash();
                 TriggerHapticFeedback();
+                nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
             }
+            //JUMP CHECK
             if (leftVelocity.y >= 2.5f)
             {
+
                 Jump();
                 TriggerHapticFeedback();
             }
@@ -85,24 +97,97 @@ public class DriveControls : MonoBehaviour
         //TODO: decellerate
     }
 
-    private float currentSteeringInput = 0f;
-    public float steeringSmoothness = 5f; // Adjust for desired smoothness
+
 
     void Steer()
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
-            
             Vector3 eulerRotation = deviceRotation.eulerAngles;
-            float targetYaw = eulerRotation.y + rotOffset;
-            float targetSteeringInput = Mathf.DeltaAngle(0f, targetYaw);
 
-            // Smoothly interpolate between current and target steering input
-            currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
+            // Convert eulerRotation.x from 0–360 to -180–180
+            float pitch = eulerRotation.x + rotOffset;
 
-            transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+
+
+            // Check if the adjusted pitch is outside the dead zone -> then rotate
+            if (Mathf.Abs(pitch) > deadZone + rotOffset) // Ansolute to check both - and +, chezck the absolute value ifg it's minus basically
+            {
+                // Calculate steering input
+                float targetSteeringInput = Mathf.DeltaAngle(0f, pitch);
+
+                // Smoothly interpolate between current and target steering input
+                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
+
+                // Apply rotation
+                transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+
+                lastSteeringInput = currentSteeringInput;
+            }
+            else
+            {
+                // Within dead zone; smoothly return to zero
+                currentSteeringInput = Mathf.Lerp(lastSteeringInput, 0f, Time.deltaTime * steeringSmoothness);
+
+                //transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+            }
         }
     }
+
+    void Steer2()
+    {
+        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        {
+            Vector3 eulerRotation = deviceRotation.eulerAngles;
+
+            // Convert eulerRotation.x from 0–360 to -180–180
+            float pitch = eulerRotation.x;
+            if (pitch > 180f) pitch -= 360f;
+
+            // Apply rotation offset
+            float adjustedPitch = pitch;
+
+            // Calculate the absolute value for comparison
+            float absPitch = Mathf.Abs(adjustedPitch);
+
+            // Define dead zone threshold
+            float deadZone = 20f;
+
+            Debug.Log("adjusted pitch: " + pitch);
+
+            // Determine steering input based on dead zone
+            float steeringInput = 0f;
+            if (absPitch > deadZone)
+            {
+                // Calculate the amount beyond the dead zone
+                float excess = absPitch - deadZone;
+
+                // Optionally, define a maximum range beyond the dead zone for full input
+                float maxExcess = 30f; // Adjust as needed
+
+                // Calculate a scaling factor (0 to 1)
+                float scale = Mathf.Clamp01(excess / maxExcess);
+
+                // Determine the direction (-1 or 1)
+                float direction = Mathf.Sign(adjustedPitch);
+
+                // Calculate the target steering input
+                float targetSteeringInput = direction * scale;
+
+                // Smoothly interpolate between current and target steering input
+                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
+
+                // Apply rotation
+                transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+            }
+            else
+            {
+                // Within dead zone; smoothly return to zero
+                currentSteeringInput = Mathf.Lerp(currentSteeringInput, 0f, Time.deltaTime * steeringSmoothness);
+            }
+        }
+    }
+
 
 
     public void TriggerHapticFeedback()

@@ -595,17 +595,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0.14
-  maxSpeed: 14.6
-  turnSpeed: 2
-  driftSpeed: 5
-  rotOffset: 90
-  bashStrength: 82.34
+  maxSpeed: 14
+  rotOffset: 180
+  bashStrength: 100
   bashDamage: 1
+  bashCooldown: 1.5
   jumpStrength: 22.72
+  turnSpeed: 1
+  driftSpeed: 5
+  steeringSmoothness: 5
+  deadZone: 20
   controllerData: {fileID: 154189351}
   revStrength: 1
   accelerationRate: 1.002
-  steeringSmoothness: 5
 --- !u!136 &154189353
 CapsuleCollider:
   m_ObjectHideFlags: 0
