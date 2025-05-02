@@ -23,6 +23,8 @@ public class DriveControls : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] float jumpStrength = 5f;
+    [SerializeField] float jumpCooldown = 0.5f;
+    private float nextJumpTime = 0f;
 
     [Header("Steering & drift")]
     [SerializeField] float turnSpeed;
@@ -35,6 +37,7 @@ public class DriveControls : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] XRControllerData controllerData;
+    [SerializeField] BoxCollider groundCollider;
 
     //How much the handle is turned
     [SerializeField] float revStrength = 1f;
@@ -59,16 +62,19 @@ public class DriveControls : MonoBehaviour
             {
                 Bash();
                 TriggerHapticFeedback();
-                nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
             }
             //JUMP CHECK
             if (leftVelocity.y >= 2.5f)
             {
-
-                Jump();
-                TriggerHapticFeedback();
+                if(CanJump())
+                { 
+                    Jump();
+                    TriggerHapticFeedback();
+                }
             }
         }
+        nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
+        nextJumpTime = Time.time + jumpCooldown;
     }
 
     void Bash()
@@ -78,6 +84,19 @@ public class DriveControls : MonoBehaviour
         Debug.Log("Bashed");
     }
 
+    bool CanJump()
+    {
+        GroundCheck  gc = GetComponentInChildren<GroundCheck>();
+        Debug.Assert(gc != null, "did not find GroundCheckScript in children");
+
+        // If you can jump AND your cooldown is complete
+        if (gc != null && gc.IsGrounded() && Time.time >= nextJumpTime)
+        {
+            return true;
+        }
+
+        return false;
+    }
     void Jump()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(transform.up * jumpStrength, ForceMode.Impulse);
@@ -134,7 +153,7 @@ public class DriveControls : MonoBehaviour
         }
     }
 
-    void Steer2()
+    void Steer2() //"smooth" steer
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
