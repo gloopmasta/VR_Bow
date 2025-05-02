@@ -5,13 +5,13 @@ public class BowSimulator : MonoBehaviour
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
-    public Transform shootPoint; // Position only
+    public Transform shootPoint;
     public float maxShootForce = 20f;
     public InputActionAsset inputActions;
 
     [Header("Hand Transforms")]
-    public Transform leftHand;   // Bow hand (used for aiming)
-    public Transform rightHand;  // Pulling hand (used for drawing)
+    public Transform leftHand;   // Aiming
+    public Transform rightHand;  // Drawing
 
     [Header("Draw Settings")]
     public float maxDrawDistance = 0.5f;
@@ -21,6 +21,10 @@ public class BowSimulator : MonoBehaviour
     public int trajectorySteps = 30;
     public float timeStep = 0.1f;
 
+    [Header("Animation")]
+    public Animator bowAnimator;
+    private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
+
     private InputAction triggerAction;
     private float flexValue = 0f;
     private bool isDrawing = false;
@@ -29,7 +33,6 @@ public class BowSimulator : MonoBehaviour
     void OnEnable()
     {
         var gameplayMap = inputActions.FindActionMap("VrPlayerController");
-
         triggerAction = gameplayMap.FindAction("RightTrigger");
 
         gameplayMap.Enable();
@@ -42,7 +45,6 @@ public class BowSimulator : MonoBehaviour
     {
         triggerAction.started -= _ => StartDrawing();
         triggerAction.canceled -= _ => ReleaseArrow();
-
         triggerAction.Disable();
     }
 
@@ -53,25 +55,28 @@ public class BowSimulator : MonoBehaviour
             float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
             flexValue = Mathf.Clamp01(drawDistance / maxDrawDistance);
 
-            // Use left hand's forward direction for aiming
+            // Manually scrub the charge animation
+            if (bowAnimator != null)
+            {
+                bowAnimator.Play("Charge", 0, flexValue); // Replace "Charge" with your actual state name if different
+                bowAnimator.speed = 0f;
+            }
+
+            // Update trajectory line
             Vector3 launchDir = leftHand.forward;
             float previewForce = flexValue * maxShootForce;
             Vector3 launchVel = launchDir * previewForce;
 
             DrawTrajectory(shootPoint.position, launchVel);
-
             Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
         }
         else
         {
-            // Hide the trajectory line when not drawing
+            // Hide trajectory when not drawing
             if (trajectoryLine != null && trajectoryLine.enabled)
                 trajectoryLine.enabled = false;
         }
     }
-
-
-
 
     void StartDrawing()
     {
@@ -91,6 +96,10 @@ public class BowSimulator : MonoBehaviour
         Shoot();
         isDrawing = false;
         flexValue = 0f;
+
+        if (trajectoryLine != null)
+            trajectoryLine.enabled = false;
+
         Debug.Log("Arrow released.");
     }
 
@@ -98,14 +107,17 @@ public class BowSimulator : MonoBehaviour
     {
         float shootForce = flexValue * maxShootForce;
         Vector3 shootDirection = leftHand.forward;
-        Debug.Log("Arrow launched with force: " + shootForce);
 
         GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
         Arrow arrow = arrowObj.GetComponent<Arrow>();
         if (arrow != null)
-        {
             arrow.Launch(shootDirection, shootForce, flexValue);
-           
+
+        // Trigger shoot animation
+        if (bowAnimator != null)
+        {
+            bowAnimator.speed = 1f; // Resume animation playback speed
+            bowAnimator.SetTrigger(ShootTrigger);
         }
     }
 
@@ -114,27 +126,16 @@ public class BowSimulator : MonoBehaviour
         if (trajectoryLine == null) return;
 
         trajectoryLine.positionCount = trajectorySteps;
-
         bool ignoreGravity = flexValue >= 0.9f;
 
         for (int i = 0; i < trajectorySteps; i++)
         {
             float t = i * timeStep;
-            Vector3 point;
-
-            if (ignoreGravity)
-            {
-                // Straight line (no gravity)
-                point = startPos + startVel * t;
-            }
-            else
-            {
-                // Parabolic arc with gravity
-                point = startPos + startVel * t + 0.5f * Physics.gravity * (t * t);
-            }
+            Vector3 point = ignoreGravity
+                ? startPos + startVel * t
+                : startPos + startVel * t + 0.5f * Physics.gravity * (t * t);
 
             trajectoryLine.SetPosition(i, point);
         }
     }
-
 }

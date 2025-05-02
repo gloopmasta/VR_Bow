@@ -2,48 +2,52 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private float speed;
-    private Rigidbody rb;
+    public float lifetime = 5f;
+    private Vector3 velocity;
+    private bool useGravity;
+    private float timer;
 
-    // Rotation correction to align the model properly (adjust if needed)
-    private static readonly Quaternion rotationCorrection = Quaternion.Euler(0f, -90f, 90f);
+    // Rotation correction if needed (e.g., to align model)
+    private static readonly Quaternion rotationCorrection = Quaternion.Euler(-90f, 0f, 0f);
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // Called by Bow when the arrow is fired
     public void Launch(Vector3 direction, float force, float flexRatio)
     {
-        speed = force;
-        rb.velocity = direction * speed;
-        rb.useGravity = flexRatio < 0.9f;
-
-        // Set initial rotation corrected
-        if (rb.velocity.sqrMagnitude > 0.01f)
-        {
-            transform.rotation = Quaternion.LookRotation(rb.velocity) * rotationCorrection;
-        }
+        velocity = direction.normalized * force;
+        useGravity = flexRatio < 0.9f;
+        transform.rotation = Quaternion.LookRotation(velocity) * rotationCorrection;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (rb.velocity.sqrMagnitude > 0.01f)
+        float dt = Time.unscaledDeltaTime;
+
+        // Apply gravity manually if needed
+        if (useGravity)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(rb.velocity) * rotationCorrection;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
+            velocity += Physics.gravity * dt;
+        }
+
+        // Move manually
+        transform.position += velocity * dt;
+
+        // Smooth rotation
+        if (velocity.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(velocity) * rotationCorrection;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, dt * 10f);
+        }
+
+        // Despawn after lifetime
+        timer += dt;
+        if (timer > lifetime)
+        {
+            Destroy(gameObject);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hit: " + collision.gameObject.name);
-        Despawn();
-    }
-
-    public void Despawn()
-    {
-        Destroy(gameObject); // Replace with object pooling if needed
+        Destroy(gameObject); // You can replace this with object pooling
     }
 }
