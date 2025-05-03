@@ -27,12 +27,17 @@ public class DriveControls : MonoBehaviour
     private float nextJumpTime = 0f;
 
     [Header("Steering & drift")]
-    [SerializeField] float turnSpeed;
+    [SerializeField] bool isDrifting = false;
+    [SerializeField] float turnSpeed = 1f;
+    [SerializeField] float currentTurnSpeed = 1f;
     [SerializeField] float driftSpeed;
+    [SerializeField] float driftCooldown;
+    private float nextDriftTime = 0f;
     private float currentSteeringInput = 0f;
     [SerializeField] float steeringSmoothness = 5f; // Adjust for desired smoothness
     [SerializeField] float deadZone = 20f;
     private float lastSteeringInput;
+    private float pitch;
 
 
     [Header("Scripts")]
@@ -50,7 +55,8 @@ public class DriveControls : MonoBehaviour
     {
         UpdateControllerData();
         Drive();
-        Steer2();
+        Steer();
+        Drift();
     }
 
     private void UpdateControllerData()
@@ -62,19 +68,17 @@ public class DriveControls : MonoBehaviour
             {
                 Bash();
                 TriggerHapticFeedback();
+                nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
             }
             //JUMP CHECK
-            if (leftVelocity.y >= 2.5f)
+            if (leftVelocity.y >= 2.5f && Time.time >= nextJumpTime && CanJump())
             {
-                if(CanJump())
-                { 
-                    Jump();
-                    TriggerHapticFeedback();
-                }
+                Debug.Log("JUMPED");
+                Jump();
+                TriggerHapticFeedback();
+                nextJumpTime = Time.time + jumpCooldown;
             }
         }
-        nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
-        nextJumpTime = Time.time + jumpCooldown;
     }
 
     void Bash()
@@ -90,11 +94,12 @@ public class DriveControls : MonoBehaviour
         Debug.Assert(gc != null, "did not find GroundCheckScript in children");
 
         // If you can jump AND your cooldown is complete
-        if (gc != null && gc.IsGrounded() && Time.time >= nextJumpTime)
+        if (gc != null && gc.IsGrounded())
         {
             return true;
         }
 
+        Debug.Log("player is not grounded");
         return false;
     }
     void Jump()
@@ -116,7 +121,52 @@ public class DriveControls : MonoBehaviour
         //TODO: decellerate
     }
 
+    private void Drift()
+    {
+        if (isDrifting)
+        {
+            HandleDrifting();
+            return;
+        }
 
+        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
+        {
+            if (Mathf.Abs(leftVelocity.x) >= 2.5f && Time.time >= nextDriftTime) // If swing sideways left or right more than 2.5f velocity
+            {
+                isDrifting = true;
+
+                Debug.Log("started a drift");
+                TriggerHapticFeedback();
+                nextDriftTime = Time.time + driftCooldown;
+            }
+        }
+    }
+
+    private void HandleDrifting()
+    {
+        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        {
+            if (Mathf.Abs(pitch) > deadZone + rotOffset) // outside of deadzone
+            {
+                currentTurnSpeed = driftSpeed;
+            }
+            else //within deadzone -> stop drifting
+            {
+                currentTurnSpeed = turnSpeed;
+                isDrifting = false;
+            }
+        }
+    }
+
+    private Vector3 GetControllerRotation()
+    {
+        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        {
+            return deviceRotation.eulerAngles;
+        }
+
+        return Vector3.zero;
+    }
 
     void Steer()
     {
@@ -125,9 +175,9 @@ public class DriveControls : MonoBehaviour
             Vector3 eulerRotation = deviceRotation.eulerAngles;
 
             // Convert eulerRotation.x from 0–360 to -180–180
-            float pitch = eulerRotation.x + rotOffset;
+            pitch = eulerRotation.x + rotOffset;
 
-
+            Debug.Log("Pitch: "+pitch);
 
             // Check if the adjusted pitch is outside the dead zone -> then rotate
             if (Mathf.Abs(pitch) > deadZone + rotOffset) // Ansolute to check both - and +, chezck the absolute value ifg it's minus basically
@@ -139,7 +189,7 @@ public class DriveControls : MonoBehaviour
                 currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
 
                 // Apply rotation
-                transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
 
                 lastSteeringInput = currentSteeringInput;
             }
@@ -160,7 +210,7 @@ public class DriveControls : MonoBehaviour
             Vector3 eulerRotation = deviceRotation.eulerAngles;
 
             // Convert eulerRotation.x from 0–360 to -180–180
-            float pitch = eulerRotation.x;
+            pitch = eulerRotation.x;
             if (pitch > 180f) pitch -= 360f;
 
             // Apply rotation offset
@@ -197,7 +247,7 @@ public class DriveControls : MonoBehaviour
                 currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
 
                 // Apply rotation
-                transform.Rotate(Vector3.up, currentSteeringInput * turnSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
             }
             else
             {
