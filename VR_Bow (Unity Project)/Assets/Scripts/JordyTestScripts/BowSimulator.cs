@@ -1,91 +1,168 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BowSimulator : MonoBehaviour
 {
-    public GameObject projectilePrefab;        // Prefab of the arrow or object to shoot
-    public Transform shootPoint;               // Position and direction to shoot from
-    public float maxShootForce = 20f;          // Maximum force applied when fully stretched
+    [Header("Arrow & Shooting")]
+    public GameObject projectilePrefab;
+    public Transform shootPoint;
+    public float maxShootForce = 20f;
+    public InputActionAsset inputActions;
 
-    public InputActionAsset inputActions;      // Reference to the Input Actions asset in the Inspector
+    [Header("Hand Transforms")]
+    public Transform leftHand;   // Aiming
+    public Transform rightHand;  // Drawing
 
-    private InputAction flexAction;            // Controls the stretch input
-    private InputAction setMinAction;          // Button to set the relaxed position (min)
-    private InputAction setMaxAction;          // Button to set the full draw position (max)
-    private InputAction shootAction;           // Button to shoot
+    [Header("Draw Settings")]
+    public float maxDrawDistance = 0.5f;
 
-    private float flexValue = 0f;              // Current simulated flex amount
-    private float minValue = 0f;               // Saved minimum flex position
-    private float maxValue = 1f;               // Saved maximum flex position
+    [Header("Trajectory Preview")]
+    public LineRenderer trajectoryLine;
+    public int trajectorySteps = 30;
+    public float timeStep = 0.1f;
+
+    [Header("Animation")]
+    public Animator bowAnimator;
+    private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
+
+    [Header("Bowstring")]
+    public LineRenderer bowstringLine;
+    public Transform stringTop;    // Top of bow
+    public Transform stringBottom; // Bottom of bow
+
+    private InputAction triggerAction;
+    private float flexValue = 0f;
+    private bool isDrawing = false;
+    private Vector3 drawStartPosition;
 
     void OnEnable()
     {
-        // Find the action map by name — must match the one in the Input Actions asset
         var gameplayMap = inputActions.FindActionMap("VrPlayerController");
+        triggerAction = gameplayMap.FindAction("RightTrigger");
 
-        // Find individual actions by name — make sure they exist in the action map
-        flexAction = gameplayMap.FindAction("Flex");
-        setMinAction = gameplayMap.FindAction("SetMin");
-        setMaxAction = gameplayMap.FindAction("SetMax");
-        shootAction = gameplayMap.FindAction("Shoot");
-
-        // Enable the whole map to start listening for input
         gameplayMap.Enable();
 
-        // Register callbacks for the button actions
-        setMinAction.performed += ctx => SetMin();
-        setMaxAction.performed += ctx => SetMax();
-        shootAction.performed += ctx => Shoot();
+        triggerAction.started += _ => StartDrawing();
+        triggerAction.canceled += _ => ReleaseArrow();
     }
 
     void OnDisable()
     {
-        // Disable all actions when this component is disabled to avoid memory leaks
-        flexAction.Disable();
-        setMinAction.Disable();
-        setMaxAction.Disable();
-        shootAction.Disable();
+        triggerAction.started -= _ => StartDrawing();
+        triggerAction.canceled -= _ => ReleaseArrow();
+        triggerAction.Disable();
     }
 
     void Update()
     {
-        // Read the 1D axis input from the flex action (e.g. arrow keys or analog)
-        float axisInput = flexAction.ReadValue<float>();
+        if (isDrawing)
+        {
+            float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
+            flexValue = Mathf.Clamp01(drawDistance / maxDrawDistance);
 
-        // Adjust the flex value based on input, clamped between 0 and 1
-        flexValue = Mathf.Clamp01(flexValue + axisInput * Time.deltaTime);
+            // Animate charge by scrubbing normalized time
+            if (bowAnimator != null)
+            {
+                bowAnimator.Play("Charge", 0, flexValue); // Make sure this matches your animation state's name
+                bowAnimator.speed = 0f;
+            }
 
-        Debug.Log($"Flex Value: {flexValue:F2}");
+            // Show trajectory
+            Vector3 launchDir = leftHand.forward;
+            float previewForce = flexValue * maxShootForce;
+            Vector3 launchVel = launchDir * previewForce;
+
+            DrawTrajectory(shootPoint.position, launchVel);
+            Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
+        }
+        else
+        {
+            if (trajectoryLine != null && trajectoryLine.enabled)
+                trajectoryLine.enabled = false;
+        }
+
+        // Always update bowstring
+        UpdateBowstring();
     }
 
-    void SetMin()
+    void StartDrawing()
     {
-        // Save the current flex value as the minimum stretch position
-        minValue = flexValue;
-        Debug.Log($"[INPUT] Min set to: {minValue:F2}");
+        isDrawing = true;
+        drawStartPosition = rightHand.position;
+
+        if (trajectoryLine != null)
+            trajectoryLine.enabled = true;
+
+        if (bowstringLine != null)
+            bowstringLine.enabled = true;
+
+        Debug.Log("Started drawing bow.");
     }
 
-    void SetMax()
+    void ReleaseArrow()
     {
-        // Save the current flex value as the maximum stretch position
-        maxValue = flexValue;
-        Debug.Log($"[INPUT] Max set to: {maxValue:F2}");
+        if (!isDrawing) return;
+
+        Shoot();
+        isDrawing = false;
+        flexValue = 0f;
+
+        if (trajectoryLine != null)
+            trajectoryLine.enabled = false;
+
+        if (bowstringLine != null)
+            bowstringLine.enabled = false;
+
+        Debug.Log("Arrow released.");
     }
 
     void Shoot()
     {
-        // Calculate stretch ratio between min and max flex positions
-        float flexRatio = Mathf.InverseLerp(minValue, maxValue, flexValue);
+        float shootForce = flexValue * maxShootForce;
+        Vector3 shootDirection = leftHand.forward;
 
-        // Convert that ratio into a shoot force
-        float shootForce = flexRatio * maxShootForce;
+        GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
+        Arrow arrow = arrowObj.GetComponent<Arrow>();
+        if (arrow != null)
+            arrow.Launch(shootDirection, shootForce, flexValue);
 
-        Debug.Log($"[INPUT] SHOOT! Ratio: {flexRatio:F2}, Force: {shootForce:F2}");
+        if (bowAnimator != null)
+        {
+            bowAnimator.speed = 1f;
+            bowAnimator.SetTrigger(ShootTrigger);
+        }
+    }
 
-        // Instantiate and launch the projectile
-        GameObject arrow = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-        Rigidbody rb = arrow.GetComponent<Rigidbody>();
-        rb.velocity = shootPoint.forward * shootForce;
+    void DrawTrajectory(Vector3 startPos, Vector3 startVel)
+    {
+        if (trajectoryLine == null) return;
+
+        trajectoryLine.positionCount = trajectorySteps;
+        bool ignoreGravity = flexValue >= 0.9f;
+
+        for (int i = 0; i < trajectorySteps; i++)
+        {
+            float t = i * timeStep;
+            Vector3 point = ignoreGravity
+                ? startPos + startVel * t
+                : startPos + startVel * t + 0.5f * Physics.gravity * (t * t);
+
+            trajectoryLine.SetPosition(i, point);
+        }
+    }
+
+    void UpdateBowstring()
+    {
+        if (bowstringLine == null || stringTop == null || stringBottom == null) return;
+
+        bowstringLine.positionCount = 3;
+        bowstringLine.SetPosition(0, stringTop.position);
+
+        Vector3 middlePoint = isDrawing
+            ? rightHand.position
+            : Vector3.Lerp(stringTop.position, stringBottom.position, 0.5f);
+
+        bowstringLine.SetPosition(1, middlePoint);
+        bowstringLine.SetPosition(2, stringBottom.position);
     }
 }
