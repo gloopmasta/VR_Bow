@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BowSimulator : MonoBehaviour
+public class BowControls : MonoBehaviour
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
