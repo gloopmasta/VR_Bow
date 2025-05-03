@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
-    //Singleton logic
-    public static PlayerManager Instance { get; private set; }
-    void Awake()
-    {
-        if (Instance != null && Instance != this) Destroy(gameObject);
-        else Instance = this;
-    }
+   
 
     [SerializeField] private int hp;
     [SerializeField] private int maxHp = 3;
