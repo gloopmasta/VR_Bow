@@ -25,6 +25,11 @@ public class BowSimulator : MonoBehaviour
     public Animator bowAnimator;
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
 
+    [Header("Bowstring")]
+    public LineRenderer bowstringLine;
+    public Transform stringTop;    // Top of bow
+    public Transform stringBottom; // Bottom of bow
+
     private InputAction triggerAction;
     private float flexValue = 0f;
     private bool isDrawing = false;
@@ -55,14 +60,14 @@ public class BowSimulator : MonoBehaviour
             float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
             flexValue = Mathf.Clamp01(drawDistance / maxDrawDistance);
 
-            // Manually scrub the charge animation
+            // Animate charge by scrubbing normalized time
             if (bowAnimator != null)
             {
-                bowAnimator.Play("Charge", 0, flexValue); // Replace "Charge" with your actual state name if different
+                bowAnimator.Play("Charge", 0, flexValue); // Make sure this matches your animation state's name
                 bowAnimator.speed = 0f;
             }
 
-            // Update trajectory line
+            // Show trajectory
             Vector3 launchDir = leftHand.forward;
             float previewForce = flexValue * maxShootForce;
             Vector3 launchVel = launchDir * previewForce;
@@ -72,10 +77,12 @@ public class BowSimulator : MonoBehaviour
         }
         else
         {
-            // Hide trajectory when not drawing
             if (trajectoryLine != null && trajectoryLine.enabled)
                 trajectoryLine.enabled = false;
         }
+
+        // Always update bowstring
+        UpdateBowstring();
     }
 
     void StartDrawing()
@@ -85,6 +92,9 @@ public class BowSimulator : MonoBehaviour
 
         if (trajectoryLine != null)
             trajectoryLine.enabled = true;
+
+        if (bowstringLine != null)
+            bowstringLine.enabled = true;
 
         Debug.Log("Started drawing bow.");
     }
@@ -100,6 +110,9 @@ public class BowSimulator : MonoBehaviour
         if (trajectoryLine != null)
             trajectoryLine.enabled = false;
 
+        if (bowstringLine != null)
+            bowstringLine.enabled = false;
+
         Debug.Log("Arrow released.");
     }
 
@@ -113,10 +126,9 @@ public class BowSimulator : MonoBehaviour
         if (arrow != null)
             arrow.Launch(shootDirection, shootForce, flexValue);
 
-        // Trigger shoot animation
         if (bowAnimator != null)
         {
-            bowAnimator.speed = 1f; // Resume animation playback speed
+            bowAnimator.speed = 1f;
             bowAnimator.SetTrigger(ShootTrigger);
         }
     }
@@ -137,5 +149,20 @@ public class BowSimulator : MonoBehaviour
 
             trajectoryLine.SetPosition(i, point);
         }
+    }
+
+    void UpdateBowstring()
+    {
+        if (bowstringLine == null || stringTop == null || stringBottom == null) return;
+
+        bowstringLine.positionCount = 3;
+        bowstringLine.SetPosition(0, stringTop.position);
+
+        Vector3 middlePoint = isDrawing
+            ? rightHand.position
+            : Vector3.Lerp(stringTop.position, stringBottom.position, 0.5f);
+
+        bowstringLine.SetPosition(1, middlePoint);
+        bowstringLine.SetPosition(2, stringBottom.position);
     }
 }
