@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class BowControls : MonoBehaviour
 {
+    //[Header("Scripts & ScriptableObjects")]
+
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
     public Transform shootPoint;

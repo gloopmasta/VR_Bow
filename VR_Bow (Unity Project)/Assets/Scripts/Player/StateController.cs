@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cysharp.Threading;
+using Cysharp.Threading.Tasks;
 using PandaBT;
+using PandaBT.Runtime;
+using System.Threading.Tasks;
 
 public class StateController : MonoBehaviour
 {
@@ -10,6 +12,28 @@ public class StateController : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private BowControls bowControls;
     [SerializeField] private DriveControls driveControls;
+    [SerializeField] private JumpEventsSO jumpEvents;
+    [SerializeField] private SwitchTimeEventsSO switchEvents;
+    [SerializeField] public SlowTimeSO slowTime;
+
+    [Header("Bow Rotation")]
+    [SerializeField] private Transform bowTransform;
+    [SerializeField] private float vertAngleTarget = 90f;
+    [SerializeField] private float horAngleTarget = 0f;
+    [SerializeField] private float tolerance = 20f;
+
+    [Header("Aditional Settings")]
+    [SerializeField][PandaVariable] public bool isGrounded;
+    [SerializeField] private bool canEnterSwitchtime = false;
+
+
+    private void OnEnable()
+    {
+        jumpEvents.OnJump += () => isGrounded = false;
+        jumpEvents.OnLand += () => isGrounded = true;
+        switchEvents.OnEnterDSSwitchTime += () => canEnterSwitchtime = true;
+    }
+
 
     private void Start()
     {
@@ -19,55 +43,118 @@ public class StateController : MonoBehaviour
             Debug.Assert(player != null, "no Player script attached or injected");
         }
 
-        SwitchState(PlayerState.Driving);
+        SetState(PlayerState.Driving);
     }
 
     void Update() // TODO: CHANGE TO EVENT BASED
     {
-        if (player.State == PlayerState.Driving)
-        {
-            HandleDrivingState();
-        }
-        else if (player.State == PlayerState.Shooting)
-        {
-            HandleShootingState();
-        }
+
     }
 
-    void HandleDrivingState()
-    {
-        //on jump, switch to bow
-        if (!IsGrounded())
-        {
-            SwitchState(PlayerState.Shooting);
-        }
-    }
+    //void HandleDrivingState()
+    ////{
+    ////    //on jump, switch to bow
+    ////    if (!IsGrounded())
+    ////    {
+    ////        SetState(PlayerState.Shooting);
+    ////    }
+    //}
 
-    void HandleShootingState()
-    {
-        //on land -> switch to drive
-        if (!IsGrounded())
-        {
-            SwitchState(PlayerState.Driving);
-        }
-    }
+    //void HandleShootingState()
+    ////{
+    ////    //on land -> switch to drive
+    ////    if (IsGrounded())
+    ////    {
+    ////        SetState(PlayerState.Driving);
+    ////    }
+    //}
 
-    void SwitchState(PlayerState newState)
+    [PandaTask]
+    void SetState(PlayerState newState)
     {
         player.State = newState;
 
-        switch (newState) 
-        { 
-        case PlayerState.Driving:
+        // Manage Scripts
+        switch (newState)
+        {
+            case PlayerState.Driving:
                 driveControls.enabled = true;
                 bowControls.enabled = false;
-                break; 
+                break;
 
-        case PlayerState.Shooting:
+            case PlayerState.Shooting:
                 driveControls.enabled = false;
                 bowControls.enabled = true;
                 break;
         }
+
+        PandaTask.Succeed();
+    }
+
+    // Checks rotation around the local X-axis
+    private float GetBowTiltAngle()
+    {
+        // Assuming bow tilts up on local X axis
+        float angle = bowTransform.localEulerAngles.x;
+        // Normalize angle to 0–180 for comparison
+        if (angle > 180f) angle -= 360f;
+        return angle;
+    }
+
+    [PandaTask]
+    public void MoveForwardSlowly()
+    {
+        //move forward slowly
+        //if (PandaTask.isStarting)
+        transform.Translate(Vector3.forward * 5f * Time.deltaTime); //run indefinitely
+
+    }
+
+    [PandaTask]
+    public async void SlowTime(float duration)
+    {
+        await slowTime.SlowTime(duration);
+        PandaTask.Succeed();
+    }
+
+
+    [PandaTask]
+    public void DisplaySwitchMessage()
+    {
+        // Display a message that says you need to tilt your back to drive mode
+    }
+
+    [PandaTask]
+    public async Task<bool> WaitUntilGrounded()
+    {
+        await UniTask.WaitUntil(() => isGrounded);
+        return true;
+    }
+
+    [PandaTask]
+    public async Task<bool> WaitUntilSwitchtime()
+    {
+        await UniTask.WaitUntil(() => canEnterSwitchtime);
+        canEnterSwitchtime = false;
+        return true;
+    }
+
+    [PandaTask]
+    public async Task<bool> WaitUntilBowVertical()
+    {
+        await UniTask.WaitUntil(() =>
+            Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance);
+
+        return true;
+    }
+
+    [PandaTask]
+    public async Task<bool> WaitUntilBowHorizontal()
+    {
+        await UniTask.WaitUntil(() =>
+            Mathf.Abs(GetBowTiltAngle() - horAngleTarget) <= tolerance);
+
+        return true;
     }
 
     // Sample condition methods:

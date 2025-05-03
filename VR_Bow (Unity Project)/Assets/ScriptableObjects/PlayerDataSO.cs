@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Player Data")]
+[CreateAssetMenu(menuName = "Player/Player Data")]
 public class PlayerDataSO : ScriptableObject
 {
     public int maxHp = 3;

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PandaBT;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerDataSO data;
+    
 
 
     private int hp;
@@ -12,6 +14,7 @@ public class Player : MonoBehaviour, IDamageable
     private float fuel;
     private float slowTime;
     private PlayerState state;
+    private bool isBashing;
 
     public int Hp
     {
@@ -23,7 +26,7 @@ public class Player : MonoBehaviour, IDamageable
         get { return arrowCount; }
         set { arrowCount = Mathf.Clamp(value, 0, data.maxArrowCount); }
     }
-    public float SlowTime
+    [PandaVariable] public float SlowTime
     {
         get { return slowTime; }
         set { slowTime = value; }
@@ -38,12 +41,18 @@ public class Player : MonoBehaviour, IDamageable
         get { return state; }
         set { state = value; }
     }
+    public bool IsBashing
+    {
+        get { return isBashing; }
+        set { isBashing = value; }
+    }
 
 
     void Start()
     {
         hp = data.maxHp;
         arrowCount = data.maxArrowCount;
+        slowTime = 4f;
         fuel = data.maxFuel;
         
     }
