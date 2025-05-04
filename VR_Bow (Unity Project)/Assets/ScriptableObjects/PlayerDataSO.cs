@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Player/Player Data")]
 public class PlayerDataSO : ScriptableObject
 {
-    public int maxHp = 3;
-    public int maxArrowCount = 6;
-    public float maxFuel = 100f;
+    public readonly int maxHp = 3;
+    public readonly int maxArrowCount = 6;
+    public readonly float maxFuel = 100f;
 
-    
+    //TODO : read only properties
 }

@@ -6,11 +6,11 @@ public abstract class Enemy : MonoBehaviour, IDamageable
 {
     private void Start()
     {
-        GameManager.Instance.RegisterEnemy(gameObject);
+        //GameManager.Instance.RegisterEnemy(gameObject);
     }
     private void OnDestroy()
     {
-        GameManager.Instance.UnregisterEnemy(gameObject);
+        //GameManager.Instance.UnregisterEnemy(gameObject);
     }
 
     public int Hp { get; set; } = 2;

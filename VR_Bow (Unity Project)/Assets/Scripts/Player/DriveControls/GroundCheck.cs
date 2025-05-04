@@ -6,6 +6,8 @@ public class GroundCheck : MonoBehaviour
     private HashSet<Collider> groundColliders = new HashSet<Collider>();
     [SerializeField] private JumpEventsSO jumpEvents;
 
+    [SerializeField] private SwitchTimeEventsSO switchTimeEvents;
+
     
 
     private void OnTriggerEnter(Collider other)

@@ -25,6 +25,7 @@ public class StateController : MonoBehaviour
     [Header("Aditional Settings")]
     [SerializeField][PandaVariable] public bool isGrounded;
     [SerializeField] private bool canEnterSwitchtime = false;
+    [SerializeField] private bool switchTimeActive = false;
 
 
     private void OnEnable()
@@ -32,9 +33,12 @@ public class StateController : MonoBehaviour
         jumpEvents.OnJump += () => isGrounded = false;
         jumpEvents.OnLand += () => isGrounded = true;
         switchEvents.OnEnterDSSwitchTime += () => canEnterSwitchtime = true;
+
+        slowTime.OnSlowTimeExit += () => switchTimeActive = false;
+        slowTime.OnSlowTimeEnter += () => switchTimeActive = true;
     }
 
-
+    
     private void Start()
     {
         if (player == null)
@@ -51,23 +55,7 @@ public class StateController : MonoBehaviour
 
     }
 
-    //void HandleDrivingState()
-    ////{
-    ////    //on jump, switch to bow
-    ////    if (!IsGrounded())
-    ////    {
-    ////        SetState(PlayerState.Shooting);
-    ////    }
-    //}
-
-    //void HandleShootingState()
-    ////{
-    ////    //on land -> switch to drive
-    ////    if (IsGrounded())
-    ////    {
-    ////        SetState(PlayerState.Driving);
-    ////    }
-    //}
+   
 
     [PandaTask]
     void SetState(PlayerState newState)
@@ -95,7 +83,7 @@ public class StateController : MonoBehaviour
     private float GetBowTiltAngle()
     {
         // Assuming bow tilts up on local X axis
-        float angle = bowTransform.localEulerAngles.x;
+        float angle = bowTransform.localEulerAngles.z;
         // Normalize angle to 0–180 for comparison
         if (angle > 180f) angle -= 360f;
         return angle;
@@ -111,10 +99,9 @@ public class StateController : MonoBehaviour
     }
 
     [PandaTask]
-    public async void SlowTime(float duration)
+    public async Task<bool> SlowTime(float duration)
     {
-        await slowTime.SlowTime(duration);
-        PandaTask.Succeed();
+        return await slowTime.SlowTime(duration);
     }
 
 
@@ -143,7 +130,12 @@ public class StateController : MonoBehaviour
     public async Task<bool> WaitUntilBowVertical()
     {
         await UniTask.WaitUntil(() =>
-            Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance);
+            Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance || !switchTimeActive);
+
+        if (!switchTimeActive)
+        {
+            return false;
+        }
 
         return true;
     }
@@ -159,15 +151,15 @@ public class StateController : MonoBehaviour
 
     // Sample condition methods:
     //public bool IsAimingBow() { return BowInputDetector.IsAiming(); }
-    public bool IsGrounded() 
-    {
-        GroundCheck gc = GetComponentInChildren<GroundCheck>();
-        if (gc == null)
-        {
-            Debug.LogError("no GrounCheck script found in children for StateController");
-            return false;
-        }
+    //public bool IsGrounded() 
+    //{
+    //    GroundCheck gc = GetComponentInChildren<GroundCheck>();
+    //    if (gc == null)
+    //    {
+    //        Debug.LogError("no GrounCheck script found in children for StateController");
+    //        return false;
+    //    }
 
-        return gc.IsGrounded(); 
-    }
+    //    return gc.IsGrounded(); 
+    //}
 }

@@ -679,6 +679,7 @@ GameObject:
   - component: {fileID: 154189351}
   - component: {fileID: 154189354}
   - component: {fileID: 154189353}
+  - component: {fileID: 154189358}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -852,12 +853,36 @@ MonoBehaviour:
   driveControls: {fileID: 154189352}
   jumpEvents: {fileID: 11400000, guid: 26d74483eb157844e8e10e07f9e7c3ca, type: 2}
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
-  bowTransform: {fileID: 0}
-  vertAngleTarget: 90
-  horAngleTarget: 0
+  slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
+  bowTransform: {fileID: 136419144}
+  vertAngleTarget: 0
+  horAngleTarget: -90
   tolerance: 20
   isGrounded: 0
   canEnterSwitchtime: 0
+--- !u!114 &154189358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154189349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa03e162cfb4d55a63166e6b4dd4de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: -5453058477560777752, guid: 174032d083cd47c45b7333805fe5475b, type: 3}
+  autoReset: 1
+  tickOn: 0
+  customTickOnInterval: 1
+  repeatRetryOnSameTick: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
 --- !u!1 &178477522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1026,7 @@ Transform:
   m_GameObject: {fileID: 178477522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: -2.18, z: 7.5}
+  m_LocalPosition: {x: 10.11, y: -2.18, z: 7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1474,7 +1499,7 @@ Transform:
   m_GameObject: {fileID: 447670779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: -2.22, z: 11.75}
+  m_LocalPosition: {x: 0.66, y: -2.22, z: 74.49}
   m_LocalScale: {x: 2.83, y: 1.34, z: 2.83}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1918,6 +1943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpEvents: {fileID: 11400000, guid: 26d74483eb157844e8e10e07f9e7c3ca, type: 2}
+  switchTimeEvents: {fileID: 0}
 --- !u!1 &1917489897
 GameObject:
   m_ObjectHideFlags: 0
