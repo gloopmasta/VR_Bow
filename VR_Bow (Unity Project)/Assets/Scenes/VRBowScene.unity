@@ -860,6 +860,7 @@ MonoBehaviour:
   tolerance: 20
   isGrounded: 0
   canEnterSwitchtime: 0
+  switchTimeActive: 0
 --- !u!114 &154189358
 MonoBehaviour:
   m_ObjectHideFlags: 0
