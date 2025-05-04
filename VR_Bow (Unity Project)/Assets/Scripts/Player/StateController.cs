@@ -117,6 +117,12 @@ public class StateController : MonoBehaviour
         await UniTask.WaitUntil(() => isGrounded);
         return true;
     }
+    [PandaTask]
+    public async Task<bool> WaitUntilJump()
+    {
+        await UniTask.WaitUntil(() => !isGrounded);
+        return true;
+    }
 
     [PandaTask]
     public async Task<bool> WaitUntilSwitchtime()
