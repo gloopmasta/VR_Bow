@@ -1,10 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BowControls : MonoBehaviour
 {
-    //[Header("Scripts & ScriptableObjects")]
-
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
     public Transform shootPoint;
@@ -29,8 +27,13 @@ public class BowControls : MonoBehaviour
 
     [Header("Bowstring")]
     public LineRenderer bowstringLine;
-    public Transform stringTop;    // Top of bow
-    public Transform stringBottom; // Bottom of bow
+    public Transform stringTop;
+    public Transform stringBottom;
+
+    [Header("Arrow Visual")]
+    public GameObject arrowVisualPrefab;
+    private GameObject currentVisualArrow;
+    public Transform arrowNockPoint;
 
     private InputAction triggerAction;
     private float flexValue = 0f;
@@ -62,20 +65,25 @@ public class BowControls : MonoBehaviour
             float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
             flexValue = Mathf.Clamp01(drawDistance / maxDrawDistance);
 
-            // Animate charge by scrubbing normalized time
             if (bowAnimator != null)
             {
-                bowAnimator.Play("Charge", 0, flexValue); // Make sure this matches your animation state's name
+                bowAnimator.Play("Charge", 0, flexValue);
                 bowAnimator.speed = 0f;
             }
 
-            // Show trajectory
             Vector3 launchDir = leftHand.forward;
             float previewForce = flexValue * maxShootForce;
             Vector3 launchVel = launchDir * previewForce;
 
             DrawTrajectory(shootPoint.position, launchVel);
             Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
+
+            // Update arrow visual position and corrected rotation
+            if (currentVisualArrow != null)
+            {
+                currentVisualArrow.transform.position = rightHand.position;
+                currentVisualArrow.transform.rotation = Quaternion.LookRotation(leftHand.forward) * Quaternion.Euler(-90, 0, 0); // ← corrected rotation
+            }
         }
         else
         {
@@ -83,7 +91,6 @@ public class BowControls : MonoBehaviour
                 trajectoryLine.enabled = false;
         }
 
-        // Always update bowstring
         UpdateBowstring();
     }
 
@@ -97,6 +104,12 @@ public class BowControls : MonoBehaviour
 
         if (bowstringLine != null)
             bowstringLine.enabled = true;
+
+        // Spawn visual arrow
+        if (arrowVisualPrefab != null && arrowNockPoint != null)
+        {
+            currentVisualArrow = Instantiate(arrowVisualPrefab, arrowNockPoint.position, arrowNockPoint.rotation);
+        }
 
         Debug.Log("Started drawing bow.");
     }
@@ -114,6 +127,13 @@ public class BowControls : MonoBehaviour
 
         if (bowstringLine != null)
             bowstringLine.enabled = false;
+
+        // Destroy visual arrow
+        if (currentVisualArrow != null)
+        {
+            Destroy(currentVisualArrow);
+            currentVisualArrow = null;
+        }
 
         Debug.Log("Arrow released.");
     }
