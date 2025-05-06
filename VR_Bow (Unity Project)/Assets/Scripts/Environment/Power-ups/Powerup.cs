@@ -6,6 +6,7 @@ using UnityEngine;
 
 public abstract class Powerup : MonoBehaviour
 {
+    [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private float timeToDestroy = 1f;
 
