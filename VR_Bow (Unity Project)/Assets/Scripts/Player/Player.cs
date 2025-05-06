@@ -6,7 +6,8 @@ using PandaBT;
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerDataSO data;
-    
+    [SerializeField] private ArrowHitEventsSO arrowHitEvents;
+
 
 
     private int hp;
@@ -15,7 +16,11 @@ public class Player : MonoBehaviour, IDamageable
     private float slowTime;
     private PlayerState state;
     private bool isBashing;
+    private int score;
 
+    
+
+    
     public int Hp
     {
         get { return hp; }
@@ -46,6 +51,11 @@ public class Player : MonoBehaviour, IDamageable
         get { return isBashing; }
         set { isBashing = value; }
     }
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
 
 
     void Start()
@@ -57,7 +67,10 @@ public class Player : MonoBehaviour, IDamageable
         
     }
 
-
+    private void OnEnable()
+    {
+        arrowHitEvents.OnArrowHitEnemy += IncreaseScore;
+    }
 
     public void TakeDamage(int amount)
     {
@@ -81,6 +94,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         fuel = data.maxFuel;
         //playerEvents.RaiseFuelChanged(fuel);
+    }
+
+    public void IncreaseScore(int ammount)
+    {
+        score += ammount;
+        //playerEvents.RaiseScoreChanged(score);
     }
 }
 

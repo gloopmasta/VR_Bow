@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NewBehaviourScript : MonoBehaviour
+public class LerpingCube : MonoBehaviour
 {
     [Tooltip("Time scale to use during slow motion (e.g. 0.2 for 20% speed)")]
     [Range(0f, 1f)]

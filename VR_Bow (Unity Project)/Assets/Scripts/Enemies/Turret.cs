@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.OpenXR.Features.Interactions;
+using PandaBT;
 
 public class Turret : Enemy
 {
     public SwitchTimeEventsSO switchEvents;
+    public ArrowHitEventsSO arrowHitEvents;
+    public GameObject projectilePrefab;
+    [PandaVariable] public float shootingInterval = 1f;
+
+
 
     private void Awake()
     {
@@ -15,6 +21,15 @@ public class Turret : Enemy
     void Update()
     {
         
+    }
+
+    [PandaTask]    
+    public void ShootProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        //Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        //rb.AddForce(transform.forward * 10, ForceMode.Impulse);
+        PandaTask.Succeed();
     }
 
     protected override void Die()
@@ -33,5 +48,10 @@ public class Turret : Enemy
                 switchEvents.RaiseEnterDSSwitchTime(); //Raise enter switch time ds
             }
         }
+        if (other.CompareTag("Projectile"))
+        {
+                arrowHitEvents.RaiseArrowHitEnemy(100);
+        }
+
     }
 }
