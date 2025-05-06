@@ -902,7 +902,6 @@ GameObject:
   - component: {fileID: 178477525}
   - component: {fileID: 178477524}
   - component: {fileID: 178477523}
-  - component: {fileID: 178477529}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -951,8 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
-  projectilePrefab: {fileID: 2334667485402507279, guid: 12b7597ef2227d040b005ef613141f01, type: 3}
-  shootingInterval: 5
+  maxHP: 3
 --- !u!136 &178477525
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1041,29 +1039,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &178477529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 178477522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa03e162cfb4d55a63166e6b4dd4de6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scripts:
-  - {fileID: -5453058477560777752, guid: 2d97a7af6b64c7e41908437899c78e99, type: 3}
-  autoReset: 1
-  tickOn: 0
-  customTickOnInterval: 1
-  repeatRetryOnSameTick: 0
-  sourceInfos:
-  - isFoldout: 1
-    breakPoints: 
-    breakPointStatuses: 
-    collapsedLines: 
 --- !u!1 &225098169
 GameObject:
   m_ObjectHideFlags: 0

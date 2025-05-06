@@ -8,7 +8,7 @@ public class ArrowHitEventsSO : ScriptableObject
 {
     public event Action<int> OnArrowHitEnemy;
 
-    public void RaiseArrowHitEnemy(int amount)
+    public void RaiseScoreHitEnemy(int amount)
     {
         OnArrowHitEnemy?.Invoke(amount);
     }
