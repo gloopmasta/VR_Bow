@@ -177,7 +177,7 @@ public class DriveControls : MonoBehaviour
             // Convert eulerRotation.x from 0–360 to -180–180
             pitch = eulerRotation.x + rotOffset;
 
-            Debug.Log("Pitch: "+pitch);
+            //.Log("Pitch: "+pitch);
 
             // Check if the adjusted pitch is outside the dead zone -> then rotate
             if (Mathf.Abs(pitch) > deadZone + rotOffset) // Ansolute to check both - and +, chezck the absolute value ifg it's minus basically
@@ -222,7 +222,7 @@ public class DriveControls : MonoBehaviour
             // Define dead zone threshold
             float deadZone = 20f;
 
-            Debug.Log("adjusted pitch: " + pitch);
+            //Debug.Log("adjusted pitch: " + pitch);
 
             // Determine steering input based on dead zone
             float steeringInput = 0f;
