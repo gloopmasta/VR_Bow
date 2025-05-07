@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 4160580193765797064}
   - component: {fileID: 7948125856621218419}
   m_Layer: 6
-  m_Name: Rocket (root)
+  m_Name: AimingRocket (root)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,5 +189,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bd4aa0ac791dd498603f9bda17559a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 5
-  usePrediction: 0
+  launchForce: 30
+  usePrediction: 1

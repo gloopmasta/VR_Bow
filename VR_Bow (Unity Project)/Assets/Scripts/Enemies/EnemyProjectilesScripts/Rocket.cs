@@ -1,29 +1,42 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Rocket : MonoBehaviour
 {
     public float launchForce = 10f;
+    public bool usePrediction = false;
+
+    private Transform player;
 
     private void Start()
     {
+        player = GameObject.FindWithTag("Player")?.transform;
+        if (usePrediction && player == null)
+        {
+            Debug.LogWarning("Rocket: Geen speler gevonden met tag 'Player'.");
+        }
+
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
-        // Bepaal willekeurige horizontale richting
-        Vector3 direction = new Vector3(
-            Random.Range(-1f, 1f),
-            0f,
-            Random.Range(-1f, 1f)
-        ).normalized;
+        Vector3 direction;
 
-        // Pas kracht toe
+        if (usePrediction && player != null)
+        {
+            DriveControls driveControls = player.GetComponent<DriveControls>();
+            Vector3 playerVelocity = player.forward * driveControls.CurrentSpeed;
+            float predictionTime = 1.0f;
+            Vector3 futurePosition = player.position + playerVelocity * predictionTime;
+
+            direction = (futurePosition - transform.position).normalized;
+        }
+        else
+        {
+            direction = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
+        }
+
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
-
-        // Roteer projectile zodat hij in vliegrichting wijst
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        // Verwijder na 10 seconden
         Destroy(gameObject, 10f);
     }
 
@@ -31,9 +44,8 @@ public class Rocket : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player geraakt!");
-            other.GetComponent<IDamageable>().TakeDamage(1);
-            Destroy(gameObject); // rocket verdwijnt na impact
+            other.GetComponent<IDamageable>()?.TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 }

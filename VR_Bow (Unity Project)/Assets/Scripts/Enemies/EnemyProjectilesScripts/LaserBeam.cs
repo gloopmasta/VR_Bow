@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
@@ -7,14 +8,12 @@ public class LaserBeam : MonoBehaviour
     public float warningTime = 0.5f;
     public float gapTime = 0.1f;
     public float activeTime = 2f;
-    public float damageRadius = 0.5f;
     public float maxDistance = 20f;
 
     public Color warningColor = Color.white;
-    public Color activeColor = Color.red * 2f;
+    public Color activeColor = Color.red;
 
     private LineRenderer lr;
-    private Material laserMat;
     private Vector3 start;
     private Vector3 end;
     private Vector3 fireDirection;
@@ -22,50 +21,68 @@ public class LaserBeam : MonoBehaviour
     private void Start()
     {
         lr = GetComponent<LineRenderer>();
-        laserMat = lr.material;
 
-        // Kies random horizontale richting
+        // Zorg ervoor dat het materiaal de juiste transparantie ondersteunt
+        lr.material = new Material(Shader.Find("Sprites/Default")); // Zorgt ervoor dat transparantie mogelijk is
+        lr.startWidth = 0.1f; // Pas dit aan voor de gewenste lijnbreedte
+        lr.endWidth = 0.1f;
+
+        // Stel de begin- en eindkleur in met transparantie
+        warningColor.a = 0f; // Start invisible
+        activeColor.a = 1f;
+
         fireDirection = new Vector3(
-            Random.Range(-1f, 1f),
+            UnityEngine.Random.Range(-1f, 1f),
             0f,
-            Random.Range(-1f, 1f)
+            UnityEngine.Random.Range(-1f, 1f)
         ).normalized;
 
         start = transform.position;
         end = start + fireDirection * maxDistance;
 
-        StartCoroutine(FireLaser());
+        FireLaser().Forget();
     }
 
-    private IEnumerator FireLaser()
+    private async UniTaskVoid FireLaser()
     {
-        // 1. Witte waarschuwingslijn, uitschuivend
         lr.enabled = true;
-        laserMat.SetColor("_EmissionColor", warningColor);
         lr.SetPosition(0, start);
-        lr.SetPosition(1, start);
+        lr.SetPosition(1, end);
 
+        // Waarschuwingsfase (fade-in naar wit)
         float t = 0f;
         while (t < warningTime)
         {
             t += Time.deltaTime;
-            Vector3 lerped = Vector3.Lerp(start, end, t / warningTime);
-            lr.SetPosition(1, lerped);
-            yield return null;
+            float alpha = Mathf.Clamp01(t / warningTime);
+
+            Color faded = warningColor;
+            faded.a = alpha;
+
+            lr.startColor = faded;
+            lr.endColor = faded;
+
+            // Zorg ervoor dat de lijnbrede correct wordt ingesteld, mogelijk opnieuw instellen
+            lr.startWidth = 0.1f + alpha * 0.1f;  // Verhoog de breedte beetje per beetje
+            lr.endWidth = 0.1f + alpha * 0.1f;
+
+            await UniTask.Yield();
         }
 
-        // 2. Pauze (laser verdwijnt)
+        // Pauze (lijn wordt tijdelijk uitgeschakeld)
         lr.enabled = false;
-        yield return new WaitForSeconds(gapTime);
+        await UniTask.Delay(TimeSpan.FromSeconds(gapTime));
 
-        // 3. Rode laser actief
+        // Actieve rode laser (met schade)
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-        laserMat.SetColor("_EmissionColor", activeColor);
 
-        // 4. Damage toepassen
-        RaycastHit[] hits = Physics.SphereCastAll(start, damageRadius, fireDirection, maxDistance);
+        lr.startColor = activeColor;
+        lr.endColor = activeColor;
+
+        // Gebruik een Raycast om de schade toe te passen
+        RaycastHit[] hits = Physics.RaycastAll(start, fireDirection, maxDistance);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag("Player"))
@@ -74,7 +91,8 @@ public class LaserBeam : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(activeTime);
+        // Wacht de actieve tijd af voordat de laser wordt vernietigd
+        await UniTask.Delay(TimeSpan.FromSeconds(activeTime));
         Destroy(gameObject);
     }
 }

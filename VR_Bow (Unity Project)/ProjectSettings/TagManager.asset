@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Anchor
   - Ground
+  - Enemy
+  - Trails
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - UI
   - Enemy
   - Projectile
-  - 
-  - 
-  - 
+  - Ground
+  - 'Obstacle '
+  - Trails
   - 
   - 
   - 

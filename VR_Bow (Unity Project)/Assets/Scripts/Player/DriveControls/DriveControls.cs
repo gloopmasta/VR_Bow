@@ -10,7 +10,8 @@ public class DriveControls : MonoBehaviour
 
 
     [Header("Speed Settings")]
-    [SerializeField] float currentSpeed = 5f;
+    [SerializeField] private float currentSpeed = 5f;
+    public float CurrentSpeed => currentSpeed;
     [SerializeField] float maxSpeed = 100f;
     
     [SerializeField] float rotOffset = 90f;
@@ -51,6 +52,7 @@ public class DriveControls : MonoBehaviour
     [SerializeField] float accelerationRate = 1.005f;
 
 
+
     private void Update()
     {
         UpdateControllerData();
@@ -58,6 +60,8 @@ public class DriveControls : MonoBehaviour
         Steer();
         Drift();
     }
+
+
 
     private void UpdateControllerData()
     {

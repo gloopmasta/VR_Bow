@@ -1,7 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using PandaBT;
 
-public class Turret : Enemy
+public class Rider : Enemy
 {
     public SwitchTimeEventsSO switchEvents;
     public ArrowHitEventsSO arrowHitEvents;
@@ -30,7 +32,6 @@ public class Turret : Enemy
         {
             TakeDamage(1);
         }
-        
     }
 
     protected override void Die()
