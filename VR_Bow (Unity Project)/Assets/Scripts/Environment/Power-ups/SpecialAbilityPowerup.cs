@@ -19,6 +19,9 @@ public class SpecialAbilityPowerup : Powerup
                 //if (ability != null)
                 // DisableAfterSeconds(ability).Forget();
                 break;
+
+            case "spinninglaser":
+                break;
             default:
                 Debug.LogWarning("No valid ability name entered");
                 break;

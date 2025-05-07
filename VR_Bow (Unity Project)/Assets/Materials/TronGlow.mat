@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TronMaterial
-  m_Shader: {fileID: 4800000, guid: 31230927e5619664081e8e0b1290b570, type: 3}
+  m_Name: TronGlow
+  m_Shader: {fileID: 4800000, guid: 3a3988c47588af74dbbc2d8d11502ec2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -107,7 +107,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionIntensity: 39.78
+    - _EmissionIntensity: 24.4
     - _EnvironmentReflections: 1
     - _Frequency: 0
     - _GlossMapScale: 0
@@ -135,8 +135,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 7.4642644, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 9.965379, g: 0, b: 0, a: 1}
     - _GridColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 0, b: 0.035849094, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
