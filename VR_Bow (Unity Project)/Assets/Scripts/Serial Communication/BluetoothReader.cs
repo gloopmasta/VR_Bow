@@ -4,9 +4,10 @@ using System.Threading;
 
 public class BluetoothReader : MonoBehaviour
 {
-    SerialPort serialPort = new SerialPort("COM6", 9600); // Replace "COM3" with your HC-05 COM port
+    SerialPort serialPort = new SerialPort("COM13", 115200); // Replace "COM3" with your HC-05 COM port
     Thread readThread;
     bool isRunning = false;
+    public float sensorValue = 0f;
     string receivedData = "";
 
     void Start()
@@ -25,6 +26,15 @@ public class BluetoothReader : MonoBehaviour
             {
                 receivedData = serialPort.ReadLine();
                 Debug.Log("Received: " + receivedData);
+
+                // Read until newline
+                string line = serialPort.ReadLine();
+
+                if (int.TryParse(line, out int rawValue))
+                {
+                    sensorValue = Mathf.Clamp01(rawValue / 4095f); // Normalize to 0–1
+                    Debug.Log($"Pot Value: {sensorValue}");
+                }
             }
             catch (System.Exception e)
             {
