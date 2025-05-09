@@ -10,15 +10,14 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-    private int hp;
-    private int arrowCount;
-    private float fuel;
-    private float slowTime;
-    private PlayerState state;
-    private bool isBashing;
-    private int score;
 
-    
+    [SerializeField] private int hp;
+    [SerializeField] private int arrowCount;
+    [SerializeField] private float fuel;
+    [SerializeField] private float slowTime;
+    [SerializeField] private PlayerState state;
+    [SerializeField] private bool isBashing;
+
 
     
     public int Hp
@@ -61,7 +60,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         hp = data.maxHp;
-        arrowCount = data.maxArrowCount;
+        arrowCount = 1/*data.maxArrowCount*/;
         slowTime = 4f;
         fuel = data.maxFuel;
         
@@ -96,10 +95,19 @@ public class Player : MonoBehaviour, IDamageable
         //playerEvents.RaiseFuelChanged(fuel);
     }
 
+
     public void IncreaseScore(int ammount)
     {
         score += ammount;
         //playerEvents.RaiseScoreChanged(score);
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //on collision with a powerup -> collect logic
+        if (other.TryGetComponent<Powerup>(out var powerup))
+        {
+            powerup.Collect(gameObject);
+        }
     }
 }
 
