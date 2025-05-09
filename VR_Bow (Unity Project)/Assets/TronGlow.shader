@@ -33,7 +33,11 @@
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Geometry" }
+        Tags { 
+            "RenderType"="Opaque" 
+            "Queue"="Geometry"
+            "RenderPipeline" = "UniversalPipeline"
+        }
 
         Pass
         {
@@ -42,16 +46,16 @@ Name"Unlit"
 {"LightMode" = "UniversalForward"
 }
 
-HLSLPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            
+            // Add VR single-pass instancing support
             #pragma multi_compile_instancing
-
+            #pragma multi_compile _ _USE_DRAW_PROCEDURAL
+            
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            UNITY_INSTANCING_BUFFER_START(Props)
-                // Add instanced properties here if needed
-            UNITY_INSTANCING_BUFFER_END(Props)
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
 struct Attributes
 {
@@ -66,134 +70,152 @@ struct Varyings
     float2 uv : TEXCOORD0;
     float4 positionHCS : SV_POSITION;
     float3 scale : TEXCOORD1;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-};
+    UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
+            };
 
-float4 _Color;
-float4 _OutlineColor;
-float _WidthOutline;
-float _WidthOutlineSharpness;
-float4 _GridColor;
-float _WidthGrid;
-float _WidthGridSharpness;
-float _NumberHorizzontal;
-float _NumberVertical;
-float _Frequency;
-float4 _EmissionColor;
-float _EmissionIntensity;
+            UNITY_INSTANCING_BUFFER_START(Props)
+                // Add instanced properties here if needed
+            UNITY_INSTANCING_BUFFER_END(Props)
 
-float3 GetObjectScale()
-{
-    float3x3 m = (float3x3) UNITY_MATRIX_M;
-    return float3(length(m[0]), length(m[1]), length(m[2]));
-}
+            CBUFFER_START(UnityPerMaterial)
+    float4 _Color;
+    float4 _OutlineColor;
+    float _WidthOutline;
+    float _WidthOutlineSharpness;
+    float4 _GridColor;
+    float _WidthGrid;
+    float _WidthGridSharpness;
+    float _NumberHorizzontal;
+    float _NumberVertical;
+    float _Frequency;
+    float4 _EmissionColor;
+    float _EmissionIntensity;
+            CBUFFER_END
 
-Varyings vert(Attributes IN)
-{
-    Varyings OUT;
-    UNITY_SETUP_INSTANCE_ID(IN);
-    UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
-    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-    OUT.uv = IN.uv;
-    OUT.scale = GetObjectScale();
-    return OUT;
-}
+    float3 GetObjectScale()
+    {
+        return float3(
+                    length(unity_ObjectToWorld._m00_m10_m20),
+                    length(unity_ObjectToWorld._m01_m11_m21),
+                    length(unity_ObjectToWorld._m02_m12_m22)
+                );
+    }
 
-void ColorMask(float3 In, float3 MaskColor, float width, float widthLimiter, out float4 Out)
-{
-    float Distance = distance(MaskColor, In);
-    Out = saturate(1 - (Distance - (1 - width)) / max((1 - widthLimiter), 1e-5));
-}
+    Varyings vert(Attributes IN)
+    {
+        Varyings OUT;
+                
+                // VR instancing setup
+        UNITY_SETUP_INSTANCE_ID(IN);
+        UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
+        UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+                
+        VertexPositionInputs vertexInput = GetVertexPositionInputs(IN.positionOS.xyz);
+        OUT.positionHCS = vertexInput.positionCS;
+        OUT.uv = IN.uv;
+        OUT.scale = GetObjectScale();
+        return OUT;
+    }
 
-void ChannelMask_Green(float4 In, out float4 Out)
-{
-    Out = float4(0, In.g, 0, In.a);
-}
+    void ColorMask(float3 In, float3 MaskColor, float width, float widthLimiter, out float4 Out)
+    {
+        float Distance = distance(MaskColor, In);
+        Out = saturate(1 - (Distance - (1 - width)) / max((1 - widthLimiter), 1e-5));
+    }
 
-void ChannelMask_Red(float4 In, out float4 Out)
-{
-    Out = float4(In.r, 0, 0, In.a);
-}
+    void ChannelMask_Green(float4 In, out float4 Out)
+    {
+        Out = float4(0, In.g, 0, In.a);
+    }
 
-void Rotate_Degrees(float2 UV, float2 Center, float Rotation, out float2 Out)
-{
-    Rotation = radians(Rotation);
-    UV -= Center;
-    float s = sin(Rotation);
-    float c = cos(Rotation);
-    float2x2 rMatrix = float2x2(c, -s, s, c);
-    UV = mul(UV, rMatrix);
-    UV += Center;
-    Out = UV;
-}
+    void ChannelMask_Red(float4 In, out float4 Out)
+    {
+        Out = float4(In.r, 0, 0, In.a);
+    }
 
-void Mask(float4 col, float4 mask, float width, float widthLimiter, float sharpness, out float4 Out)
-{
-    ColorMask(col.rgb, mask.rgb, width, widthLimiter, Out);
-    Out = pow(Out, sharpness);
-}
+    void Rotate_Degrees(float2 UV, float2 Center, float Rotation, out float2 Out)
+    {
+        Rotation = radians(Rotation);
+        UV -= Center;
+        float s = sin(Rotation);
+        float c = cos(Rotation);
+        float2x2 rMatrix = float2x2(c, -s, s, c);
+        UV = mul(UV, rMatrix);
+        UV += Center;
+        Out = UV;
+    }
 
-half4 frag(Varyings i) : SV_Target
-{
-    float _ScaleY = i.scale.y;
-    float _ScaleZ = i.scale.x;
-    float _ScaleX = i.scale.z;
+    void Mask(float4 col, float4 mask, float width, float widthLimiter, float sharpness, out float4 Out)
+    {
+        ColorMask(col.rgb, mask.rgb, width, widthLimiter, Out);
+        Out = pow(Out, sharpness);
+    }
 
-    float2 uv = i.uv;
-    float2 uvr;
-    Rotate_Degrees(i.uv, float2(0.5, 0.5), 180, uvr);
+    half4 frag(Varyings i) : SV_Target
+    {
+                // VR stereo eye index setup
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+                
+        float _ScaleY = i.scale.y;
+        float _ScaleZ = i.scale.x;
+        float _ScaleX = i.scale.z;
 
-    float4 maskg = float4(0, 1, 0, 1);
-    float4 maskr = float4(1, 0, 0, 1);
+        float2 uv = i.uv;
+        float2 uvr;
+        Rotate_Degrees(i.uv, float2(0.5, 0.5), 180, uvr);
 
-    float4 g, gr, r, rr;
-    ChannelMask_Green(float4(uv, 1, 1), g);
-    Mask(g, maskg, _WidthOutline / _ScaleX, _WidthOutlineSharpness, 0.5 * _ScaleX, g);
+        float4 maskg = float4(0, 1, 0, 1);
+        float4 maskr = float4(1, 0, 0, 1);
 
-    ChannelMask_Green(float4(uvr, 1, 1), gr);
-    Mask(gr, maskg, _WidthOutline / _ScaleX, _WidthOutlineSharpness, 0.5 * _ScaleX, gr);
+        float4 g, gr, r, rr;
+        ChannelMask_Green(float4(uv, 1, 1), g);
+        Mask(g, maskg, _WidthOutline / _ScaleX, _WidthOutlineSharpness, 0.5 * _ScaleX, g);
 
-    ChannelMask_Red(float4(uv, 1, 1), r);
-    Mask(r, maskr, _WidthOutline / _ScaleZ, _WidthOutlineSharpness, 0.5 * _ScaleZ, r);
+        ChannelMask_Green(float4(uvr, 1, 1), gr);
+        Mask(gr, maskg, _WidthOutline / _ScaleX, _WidthOutlineSharpness, 0.5 * _ScaleX, gr);
 
-    ChannelMask_Red(float4(uvr, 1, 1), rr);
-    Mask(rr, maskr, _WidthOutline / _ScaleZ, _WidthOutlineSharpness, 0.5 * _ScaleZ, rr);
+        ChannelMask_Red(float4(uv, 1, 1), r);
+        Mask(r, maskr, _WidthOutline / _ScaleZ, _WidthOutlineSharpness, 0.5 * _ScaleZ, r);
 
-    float2 uvGridg = sin(i.uv * _NumberHorizzontal * 100);
-    float2 uvGridr = sin(i.uv * _NumberVertical * 100);
+        ChannelMask_Red(float4(uvr, 1, 1), rr);
+        Mask(rr, maskr, _WidthOutline / _ScaleZ, _WidthOutlineSharpness, 0.5 * _ScaleZ, rr);
 
-    float4 gGrid, rGrid;
-    ChannelMask_Green(float4(uvGridg, 1, 1), gGrid);
-    Mask(gGrid, maskg, 1 - (_WidthGrid / _ScaleX), 1 - _WidthGridSharpness, 0.5 * _ScaleX, gGrid);
+        float2 uvGridg = sin(i.uv * _NumberHorizzontal * 100);
+        float2 uvGridr = sin(i.uv * _NumberVertical * 100);
 
-    ChannelMask_Red(float4(uvGridr, 1, 1), rGrid);
-    Mask(rGrid, maskr, 1 - (_WidthGrid / _ScaleZ), 1 - _WidthGridSharpness, 0.5 * _ScaleZ, rGrid);
+        float4 gGrid, rGrid;
+        ChannelMask_Green(float4(uvGridg, 1, 1), gGrid);
+        Mask(gGrid, maskg, 1 - (_WidthGrid / _ScaleX), 1 - _WidthGridSharpness, 0.5 * _ScaleX, gGrid);
 
-    float4 green = 1 - (g * gr);
-    float4 red = 1 - (r * rr);
-    float4 outline = (green + red) - (green * red);
+        ChannelMask_Red(float4(uvGridr, 1, 1), rGrid);
+        Mask(rGrid, maskr, 1 - (_WidthGrid / _ScaleZ), 1 - _WidthGridSharpness, 0.5 * _ScaleZ, rGrid);
 
-    float4 grid = (gGrid + rGrid) - (gGrid * rGrid);
+        float4 green = 1 - (g * gr);
+        float4 red = 1 - (r * rr);
+        float4 outline = (green + red) - (green * red);
 
-    float4 baseOutline = 1 - outline;
-    float4 baseGrid = lerp(0, baseOutline, 1 - grid) * _Color;
+        float4 grid = (gGrid + rGrid) - (gGrid * rGrid);
 
-    float4 glow = lerp(0, grid, baseOutline) * _GridColor;
-    glow += baseGrid;
+        float4 baseOutline = 1 - outline;
+        float4 baseGrid = lerp(0, baseOutline, 1 - grid) * _Color;
 
-    float t1 = (sin(_Time.y * _Frequency) + 1) / 2;
-    float t2 = (cos(_Time.y * _Frequency) + 1) / 2;
-    float t3 = (sin(_Time.y * _Frequency) + 1) / 2;
+        float4 glow = lerp(0, grid, baseOutline) * _GridColor;
+        glow += baseGrid;
 
-    glow *= (t1 + t2 + t3);
+        float t1 = (sin(_Time.y * _Frequency) + 1) / 2;
+        float t2 = (cos(_Time.y * _Frequency) + 1) / 2;
+        float t3 = (sin(_Time.y * _Frequency) + 1) / 2;
+
+        glow *= (t1 + t2 + t3);
 
                 // Add emission ONLY to the outline
-    float4 emission = outline * _EmissionColor * _EmissionIntensity;
+        float4 emission = outline * _EmissionColor * _EmissionIntensity;
 
-    return glow + emission;
-}
-            ENDHLSL
-        }
+        return glow + emission;
     }
-FallBack"Hidden/InternalErrorShader"
+            ENDHLSL
+}
+    }
+    FallBack"Hidden/InternalErrorShader"
 }

@@ -12,6 +12,7 @@ public class StateController : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private BowControls bowControls;
     [SerializeField] private DriveControls driveControls;
+    [SerializeField] private BowModelHandler bowModelHandler;
     [SerializeField] private JumpEventsSO jumpEvents;
     [SerializeField] private SwitchTimeEventsSO switchEvents;
     [SerializeField] public SlowTimeSO slowTime;
@@ -68,11 +69,13 @@ public class StateController : MonoBehaviour
             case PlayerState.Driving:
                 driveControls.canDrive = true;
                 bowControls.enabled = false;
+                bowModelHandler.isLocked = true;
                 break;
 
             case PlayerState.Shooting:
                 driveControls.canDrive = false;
                 bowControls.enabled = true;
+                bowModelHandler.isLocked = false;
                 break;
         }
 

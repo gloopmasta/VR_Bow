@@ -17,9 +17,10 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float slowTime;
     [SerializeField] private PlayerState state;
     [SerializeField] private bool isBashing;
+    [SerializeField] private int score;
 
 
-    
+
     public int Hp
     {
         get { return hp; }
@@ -30,7 +31,8 @@ public class Player : MonoBehaviour, IDamageable
         get { return arrowCount; }
         set { arrowCount = Mathf.Clamp(value, 0, data.maxArrowCount); }
     }
-    [PandaVariable] public float SlowTime
+    [PandaVariable]
+    public float SlowTime
     {
         get { return slowTime; }
         set { slowTime = value; }
@@ -63,7 +65,7 @@ public class Player : MonoBehaviour, IDamageable
         arrowCount = 1/*data.maxArrowCount*/;
         slowTime = 4f;
         fuel = data.maxFuel;
-        
+
     }
 
     private void OnEnable()
@@ -101,13 +103,16 @@ public class Player : MonoBehaviour, IDamageable
         score += ammount;
         //playerEvents.RaiseScoreChanged(score);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //on collision with a powerup -> collect logic
-        if (other.TryGetComponent<Powerup>(out var powerup))
+        void OnTriggerEnter(Collider other)
         {
-            powerup.Collect(gameObject);
+            //on collision with a powerup -> collect logic
+            if (other.TryGetComponent<Powerup>(out var powerup))
+            {
+                powerup.Collect(gameObject);
+            }
         }
     }
 }
+
+
 

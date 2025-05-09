@@ -12,9 +12,8 @@ public class DriveControls : MonoBehaviour
     
 
     [Header("Speed Settings")]
-    [SerializeField] float currentSpeed = 5f;
+    public float currentSpeed = 5f;
     [SerializeField] private Vector3 currentVelocity = Vector3.zero;
-    [SerializeField] private float currentSpeed = 5f;
     [SerializeField] float maxSpeed = 100f;
     [Range(1.002f, 2f)]
     [SerializeField] float accelerationRate = 1.005f;
@@ -77,7 +76,8 @@ public class DriveControls : MonoBehaviour
         }
 
         //move the player useing rigidbody
-        rb.MovePosition(rb.position + transform.forward * currentSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+
     }
 
 
