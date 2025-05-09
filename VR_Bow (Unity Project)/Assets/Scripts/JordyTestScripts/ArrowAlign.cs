@@ -49,5 +49,6 @@ public class Arrow : MonoBehaviour
     {
         Debug.Log("Hit: " + collision.gameObject.name);
         Destroy(gameObject); // You can replace this with object pooling
+        
     }
 }
