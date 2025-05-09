@@ -6,7 +6,7 @@ public class BowControls : MonoBehaviour
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
     public Transform shootPoint;
-    public float maxShootForce = 20f;
+    public float maxShootForce = 50f;
     public InputActionAsset inputActions;
 
     [Header("Hand Transforms")]
