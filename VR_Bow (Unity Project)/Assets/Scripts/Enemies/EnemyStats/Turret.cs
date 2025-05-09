@@ -3,11 +3,12 @@ using PandaBT;
 
 public class Turret : Enemy
 {
-    public SwitchTimeEventsSO switchEvents;
-    public ArrowHitEventsSO arrowHitEvents;
-
+    [Header("Turret Settings")]
     [SerializeField] private int maxHP = 3;
 
+    [Header("Event Channels")]
+    [SerializeField] private SwitchTimeEventsSO switchEvents;
+    [SerializeField] private ArrowHitEventsSO arrowHitEvents;
 
     private void Start()
     {
@@ -16,21 +17,28 @@ public class Turret : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
+        // React to Player bash
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<Player>().IsBashing)
+            Player player = other.GetComponent<Player>();
+            if (player != null && player.IsBashing)
             {
                 TakeDamage(1);
-                GetComponent<Rigidbody>().AddForce(transform.up * 15, ForceMode.Impulse);
-                switchEvents.RaiseEnterDSSwitchTime();
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddForce(transform.up * 15f, ForceMode.Impulse);
+                }
+
+                switchEvents?.RaiseEnterDSSwitchTime();
             }
         }
 
+        // React to arrow hit
         if (other.CompareTag("Arrow"))
         {
             TakeDamage(1);
         }
-        
     }
 
     protected override void Die()

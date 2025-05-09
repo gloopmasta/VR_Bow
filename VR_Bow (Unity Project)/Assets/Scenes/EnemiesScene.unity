@@ -1271,6 +1271,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trailSegmentPrefab: {fileID: 0}
+  segmentSpacing: 0.01
+--- !u!114 &323496807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323496793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3beb145eb1bda6e4296d56224ef1f9e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  laserLength: 5
+  spawnedByTag: 
 --- !u!1 &447670779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2606,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3479502861556589999, guid: 27c23b45ce864e84b816f949d8fc18f2, type: 3}
       insertIndex: 5
       addedObject: {fileID: 323496800}
+    - targetCorrespondingSourceObject: {fileID: 3479502861556589999, guid: 27c23b45ce864e84b816f949d8fc18f2, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 323496807}
   m_SourcePrefab: {fileID: 100100000, guid: 27c23b45ce864e84b816f949d8fc18f2, type: 3}
 --- !u!114 &6110248876911322323
 MonoBehaviour:

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    public float launchForce = 10f;
-    public bool usePrediction = false;
+    [SerializeField] private float launchForce = 10f;
+    [SerializeField] private bool usePrediction = false;
 
     private Transform player;
 

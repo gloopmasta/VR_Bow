@@ -5,84 +5,85 @@ using System;
 [RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
 {
-    public float warningTime = 0.5f;
-    public float gapTime = 0.1f;
-    public float activeTime = 2f;
-    public float maxDistance = 20f;
+    [Header("Timing Settings")]
+    [SerializeField] private float warningTime = 0.5f;
+    [SerializeField] private float gapTime = 0.1f;
+    [SerializeField] private float activeTime = 2f;
 
-    public Color warningColor = Color.white;
-    public Color activeColor = Color.red;
+    [Header("Laser Settings")]
+    [SerializeField] private float maxDistance = 20f;
+    [SerializeField] private Color warningColor = Color.white;
+    [SerializeField] private Color activeColor = Color.red;
 
-    private LineRenderer lr;
-    private Vector3 start;
-    private Vector3 end;
+    private LineRenderer lineRenderer;
+    private Vector3 startPoint;
+    private Vector3 endPoint;
     private Vector3 fireDirection;
 
     private void Start()
     {
-        lr = GetComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
 
-        // Zorg ervoor dat het materiaal de juiste transparantie ondersteunt
-        lr.material = new Material(Shader.Find("Sprites/Default")); // Zorgt ervoor dat transparantie mogelijk is
-        lr.startWidth = 0.1f; // Pas dit aan voor de gewenste lijnbreedte
-        lr.endWidth = 0.1f;
+        // Set up the line renderer with default appearance
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // Ensures transparency
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
 
-        // Stel de begin- en eindkleur in met transparantie
-        warningColor.a = 0f; // Start invisible
+        // Set initial transparency
+        warningColor.a = 0f;
         activeColor.a = 1f;
 
+        // Generate random direction in XZ plane
         fireDirection = new Vector3(
             UnityEngine.Random.Range(-1f, 1f),
             0f,
             UnityEngine.Random.Range(-1f, 1f)
         ).normalized;
 
-        start = transform.position;
-        end = start + fireDirection * maxDistance;
+        startPoint = transform.position;
+        endPoint = startPoint + fireDirection * maxDistance;
 
         FireLaser().Forget();
     }
 
     private async UniTaskVoid FireLaser()
     {
-        lr.enabled = true;
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
 
-        // Waarschuwingsfase (fade-in naar wit)
+        // Warning phase: fade in white laser
         float t = 0f;
         while (t < warningTime)
         {
             t += Time.deltaTime;
             float alpha = Mathf.Clamp01(t / warningTime);
 
-            Color faded = warningColor;
-            faded.a = alpha;
+            Color fadedColor = warningColor;
+            fadedColor.a = alpha;
 
-            lr.startColor = faded;
-            lr.endColor = faded;
+            lineRenderer.startColor = fadedColor;
+            lineRenderer.endColor = fadedColor;
 
-            // Zorg ervoor dat de lijnbrede correct wordt ingesteld, mogelijk opnieuw instellen
-            lr.startWidth = 0.1f + alpha * 0.1f;  // Verhoog de breedte beetje per beetje
-            lr.endWidth = 0.1f + alpha * 0.1f;
+            lineRenderer.startWidth = 0.1f + alpha * 0.1f;
+            lineRenderer.endWidth = 0.1f + alpha * 0.1f;
 
             await UniTask.Yield();
         }
 
-        // Pauze (lijn wordt tijdelijk uitgeschakeld)
-        lr.enabled = false;
+        // Gap phase: laser temporarily invisible
+        lineRenderer.enabled = false;
         await UniTask.Delay(TimeSpan.FromSeconds(gapTime));
 
-        // Actieve rode laser (met schade)
-        lr.enabled = true;
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
+        // Active phase: show red laser and apply damage
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
 
-        lr.startColor = activeColor;
-        lr.endColor = activeColor;
+        lineRenderer.startColor = activeColor;
+        lineRenderer.endColor = activeColor;
 
-        // Gebruik een Raycast om de schade toe te passen
-        RaycastHit[] hits = Physics.RaycastAll(start, fireDirection, maxDistance);
+        RaycastHit[] hits = Physics.RaycastAll(startPoint, fireDirection, maxDistance);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag("Player"))
@@ -91,7 +92,7 @@ public class LaserBeam : MonoBehaviour
             }
         }
 
-        // Wacht de actieve tijd af voordat de laser wordt vernietigd
+        // Wait for the active duration, then destroy this object
         await UniTask.Delay(TimeSpan.FromSeconds(activeTime));
         Destroy(gameObject);
     }

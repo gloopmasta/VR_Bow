@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShootProjectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
-    public GameObject projectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float shootingInterval = 1f;
     [SerializeField] private float detectionRange = 25f;
 
@@ -13,7 +13,7 @@ public class ShootProjectile : MonoBehaviour
 
     private void Start()
     {
-        // Voeg automatisch een SphereCollider toe als trigger
+        // Automatically configure the SphereCollider as a trigger with the desired detection range
         SphereCollider trigger = GetComponent<SphereCollider>();
         trigger.isTrigger = true;
         trigger.radius = detectionRange;
@@ -34,7 +34,7 @@ public class ShootProjectile : MonoBehaviour
     {
         if (projectilePrefab == null)
         {
-            Debug.LogWarning("Projectile prefab not assigned.");
+            Debug.LogWarning("ShootProjectile: No projectile prefab assigned.");
             return;
         }
 

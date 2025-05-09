@@ -2,21 +2,24 @@ using UnityEngine;
 
 public class WanderMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 120f;
-    public float obstacleCheckDistance = 4f;
-    public float edgeCheckDistance = 3f;
-    public LayerMask groundLayer;
-    public LayerMask obstacleLayer;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;                // Speed at which the object moves forward
+    [SerializeField] private float rotationSpeed = 120f;          // Not currently used, but can be applied for smooth turning
 
-    private float turnCooldown = 0f;
+    [Header("Detection Settings")]
+    [SerializeField] private float obstacleCheckDistance = 4f;    // Distance to check for obstacles in front
+    [SerializeField] private float edgeCheckDistance = 3f;        // Distance ahead to check for edges
+    [SerializeField] private LayerMask groundLayer;               // LayerMask for what is considered ground
+    [SerializeField] private LayerMask obstacleLayer;             // LayerMask for what is considered an obstacle
 
-    void Update()
+    private float turnCooldown = 0f;                              // Timer to prevent constant turning
+
+    private void Update()
     {
-        // Rijd vooruit
+        // Move forward constantly
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
-        // Check cooldown zodat hij niet te vaak draait
+        // Countdown cooldown to limit turning frequency
         if (turnCooldown > 0f)
         {
             turnCooldown -= Time.deltaTime;
@@ -29,17 +32,17 @@ public class WanderMovement : MonoBehaviour
         if (obstacleAhead || edgeAhead)
         {
             TurnRandom();
-            turnCooldown = 1f; // voorkomt dat hij elke frame draait
+            turnCooldown = 1f; // Prevents immediate retrigger
         }
     }
 
-    void TurnRandom()
+    private void TurnRandom()
     {
         float randomAngle = Random.Range(-110f, 110f);
         transform.Rotate(Vector3.up, randomAngle);
     }
 
-    // Debug visualization in editor
+    // Debug rays in the scene view
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

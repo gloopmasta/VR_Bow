@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rider : Enemy
 {
-    public SwitchTimeEventsSO switchEvents;
-    public ArrowHitEventsSO arrowHitEvents;
-
+    [Header("Rider Settings")]
     [SerializeField] private int maxHP = 3;
-
+    [SerializeField] private SwitchTimeEventsSO switchEvents;
+    [SerializeField] private ArrowHitEventsSO arrowHitEvents;
 
     private void Start()
     {
@@ -20,17 +16,23 @@ public class Rider : Enemy
     {
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<Player>().IsBashing)
+            Player player = other.GetComponent<Player>();
+            if (player != null && player.IsBashing)
             {
                 TakeDamage(1);
-                GetComponent<Rigidbody>().AddForce(transform.up * 15, ForceMode.Impulse);
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddForce(Vector3.up * 15f, ForceMode.Impulse);
+                }
+
                 switchEvents.RaiseEnterDSSwitchTime();
             }
         }
-
-        if (other.CompareTag("Arrow"))
+        else if (other.CompareTag("Arrow"))
         {
             TakeDamage(1);
+            // You could also raise arrowHitEvents here if needed
         }
     }
 
