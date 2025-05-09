@@ -66,12 +66,12 @@ public class StateController : MonoBehaviour
         switch (newState)
         {
             case PlayerState.Driving:
-                driveControls.enabled = true;
+                driveControls.canDrive = true;
                 bowControls.enabled = false;
                 break;
 
             case PlayerState.Shooting:
-                driveControls.enabled = false;
+                driveControls.canDrive = false;
                 bowControls.enabled = true;
                 break;
         }
@@ -94,7 +94,7 @@ public class StateController : MonoBehaviour
     {
         //move forward slowly
         //if (PandaTask.isStarting)
-        transform.Translate(Vector3.forward * 5f * Time.deltaTime); //run indefinitely
+        //transform.Translate(Vector3.forward * 5f * Time.deltaTime); //run indefinitely
 
     }
 

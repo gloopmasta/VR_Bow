@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
@@ -7,12 +8,18 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DriveControls : MonoBehaviour
 {
-
+    private Rigidbody rb;
+    
 
     [Header("Speed Settings")]
     [SerializeField] float currentSpeed = 5f;
+    [SerializeField] private Vector3 currentVelocity = Vector3.zero;
     [SerializeField] float maxSpeed = 100f;
-    
+    [Range(1.002f, 2f)]
+    [SerializeField] float accelerationRate = 1.005f;
+    public bool canDrive;
+
+
     [SerializeField] float rotOffset = 90f;
 
     [Header("Bash Settings")]
@@ -40,24 +47,38 @@ public class DriveControls : MonoBehaviour
     private float pitch;
 
 
-    [Header("Scripts")]
+    [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] BoxCollider groundCollider;
+    [SerializeField] GameObject lockPoint;
+    [SerializeField] GameObject BowMesh;
+
 
     //How much the handle is turned
     [SerializeField] float revStrength = 1f;
 
-    [Range(1.002f, 1.01f)]
-    [SerializeField] float accelerationRate = 1.005f;
-
-
-    private void Update()
+    
+    private void Start()
     {
-        UpdateControllerData();
-        Drive();
-        Steer();
-        Drift();
+        rb = GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics
     }
+
+    private void FixedUpdate()
+    {
+        Drive(); //avoid jitter when timeSlow
+        if (canDrive) 
+        {   
+            UpdateControllerData();
+            Steer();
+            Drift();
+            LockBowPosition();
+        }
+
+        //move the player useing rigidbody
+        rb.MovePosition(rb.position + transform.forward * currentSpeed * Time.fixedDeltaTime);
+    }
+
 
     private void UpdateControllerData()
     {
@@ -104,22 +125,37 @@ public class DriveControls : MonoBehaviour
     }
     void Jump()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+        rb.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
     }
+
+    public void Launch(float launchStrength)
+    {
+        rb.AddForce(transform.up * launchStrength, ForceMode.Impulse);
+    }
+
     void Drive()
     {
-        // Only accelerate if below max speed
-        if (currentSpeed < maxSpeed)
+        // Accelerate forward if below max speed
+        if (currentVelocity.magnitude < maxSpeed)
         {
-            currentSpeed *= accelerationRate;
-            currentSpeed = Mathf.Min(currentSpeed, maxSpeed); // Clamp to maxSpeed
+            if (currentVelocity == Vector3.zero)
+            {
+                // Start with a base forward velocity
+                currentVelocity = transform.forward * currentSpeed;
+            }
+            else
+            {
+                // Exponential acceleration
+                currentVelocity *= accelerationRate;
+                currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+            }
         }
 
-        // Move forward
-        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
-        //TODO: decellerate
+        // Optional: log speed for debugging
+        Debug.Log($"Speed: {currentVelocity.magnitude:F2}");
     }
+
 
     private void Drift()
     {
@@ -188,8 +224,14 @@ public class DriveControls : MonoBehaviour
                 // Smoothly interpolate between current and target steering input
                 currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
 
-                // Apply rotation
-                transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
+                // Apply rotation - OLD
+                //transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
+
+                //apply rotation - NEW
+                float rotationAmount = currentSteeringInput * currentTurnSpeed * Time.fixedDeltaTime;
+                Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
+                rb.MoveRotation(rb.rotation * deltaRotation);
+
 
                 lastSteeringInput = currentSteeringInput;
             }
@@ -203,61 +245,10 @@ public class DriveControls : MonoBehaviour
         }
     }
 
-    void Steer2() //"smooth" steer
+    private void LockBowPosition()
     {
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
-        {
-            Vector3 eulerRotation = deviceRotation.eulerAngles;
-
-            // Convert eulerRotation.x from 0–360 to -180–180
-            pitch = eulerRotation.x;
-            if (pitch > 180f) pitch -= 360f;
-
-            // Apply rotation offset
-            float adjustedPitch = pitch;
-
-            // Calculate the absolute value for comparison
-            float absPitch = Mathf.Abs(adjustedPitch);
-
-            // Define dead zone threshold
-            float deadZone = 20f;
-
-            //Debug.Log("adjusted pitch: " + pitch);
-
-            // Determine steering input based on dead zone
-            float steeringInput = 0f;
-            if (absPitch > deadZone)
-            {
-                // Calculate the amount beyond the dead zone
-                float excess = absPitch - deadZone;
-
-                // Optionally, define a maximum range beyond the dead zone for full input
-                float maxExcess = 30f; // Adjust as needed
-
-                // Calculate a scaling factor (0 to 1)
-                float scale = Mathf.Clamp01(excess / maxExcess);
-
-                // Determine the direction (-1 or 1)
-                float direction = Mathf.Sign(adjustedPitch);
-
-                // Calculate the target steering input
-                float targetSteeringInput = direction * scale;
-
-                // Smoothly interpolate between current and target steering input
-                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
-
-                // Apply rotation
-                transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
-            }
-            else
-            {
-                // Within dead zone; smoothly return to zero
-                currentSteeringInput = Mathf.Lerp(currentSteeringInput, 0f, Time.deltaTime * steeringSmoothness);
-            }
-        }
+        BowMesh.transform.position = lockPoint.transform.position;
     }
-
-
 
     public void TriggerHapticFeedback()
     {

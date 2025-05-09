@@ -11,7 +11,19 @@ public class JumpPad : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Rigidbody>().AddForce(transform.up * lauchStrength, ForceMode.Impulse);
+            DriveControls playerDriveScript = other.GetComponent<DriveControls>();
+            if (!playerDriveScript.enabled)
+            {
+                //enable the script, launch the player than disable again
+                playerDriveScript.enabled = true;
+                playerDriveScript.Launch(lauchStrength);
+                playerDriveScript.enabled = false;
+            }
+            else
+            {
+                playerDriveScript.Launch(30f);
+            }
+
             switchEvents.RaiseEnterDSSwitchTime();
         }
     }
