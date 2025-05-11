@@ -1,15 +1,13 @@
 using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class DriveControls : MonoBehaviour
+public class DriveControls : MonoBehaviour, ITimeScalable
 {
     private Rigidbody rb;
-    
 
     [Header("Speed Settings")]
     public float currentSpeed = 5f;
@@ -19,21 +17,20 @@ public class DriveControls : MonoBehaviour
     [SerializeField] float accelerationRate = 1.005f;
     public bool canDrive;
 
-
     [SerializeField] float rotOffset = 90f;
 
     [Header("Bash Settings")]
     [SerializeField] float bashStrength = 5f;
     [SerializeField] int bashDamage = 1;
-    [SerializeField] private float bashCooldown = 1.5f; // Cooldown duration in seconds
-    private float nextBashTime = 0f; // Time when the next bash is allowed
+    [SerializeField] private float bashCooldown = 1.5f;
+    private float nextBashTime = 0f;
 
     [Header("Jump Settings")]
     [SerializeField] float jumpStrength = 5f;
     [SerializeField] float jumpCooldown = 0.5f;
     private float nextJumpTime = 0f;
 
-    [Header("Steering & drift")]
+    [Header("Steering & Drift")]
     [SerializeField] bool isDrifting = false;
     [SerializeField] float turnSpeed = 1f;
     [SerializeField] float currentTurnSpeed = 1f;
@@ -41,87 +38,90 @@ public class DriveControls : MonoBehaviour
     [SerializeField] float driftCooldown;
     private float nextDriftTime = 0f;
     private float currentSteeringInput = 0f;
-    [SerializeField] float steeringSmoothness = 5f; // Adjust for desired smoothness
+    [SerializeField] float steeringSmoothness = 5f;
     [SerializeField] float deadZone = 20f;
     private float lastSteeringInput;
     private float pitch;
-
 
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] BoxCollider groundCollider;
 
+    // ITimeScalable
+    private float timeScale = 1f;
 
-    //How much the handle is turned
-    [SerializeField] float revStrength = 1f;
-
-    
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.mass = 50f;
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        Drive(); //avoid jitter when timeSlow
-        if (canDrive) 
-        {   
+        GameManager.Instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.Unregister(this);
+    }
+
+    public void OnTimeScaleChanged(float newScale)
+    {
+        timeScale = newScale;
+    }
+
+    private void Update()
+    {
+        float unscaledDelta = Time.fixedDeltaTime * timeScale;
+
+        Drive(unscaledDelta);
+
+        if (canDrive)
+        {
             UpdateControllerData();
-            Steer();
+            Steer(unscaledDelta);
             Drift();
         }
 
-        //move the player useing rigidbody
-        rb.MovePosition(rb.position + currentVelocity * Time.unscaledDeltaTime);
-
+        rb.MovePosition(rb.position + currentVelocity * unscaledDelta);
     }
-
-
 
     private void UpdateControllerData()
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            //BASH CHECK
-            if (leftVelocity.z >= 2.5f && Time.time >= nextBashTime) // Swing forward and cooldown check
+            float now = Time.time * timeScale;
+            if (leftVelocity.z >= 2.5f && now >= nextBashTime)
             {
                 Bash();
                 TriggerHapticFeedback();
-                nextBashTime = Time.time + bashCooldown; // Set next allowable bash time
+                nextBashTime = now + bashCooldown;
             }
-            //JUMP CHECK
-            if (leftVelocity.y >= 2.5f && Time.time >= nextJumpTime && CanJump())
+            if (leftVelocity.y >= 2.5f && now >= nextJumpTime && CanJump())
             {
-                Debug.Log("JUMPED");
                 Jump();
                 TriggerHapticFeedback();
-                nextJumpTime = Time.time + jumpCooldown;
+                nextJumpTime = now + jumpCooldown;
             }
         }
     }
 
     void Bash()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * bashStrength, ForceMode.Impulse);
-        TriggerHapticFeedback();
-        Debug.Log("Bashed");
+        rb.AddForce(transform.forward * bashStrength, ForceMode.Impulse);
     }
 
     bool CanJump()
     {
-        GroundCheck  gc = GetComponentInChildren<GroundCheck>();
-        Debug.Assert(gc != null, "did not find GroundCheckScript in children");
-
-        // If you can jump AND your cooldown is complete
-        if (gc != null && gc.IsGrounded())
-        {
-            return true;
-        }
-
-        Debug.Log("player is not grounded");
-        return false;
+        GroundCheck gc = GetComponentInChildren<GroundCheck>();
+        return gc != null && gc.IsGrounded();
     }
+
     void Jump()
     {
         rb.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
@@ -132,47 +132,33 @@ public class DriveControls : MonoBehaviour
         rb.AddForce(transform.up * launchStrength, ForceMode.Impulse);
     }
 
-    void Drive()
+    void Drive(float delta)
     {
-        // Accelerate forward if below max speed
         if (currentVelocity.magnitude < maxSpeed)
         {
+            Vector3 acceleration = transform.forward * currentSpeed;
             if (currentVelocity == Vector3.zero)
-            {
-                // Start with a base forward velocity
-                currentVelocity = transform.forward * currentSpeed;
-            }
+                currentVelocity = acceleration;
             else
             {
-                // Exponential acceleration
-                currentVelocity *= accelerationRate;
+                currentVelocity += acceleration * (accelerationRate - 1f);
                 currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
             }
         }
-
-
-        // Optional: log speed for debugging
-        Debug.Log($"Speed: {currentVelocity.magnitude:F2}");
     }
-
 
     private void Drift()
     {
-        if (isDrifting)
-        {
-            HandleDrifting();
-            return;
-        }
+        if (isDrifting) { HandleDrifting(); return; }
 
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            if (Mathf.Abs(leftVelocity.x) >= 2.5f && Time.time >= nextDriftTime) // If swing sideways left or right more than 2.5f velocity
+            float now = Time.time * timeScale;
+            if (Mathf.Abs(leftVelocity.x) >= 2.5f && now >= nextDriftTime)
             {
                 isDrifting = true;
-
-                Debug.Log("started a drift");
                 TriggerHapticFeedback();
-                nextDriftTime = Time.time + driftCooldown;
+                nextDriftTime = now + driftCooldown;
             }
         }
     }
@@ -181,11 +167,9 @@ public class DriveControls : MonoBehaviour
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
-            if (Mathf.Abs(pitch) > deadZone + rotOffset) // outside of deadzone
-            {
+            if (Mathf.Abs(pitch) > deadZone + rotOffset)
                 currentTurnSpeed = driftSpeed;
-            }
-            else //within deadzone -> stop drifting
+            else
             {
                 currentTurnSpeed = turnSpeed;
                 isDrifting = false;
@@ -193,14 +177,44 @@ public class DriveControls : MonoBehaviour
         }
     }
 
-    private Vector3 GetControllerRotation()
+    void Steer(float delta)
     {
         if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
-            return deviceRotation.eulerAngles;
-        }
+            Vector3 euler = deviceRotation.eulerAngles;
+            pitch = euler.x + rotOffset;
+            float absPitch = Mathf.Abs(pitch);
 
-        return Vector3.zero;
+            // Calculate target steering input (0 when in dead zone, otherwise based on pitch)
+            float targetInput = (absPitch > deadZone + rotOffset)
+                ? Mathf.DeltaAngle(0f, pitch)
+                : 0f;
+
+            // Smoothly interpolate steering input
+            currentSteeringInput = Mathf.Lerp(
+                currentSteeringInput,
+                targetInput,
+                delta * steeringSmoothness
+            );
+
+            // Only apply rotation if we have meaningful input. check prevents tiny residual rotations when nearly centered
+            if (absPitch > deadZone + rotOffset || Mathf.Abs(currentSteeringInput) > 0.1f)
+            {
+                float rotationAmount = currentSteeringInput * currentTurnSpeed * delta;
+                Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
+
+                // Apply rotation to rigidbody
+                rb.MoveRotation(rb.rotation * deltaRotation);
+
+                // Rotate velocity to match new direction
+                currentVelocity = deltaRotation * currentVelocity;
+            }
+            else
+            {
+                // When fully in dead zone, align velocity perfectly with forward
+                currentVelocity = transform.forward * currentVelocity.magnitude;
+            }
+        }
     }
 
     void Steer()
@@ -221,7 +235,7 @@ public class DriveControls : MonoBehaviour
                 float targetSteeringInput = Mathf.DeltaAngle(0f, pitch);
 
                 // Smoothly interpolate between current and target steering input
-                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.fixedDeltaTime * steeringSmoothness);
+                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
 
                 // Apply rotation - OLD
                 //transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
@@ -245,16 +259,33 @@ public class DriveControls : MonoBehaviour
     }
 
 
+
+
     public void TriggerHapticFeedback()
     {
-        // Get the right controller
         InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-
         if (leftController.isValid)
-        {
-            // Send haptic impulse
             leftController.SendHapticImpulse(0, 1f, 0.5f);
-        }
     }
-
 }
+//For even smoother transitions:
+
+//// Replace the else block with:
+//else if (currentSteeringInput != 0f)
+//{
+//    // Gradually align to forward when entering dead zone
+//    currentVelocity = Vector3.RotateTowards(
+//        currentVelocity,
+//        transform.forward * currentVelocity.magnitude,
+//        delta * steeringSmoothness * Mathf.Deg2Rad,
+//        0f
+//    );
+//}
+//Consider adding a small dead zone buffer to prevent rapid toggling at the threshold:
+
+//csharp
+//float deadZoneBuffer = 5f; // Degrees of hysteresis
+//bool wasOutsideDeadzone = absPitch > (deadZone + rotOffset);
+//bool isOutsideDeadzone = absPitch > (deadZone + rotOffset - deadZoneBuffer);
+
+//// Use isOutsideDeadzone for checks but wasOutsideDeadzone for transitions

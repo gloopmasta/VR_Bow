@@ -35,8 +35,8 @@ public class StateController : MonoBehaviour
         jumpEvents.OnLand += () => isGrounded = true;
         switchEvents.OnEnterDSSwitchTime += () => canEnterSwitchtime = true;
 
-        slowTime.OnSlowTimeExit += () => switchTimeActive = false;
-        slowTime.OnSlowTimeEnter += () => switchTimeActive = true;
+        //slowTime.OnSlowTimeExit += () => switchTimeActive = false;
+        //slowTime.OnSlowTimeEnter += () => switchTimeActive = true;
     }
 
     
@@ -104,7 +104,9 @@ public class StateController : MonoBehaviour
     [PandaTask]
     public async Task<bool> SlowTime(float duration)
     {
-        return await slowTime.SlowTime(duration);
+        //return await slowTime.SlowTime(duration);
+
+        return true;
     }
 
 
