@@ -12,31 +12,16 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag("Player"))
-        //{
-        //    DriveControls playerDriveScript = other.GetComponent<DriveControls>();
-        //    if (!playerDriveScript.enabled)
-        //    {
-        //        //enable the script, launch the player than disable again
-        //        playerDriveScript.enabled = true;
-        //        playerDriveScript.Launch(lauchStrength);
-        //        playerDriveScript.enabled = false;
-        //    }
-        //    else
-        //    {
-        //        playerDriveScript.Launch(30f);
-        //    }
+        if (other.CompareTag("Player"))
+        {
+            DriveControls playerDriveScript = other.GetComponent<DriveControls>();
+            playerDriveScript.Launch(30f);
 
-        //    switchEvents.RaiseEnterDSSwitchTime();
-        //}
 
-        slowDownTheDamnTime().Forget();
+            slowtime.RaiseSlowTimeEnter(0.2f, 3f); //raise slow down time for 3 seconds
+            switchEvents.RaiseEnterDSSwitchTime(); //raise entering switch time for the player
+        }
+
     }
 
-    async UniTaskVoid slowDownTheDamnTime()
-    {
-        Time.timeScale = 0.2f;
-        await UniTask.Delay(4000);
-        Time.timeScale = 1f;
-    }
 }

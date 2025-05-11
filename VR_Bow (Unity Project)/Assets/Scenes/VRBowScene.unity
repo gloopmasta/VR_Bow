@@ -852,26 +852,25 @@ MonoBehaviour:
   currentSpeed: 8.7
   currentVelocity: {x: 0, y: 0, z: 0}
   maxSpeed: 19.2
-  accelerationRate: 1.01
+  accelerationRate: 1.317
   canDrive: 0
   rotOffset: 0
   bashStrength: 100
   bashDamage: 1
   bashCooldown: 1.5
-  jumpStrength: 277.1
+  jumpStrength: 32.7
   jumpCooldown: 0.5
   isDrifting: 0
-  turnSpeed: 0.5
-  currentTurnSpeed: 0.5
-  driftSpeed: 1.93
+  turnSpeed: 2.17
+  currentTurnSpeed: 1.4
+  driftSpeed: 6.91
   driftCooldown: 0.57
   steeringSmoothness: 5
   deadZone: 30
   controllerData: {fileID: 154189351}
-  groundCollider: {fileID: 0}
-  lockPoint: {fileID: 0}
-  BowMesh: {fileID: 0}
-  revStrength: 1
+  groundCollider: {fileID: 1831466215}
+  lockPoint: {fileID: 433643731}
+  BowMesh: {fileID: 313258}
 --- !u!136 &154189353
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -921,7 +920,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &154189355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,6 +2029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lauchStrength: 1661
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
+  slowtime: {fileID: 0}
 --- !u!1 &460370421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2113,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.85
   m_Radius: 0.5
