@@ -17,7 +17,7 @@ public class DriveControls : MonoBehaviour
     [SerializeField] float maxSpeed = 100f;
     [Range(1.002f, 2f)]
     [SerializeField] float accelerationRate = 1.005f;
-    public bool canDrive = true;
+    public bool canDrive;
 
 
     [SerializeField] float rotOffset = 90f;
@@ -69,34 +69,22 @@ public class DriveControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!canDrive) return;
-
+        Debug.Log(Time.timeScale);
         float unscaledDelta = Time.fixedDeltaTime / Mathf.Max(Time.timeScale, 0.0001f);
 
-        ApplyMovementForces(unscaledDelta);
-        UpdateControllerData();
-        Steer2(unscaledDelta);
-        Drift();
-        LockBowPosition();
-    }
+        Drive(unscaledDelta); //avoid jitter when timeSlow
 
-    void ApplyMovementForces(float delta)
-    {
-        // Calculate target velocity
-        Vector3 targetVelocity = transform.forward * currentSpeed;
-
-        // Smooth velocity transition
-        Vector3 velocityDifference = targetVelocity - rb.velocity;
-        velocityDifference.y = 0; // Preserve vertical velocity
-
-        // Apply acceleration force
-        rb.AddForce(velocityDifference * accelerationRate * delta, ForceMode.VelocityChange);
-
-        // Speed cap
-        if (rb.velocity.magnitude > maxSpeed)
+        if (canDrive)
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            UpdateControllerData();
+            Steer(unscaledDelta);
+            Drift();
+            LockBowPosition();
         }
+
+        //move the player useing rigidbody
+        rb.MovePosition(rb.position + currentVelocity * unscaledDelta);
+
     }
 
 
@@ -173,28 +161,6 @@ public class DriveControls : MonoBehaviour
                 currentVelocity += acceleration * (accelerationRate - 1f);
                 currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
             }
-        }
-    }
-
-    void Steer2(float delta)
-    {
-        if (!controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
-            return;
-
-        Vector3 eulerRotation = deviceRotation.eulerAngles;
-        pitch = eulerRotation.x + rotOffset;
-
-        if (Mathf.Abs(pitch) > deadZone + rotOffset)
-        {
-            float targetSteering = Mathf.Clamp(pitch * 0.1f, -1f, 1f); // Scale input
-            currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteering, delta * steeringSmoothness);
-
-            // Apply torque instead of direct rotation
-            rb.AddTorque(Vector3.up * currentSteeringInput * currentTurnSpeed * delta, ForceMode.VelocityChange);
-        }
-        else
-        {
-            currentSteeringInput = Mathf.Lerp(currentSteeringInput, 0f, delta * steeringSmoothness * 2f);
         }
     }
 

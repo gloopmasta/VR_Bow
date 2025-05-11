@@ -9,32 +9,12 @@ using System;
 public class SlowTimeSO : ScriptableObject
 {
     //Events
-    public event Action OnSlowTimeEnter;
+    public event Action<float, float> OnSlowTimeEnter;
     public event Action OnSlowTimeExit;
 
-    public void RaiseSlowTimeEnter() => OnSlowTimeEnter?.Invoke();
+    public void RaiseSlowTimeEnter(float factor, float duration) => OnSlowTimeEnter?.Invoke(factor, duration);
     public void RaiseSlowTimeExit() => OnSlowTimeExit?.Invoke();
 
-    public float slowAmount = 0.2f;
+   
 
-    public void EnterSlowTime()
-    {
-        Time.timeScale = slowAmount;
-    }
-    public void ExitSlowTime()
-    {
-        Time.timeScale = 1f;
-    }
-
-    public async Task<bool> SlowTime(float duration)
-    {
-        RaiseSlowTimeEnter();
-        Time.timeScale = slowAmount;
-
-        await UniTask.WaitForSeconds(duration, true) ;
-
-        RaiseSlowTimeExit();
-        Time.timeScale = 1f;
-        return true;
-    }
 }

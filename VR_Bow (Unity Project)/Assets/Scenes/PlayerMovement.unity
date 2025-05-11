@@ -1050,9 +1050,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpeed: 5
   currentVelocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 100
+  maxSpeed: 24.7
   accelerationRate: 1.005
-  canDrive: 0
+  canDrive: 1
   rotOffset: 90
   bashStrength: 5
   bashDamage: 1
