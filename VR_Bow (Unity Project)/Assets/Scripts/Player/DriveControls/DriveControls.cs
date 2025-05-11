@@ -46,8 +46,6 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] BoxCollider groundCollider;
-    [SerializeField] GameObject lockPoint;
-    [SerializeField] GameObject BowMesh;
 
     // ITimeScalable
     private float timeScale = 1f;
@@ -88,7 +86,6 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             UpdateControllerData();
             Steer(unscaledDelta);
             Drift();
-            LockBowPosition();
         }
 
         rb.MovePosition(rb.position + currentVelocity * unscaledDelta);
@@ -116,7 +113,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     void Bash()
     {
-        rb.AddForce(transform.forward * bashStrength, ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * bashStrength, ForceMode.Impulse);
     }
 
     bool CanJump()
@@ -186,19 +183,36 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         {
             Vector3 euler = deviceRotation.eulerAngles;
             pitch = euler.x + rotOffset;
+            float absPitch = Mathf.Abs(pitch);
 
-            if (Mathf.Abs(pitch) > deadZone + rotOffset)
+            // Calculate target steering input (0 when in dead zone, otherwise based on pitch)
+            float targetInput = (absPitch > deadZone + rotOffset)
+                ? Mathf.DeltaAngle(0f, pitch)
+                : 0f;
+
+            // Smoothly interpolate steering input
+            currentSteeringInput = Mathf.Lerp(
+                currentSteeringInput,
+                targetInput,
+                delta * steeringSmoothness
+            );
+
+            // Only apply rotation if we have meaningful input. check prevents tiny residual rotations when nearly centered
+            if (absPitch > deadZone + rotOffset || Mathf.Abs(currentSteeringInput) > 0.1f)
             {
-                float targetInput = Mathf.DeltaAngle(0f, pitch);
-                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetInput, delta * steeringSmoothness);
                 float rotationAmount = currentSteeringInput * currentTurnSpeed * delta;
                 Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
+
+                // Apply rotation to rigidbody
                 rb.MoveRotation(rb.rotation * deltaRotation);
-                lastSteeringInput = currentSteeringInput;
+
+                // Rotate velocity to match new direction
+                currentVelocity = deltaRotation * currentVelocity;
             }
             else
             {
-                currentSteeringInput = Mathf.Lerp(lastSteeringInput, 0f, delta * steeringSmoothness);
+                // When fully in dead zone, align velocity perfectly with forward
+                currentVelocity = transform.forward * currentVelocity.magnitude;
             }
         }
     }
@@ -246,10 +260,6 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
 
 
-    private void LockBowPosition()
-    {
-        BowMesh.transform.position = lockPoint.transform.position;
-    }
 
     public void TriggerHapticFeedback()
     {
@@ -258,3 +268,24 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             leftController.SendHapticImpulse(0, 1f, 0.5f);
     }
 }
+//For even smoother transitions:
+
+//// Replace the else block with:
+//else if (currentSteeringInput != 0f)
+//{
+//    // Gradually align to forward when entering dead zone
+//    currentVelocity = Vector3.RotateTowards(
+//        currentVelocity,
+//        transform.forward * currentVelocity.magnitude,
+//        delta * steeringSmoothness * Mathf.Deg2Rad,
+//        0f
+//    );
+//}
+//Consider adding a small dead zone buffer to prevent rapid toggling at the threshold:
+
+//csharp
+//float deadZoneBuffer = 5f; // Degrees of hysteresis
+//bool wasOutsideDeadzone = absPitch > (deadZone + rotOffset);
+//bool isOutsideDeadzone = absPitch > (deadZone + rotOffset - deadZoneBuffer);
+
+//// Use isOutsideDeadzone for checks but wasOutsideDeadzone for transitions

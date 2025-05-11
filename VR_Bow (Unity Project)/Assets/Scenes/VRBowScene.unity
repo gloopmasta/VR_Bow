@@ -851,7 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpeed: 8.7
   currentVelocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 19.2
+  maxSpeed: 14.4
   accelerationRate: 1.317
   canDrive: 0
   rotOffset: 0
@@ -861,16 +861,14 @@ MonoBehaviour:
   jumpStrength: 32.7
   jumpCooldown: 0.5
   isDrifting: 0
-  turnSpeed: 2.17
+  turnSpeed: 16.1
   currentTurnSpeed: 1.4
   driftSpeed: 6.91
   driftCooldown: 0.57
-  steeringSmoothness: 5
+  steeringSmoothness: 12.56
   deadZone: 30
   controllerData: {fileID: 154189351}
   groundCollider: {fileID: 1831466215}
-  lockPoint: {fileID: 433643731}
-  BowMesh: {fileID: 313258}
 --- !u!136 &154189353
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1926,7 +1924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &447670780
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2009,7 +2007,7 @@ Transform:
   m_GameObject: {fileID: 447670779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 1.0200002, z: 180}
+  m_LocalPosition: {x: 0.66, y: 1.0200002, z: 55}
   m_LocalScale: {x: 2.83, y: 1.34, z: 2.83}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2029,7 +2027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lauchStrength: 1661
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
-  slowtime: {fileID: 0}
+  slowtime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
 --- !u!1 &460370421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,6 +2225,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -37.005, y: 90, z: 0}
+--- !u!1 &679204797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679204799}
+  - component: {fileID: 679204798}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &679204798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679204797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9910c35f3862e6f46a79a8b675f0cfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowTimeEvent: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
+  player: {fileID: 154189349}
+  enemies: []
+--- !u!4 &679204799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679204797}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2710037, y: 2.7183437, z: 328.2547}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &719213461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4603,3 +4648,4 @@ SceneRoots:
   - {fileID: 719213465}
   - {fileID: 2575667257505389091}
   - {fileID: 2045488976}
+  - {fileID: 679204799}
