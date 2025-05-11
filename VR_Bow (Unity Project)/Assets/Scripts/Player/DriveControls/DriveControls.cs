@@ -45,7 +45,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
-    [SerializeField] BoxCollider groundCollider;
+    [SerializeField] GroundCheck groundCheck;
 
     // ITimeScalable
     private float timeScale = 1f;
@@ -57,8 +57,10 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.mass = 50f;
-    }
 
+        groundCheck = GetComponent<GroundCheck>();
+    }
+     
     private void OnEnable()
     {
         GameManager.Instance.Register(this);
@@ -134,6 +136,13 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     void Drive(float delta)
     {
+       // //slopes
+       // Vector3 moveDirection = groundCheck.IsOnSlope()
+       //? groundCheck.GetSlopeMoveDirection(transform.forward)
+       //: transform.forward;
+
+
+        //if below max speed -> accelerate
         if (currentVelocity.magnitude < maxSpeed)
         {
             Vector3 acceleration = transform.forward * currentSpeed;

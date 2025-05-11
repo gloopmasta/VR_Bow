@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] private int hp;
     [SerializeField] private int arrowCount;
-    [SerializeField] private float fuel;
+    //[SerializeField] private float fuel;
     [SerializeField] private float slowTime;
     [SerializeField] private PlayerState state;
     [SerializeField] private bool isBashing;
@@ -24,12 +24,12 @@ public class Player : MonoBehaviour, IDamageable
     public int Hp
     {
         get { return hp; }
-        set { hp = Mathf.Min(value, data.maxHp); } //Make sure that health never exceeds max Health
+        set { hp = Mathf.Min(value, data.MaxHp); } //Make sure that health never exceeds max Health
     }
     public int ArrowCount
     {
         get { return arrowCount; }
-        set { arrowCount = Mathf.Clamp(value, 0, data.maxArrowCount); }
+        set { arrowCount = Mathf.Clamp(value, 0, data.MaxArrowCount); }
     }
     [PandaVariable]
     public float SlowTime
@@ -37,11 +37,11 @@ public class Player : MonoBehaviour, IDamageable
         get { return slowTime; }
         set { slowTime = value; }
     }
-    public float Fuel
-    {
-        get { return fuel; }
-        set { fuel = Mathf.Clamp(value, 0, data.maxFuel); }
-    }
+    //public float Fuel
+    //{
+    //    get { return fuel; }
+    //    set { fuel = Mathf.Clamp(value, 0, data.MaxFuel); }
+    //}
     public PlayerState State
     {
         get { return state; }
@@ -61,10 +61,10 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
-        hp = data.maxHp;
+        hp = data.MaxHp;
         arrowCount = 1/*data.maxArrowCount*/;
         slowTime = 4f;
-        fuel = data.maxFuel;
+        //fuel = data.MaxFuel;
 
     }
 
@@ -85,17 +85,6 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void ConsumeFuel(float amount)
-    {
-        fuel = Mathf.Clamp(fuel - amount, 0, data.maxFuel);
-        //playerEvents.RaiseFuelChanged(fuel);
-    }
-
-    public void RefillFuel()
-    {
-        fuel = data.maxFuel;
-        //playerEvents.RaiseFuelChanged(fuel);
-    }
 
 
     public void IncreaseScore(int ammount)
@@ -103,13 +92,15 @@ public class Player : MonoBehaviour, IDamageable
         score += ammount;
         //playerEvents.RaiseScoreChanged(score);
 
-        void OnTriggerEnter(Collider other)
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //on collision with a powerup -> collect logic
+        if (other.TryGetComponent<Powerup>(out var powerup))
         {
-            //on collision with a powerup -> collect logic
-            if (other.TryGetComponent<Powerup>(out var powerup))
-            {
-                powerup.Collect(gameObject);
-            }
+            powerup.Collect(gameObject);
         }
     }
 }

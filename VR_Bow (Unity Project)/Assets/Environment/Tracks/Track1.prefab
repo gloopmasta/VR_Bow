@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 498656659637108282}
   - component: {fileID: 1156309011304698947}
   - component: {fileID: 575112020549629758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp
-  m_TagString: Untagged
+  m_TagString: Slope
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,9 +116,9 @@ GameObject:
   - component: {fileID: 3635950104574764846}
   - component: {fileID: 7789295921933648627}
   - component: {fileID: 344309480284646468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (8)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,9 +199,9 @@ GameObject:
   - component: {fileID: 3308922655427675992}
   - component: {fileID: 645418002831300800}
   - component: {fileID: 8521180808386572763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,9 +282,9 @@ GameObject:
   - component: {fileID: 8438390514995011681}
   - component: {fileID: 9115449246186795906}
   - component: {fileID: 278098930233636658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,9 +363,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641893906582847111}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,9 +406,9 @@ GameObject:
   - component: {fileID: 6752773046524810157}
   - component: {fileID: 4669103105469815946}
   - component: {fileID: 4447200974863937881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -490,9 +490,9 @@ GameObject:
   - component: {fileID: 238995927574620642}
   - component: {fileID: 2552810206114526234}
   - component: {fileID: 6990829063543347845}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp (3)
-  m_TagString: Untagged
+  m_TagString: Slope
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -594,9 +594,9 @@ GameObject:
   - component: {fileID: 2001442427546675066}
   - component: {fileID: 8101407067581364958}
   - component: {fileID: 2523663802529993398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -677,9 +677,9 @@ GameObject:
   - component: {fileID: 3016496730473108004}
   - component: {fileID: 1679496362639452954}
   - component: {fileID: 7836731897814187693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -830,6 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb62f2c8e9753e418ab1f705643a090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackMaterial: {fileID: 0}
 --- !u!1 &4748381007307607324
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,9 +877,9 @@ GameObject:
   - component: {fileID: 7235154376302163479}
   - component: {fileID: 8606589583254952535}
   - component: {fileID: 8270564485318641685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,9 +960,9 @@ GameObject:
   - component: {fileID: 3266116061826506776}
   - component: {fileID: 5607397767260375362}
   - component: {fileID: 7937550819878611094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1042,9 +1043,9 @@ GameObject:
   - component: {fileID: 1557206072434062622}
   - component: {fileID: 8004587518205110064}
   - component: {fileID: 8915686035546915034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1125,9 +1126,9 @@ GameObject:
   - component: {fileID: 4115575516968819619}
   - component: {fileID: 2450102090072433992}
   - component: {fileID: 8415938907072697185}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Track Straight (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Player))]
 public class BowControls : MonoBehaviour
 {
     [Header("Arrow & Shooting")]
@@ -39,6 +40,7 @@ public class BowControls : MonoBehaviour
     private float flexValue = 0f;
     private bool isDrawing = false;
     private Vector3 drawStartPosition;
+    private Player playerScript;
 
     void OnEnable()
     {
@@ -49,6 +51,8 @@ public class BowControls : MonoBehaviour
 
         triggerAction.started += _ => StartDrawing();
         triggerAction.canceled += _ => ReleaseArrow();
+
+        playerScript = GetComponent<Player>();
     }
 
     void OnDisable()
@@ -79,7 +83,7 @@ public class BowControls : MonoBehaviour
             Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
 
             // Update arrow visual position and corrected rotation
-            if (currentVisualArrow != null)
+            if (currentVisualArrow != null && playerScript.ArrowCount > 0)
             {
                 currentVisualArrow.transform.position = rightHand.position;
                 currentVisualArrow.transform.rotation = Quaternion.LookRotation(leftHand.forward) * Quaternion.Euler(-90, 0, 0); // ← corrected rotation
@@ -96,6 +100,8 @@ public class BowControls : MonoBehaviour
 
     void StartDrawing()
     {
+        if (playerScript.ArrowCount <= 0) return;
+
         isDrawing = true;
         drawStartPosition = rightHand.position;
 
@@ -116,7 +122,8 @@ public class BowControls : MonoBehaviour
 
     void ReleaseArrow()
     {
-        if (!isDrawing) return;
+        //if not drawing or player has no arrows -> dont shoot
+        if (!isDrawing || playerScript.ArrowCount <= 0) return;
 
         Shoot();
         isDrawing = false;
@@ -140,6 +147,7 @@ public class BowControls : MonoBehaviour
 
     void Shoot()
     {
+        playerScript.ArrowCount--; //deduct an arrow from the player
         float shootForce = flexValue * maxShootForce;
         Vector3 shootDirection = leftHand.forward;
 
