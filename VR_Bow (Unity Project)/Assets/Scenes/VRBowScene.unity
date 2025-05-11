@@ -353,6 +353,7 @@ MonoBehaviour:
   leftController: {fileID: 136419144}
   lockPoint: {fileID: 433643732}
   bowOffsetEuler: {x: 0, y: 90, z: 35}
+  maxVisibleRotation: 50
   isLocked: 0
 --- !u!1 &29975672
 GameObject:
@@ -861,9 +862,10 @@ MonoBehaviour:
   jumpStrength: 32.7
   jumpCooldown: 0.5
   isDrifting: 0
-  turnSpeed: 16.1
+  turnSpeed: 2
   currentTurnSpeed: 1.4
-  driftSpeed: 6.91
+  driftSpeed: 5
+  
   driftCooldown: 0.57
   steeringSmoothness: 12.56
   deadZone: 30
@@ -2025,7 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962042f459452e44f8d92013dbb72118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lauchStrength: 1661
+  lauchStrength: 600
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   slowtime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
 --- !u!1 &460370421
@@ -4625,6 +4627,7 @@ BoxCollider:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 679204799}
   - {fileID: 299639869}
   - {fileID: 756192408}
   - {fileID: 2092139010}

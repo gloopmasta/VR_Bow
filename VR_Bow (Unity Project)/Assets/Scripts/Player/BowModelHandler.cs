@@ -5,6 +5,7 @@ public class BowModelHandler : MonoBehaviour
     [SerializeField] private Transform leftController;
     [SerializeField] private Transform lockPoint;
     [SerializeField] private Vector3 bowOffsetEuler; // If needed
+    [SerializeField] private float maxVisibleRotation = 50f; // If needed
     public bool isLocked;
 
     void LateUpdate()
@@ -18,6 +19,8 @@ public class BowModelHandler : MonoBehaviour
             Vector3 controllerEuler = leftController.rotation.eulerAngles;
 
             // Use only Y and Z rotation
+            float clampedZ = Mathf.Clamp(-controllerEuler.z, -maxVisibleRotation, maxVisibleRotation);
+
             Quaternion limitedRotation = Quaternion.Euler(-controllerEuler.z, 90f, 0f);
             // LEFT HANDED -> Quaternion limitedRotation = Quaternion.Euler(controllerEuler.z, 90f, 0f);
             transform.localRotation = limitedRotation;

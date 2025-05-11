@@ -15,7 +15,8 @@ public class JumpPad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             DriveControls playerDriveScript = other.GetComponent<DriveControls>();
-            playerDriveScript.Launch(30f);
+
+            playerDriveScript.Launch(lauchStrength);
 
 
             slowtime.RaiseSlowTimeEnter(0.2f, 3f); //raise slow down time for 3 seconds
