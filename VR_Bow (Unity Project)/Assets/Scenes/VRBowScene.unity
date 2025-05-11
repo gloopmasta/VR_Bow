@@ -869,6 +869,8 @@ MonoBehaviour:
   deadZone: 30
   controllerData: {fileID: 154189351}
   groundCollider: {fileID: 0}
+  lockPoint: {fileID: 0}
+  BowMesh: {fileID: 0}
   revStrength: 1
 --- !u!136 &154189353
 CapsuleCollider:
@@ -917,7 +919,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &154189355
@@ -1078,9 +1080,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb8e452a1282724985a415d13d1601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
-  switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
-  arrowHitEvents: {fileID: 0}
 --- !u!136 &178477525
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1928,7 +1927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &447670780
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2011,7 +2010,7 @@ Transform:
   m_GameObject: {fileID: 447670779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 1.0200002, z: 184.4}
+  m_LocalPosition: {x: 0.66, y: 1.0200002, z: 180}
   m_LocalScale: {x: 2.83, y: 1.34, z: 2.83}
   m_ConstrainProportionsScale: 1
   m_Children: []
