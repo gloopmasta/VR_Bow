@@ -13,6 +13,7 @@ public class JumpPad : MonoBehaviour
         {
             DriveControls playerDriveScript = other.GetComponent<DriveControls>();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             if (!playerDriveScript.enabled)
             {
                 //enable the script, launch the player than disable again
@@ -24,6 +25,9 @@ public class JumpPad : MonoBehaviour
             {
                 playerDriveScript.Launch(30f);
             }
+=======
+            playerDriveScript.Launch(lauchStrength);
+>>>>>>> Stashed changes
 =======
             playerDriveScript.Launch(lauchStrength);
 >>>>>>> Stashed changes

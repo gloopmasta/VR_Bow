@@ -863,9 +863,15 @@ MonoBehaviour:
   jumpCooldown: 0.5
   isDrifting: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   turnSpeed: 0.5
   currentTurnSpeed: 0.5
   driftSpeed: 1.93
+=======
+  turnSpeed: 2
+  currentTurnSpeed: 1.4
+  driftSpeed: 5
+>>>>>>> Stashed changes
 =======
   turnSpeed: 2
   currentTurnSpeed: 1.4
