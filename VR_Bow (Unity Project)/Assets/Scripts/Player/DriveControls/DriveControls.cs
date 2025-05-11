@@ -12,9 +12,8 @@ public class DriveControls : MonoBehaviour
     
 
     [Header("Speed Settings")]
-    [SerializeField] float currentSpeed = 5f;
+    public float currentSpeed = 5f;
     [SerializeField] private Vector3 currentVelocity = Vector3.zero;
-    [SerializeField] private float currentSpeed = 5f;
     [SerializeField] float maxSpeed = 100f;
     [Range(1.002f, 2f)]
     [SerializeField] float accelerationRate = 1.005f;
@@ -51,8 +50,6 @@ public class DriveControls : MonoBehaviour
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] BoxCollider groundCollider;
-    [SerializeField] GameObject lockPoint;
-    [SerializeField] GameObject BowMesh;
 
 
     //How much the handle is turned
@@ -73,11 +70,11 @@ public class DriveControls : MonoBehaviour
             UpdateControllerData();
             Steer();
             Drift();
-            LockBowPosition();
         }
 
         //move the player useing rigidbody
-        rb.MovePosition(rb.position + transform.forward * currentSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + currentVelocity * Time.unscaledDeltaTime);
+
     }
 
 
@@ -224,7 +221,7 @@ public class DriveControls : MonoBehaviour
                 float targetSteeringInput = Mathf.DeltaAngle(0f, pitch);
 
                 // Smoothly interpolate between current and target steering input
-                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.deltaTime * steeringSmoothness);
+                currentSteeringInput = Mathf.Lerp(currentSteeringInput, targetSteeringInput, Time.fixedDeltaTime * steeringSmoothness);
 
                 // Apply rotation - OLD
                 //transform.Rotate(Vector3.up, currentSteeringInput * currentTurnSpeed * Time.deltaTime);
@@ -247,10 +244,6 @@ public class DriveControls : MonoBehaviour
         }
     }
 
-    private void LockBowPosition()
-    {
-        BowMesh.transform.position = lockPoint.transform.position;
-    }
 
     public void TriggerHapticFeedback()
     {

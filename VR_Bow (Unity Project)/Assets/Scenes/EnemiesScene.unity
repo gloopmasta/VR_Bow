@@ -730,7 +730,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 12.72
+  currentVelocity: {x: 0, y: 0, z: 0}
   maxSpeed: 12.72
+  accelerationRate: 1.01
+  canDrive: 0
   rotOffset: 0
   bashStrength: 100
   bashDamage: 1
@@ -747,7 +750,6 @@ MonoBehaviour:
   controllerData: {fileID: 154189351}
   groundCollider: {fileID: 0}
   revStrength: 1
-  accelerationRate: 1.01
 --- !u!136 &154189353
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -812,6 +814,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b474045e9bed7b84390e58e7c2c2ddad, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
+  hp: 0
+  arrowCount: 0
+  fuel: 0
+  slowTime: 0
+  state: 0
+  isBashing: 0
+  score: 0
 --- !u!114 &154189356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,6 +864,7 @@ MonoBehaviour:
   player: {fileID: 154189355}
   bowControls: {fileID: 154189356}
   driveControls: {fileID: 154189352}
+  bowModelHandler: {fileID: 0}
   jumpEvents: {fileID: 11400000, guid: 26d74483eb157844e8e10e07f9e7c3ca, type: 2}
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}

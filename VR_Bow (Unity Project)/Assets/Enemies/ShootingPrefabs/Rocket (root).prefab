@@ -189,5 +189,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bd4aa0ac791dd498603f9bda17559a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 5
+  launchForce: 17.1
   usePrediction: 0

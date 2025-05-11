@@ -23,7 +23,7 @@ public class Rocket : MonoBehaviour
         if (usePrediction && player != null)
         {
             DriveControls driveControls = player.GetComponent<DriveControls>();
-            Vector3 playerVelocity = player.forward * driveControls.CurrentSpeed;
+            Vector3 playerVelocity = player.forward * driveControls.currentSpeed;
             float predictionTime = 1.0f;
             Vector3 futurePosition = player.position + playerVelocity * predictionTime;
 
