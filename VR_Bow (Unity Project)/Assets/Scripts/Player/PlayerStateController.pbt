@@ -1,7 +1,7 @@
 #Root sequence
 	retry 
 		sequence
-			SwitchTimeActivated
+			WaitUntilSwitchtime
 			SwitchTime
 	#Shooting
 		

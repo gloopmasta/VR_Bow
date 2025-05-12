@@ -63,7 +63,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         hp = data.MaxHp;
-        arrowCount = 1/*data.maxArrowCount*/;
+        arrowCount = 6/*data.maxArrowCount*/;
         slowTime = 4f;
         //fuel = data.MaxFuel;
 
@@ -108,10 +108,10 @@ public class Player : MonoBehaviour, IDamageable
         //{
         //    jp.Activate(gameObject);
         //}
-        if (other.TryGetComponent<Launchable>(out var launchable) && isBashing) //if player interacts with a launchable and is bashing
-        {
-            launchable.OnBash(gameObject);
-        }
+        //if (other.TryGetComponent<Launchable>(out var launchable) && isBashing) //if player interacts with a launchable and is bashing
+        //{
+        //    launchable.OnBash(gameObject);
+        //}
     }
 }
 

@@ -7,7 +7,16 @@ public class Launchable : MonoBehaviour
     public BashEventSO bashEvent;
     public SwitchTimeEventsSO switchEvent;
     [SerializeField] private Rigidbody rb;
-    
+
+
+   
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            OnBash(collision.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -17,7 +26,7 @@ public class Launchable : MonoBehaviour
 
     public void OnBash(GameObject player)
     {
-        rb.AddForce(player.transform.forward, ForceMode.Impulse);
+        rb.AddForce(player.transform.forward * launchForce, ForceMode.Impulse);
         rb.AddForce(transform.up * launchForce, ForceMode.Impulse);
         bashEvent.RaiseLaunchingBash();
         switchEvent.RaiseEnterDSSwitchTime();

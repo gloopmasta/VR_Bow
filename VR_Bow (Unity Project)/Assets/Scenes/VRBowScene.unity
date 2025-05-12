@@ -1180,7 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c305849c5686b40af659d2ea29f506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 100
+  launchForce: 12
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
   switchEvent: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   rb: {fileID: 193333795}
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c305849c5686b40af659d2ea29f506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 100
+  launchForce: 12
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
   switchEvent: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   rb: {fileID: 667082184}
@@ -3451,7 +3451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c305849c5686b40af659d2ea29f506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 100
+  launchForce: 12
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
   switchEvent: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   rb: {fileID: 1233132864}
@@ -4363,7 +4363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c305849c5686b40af659d2ea29f506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 100
+  launchForce: 12
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
   switchEvent: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   rb: {fileID: 2027774519}
