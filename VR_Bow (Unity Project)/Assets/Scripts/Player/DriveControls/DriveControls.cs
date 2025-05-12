@@ -63,7 +63,8 @@ public class DriveControls : MonoBehaviour, ITimeScalable
      
     private void OnEnable()
     {
-        GameManager.Instance.Register(this);
+        if (GameManager.Instance != null)
+            GameManager.Instance.Register(this);
     }
 
     private void OnDisable()
@@ -132,6 +133,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     public void Launch(float launchStrength)
     {
         rb.AddForce(transform.up * launchStrength, ForceMode.Impulse);
+        rb.AddForce(-transform.forward * 200, ForceMode.Impulse);
     }
 
     void Drive(float delta)

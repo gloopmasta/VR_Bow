@@ -850,9 +850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd46cdeb82e7e54e9128f2940339538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 8.7
+  currentSpeed: 4.45
   currentVelocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 14.4
+  maxSpeed: 7.2
   accelerationRate: 1.317
   canDrive: 0
   rotOffset: 0
@@ -936,7 +936,6 @@ MonoBehaviour:
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
   hp: 0
   arrowCount: 0
-  fuel: 0
   slowTime: 0
   state: 0
   isBashing: 0
@@ -2267,7 +2266,7 @@ Transform:
   m_GameObject: {fileID: 679204797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2710037, y: 2.7183437, z: 328.2547}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,10 +9,10 @@ using System;
 public class SlowTimeSO : ScriptableObject
 {
     //Events
-    public event Action<float, float> OnSlowTimeEnter;
+    public event Action<float> OnSlowTimeEnter;
     public event Action OnSlowTimeExit;
 
-    public void RaiseSlowTimeEnter(float factor, float duration) => OnSlowTimeEnter?.Invoke(factor, duration);
+    public void RaiseSlowTimeEnter(float factor) => OnSlowTimeEnter?.Invoke(factor);
     public void RaiseSlowTimeExit() => OnSlowTimeExit?.Invoke();
 
    

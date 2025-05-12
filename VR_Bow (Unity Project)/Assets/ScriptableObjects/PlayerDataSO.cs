@@ -16,6 +16,7 @@ public class PlayerDataSO : ScriptableObject
     [SerializeField] private bool keepArrows = true;
 
     [Header("Slowtime / Switchtime Settings")]
+    [SerializeField] private float slowAmount = 0.2f;
     [SerializeField] private float switchtime = 3f;
     [SerializeField] private float slowtimeFromJumppad = 4f;
     [SerializeField] private float slowtimeFromBash = 2f;
@@ -25,12 +26,21 @@ public class PlayerDataSO : ScriptableObject
 
     //[SerializeField] private float maxFuel = 100f;
 
-    
+
 
 
     // Public readonly properties
+    // Public readonly properties
     public int MaxHp => maxHp;
+    public float InvulnerableTime => invulnerableTime;
+    public int StartingArrowCount => startingArrowCount;
     public int MaxArrowCount => maxArrowCount;
-    //public float MaxFuel => maxFuel;
+    public int ArrowsFromJumppad => arrowsFromJumppad;
+    public bool KeepArrows => keepArrows;
+    public float SlowAmount => slowAmount;
     public float Switchtime => switchtime;
+    public float SlowtimeFromJumppad => slowtimeFromJumppad;
+    public float SlowtimeFromBash => slowtimeFromBash;
+    public float MaxSlowtime => maxSlowtime;
+    public bool KeepSlowtime => keepSlowtime;
 }

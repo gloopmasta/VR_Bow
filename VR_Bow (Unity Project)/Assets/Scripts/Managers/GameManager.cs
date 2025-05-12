@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        slowTimeEvent.OnSlowTimeEnter += HandleSlowTime;
+        slowTimeEvent.OnSlowTimeEnter += HandleSlowTimeEnter;
+        slowTimeEvent.OnSlowTimeExit += HandleSlowTimeExit;
     }
 
     public void RegisterEnemy(GameObject enemy)
@@ -51,15 +52,16 @@ public class GameManager : MonoBehaviour
         player = null;
     }
 
-    private async void HandleSlowTime(float factor, float duration)
+    private void HandleSlowTimeEnter(float factor)
     {
-        // apply immediately
+        // apply timeSlow to all ITimeScalables
         foreach (var sc in scalables) sc.OnTimeScaleChanged(factor);
-
-        // wait for duration (real time)
-        await UniTask.Delay(System.TimeSpan.FromSeconds(duration));
-
-        // revert
+    }
+    private void HandleSlowTimeExit()
+    {
+        // revert all ItimeScalables back to 1f speed
         foreach (var sc in scalables) sc.OnTimeScaleChanged(1f);
     }
+
+
 }

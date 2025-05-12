@@ -19,7 +19,7 @@ public class JumpPad : MonoBehaviour
             playerDriveScript.Launch(lauchStrength);
 
 
-            slowtime.RaiseSlowTimeEnter(0.2f, 3f); //raise slow down time for 3 seconds
+            //slowtime.RaiseSlowTimeEnter(0.2f, 3f); //raise slow down time for 3 seconds
             switchEvents.RaiseEnterDSSwitchTime(); //raise entering switch time for the player
         }
 
