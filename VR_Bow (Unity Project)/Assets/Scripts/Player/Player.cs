@@ -5,12 +5,14 @@ using PandaBT;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
+    [SerializeField] private StateController stateController;
 
 
 
-
+    [Header("Player Variables")]
     [SerializeField] private int hp;
     [SerializeField] private int arrowCount;
     //[SerializeField] private float fuel;
@@ -101,6 +103,15 @@ public class Player : MonoBehaviour, IDamageable
         if (other.TryGetComponent<Powerup>(out var powerup))
         {
             powerup.Collect(gameObject);
+        }
+
+        if (other.TryGetComponent<JumpPad>(out var jp))
+        {
+            jp.Activate(gameObject);
+        }
+        if (other.TryGetComponent<Launchable>(out var launchable))
+        {
+            launchable.OnBash(gameObject);
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Player/Events/Bash Events")]
-public class BashEventSO : MonoBehaviour
+public class BashEventSO : ScriptableObject
 {
     public event Action OnLaunchingBash;
 

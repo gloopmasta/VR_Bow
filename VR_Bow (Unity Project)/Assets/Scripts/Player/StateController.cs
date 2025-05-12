@@ -70,8 +70,6 @@ public class StateController : MonoBehaviour
 
     }
 
-   
-
     [PandaTask]
     void SetState(PlayerState newState)
     {
@@ -131,7 +129,8 @@ public class StateController : MonoBehaviour
         }
     }
 
-    [PandaTask] public async Task<bool> SlowTime()
+    [PandaTask] 
+    public async Task<bool> SlowTime()
     {
 
         if (usedJumpPad) //slowtime from jumppad
