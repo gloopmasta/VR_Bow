@@ -1,48 +1,67 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WanderMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;                // Speed at which the object moves forward
-    [SerializeField] private float rotationSpeed = 120f;          // Not currently used, but can be applied for smooth turning
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float turnSpeed = 360f; // degrees/sec
 
     [Header("Detection Settings")]
-    [SerializeField] private float obstacleCheckDistance = 4f;    // Distance to check for obstacles in front
-    [SerializeField] private float edgeCheckDistance = 3f;        // Distance ahead to check for edges
-    [SerializeField] private LayerMask groundLayer;               // LayerMask for what is considered ground
-    [SerializeField] private LayerMask obstacleLayer;             // LayerMask for what is considered an obstacle
+    [SerializeField] private float obstacleCheckDistance = 4f;
+    [SerializeField] private float edgeCheckDistance = 3f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask obstacleLayer;
 
-    private float turnCooldown = 0f;                              // Timer to prevent constant turning
+    private Quaternion targetRotation;
+    private float directionChangeCooldown = 0f;
+
+    private void Start()
+    {
+        PickNewRandomWorldDirection();
+    }
 
     private void Update()
     {
-        // Move forward constantly
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        // Forward motion
+        transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-        // Countdown cooldown to limit turning frequency
-        if (turnCooldown > 0f)
+        // Smooth rotation towards targetRotation
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+
+        // Timer voor koerswijziging
+        directionChangeCooldown -= Time.deltaTime;
+        if (directionChangeCooldown <= 0f)
         {
-            turnCooldown -= Time.deltaTime;
-            return;
+            PickNewRandomWorldDirection();
         }
 
-        bool obstacleAhead = Physics.Raycast(transform.position, transform.forward, obstacleCheckDistance, obstacleLayer);
-        bool edgeAhead = !Physics.Raycast(transform.position + transform.forward * edgeCheckDistance, Vector3.down, 5f, groundLayer);
+        // Detecteer obstakels en randen
+        bool obstacle = Physics.Raycast(transform.position, transform.forward, obstacleCheckDistance, obstacleLayer);
+        bool edge = !Physics.Raycast(transform.position + transform.forward * edgeCheckDistance, Vector3.down, 5f, groundLayer);
 
-        if (obstacleAhead || edgeAhead)
+        if (obstacle || edge)
         {
-            TurnRandom();
-            turnCooldown = 1f; // Prevents immediate retrigger
+            PickNewRandomWorldDirection(force: true);
         }
     }
 
-    private void TurnRandom()
+    private void PickNewRandomWorldDirection(bool force = false)
     {
-        float randomAngle = Random.Range(-110f, 110f);
-        transform.Rotate(Vector3.up, randomAngle);
+        Vector3 randomDir = new Vector3(
+            Random.Range(-1f, 1f),
+            0f,
+            Random.Range(-1f, 1f)
+        ).normalized;
+
+        // Stel een wereldwijde richting in, onafhankelijk van huidige richting
+        if (randomDir.sqrMagnitude > 0.01f)
+        {
+            targetRotation = Quaternion.LookRotation(randomDir);
+        }
+
+        directionChangeCooldown = force ? 1f : Random.Range(2f, 4f);
     }
 
-    // Debug rays in the scene view
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
