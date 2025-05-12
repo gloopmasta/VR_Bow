@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Trails
   - Arrow
+  - Slope
   layers:
   - Default
   - TransparentFX

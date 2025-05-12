@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: Player Data SO
   m_EditorClassIdentifier: 
   maxHp: 3
+  invulnerableTime: 2
+  startingArrowCount: 2
   maxArrowCount: 6
-  maxFuel: 100
+  arrowsFromJumppad: 1
+  keepArrows: 1
+  slowAmount: 0.2
+  switchtime: 3
+  slowtimeFromJumppad: 4
+  slowtimeFromBash: 2
+  maxSlowtime: 15
+  keepSlowtime: 0
