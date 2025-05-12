@@ -38,13 +38,15 @@ public class BowControls : MonoBehaviour
 
     [Header("Scripts & events")]
     [SerializeField] private SlowTimeSO slowTimeEvent;
+    [SerializeField] private DriveControls driveControls;
+    [SerializeField] private StateController stateController;
 
     private InputAction triggerAction;
     private float flexValue = 0f;
     private bool isDrawing = false;
     private Vector3 drawStartPosition;
     private Player playerScript;
-    private bool ableToShoot;
+    public bool canShoot;
 
     void OnEnable()
     {
@@ -70,6 +72,7 @@ public class BowControls : MonoBehaviour
 
     void Update()
     {
+        
         if (isDrawing)
         {
             float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
@@ -106,8 +109,9 @@ public class BowControls : MonoBehaviour
 
     void StartDrawing()
     {
-        if (playerScript.ArrowCount <= 0) return;
+        if (playerScript.ArrowCount <= 0 || !canShoot) return;
 
+        
         isDrawing = true;
         drawStartPosition = rightHand.position;
 
@@ -125,11 +129,12 @@ public class BowControls : MonoBehaviour
 
         Debug.Log("Started drawing bow.");
     }
+    
 
     void ReleaseArrow()
     {
         //if not drawing or player has no arrows -> dont shoot
-        if (!isDrawing || playerScript.ArrowCount <= 0) return;
+        if (!isDrawing) return;
 
         Shoot();
         isDrawing = false;

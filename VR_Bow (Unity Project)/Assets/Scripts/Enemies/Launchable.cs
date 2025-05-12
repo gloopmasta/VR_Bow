@@ -26,6 +26,10 @@ public class Launchable : MonoBehaviour
 
     public void OnBash(GameObject player)
     {
+        if (!player.GetComponent<Player>().isBashing) //if player is not bashing 
+        {
+            return;
+        }
         rb.AddForce(player.transform.forward * launchForce, ForceMode.Impulse);
         rb.AddForce(transform.up * launchForce, ForceMode.Impulse);
         bashEvent.RaiseLaunchingBash();
