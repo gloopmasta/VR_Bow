@@ -39,21 +39,35 @@ public class StateController : MonoBehaviour
 
     private void OnEnable()
     {
-        jumpEvents.OnJump += () => isGrounded = false;
+        jumpEvents.OnJump += () =>
+        {
+            isGrounded = false;
+            bowControls.canShoot = true; //reenable being able to shoot
+        };
+
         jumpEvents.OnLand += () => 
         { 
             isGrounded = true;  
             usedJumpPad = false;  
         };
-        switchEvents.OnEnterDSSwitchTime += () => canEnterSwitchtime = true;
+        switchEvents.OnEnterDSSwitchTime += () => 
+        { 
+            canEnterSwitchtime = true;
+            bowControls.canShoot = true; //reenable being able to shoot
+        };
 
         jumpPadEvent.OnEnterJumpPad += () =>
         {
             usedJumpPad = true;
             isGrounded = false;
+            bowControls.canShoot = true; //reenable being able to shoot
         };
 
-        bashEvent.OnLaunchingBash += () => didLaunchingBash = true;
+        bashEvent.OnLaunchingBash += () => 
+        { 
+            didLaunchingBash = true;
+            bowControls.canShoot = true; //reenable being able to shoot
+        };
 
         //slowTime.OnSlowTimeExit += () => switchTimeActive = false;
         //slowTime.OnSlowTimeEnter += () => switchTimeActive = true;
@@ -274,6 +288,12 @@ public class StateController : MonoBehaviour
     {
         await UniTask.WaitUntil(() => !isGrounded);
         return true;
+    }
+
+    [PandaTask]
+    public void DisableArrows()
+    {
+        bowControls.canShoot = false;
     }
 
     [PandaTask]

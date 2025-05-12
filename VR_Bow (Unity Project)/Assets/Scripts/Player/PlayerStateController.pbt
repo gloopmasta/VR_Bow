@@ -28,6 +28,7 @@
 		WaitUntilBowHorizontal
 		sequence //after you hit the ground -> display too late message. This sequence can never return true, it just waits to tilt bow
 			WaitUntilGrounded
+			DisableArrows
 			DisplaySwitchMessage
 
 	SetState PlayerState.Driving //reenable driving script
