@@ -865,7 +865,6 @@ MonoBehaviour:
   turnSpeed: 2
   currentTurnSpeed: 1.4
   driftSpeed: 5
-  
   driftCooldown: 0.57
   steeringSmoothness: 12.56
   deadZone: 30
@@ -1079,6 +1078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb8e452a1282724985a415d13d1601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 3
+  switchEvents: {fileID: 0}
+  arrowHitEvents: {fileID: 0}
 --- !u!136 &178477525
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4651,4 +4653,3 @@ SceneRoots:
   - {fileID: 719213465}
   - {fileID: 2575667257505389091}
   - {fileID: 2045488976}
-  - {fileID: 679204799}
