@@ -2,24 +2,26 @@ using UnityEngine;
 
 public class RotatingLaser : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 100f;  // Speed at which the laser rotates around its origin
-    [SerializeField] private float laserLength = 5f;      // Visual and functional length of the laser beam
-    [SerializeField] private string spawnedByTag;         // Expected to be "Player" or "Enemy" to determine damage logic
+    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private float laserLength = 5f;
+    [SerializeField] private string spawnedByTag;
 
     private LineRenderer lineRenderer;
-    private GameObject laserChild;
+    private GameObject laserPivot;
     private float nextDamageTime;
 
     private void Start()
     {
-        // Create a child GameObject that visually represents the laser
-        laserChild = new GameObject("RotatingLaserChild");
-        laserChild.transform.SetParent(transform);
-        laserChild.transform.localPosition = Vector3.zero;
-        laserChild.transform.localRotation = Quaternion.identity;
+        // Create a separate pivot object that is not affected by parent's rotation
+        laserPivot = new GameObject("LaserPivot");
+        laserPivot.transform.position = transform.position;
+        laserPivot.transform.rotation = Quaternion.identity;
 
-        // Add and configure the LineRenderer component
-        lineRenderer = laserChild.AddComponent<LineRenderer>();
+        // Make sure the pivot follows the object positionally but not rotationally
+        laserPivot.transform.SetParent(null); // Not parented, world-aligned
+
+        // Add and configure the LineRenderer
+        lineRenderer = laserPivot.AddComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
@@ -27,27 +29,29 @@ public class RotatingLaser : MonoBehaviour
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
 
-        // Ensure the laser always renders, even through objects
         lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lineRenderer.receiveShadows = false;
     }
 
     private void Update()
     {
-        // Rotate the laser in world space around the Y axis
-        laserChild.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
+        // Follow the owner’s position
+        laserPivot.transform.position = transform.position;
 
-        // Calculate beam start and end points
-        Vector3 laserStart = laserChild.transform.position;
-        Vector3 laserDirection = laserChild.transform.forward;
-        Vector3 laserEnd = laserStart + laserDirection * laserLength;
+        // Rotate smoothly around world Y axis
+        laserPivot.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
 
-        // Update the LineRenderer visuals
-        lineRenderer.SetPosition(0, laserStart);
-        lineRenderer.SetPosition(1, laserEnd);
+        // Determine the laser direction and end point
+        Vector3 start = laserPivot.transform.position;
+        Vector3 direction = laserPivot.transform.forward;
+        Vector3 end = start + direction * laserLength;
 
-        // Check for collisions to apply damage
-        if (Physics.Raycast(laserStart, laserDirection, out RaycastHit hit, laserLength))
+        // Set LineRenderer positions
+        lineRenderer.SetPosition(0, start);
+        lineRenderer.SetPosition(1, end);
+
+        // Damage detection via raycast
+        if (Physics.Raycast(start, direction, out RaycastHit hit, laserLength))
         {
             if (Time.time >= nextDamageTime)
             {
@@ -67,10 +71,9 @@ public class RotatingLaser : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Clean up the laser child object when this script is removed
-        if (laserChild != null)
+        if (laserPivot != null)
         {
-            Destroy(laserChild);
+            Destroy(laserPivot);
         }
     }
 }
