@@ -36,11 +36,15 @@ public class BowControls : MonoBehaviour
     private GameObject currentVisualArrow;
     public Transform arrowNockPoint;
 
+    [Header("Scripts & events")]
+    [SerializeField] private SlowTimeSO slowTimeEvent;
+
     private InputAction triggerAction;
     private float flexValue = 0f;
     private bool isDrawing = false;
     private Vector3 drawStartPosition;
     private Player playerScript;
+    private bool ableToShoot;
 
     void OnEnable()
     {
@@ -51,6 +55,8 @@ public class BowControls : MonoBehaviour
 
         triggerAction.started += _ => StartDrawing();
         triggerAction.canceled += _ => ReleaseArrow();
+
+        
 
         playerScript = GetComponent<Player>();
     }
