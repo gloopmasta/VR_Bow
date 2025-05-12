@@ -1,24 +1,25 @@
 #Root sequence
-	retry sequence
-		#Driving
-		#SwitchTime
+	retry 
+		sequence
+			SwitchTimeActivated
+			SwitchTime
 	#Shooting
 		
 		
 
 #Driving race
 	WaitUntilSwitchtime //wait until something happens that lets you enter switchTime
-	repeat sequence //if you jump without switchTime -> enable shooting script but no extras
-		WaitUntilJump
-		SetState PlayerState.Shooting
-		WaitUntilGrounded
-		SetState PlayerState.Driving
+	//if //only able to jump shoot if you're on the ground
+		//IsGrounded
+		//#JumpShooting
+
+
+	
 
 
 
 
-#SwitchTime sequence
-	SwitchTime
+
 
 #Shooting sequence
 	SetState PlayerState.Shooting //enable shooting script
@@ -32,6 +33,11 @@
 	SetState PlayerState.Driving //reenable driving script
 
 
+#JumpShooting repeat sequence //if you jump without switchTime -> enable shooting script but no extras
+	WaitUntilJump
+	SetState PlayerState.Shooting
+	WaitUntilGrounded
+	SetState PlayerState.Driving
 
 	//#SwitchTime race //Wait 4 seconds to turn bow, otherwise fail and go back to Driving. If you turn bow on time -> go to shooting
 //	sequence

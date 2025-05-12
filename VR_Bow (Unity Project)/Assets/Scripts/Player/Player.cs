@@ -8,8 +8,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
-    [SerializeField] private StateController stateController;
-
+    
 
 
     [Header("Player Variables")]
@@ -18,7 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     //[SerializeField] private float fuel;
     [SerializeField] private float slowTime;
     [SerializeField] private PlayerState state;
-    [SerializeField] private bool isBashing;
+    public bool isBashing;
     [SerializeField] private int score;
 
 
@@ -105,11 +104,11 @@ public class Player : MonoBehaviour, IDamageable
             powerup.Collect(gameObject);
         }
 
-        if (other.TryGetComponent<JumpPad>(out var jp))
-        {
-            jp.Activate(gameObject);
-        }
-        if (other.TryGetComponent<Launchable>(out var launchable))
+        //if (other.TryGetComponent<JumpPad>(out var jp))
+        //{
+        //    jp.Activate(gameObject);
+        //}
+        if (other.TryGetComponent<Launchable>(out var launchable) && isBashing) //if player interacts with a launchable and is bashing
         {
             launchable.OnBash(gameObject);
         }

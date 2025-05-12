@@ -56,11 +56,13 @@ public class GameManager : MonoBehaviour
     {
         // apply timeSlow to all ITimeScalables
         foreach (var sc in scalables) sc.OnTimeScaleChanged(factor);
+        Debug.Log("Slowed game time to: " + factor);
     }
     private void HandleSlowTimeExit()
     {
         // revert all ItimeScalables back to 1f speed
         foreach (var sc in scalables) sc.OnTimeScaleChanged(1f);
+        Debug.Log("resumed game time to normal");
     }
 
 

@@ -23,6 +23,11 @@ public class PlayerDataSO : ScriptableObject
     [SerializeField] private float maxSlowtime = 15f;
     [SerializeField] private bool keepSlowtime = true;
 
+    [Header("Bash Settings")]
+    [SerializeField] private float bashActiveTime = 0.8f;
+    [SerializeField] private float bashCooldown = 1.5f;
+    [SerializeField] private int bashDamage = 1;
+
 
     //[SerializeField] private float maxFuel = 100f;
 
@@ -43,4 +48,8 @@ public class PlayerDataSO : ScriptableObject
     public float SlowtimeFromBash => slowtimeFromBash;
     public float MaxSlowtime => maxSlowtime;
     public bool KeepSlowtime => keepSlowtime;
+
+    public float BashActiveTime => bashActiveTime;
+    public float BashCooldown => bashCooldown;
+    public int BashDamage => bashDamage; 
 }

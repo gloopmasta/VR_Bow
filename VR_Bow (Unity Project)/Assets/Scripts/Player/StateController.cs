@@ -42,11 +42,17 @@ public class StateController : MonoBehaviour
         jumpEvents.OnJump += () => isGrounded = false;
         jumpEvents.OnLand += () => 
         { 
-            isGrounded = true;  usedJumpPad = false;  
+            isGrounded = true;  
+            usedJumpPad = false;  
         };
         switchEvents.OnEnterDSSwitchTime += () => canEnterSwitchtime = true;
 
-        jumpPadEvent.OnEnterJumpPad += () => usedJumpPad = true;
+        jumpPadEvent.OnEnterJumpPad += () =>
+        {
+            usedJumpPad = true;
+            isGrounded = false;
+        };
+
         bashEvent.OnLaunchingBash += () => didLaunchingBash = true;
 
         //slowTime.OnSlowTimeExit += () => switchTimeActive = false;
@@ -65,13 +71,20 @@ public class StateController : MonoBehaviour
         SetState(PlayerState.Driving);
     }
 
-    void Update() // TODO: CHANGE TO EVENT BASED
-    {
+    //async void Update() // TODO: CHANGE TO EVENT BASED
+    //{
+    //    if (!canEnterSwitchtime)
+    //    {
+    //        return;
+    //    }
+    //    canEnterSwitchtime = false;
+    //    await SwitchTime();
 
-    }
+
+    //}
 
     [PandaTask]
-    void SetState(PlayerState newState)
+    bool SetState(PlayerState newState)
     {
         player.State = newState;
 
@@ -91,43 +104,60 @@ public class StateController : MonoBehaviour
                 break;
         }
 
-        PandaTask.Succeed();
+        return true;
     }
 
     [PandaTask] public bool IsShootingMode() { return player.State == PlayerState.Shooting; }
     [PandaTask] public bool IsDrivingMode() { return player.State == PlayerState.Driving; }
-    [PandaTask] public bool ISwitchTime() { return switchTimeActive; }
+    [PandaTask] public bool IsSwitchTime() { return switchTimeActive; }
+    [PandaTask] public bool IsGrounded() { return isGrounded; }
+    [PandaTask] public bool IsInAir() { return !isGrounded; }
 
     [PandaTask]
     public async Task<bool> SwitchTime()
     {
+        CancellationTokenSource cts = new CancellationTokenSource();
         try
         {
             switchTimeActive = true;
-            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount); //slow time down
+            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
+            Debug.Log($"Entered switchTime of: {playerData.Switchtime} seconds");
 
-            // Start both tasks
-            var bowTask = WaitUntilBowVertical();   //Wait until the bow vertical
-            var delayTask = UniTask.WaitForSeconds(playerData.Switchtime).AsTask(); //wait 3 seconds
+            // Start both tasks with the shared cancellation token
+            var bowTask = WaitUntilBowVertical(cts.Token); // Pass token to make it cancellable
+            var delayTask = UniTask.Delay(TimeSpan.FromSeconds(playerData.Switchtime), cancellationToken: cts.Token).AsTask();
 
-            // Wait for whichever completes first
-            var completedFirst = await Task.WhenAny(bowTask, delayTask);
+            // Wait for any task to complete
+            var completedTask = await Task.WhenAny(bowTask, delayTask);
 
-            // If bow task completed first and returned true
-            if (completedFirst == bowTask && await bowTask)
+            if (completedTask == bowTask && await bowTask)
             {
+                Debug.Log($"turned bow vertical in the air -> return true");
+                cts.Cancel(); // Cancel delay task
                 return true;
             }
-
-            // Otherwise (timeout or false result)
-            return false;
+            else
+            {
+                Debug.Log("Time ran out -> return false");
+                cts.Cancel(); // Cancel bow task
+                return false;
+            }
         }
+        //catch (OperationCanceledException)
+        //{
+        //    // Optional: can be used for logging
+        //    Debug.Log("One of the tasks was cancelled.");
+        //    return false;
+        //}
         finally
         {
             slowTime.RaiseSlowTimeExit();
             switchTimeActive = false;
+            cts.Dispose();
         }
     }
+
+    
 
     [PandaTask] 
     public async Task<bool> SlowTime()
@@ -154,6 +184,7 @@ public class StateController : MonoBehaviour
             float totalSlowTime = playerData.SlowtimeFromJumppad + player.SlowTime; //get free slowtime from jumppad + playerSlowtime
 
             slowTime.RaiseSlowTimeEnter(playerData.SlowAmount); //START SLOWTIME
+            Debug.Log($"Entered Jumppad slowtime of {totalSlowTime} seconds");
 
             // Start both tasks
             //landTask will not immediately be aborted, it will just wait until isGrounded is true and return true either way
@@ -165,6 +196,11 @@ public class StateController : MonoBehaviour
 
             // Cancel whichever task is still running
             cts.Cancel();
+
+            if (completedFirst == delayTask)
+            {
+                await delayTask; // Ensure the delay fully completes
+            }
 
             return true;
         }
@@ -183,6 +219,7 @@ public class StateController : MonoBehaviour
     }
     private async Task<bool> LaunchingBashSlowtime()
     {
+        Debug.Log($"Entered bash slowtime of {playerData.SlowtimeFromBash} seconds");
         //NO player slowtime
 
         slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
@@ -244,21 +281,38 @@ public class StateController : MonoBehaviour
     {
         await UniTask.WaitUntil(() => canEnterSwitchtime);
         canEnterSwitchtime = false;
+        Debug.Log("Disabled canEnterSwitchTime");
         return true;
     }
 
     [PandaTask]
-    public async Task<bool> WaitUntilBowVertical()
+    public bool SwitchTimeActivated()
     {
-        await UniTask.WaitUntil(() =>
-            Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance || !switchTimeActive);
+        if (canEnterSwitchtime)
+        {
+            canEnterSwitchtime = false;
+            Debug.Log("Disabled canEnterSwitchTime");
+            return true;
+        }
+        return false;
+    }
 
-        //if (!switchTimeActive)
-        //{
-        //    return false;
-        //}
+    [PandaTask]
+    public async Task<bool> WaitUntilBowVertical(CancellationToken token)
+    {
+        try
+        {
+            await UniTask.WaitUntil(() =>
+                Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance || !switchTimeActive,
+                cancellationToken: token);
 
-        return true;
+            // If exited due to !switchTimeActive, return false
+            return switchTimeActive;
+        }
+        catch (OperationCanceledException)
+        {
+            return false;
+        }
     }
 
     [PandaTask]

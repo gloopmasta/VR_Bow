@@ -1,10 +1,13 @@
+using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Theme.Primitives;
 
+[RequireComponent(typeof(Player))]
 public class DriveControls : MonoBehaviour, ITimeScalable
 {
     private Rigidbody rb;
@@ -21,9 +24,8 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     [Header("Bash Settings")]
     [SerializeField] float bashStrength = 5f;
-    [SerializeField] int bashDamage = 1;
-    [SerializeField] private float bashCooldown = 1.5f;
     private float nextBashTime = 0f;
+
 
     [Header("Jump Settings")]
     [SerializeField] float jumpStrength = 5f;
@@ -46,9 +48,11 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] GroundCheck groundCheck;
+    [SerializeField] PlayerDataSO pData;
+    private Player player;
 
     // ITimeScalable
-    private float timeScale = 1f;
+    public float timeScale = 1f;
 
     private void Awake()
     {
@@ -57,6 +61,8 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.mass = 50f;
+
+        player = GetComponent<Player>();
 
         groundCheck = GetComponent<GroundCheck>();
     }
@@ -103,7 +109,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             {
                 Bash();
                 TriggerHapticFeedback();
-                nextBashTime = now + bashCooldown;
+                nextBashTime = now + pData.BashCooldown;
             }
             if (leftVelocity.y >= 2.5f && now >= nextJumpTime && CanJump())
             {
@@ -117,6 +123,14 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     void Bash()
     {
         rb.AddForce(transform.forward * bashStrength, ForceMode.Impulse);
+        MakeBashActive().Forget();
+    }
+    
+    private async UniTaskVoid MakeBashActive()
+    {
+        player.isBashing = true;
+        await UniTask.WaitForSeconds(pData.BashActiveTime); //make bash active for however long it is in settings
+        player.isBashing = false;
     }
 
     bool CanJump()
@@ -133,7 +147,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     public void Launch(float launchStrength)
     {
         rb.AddForce(transform.up * launchStrength, ForceMode.Impulse);
-        rb.AddForce(-transform.forward * 200, ForceMode.Impulse);
+        rb.AddForce(transform.forward * 200, ForceMode.Impulse);
     }
 
     void Drive(float delta)

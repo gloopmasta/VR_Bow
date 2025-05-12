@@ -11,27 +11,21 @@ public class JumpPad : MonoBehaviour
     public SlowTimeSO slowtime;
     public JumpPadEventSO jpEvent;
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        DriveControls playerDriveScript = other.GetComponent<DriveControls>();
-
-    //        playerDriveScript.Launch(lauchStrength);
-
-
-    //        //slowtime.RaiseSlowTimeEnter(0.2f, 3f); //raise slow down time for 3 seconds
-    //        switchEvents.RaiseEnterDSSwitchTime(); //raise entering switch time for the player
-    //    }
-
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Activate(other.gameObject);
+        }
+    }
 
     public void Activate(GameObject player)
     {
         DriveControls playerDriveScript = player.GetComponent<DriveControls>();
 
         playerDriveScript.Launch(lauchStrength);
-        switchEvents.RaiseExitDSSwitchTime();
+        switchEvents.RaiseEnterDSSwitchTime();
+        Debug.Log("Jumppad called enter DS switch time -> should be active now");
         jpEvent.RaiseEnterJumpPad();
     }
 
