@@ -161,7 +161,7 @@ MonoBehaviour:
   warningTime: 1
   gapTime: 0
   activeTime: 3
-  maxDistance: 20
+  maxDistance: 40.2
   warningColor: {r: 1, g: 1, b: 1, a: 0.2}
   activeColor: {r: 0.7490196, g: 0, b: 0, a: 0.16862746}
   fireDirection: {x: 0, y: 0, z: 0}

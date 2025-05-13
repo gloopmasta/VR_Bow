@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a946c044d835edb4ba6fc9abf6461ad9, type: 3}
+  m_Name: Default Environment Library
+  m_EditorClassIdentifier: 
+  arrowUp: {fileID: 8757954709909806949, guid: 4af291c66f7d9bb44a8a67c63b3ce900, type: 3}
+  slowtimeUp: {fileID: 1930891655966940510, guid: bbbfa5feedbb8034d9e49caa857bea3e, type: 3}
+  trail: {fileID: 7050879129536503085, guid: 4c51a2a06db08684899ac1cffdf84b4a, type: 3}
+  spinningLaser: {fileID: 0}
+  trackList:
+  - {fileID: 4598361884642089493, guid: 55adaff9d672e6d47b739bb0dd58bf38, type: 3}
+  - {fileID: 879676660505326987, guid: b038e270f06c44846b874c2d3bc042dd, type: 3}
