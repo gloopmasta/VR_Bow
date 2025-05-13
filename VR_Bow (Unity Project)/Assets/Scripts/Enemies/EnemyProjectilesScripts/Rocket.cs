@@ -3,7 +3,7 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     [SerializeField] private float rocketSpeed = 30f;
-    [SerializeField] private bool usePrediction = false;
+    public bool usePrediction = false;
 
     private Transform player;
 

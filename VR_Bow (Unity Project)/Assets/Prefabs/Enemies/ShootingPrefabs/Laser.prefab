@@ -89,7 +89,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 3.0381196
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -164,3 +164,4 @@ MonoBehaviour:
   maxDistance: 20
   warningColor: {r: 1, g: 1, b: 1, a: 0.2}
   activeColor: {r: 0.7490196, g: 0, b: 0, a: 0.16862746}
+  fireDirection: {x: 0, y: 0, z: 0}

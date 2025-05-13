@@ -18,7 +18,7 @@ public class LaserBeam : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector3 startPoint;
     private Vector3 endPoint;
-    private Vector3 fireDirection;
+    public Vector3 fireDirection;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class LaserBeam : MonoBehaviour
         // Set initial transparency
         warningColor.a = 0f;
         activeColor.a = 1f;
-
+         
         // Generate random direction in XZ plane
         fireDirection = new Vector3(
             UnityEngine.Random.Range(-1f, 1f),

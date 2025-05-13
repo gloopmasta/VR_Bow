@@ -7,6 +7,8 @@ public class ShootProjectile : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float shootingInterval = 1f;
     [SerializeField] private float detectionRange = 25f;
+    [SerializeField] private bool turnHead = false;
+    [SerializeField] private GameObject headToTurn;
 
     private bool playerInRange = false;
     private float lastShootTime;
@@ -21,6 +23,18 @@ public class ShootProjectile : MonoBehaviour
 
     private void Update()
     {
+        LaserBeam laserBeamScript = projectilePrefab.GetComponent<LaserBeam>();
+        Rocket rocketScript = projectilePrefab.GetComponent<Rocket>();
+
+        if (laserBeamScript != null)
+        {
+           //headToTurn.transform.rotation == script .slerp naar directiobn
+        }
+        if (rocketScript != null && rocketScript.usePrediction) //prefab is rocket and uses prediction
+        {
+            //Rotate naar player altijd
+        }
+
         if (!playerInRange) return;
 
         if (Time.time - lastShootTime >= shootingInterval)
