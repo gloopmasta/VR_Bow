@@ -85,21 +85,15 @@ public class StateController : MonoBehaviour
         SetState(PlayerState.Driving);
     }
 
-    //async void Update() // TODO: CHANGE TO EVENT BASED
-    //{
-    //    if (!canEnterSwitchtime)
-    //    {
-    //        return;
-    //    }
-    //    canEnterSwitchtime = false;
-    //    await SwitchTime();
-
-
-    //}
+    
 
     [PandaTask]
     bool SetState(PlayerState newState)
     {
+        if (player.State == newState)
+        {
+            return true;
+        }
         player.State = newState;
 
         // Manage Scripts
@@ -124,6 +118,8 @@ public class StateController : MonoBehaviour
     [PandaTask] public bool IsShootingMode() { return player.State == PlayerState.Shooting; }
     [PandaTask] public bool IsDrivingMode() { return player.State == PlayerState.Driving; }
     [PandaTask] public bool IsSwitchTime() { return switchTimeActive; }
+    [PandaTask] public bool ActivateSwitchTime() { switchTimeActive = true; return true; }
+    [PandaTask] public bool DisableSwitchTime() { switchTimeActive = false; return true; }
     [PandaTask] public bool IsGrounded() { return isGrounded; }
     [PandaTask] public bool IsInAir() { return !isGrounded; }
 
@@ -133,6 +129,7 @@ public class StateController : MonoBehaviour
         CancellationTokenSource cts = new CancellationTokenSource();
         try
         {
+            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(true);
             switchTimeActive = true;
             slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
             Debug.Log($"Entered switchTime of: {playerData.Switchtime} seconds");
@@ -165,6 +162,7 @@ public class StateController : MonoBehaviour
         //}
         finally
         {
+            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(false);
             slowTime.RaiseSlowTimeExit();
             switchTimeActive = false;
             cts.Dispose();
@@ -275,6 +273,7 @@ public class StateController : MonoBehaviour
     public void DisplaySwitchMessage()
     {
         // Display a message that says you need to tilt your back to drive mode
+        PandaTask.Succeed();
     }
 
     [PandaTask]
@@ -294,6 +293,7 @@ public class StateController : MonoBehaviour
     public void DisableArrows()
     {
         bowControls.canShoot = false;
+        PandaTask.Succeed();
     }
 
     [PandaTask]

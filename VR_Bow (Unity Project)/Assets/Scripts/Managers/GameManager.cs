@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,18 +54,48 @@ public class GameManager : MonoBehaviour
         player = null;
     }
 
-    private void HandleSlowTimeEnter(float factor)
+    private async void HandleSlowTimeEnter(float factor)
     {
         // apply timeSlow to all ITimeScalables
         foreach (var sc in scalables) sc.OnTimeScaleChanged(factor);
+
+        //Slow down music pitch
+        await SlowDownMusic();
         Debug.Log("Slowed game time to: " + factor);
     }
-    private void HandleSlowTimeExit()
+    private async void HandleSlowTimeExit()
     {
         // revert all ItimeScalables back to 1f speed
         foreach (var sc in scalables) sc.OnTimeScaleChanged(1f);
+        await SpeedUpMusic();
         Debug.Log("resumed game time to normal");
     }
 
+    public async Task SlowDownMusic(float duration = 0.2f)
+    {
+        await ChangePitch(0.7f, duration);
+    }
+
+    public async Task SpeedUpMusic(float duration = 0.2f)
+    {
+        await ChangePitch(1f, duration);
+    }
+
+    private async Task ChangePitch(float targetPitch, float duration)
+    {
+        AudioSource audioSource = BeatManager.Instance.audioSource;
+        float startPitch = BeatManager.Instance.audioSource.pitch;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            BeatManager.Instance.audioSource.pitch = Mathf.Lerp(startPitch, targetPitch, t);
+            await Task.Yield();
+        }
+
+        BeatManager.Instance.audioSource.pitch = targetPitch;
+    }
 
 }

@@ -23,7 +23,7 @@ public class JumpPad : MonoBehaviour
     {
         DriveControls playerDriveScript = player.GetComponent<DriveControls>();
 
-        playerDriveScript.Launch(lauchStrength);
+        playerDriveScript.Launch(15f, 1f);
         switchEvents.RaiseEnterDSSwitchTime();
         Debug.Log("Jumppad called enter DS switch time -> should be active now");
         jpEvent.RaiseEnterJumpPad();
