@@ -25,17 +25,23 @@ public class StartLineTrigger : MonoBehaviour
 
             if (angle <= activationAngle)
             {
-                ActivateTrack();
+                ActivateTrack(other.gameObject);
             }
         }
     }
 
-    private void ActivateTrack()
+    private void ActivateTrack(GameObject player)
     {
         activated = true;
 
+        //assign playerUimanager in TRack script
+        if (player.GetComponent<PlayerUIManager>() != null)
+            track.playerUI = player.GetComponent<PlayerUIManager>();
+        else
+            Debug.LogWarning("No PlayerUIManager found in collision");
 
         // Activate track
-        track?.Activate();
+        track.Activate();
+        
     }
 }
