@@ -6,20 +6,17 @@ public class Rocket : MonoBehaviour
     public bool usePrediction = false;
 
     private Transform player;
+    private Rigidbody rb;
+    public Vector3 LaunchDirection { get; private set; }
 
-    private void Start()
+    public void Initialize()
     {
-        // Find the player object by tag
-        player = GameObject.FindWithTag("Player")?.transform;
-        if (usePrediction && player == null)
-        {
-            Debug.LogWarning("Rocket: No player found with tag 'Player'.");
-        }
-
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
         Vector3 direction;
+
+        player = GameObject.FindWithTag("Player")?.transform;
 
         if (usePrediction && player != null)
         {
@@ -27,20 +24,13 @@ public class Rocket : MonoBehaviour
             if (driveControls != null)
             {
                 Vector3 playerVelocity = player.forward * driveControls.currentSpeed;
-
-                // Calculate how long it would take the rocket to reach the player
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
                 float predictionTime = distanceToPlayer / rocketSpeed;
-
-                // Predict future position
                 Vector3 futurePosition = player.position + playerVelocity * predictionTime;
-
-                // Calculate direction to that future position
                 direction = (futurePosition - transform.position).normalized;
             }
             else
             {
-                Debug.LogWarning("Rocket: Player does not have DriveControls component.");
                 direction = GetRandomDirection();
             }
         }
@@ -49,7 +39,8 @@ public class Rocket : MonoBehaviour
             direction = GetRandomDirection();
         }
 
-        // Set velocity directly for more accurate movement
+        LaunchDirection = direction;
+
         rb.velocity = direction * rocketSpeed;
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 

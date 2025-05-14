@@ -199,6 +199,7 @@ Transform:
   m_Children:
   - {fileID: 805458498607052158}
   - {fileID: 501213418157380452}
+  - {fileID: 381734276167807104}
   m_Father: {fileID: 2690742818856863103}
   m_LocalEulerAnglesHint: {x: 0, y: 5.925, z: 0}
 --- !u!1 &5385930271052958864
@@ -367,6 +368,77 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6811489680005117363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 381734276167807104}
+  - component: {fileID: 6728214023573147956}
+  - component: {fileID: 6612297852233790612}
+  m_Layer: 0
+  m_Name: DetectionRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &381734276167807104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811489680005117363}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.0516836, z: -0, w: 0.99866354}
+  m_LocalPosition: {x: -0.07, y: 0.32, z: 0.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8359056031129930245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6728214023573147956
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811489680005117363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6612297852233790612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811489680005117363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8888613522984637200, guid: e65939667326aa64db0c66e53999c930, type: 3}
+  shootingInterval: 1
+  detectionRange: 739.6
+  turnHead: 1
+  headToTurn: {fileID: 5335258618102869641}
 --- !u!1 &6958927965703739281
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,8 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2690742818856863103}
   - component: {fileID: 6338451344111024037}
-  - component: {fileID: 2962986789907141352}
-  - component: {fileID: 872736474463630218}
+  - component: {fileID: 6210013253040468001}
   m_Layer: 0
   m_Name: RocketHomingTurret
   m_TagString: Untagged
@@ -501,8 +572,8 @@ MonoBehaviour:
   maxHP: 3
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
---- !u!135 &2962986789907141352
-SphereCollider:
+--- !u!65 &6210013253040468001
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -516,29 +587,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &872736474463630218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8919657225651006972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8888613522984637200, guid: e65939667326aa64db0c66e53999c930, type: 3}
-  shootingInterval: 1
-  detectionRange: 50
-  turnHead: 0
-  headToTurn: {fileID: 0}
+  m_Size: {x: 2.1162262, y: 2.3059223, z: 2.2787971}
+  m_Center: {x: -0.016659737, y: 0.6529608, z: -0.041776657}
 --- !u!1 &9182472148883522873
 GameObject:
   m_ObjectHideFlags: 0

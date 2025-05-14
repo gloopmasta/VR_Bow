@@ -94,8 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5849538511700087630}
   - component: {fileID: 3227512166868619718}
-  - component: {fileID: 722727394813367569}
-  - component: {fileID: 8833585657512163183}
+  - component: {fileID: 4732523584495362891}
   m_Layer: 0
   m_Name: RocketTurret
   m_TagString: Untagged
@@ -118,6 +117,7 @@ Transform:
   m_Children:
   - {fileID: 4834850710154613785}
   - {fileID: 3382210090436809773}
+  - {fileID: 2817383993325615989}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3227512166868619718
@@ -135,8 +135,8 @@ MonoBehaviour:
   maxHP: 3
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
---- !u!135 &722727394813367569
-SphereCollider:
+--- !u!65 &4732523584495362891
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,29 +150,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8833585657512163183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855069743737599285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8888613522984637200, guid: 8d516a3b18a963c4193d6ef79f3ecc55, type: 3}
-  shootingInterval: 1
-  detectionRange: 50
-  turnHead: 0
-  headToTurn: {fileID: 0}
+  m_Size: {x: 2.3962135, y: 2.270699, z: 2.2817307}
+  m_Center: {x: 0.16348267, y: 0.6353495, z: 0.08485794}
 --- !u!1 &2466114360776956951
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,3 +606,74 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8846504200780774357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2817383993325615989}
+  - component: {fileID: 4961253231308498330}
+  - component: {fileID: 4741441640694146962}
+  m_Layer: 0
+  m_Name: DetectionRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2817383993325615989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846504200780774357}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00002861023, y: 1.2871542, z: 0.04141617}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5849538511700087630}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4961253231308498330
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846504200780774357}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4741441640694146962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846504200780774357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8888613522984637200, guid: 8d516a3b18a963c4193d6ef79f3ecc55, type: 3}
+  shootingInterval: 1
+  detectionRange: 739.6
+  turnHead: 1
+  headToTurn: {fileID: 6875339151581264297}

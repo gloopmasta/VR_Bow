@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 2330365698715703247}
   - component: {fileID: 4690633654955808686}
   - component: {fileID: 2240449678249007902}
-  - component: {fileID: 3126227788641233465}
-  - component: {fileID: 2213343251701810262}
   - component: {fileID: 4484333671567210863}
+  - component: {fileID: 608425921095111337}
   m_Layer: 0
   m_Name: ShootingTrailRider
   m_TagString: Untagged
@@ -34,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6306781131880309675}
   - {fileID: 2263300329411854183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -68,8 +68,22 @@ MonoBehaviour:
   turnSpeed: 123.1
   moveDuration: 2
   turnAngleRange: 122.3
---- !u!135 &3126227788641233465
-SphereCollider:
+--- !u!114 &4484333671567210863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417170563748008417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375c3716d31587c4b8128331b19964e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailSegmentPrefab: {fileID: 1782193554476317184, guid: 3f127743e1da4964f98f18ab3b7ba032, type: 3}
+  segmentSpacing: 0.01
+--- !u!65 &608425921095111337
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -87,39 +101,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2213343251701810262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417170563748008417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8888613522984637200, guid: e65939667326aa64db0c66e53999c930, type: 3}
-  shootingInterval: 2
-  detectionRange: 26.4
-  turnHead: 0
-  headToTurn: {fileID: 0}
---- !u!114 &4484333671567210863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417170563748008417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375c3716d31587c4b8128331b19964e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trailSegmentPrefab: {fileID: 1782193554476317184, guid: 3f127743e1da4964f98f18ab3b7ba032, type: 3}
-  segmentSpacing: 0.01
+  m_Size: {x: 1, y: 2.2032688, z: 4.376618}
+  m_Center: {x: 0, y: 0.60163414, z: 1.6323402}
 --- !u!1 &6075479917649490906
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,3 +186,74 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6957875476024334222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6306781131880309675}
+  - component: {fileID: 5476041999456192697}
+  - component: {fileID: 1068694145341716515}
+  m_Layer: 0
+  m_Name: DetectionRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6306781131880309675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957875476024334222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.873, z: 1.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2330365698715703247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5476041999456192697
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957875476024334222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1068694145341716515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957875476024334222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8888613522984637200, guid: 8d516a3b18a963c4193d6ef79f3ecc55, type: 3}
+  shootingInterval: 1
+  detectionRange: 739.6
+  turnHead: 0
+  headToTurn: {fileID: 0}

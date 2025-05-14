@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
 
@@ -15,25 +15,31 @@ public class LaserBeam : MonoBehaviour
     [SerializeField] private Color warningColor = Color.white;
     [SerializeField] private Color activeColor = Color.red;
 
+    public Transform headToTurn;
+    public Action onLaserComplete;
+
     private LineRenderer lineRenderer;
     private Vector3 startPoint;
     private Vector3 endPoint;
     public Vector3 fireDirection;
 
+    private Material emissiveMat;
+    private const float glowIntensity = 10f;
+
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
 
-        // Set up the line renderer with default appearance
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // Ensures transparency
+        emissiveMat = new Material(Shader.Find("Unlit/Color"));
+        emissiveMat.SetColor("_Color", warningColor * 0f);
+        lineRenderer.material = emissiveMat;
+
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
 
-        // Set initial transparency
-        warningColor.a = 0f;
+        warningColor.a = 1f;
         activeColor.a = 1f;
-         
-        // Generate random direction in XZ plane
+
         fireDirection = new Vector3(
             UnityEngine.Random.Range(-1f, 1f),
             0f,
@@ -42,6 +48,12 @@ public class LaserBeam : MonoBehaviour
 
         startPoint = transform.position;
         endPoint = startPoint + fireDirection * maxDistance;
+
+        if (headToTurn != null)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(fireDirection, Vector3.up);
+            headToTurn.rotation = lookRotation;
+        }
 
         FireLaser().Forget();
     }
@@ -52,18 +64,15 @@ public class LaserBeam : MonoBehaviour
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
 
-        // Warning phase: fade in white laser
+        // Fade-in
         float t = 0f;
         while (t < warningTime)
         {
             t += Time.deltaTime;
             float alpha = Mathf.Clamp01(t / warningTime);
 
-            Color fadedColor = warningColor;
-            fadedColor.a = alpha;
-
-            lineRenderer.startColor = fadedColor;
-            lineRenderer.endColor = fadedColor;
+            Color fadedColor = Color.Lerp(Color.black, warningColor, alpha);
+            emissiveMat.SetColor("_Color", fadedColor * glowIntensity);
 
             lineRenderer.startWidth = 0.1f + alpha * 0.1f;
             lineRenderer.endWidth = 0.1f + alpha * 0.1f;
@@ -71,17 +80,15 @@ public class LaserBeam : MonoBehaviour
             await UniTask.Yield();
         }
 
-        // Gap phase: laser temporarily invisible
+        // Gap
         lineRenderer.enabled = false;
         await UniTask.Delay(TimeSpan.FromSeconds(gapTime));
 
-        // Active phase: show red laser and apply damage
+        // Active phase
         lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
-
-        lineRenderer.startColor = activeColor;
-        lineRenderer.endColor = activeColor;
+        emissiveMat.SetColor("_Color", activeColor * glowIntensity);
 
         RaycastHit[] hits = Physics.RaycastAll(startPoint, fireDirection, maxDistance);
         foreach (RaycastHit hit in hits)
@@ -92,8 +99,29 @@ public class LaserBeam : MonoBehaviour
             }
         }
 
-        // Wait for the active duration, then destroy this object
         await UniTask.Delay(TimeSpan.FromSeconds(activeTime));
+
+        // Fade-out phase
+        float fadeTime = warningTime;
+        float elapsed = 0f;
+        while (elapsed < fadeTime)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Clamp01(1f - (elapsed / fadeTime));
+
+            Color fadedColor = Color.Lerp(Color.black, activeColor, alpha);
+            emissiveMat.SetColor("_Color", fadedColor * glowIntensity);
+
+            lineRenderer.startWidth = 0.2f * alpha;
+            lineRenderer.endWidth = 0.2f * alpha;
+
+            await UniTask.Yield();
+        }
+
+        lineRenderer.enabled = false;
+        onLaserComplete?.Invoke();
+        await UniTask.Yield(); // Just to be extra sure fade is done
         Destroy(gameObject);
+
     }
 }

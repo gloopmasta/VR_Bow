@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ShootProjectile : MonoBehaviour
@@ -9,33 +9,39 @@ public class ShootProjectile : MonoBehaviour
     [SerializeField] private float detectionRange = 25f;
     [SerializeField] private bool turnHead = false;
     [SerializeField] private GameObject headToTurn;
+    [SerializeField] private float headTurnSpeed = 5f;
 
     private bool playerInRange = false;
     private float lastShootTime;
+    private bool isLaserActive = false;
+
+    private Transform player;
+    private bool lastShotUsedPrediction = false;
 
     private void Start()
     {
-        // Automatically configure the SphereCollider as a trigger with the desired detection range
         SphereCollider trigger = GetComponent<SphereCollider>();
         trigger.isTrigger = true;
         trigger.radius = detectionRange;
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+        }
     }
 
     private void Update()
     {
-        LaserBeam laserBeamScript = projectilePrefab.GetComponent<LaserBeam>();
-        Rocket rocketScript = projectilePrefab.GetComponent<Rocket>();
+        if (!playerInRange || isLaserActive) return;
 
-        if (laserBeamScript != null)
+        // Smoothly rotate head toward player if using prediction mode
+        if (turnHead && headToTurn != null && player != null && lastShotUsedPrediction)
         {
-           //headToTurn.transform.rotation == script .slerp naar directiobn
+            Vector3 directionToPlayer = (player.position - headToTurn.transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
+            headToTurn.transform.rotation = Quaternion.Slerp(headToTurn.transform.rotation, targetRotation, Time.deltaTime * headTurnSpeed);
         }
-        if (rocketScript != null && rocketScript.usePrediction) //prefab is rocket and uses prediction
-        {
-            //Rotate naar player altijd
-        }
-
-        if (!playerInRange) return;
 
         if (Time.time - lastShootTime >= shootingInterval)
         {
@@ -52,7 +58,33 @@ public class ShootProjectile : MonoBehaviour
             return;
         }
 
-        Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        if (projectileInstance.TryGetComponent<Rocket>(out var rocket))
+        {
+            rocket.Initialize();
+            lastShotUsedPrediction = rocket.usePrediction;
+
+            if (turnHead && headToTurn != null && !rocket.usePrediction)
+            {
+                Vector3 lookDir = rocket.LaunchDirection;
+                if (lookDir != Vector3.zero)
+                {
+                    headToTurn.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
+                }
+            }
+        }
+
+        if (projectileInstance.TryGetComponent<LaserBeam>(out var laser))
+        {
+            if (turnHead && headToTurn != null)
+            {
+                laser.headToTurn = headToTurn.transform;
+            }
+
+            isLaserActive = true;
+            laser.onLaserComplete = () => isLaserActive = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

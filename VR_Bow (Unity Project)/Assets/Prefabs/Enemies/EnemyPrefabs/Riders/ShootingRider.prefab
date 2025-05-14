@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4057036559888651804}
   - component: {fileID: 4408425975029777295}
   - component: {fileID: 1708440082190873263}
-  - component: {fileID: 2988675700001250093}
-  - component: {fileID: 6678269742214588418}
+  - component: {fileID: 4166654654612363476}
   m_Layer: 0
   m_Name: ShootingRider
   m_TagString: Untagged
@@ -33,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2466840050807829268}
   - {fileID: 8422743491200982706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67,8 +67,8 @@ MonoBehaviour:
   turnSpeed: 123.1
   moveDuration: 2
   turnAngleRange: 122.3
---- !u!135 &2988675700001250093
-SphereCollider:
+--- !u!65 &4166654654612363476
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86,23 +86,77 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+  m_Size: {x: 1, y: 2.165559, z: 4.0896378}
+  m_Center: {x: 0, y: 0.58277977, z: 1.5448189}
+--- !u!1 &4725857217180566467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2466840050807829268}
+  - component: {fileID: 4545075508389579682}
+  - component: {fileID: 8064298025526258025}
+  m_Layer: 0
+  m_Name: DetectionRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2466840050807829268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725857217180566467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.81, z: 1.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4057036559888651804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4545075508389579682
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725857217180566467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6678269742214588418
+--- !u!114 &8064298025526258025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438850721940889994}
+  m_GameObject: {fileID: 4725857217180566467}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73f1fae733efe464f903f7934bbee650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8888613522984637200, guid: e65939667326aa64db0c66e53999c930, type: 3}
-  shootingInterval: 2
-  detectionRange: 26.4
+  shootingInterval: 1
+  detectionRange: 739.6
   turnHead: 0
   headToTurn: {fileID: 0}
 --- !u!1 &8406776511728353529
