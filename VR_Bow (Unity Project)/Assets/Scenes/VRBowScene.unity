@@ -1224,7 +1224,7 @@ MonoBehaviour:
   customTickOnInterval: 1
   repeatRetryOnSameTick: 0
   sourceInfos:
-  - isFoldout: 0
+  - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
     collapsedLines: 
