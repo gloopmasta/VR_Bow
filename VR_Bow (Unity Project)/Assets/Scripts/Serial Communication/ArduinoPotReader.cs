@@ -3,12 +3,12 @@ using System.IO.Ports;
 
 public class PotentiometerReader : MonoBehaviour
 {
-    SerialPort serialPort = new SerialPort("COM3", 9600); // Replace with your actual port
+    SerialPort serialPort = new SerialPort("COM13", 115200); // Replace with your actual port
     string serialInput = "";
-    [Range(0, 1)] public float potValue = 0f;
-    public float movementSpeed = 0f;
-    public float maxSpeed = 100f;
-    public float accelerationRate = 2;
+    [Range(0, 1)] public float sensorValue = 0f;
+    //public float movementSpeed = 0f;
+    //public float maxSpeed = 100f;
+    //public float accelerationRate = 2;
 
     void Start()
     {
@@ -27,8 +27,8 @@ public class PotentiometerReader : MonoBehaviour
                 
                 if (int.TryParse(line, out int rawValue))
                 {
-                    potValue = Mathf.Clamp01(rawValue / 1023f); // Normalize to 0–1
-                    Debug.Log($"Pot Value: {potValue}");
+                    sensorValue = Mathf.Clamp01(rawValue / 4095f); // Normalize to 0–1
+                    Debug.Log($"Pot Value: {sensorValue}");
                 }
             }
             catch (System.Exception)
@@ -37,8 +37,8 @@ public class PotentiometerReader : MonoBehaviour
             }
         }
 
-        movementSpeed = maxSpeed * Mathf.Pow((potValue -0.5f), accelerationRate); // Exponential scaling
-        transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+        //movementSpeed = maxSpeed * Mathf.Pow((sensorValue -0.5f), accelerationRate); // Exponential scaling
+        //transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 
     void OnApplicationQuit()
