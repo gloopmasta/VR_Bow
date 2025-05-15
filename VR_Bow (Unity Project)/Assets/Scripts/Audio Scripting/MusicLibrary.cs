@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Game Libraries/Music Library")]
 public class MusicLibrary : ScriptableObject
 {
     public List<Song> songList;

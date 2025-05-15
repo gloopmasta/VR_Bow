@@ -44,7 +44,7 @@ public class BeatManager : MonoBehaviour
     [Header("Audio Settings")]
     public float bpm;
     public float beatOffset;
-    [SerializeField] private AudioSource audioSource;
+    public AudioSource audioSource;
     //[SerializeField] private Intervals[] intervals;
     public float sampledTime;
     public float beatCount;

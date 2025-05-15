@@ -85,21 +85,15 @@ public class StateController : MonoBehaviour
         SetState(PlayerState.Driving);
     }
 
-    //async void Update() // TODO: CHANGE TO EVENT BASED
-    //{
-    //    if (!canEnterSwitchtime)
-    //    {
-    //        return;
-    //    }
-    //    canEnterSwitchtime = false;
-    //    await SwitchTime();
-
-
-    //}
+    
 
     [PandaTask]
     bool SetState(PlayerState newState)
     {
+        if (player.State == newState)
+        {
+            return true;
+        }
         player.State = newState;
 
         // Manage Scripts
@@ -124,6 +118,8 @@ public class StateController : MonoBehaviour
     [PandaTask] public bool IsShootingMode() { return player.State == PlayerState.Shooting; }
     [PandaTask] public bool IsDrivingMode() { return player.State == PlayerState.Driving; }
     [PandaTask] public bool IsSwitchTime() { return switchTimeActive; }
+    [PandaTask] public bool ActivateSwitchTime() { switchTimeActive = true; return true; }
+    [PandaTask] public bool DisableSwitchTime() { switchTimeActive = false; return true; }
     [PandaTask] public bool IsGrounded() { return isGrounded; }
     [PandaTask] public bool IsInAir() { return !isGrounded; }
 
@@ -133,6 +129,7 @@ public class StateController : MonoBehaviour
         CancellationTokenSource cts = new CancellationTokenSource();
         try
         {
+            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(true);
             switchTimeActive = true;
             slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
             Debug.Log($"Entered switchTime of: {playerData.Switchtime} seconds");
@@ -165,88 +162,98 @@ public class StateController : MonoBehaviour
         //}
         finally
         {
+            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(false);
             slowTime.RaiseSlowTimeExit();
             switchTimeActive = false;
             cts.Dispose();
         }
     }
 
-    
 
-    [PandaTask] 
+
+    [PandaTask]
     public async Task<bool> SlowTime()
     {
-
-        if (usedJumpPad) //slowtime from jumppad
+        try
         {
-            await JumpPadSlowtime();
-        }
-        else if (didLaunchingBash) //SlowTime from launchingBash
-        {
-            await LaunchingBashSlowtime();
-        }
+            if (usedJumpPad)
+            {
+                // Explicitly await completion of entire jump pad sequence
+                await JumpPadSlowtime().ConfigureAwait(false);
+            }
+            else if (didLaunchingBash)
+            {
+                // Await full completion of bash slowtime
+                await LaunchingBashSlowtime().ConfigureAwait(false);
+            }
 
-        return true;
+            return true;
+        }
+        finally
+        {
+            // Reset state flags regardless of completion path
+            usedJumpPad = false;
+            didLaunchingBash = false;
+        }
     }
 
     private async Task<bool> JumpPadSlowtime()
     {
-        var cts = new CancellationTokenSource();
-
+        using var cts = new CancellationTokenSource();
         try
         {
-            float totalSlowTime = playerData.SlowtimeFromJumppad + player.SlowTime; //get free slowtime from jumppad + playerSlowtime
-
-            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount); //START SLOWTIME
+            float totalSlowTime = playerData.SlowtimeFromJumppad + player.SlowTime;
+            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
             Debug.Log($"Entered Jumppad slowtime of {totalSlowTime} seconds");
 
-            // Start both tasks
-            //landTask will not immediately be aborted, it will just wait until isGrounded is true and return true either way
-            var landTask = WaitUntilGrounded();                                                             //Wait until grounded
-            var delayTask = UniTask.WaitForSeconds(totalSlowTime, cancellationToken: cts.Token).AsTask();   //Wait until all slowtime Passes
+            // Create both tasks but don't start them yet
+            var landTask = WaitUntilGrounded();
+            var delayTask = Task.Delay(TimeSpan.FromSeconds(totalSlowTime), cts.Token);
 
-            // Wait for either task to complete
-            var completedFirst = await Task.WhenAny(landTask, delayTask);
+            // Run both tasks concurrently
+            var completedTask = await Task.WhenAny(landTask, delayTask);
 
-            // Cancel whichever task is still running
-            cts.Cancel();
-
-            if (completedFirst == delayTask)
+            // Cancel remaining task if needed
+            if (!completedTask.IsCompleted)
             {
-                await delayTask; // Ensure the delay fully completes
+                cts.Cancel();
+                await Task.WhenAll(landTask, delayTask).ConfigureAwait(false); // Ensure clean cancellation
             }
 
             return true;
         }
         catch (OperationCanceledException)
         {
-            // Normal cancellation, no need to handle specially
+            // Normal cancellation pathway
             return true;
         }
         finally
         {
-            // Ensure cleanup happens in all cases
-            slowTime.RaiseSlowTimeExit();               //Stop SlowTime when player lands or when slowtime is over
+            // Ensure cleanup happens before returning
+            slowTime.RaiseSlowTimeExit();
             player.SlowTime = 0f;
-            cts.Dispose();
         }
     }
+
     private async Task<bool> LaunchingBashSlowtime()
     {
-        Debug.Log($"Entered bash slowtime of {playerData.SlowtimeFromBash} seconds");
-        //NO player slowtime
+        try
+        {
+            Debug.Log($"Entered bash slowtime of {playerData.SlowtimeFromBash} seconds");
+            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
 
-        slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
+            // Use proper cancellation handling
+            await Task.Delay(TimeSpan.FromSeconds(playerData.SlowtimeFromBash))
+                .ConfigureAwait(false);
 
-        await UniTask.WaitForSeconds(playerData.SlowtimeFromBash); //get free slowTime from JumpPad
-
-        slowTime.RaiseSlowTimeExit();
-
-        didLaunchingBash = false; //turn off didLaunchingBash
-
-        return true;
+            return true;
+        }
+        finally
+        {
+            slowTime.RaiseSlowTimeExit();
+        }
     }
-    
+
 
 
     // Checks rotation around the local X-axis
@@ -275,12 +282,16 @@ public class StateController : MonoBehaviour
     public void DisplaySwitchMessage()
     {
         // Display a message that says you need to tilt your back to drive mode
+        PandaTask.Succeed();
     }
 
     [PandaTask]
     public async Task<bool> WaitUntilGrounded()
     {
-        await UniTask.WaitUntil(() => isGrounded);
+        while (!isGrounded)
+        {
+            await Task.Yield();
+        }
         return true;
     }
     [PandaTask]
@@ -294,6 +305,7 @@ public class StateController : MonoBehaviour
     public void DisableArrows()
     {
         bowControls.canShoot = false;
+        PandaTask.Succeed();
     }
 
     [PandaTask]

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13da9a0417e71d2418fbcf02bc76c7e1, type: 3}
+  m_Name: Enemy Library
+  m_EditorClassIdentifier: 
+  easyEnemies:
+  - {fileID: 4577859442738821623, guid: 1300dbf1cd706b247b0a51c4b13e8cc0, type: 3}
+  - {fileID: 1855069743737599285, guid: 5dcf3257e7b713646a2e3728a69d3079, type: 3}
+  - {fileID: 1438850721940889994, guid: adfbf8db199817e43903ae78b915d014, type: 3}
+  mediumEnemies:
+  - {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+  - {fileID: 5086917500299134982, guid: c5732ecb5b99f4441a662e0dc0e80b9b, type: 3}
+  hardEnemies:
+  - {fileID: 1438850721940889994, guid: adfbf8db199817e43903ae78b915d014, type: 3}
+  bosses: []
+  trailSegment: {fileID: 1782193554476317184, guid: 3f127743e1da4964f98f18ab3b7ba032, type: 3}
+  rocket: {fileID: 8888613522984637200, guid: 8d516a3b18a963c4193d6ef79f3ecc55, type: 3}
+  homingRocket: {fileID: 8888613522984637200, guid: e65939667326aa64db0c66e53999c930, type: 3}
+  laser: {fileID: 8888613522984637200, guid: 566183c517410494b9f06d75406ece05, type: 3}
+  homingLaser: {fileID: 0}
