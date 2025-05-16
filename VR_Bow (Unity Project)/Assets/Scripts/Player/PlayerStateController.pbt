@@ -3,7 +3,7 @@
 		sequence
 			SwitchTimeActivated
 			SwitchTime
-	#Shooting
+	#Shooting2
 		
 		
 
@@ -14,11 +14,36 @@
 		//#JumpShooting
 
 
+#Shooting2 sequence
+	SetState PlayerState.Shooting //enable shooting script
+	StartSlowTime
+	race
+		WaitUntilBowHorizontal
+		sequence //after you hit the ground -> display too late message. This sequence can never return true, it just waits to tilt bow
+			WaitUntilGrounded
+			DisableArrows
+			DisplaySwitchMessage
 
+	SetState PlayerState.Driving //reenable driving script
 
+#AirSlowTimeLogic race
+	race
+		sequence
+			WaitUntilBowHorizontal
+			StopSlowTime
+		sequence //after you hit the ground -> display too late message. This sequence can never return true, it just waits to tilt bow
+			WaitUntilGrounded
+			StopSlowTime
+			DisableArrows
+			DisplaySwitchMessage
 
-
-
+#GroundSlowTimeLogic race
+	race
+		WaitUntilBowHorizontal
+		sequence //after you hit the ground -> display too late message. This sequence can never return true, it just waits to tilt bow
+			WaitUntilGrounded
+			DisableArrows
+			DisplaySwitchMessage
 
 
 #Shooting sequence

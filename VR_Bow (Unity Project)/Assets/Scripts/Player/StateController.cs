@@ -197,6 +197,19 @@ public class StateController : MonoBehaviour
         }
     }
 
+    [PandaTask]
+    public bool StartSlowTime()
+    {
+        slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
+        return true;
+    }
+    [PandaTask]
+    public bool StopSlowTime()
+    {
+        slowTime.RaiseSlowTimeExit();
+        return true;
+    }
+
     private async Task<bool> JumpPadSlowtime()
     {
         using var cts = new CancellationTokenSource();
