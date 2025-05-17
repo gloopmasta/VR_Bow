@@ -10,6 +10,7 @@ TagManager:
   - Trails
   - Arrow
   - Slope
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Ground
   - 'Obstacle '
   - Trails
-  - 
+  - Road
   - 
   - 
   - 

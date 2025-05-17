@@ -34,6 +34,7 @@ public class Activator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ActivateObjects();
+            SetPlayerRespawnPoint(other.gameObject);
         }
     }
 
@@ -62,4 +63,12 @@ public class Activator : MonoBehaviour
         }
     }
 
+    private void SetPlayerRespawnPoint(GameObject player)
+    {
+        if (!player.GetComponent<Player>()) { Debug.Log("no player script found in player collision " + player); return; }
+
+        player.GetComponent<Player>().respawnPosition = transform.position; //set respawnPosition to the last checkpoint
+    }
+
 }
+ 
