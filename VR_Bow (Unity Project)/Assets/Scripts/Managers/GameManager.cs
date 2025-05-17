@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public SlowTimeSO slowTimeEvent;
 
 
+
     public GameObject player;
     public List<GameObject> enemies = new List<GameObject>();
     private List<ITimeScalable> scalables = new();
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
         slowTimeEvent.OnSlowTimeEnter += HandleSlowTimeEnter;
         slowTimeEvent.OnSlowTimeExit += HandleSlowTimeExit;
+    }
+
+    public void StartLevelOne()
+    {
+
     }
 
     public void RegisterEnemy(GameObject enemy)

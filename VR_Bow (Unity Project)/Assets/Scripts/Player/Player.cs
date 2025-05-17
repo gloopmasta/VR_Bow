@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PandaBT;
+using Cysharp.Threading.Tasks;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
+    
     
 
 
@@ -19,6 +21,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private PlayerState state;
     public bool isBashing;
     [SerializeField] private int score;
+
+    [Header("Respawn")]
+    public Vector3 respawnPosition = Vector3.zero;
 
 
 
@@ -86,7 +91,22 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public async UniTaskVoid Respawn()
+    {
+        Debug.Log("Player respawned");
+        var ui = GetComponent<PlayerUIManager>();
 
+        await ui.FadeToBlackAsync(); //wait fade to black
+
+        if (respawnPosition != null)
+            transform.position = respawnPosition;   //reset position
+        else
+            Debug.Log("respawnPosition is null");
+
+        await ui.FadeFromBlackAsync(); //fade out again
+
+
+    }
 
     public void IncreaseScore(int ammount)
     {
