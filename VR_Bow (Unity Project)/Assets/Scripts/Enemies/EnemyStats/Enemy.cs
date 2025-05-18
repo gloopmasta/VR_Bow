@@ -13,12 +13,13 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         GameManager.Instance.UnregisterEnemy(gameObject);
     }
 
-    public int Hp { get; set; } = 2;
+    public int Hp { get; set; } = 1;
 
     //Basic TakeDamage
     public void TakeDamage(int amount)
     {
         Hp -= amount;
+        Debug.Log($"{gameObject.name} took damage. Remaining HP: {Hp}");
         if (Hp <= 0)
             Die();
     }

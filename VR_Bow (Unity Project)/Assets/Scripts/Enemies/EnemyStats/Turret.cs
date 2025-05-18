@@ -4,7 +4,7 @@ using PandaBT;
 public class Turret : Enemy
 {
     [Header("Turret Settings")]
-    [SerializeField] private int maxHP = 3;
+    [SerializeField] private int maxHP = 1;
 
     [Header("Event Channels")]
     [SerializeField] private SwitchTimeEventsSO switchEvents;
@@ -44,6 +44,7 @@ public class Turret : Enemy
     protected override void Die()
     {
         Destroy(gameObject);
+        arrowHitEvents?.RaiseScoreHitEnemy(100);
     }
 }
 

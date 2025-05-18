@@ -3,7 +3,7 @@ using UnityEngine;
 public class Rider : Enemy
 {
     [Header("Rider Settings")]
-    [SerializeField] private int maxHP = 3;
+    [SerializeField] private int maxHP = 1;
     [SerializeField] private SwitchTimeEventsSO switchEvents;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
 
@@ -32,6 +32,7 @@ public class Rider : Enemy
         else if (other.CompareTag("Arrow"))
         {
             TakeDamage(1);
+            arrowHitEvents?.RaiseScoreHitEnemy(100);
             // You could also raise arrowHitEvents here if needed
         }
     }
