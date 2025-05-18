@@ -1141,6 +1141,7 @@ MonoBehaviour:
   state: 0
   isBashing: 0
   score: 0
+  respawnPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &154189356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1241,6 +1242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateBowPanel: {fileID: 29975672}
+  fadeScreen: {fileID: 0}
   racePanel: {fileID: 13371476}
   timer: {fileID: 2135475703}
 --- !u!1 &160180641
@@ -1261,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &160180642
 Transform:
   m_ObjectHideFlags: 0
