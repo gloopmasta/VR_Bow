@@ -439,6 +439,7 @@ MonoBehaviour:
   detectionRange: 739.6
   turnHead: 1
   headToTurn: {fileID: 5335258618102869641}
+  headTurnSpeed: 5
 --- !u!1 &6958927965703739281
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb8e452a1282724985a415d13d1601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
+  maxHP: 1
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
 --- !u!65 &6210013253040468001
