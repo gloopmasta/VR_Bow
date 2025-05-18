@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleEffectsLibrary : MonoBehaviour
+[CreateAssetMenu(menuName = "Game Libraries/Particle Library")]
+public class ParticleEffectsLibrary : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Enemies")]
+    public GameObject arrow;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Enemies")]
+    public GameObject turretExplode;
 }
