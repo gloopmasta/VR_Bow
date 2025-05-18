@@ -14,6 +14,11 @@ public class LevelManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        map.SetActive(false);
+}
+
     [Header("Start Scene")]
     public GameObject coverDome;
     public GameObject startUI;
@@ -21,6 +26,7 @@ public class LevelManager : MonoBehaviour
     [Header("Level one")]
     public GameObject firstRoad;
     public GameObject firstActivator;
+    public GameObject map;
 
     public void FinishStartUI()
     {
