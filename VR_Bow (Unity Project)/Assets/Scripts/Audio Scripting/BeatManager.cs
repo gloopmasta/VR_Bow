@@ -60,7 +60,7 @@ public class BeatManager : MonoBehaviour
 
     private void Update()
     {
-      
+
         //foreach (var interval in intervals) 
         //{
         //    sampledTime = beatOffset + (audioSource.timeSamples / (audioSource.clip.frequency * interval.GetBeatLength(bpm)) ); //gets time elapsed in beats

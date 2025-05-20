@@ -1,34 +1,72 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using System.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-
     [Header("Time Scaling")]
     public SlowTimeSO slowTimeEvent;
 
+    [Header("Debug TimeScale Toggle")]
+    [SerializeField] private bool enableTimeScaleTesting = true;
+    [SerializeField] private KeyCode toggleTimeKey = KeyCode.T;
+    [SerializeField] private float testSlowTimeFactor = 0.3f;
 
-
+    public float CurrentTimeScale => isInSlowTime ? testSlowTimeFactor : 1f;
     public GameObject player;
     public List<GameObject> enemies = new List<GameObject>();
     private List<ITimeScalable> scalables = new();
 
+    private bool isInSlowTime = false;
+
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
         slowTimeEvent.OnSlowTimeEnter += HandleSlowTimeEnter;
         slowTimeEvent.OnSlowTimeExit += HandleSlowTimeExit;
     }
 
+    private void Update()
+    {
+        Debug.Log("GameManager Update running");
+
+        if (!enableTimeScaleTesting) return;
+
+        if (Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            Debug.Log("Pressed L - Slowmo");
+            isInSlowTime = true;
+            slowTimeEvent.RaiseSlowTimeEnter(testSlowTimeFactor);
+        }
+        else if (Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            Debug.Log("Pressed K - Back to normal");
+            isInSlowTime = false;
+            slowTimeEvent.RaiseSlowTimeExit();
+        }
+    }
+
+    public bool IsInSlowTime()
+    {
+        return isInSlowTime;
+    }
+
+    
+
+
     public void StartLevelOne()
     {
-
+        // Initialize level logic
     }
 
     public void RegisterEnemy(GameObject enemy)
@@ -44,10 +82,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void Register(ITimeScalable obj)
-        => scalables.Add(obj);
+    {
+        if (!scalables.Contains(obj))
+            scalables.Add(obj);
+    }
 
     public void Unregister(ITimeScalable obj)
-        => scalables.Remove(obj);
+    {
+        if (scalables.Contains(obj))
+            scalables.Remove(obj);
+    }
 
     public void SetPlayer(GameObject playerObject)
     {
@@ -62,19 +106,20 @@ public class GameManager : MonoBehaviour
 
     private async void HandleSlowTimeEnter(float factor)
     {
-        // apply timeSlow to all ITimeScalables
-        foreach (var sc in scalables) sc.OnTimeScaleChanged(factor);
+        foreach (var sc in scalables)
+            sc.OnTimeScaleChanged(factor);
 
-        //Slow down music pitch
         await SlowDownMusic();
         Debug.Log("Slowed game time to: " + factor);
     }
+
     private async void HandleSlowTimeExit()
     {
-        // revert all ItimeScalables back to 1f speed
-        foreach (var sc in scalables) sc.OnTimeScaleChanged(1f);
+        foreach (var sc in scalables)
+            sc.OnTimeScaleChanged(1f);
+
         await SpeedUpMusic();
-        Debug.Log("resumed game time to normal");
+        Debug.Log("Resumed game time to normal");
     }
 
     public async Task SlowDownMusic(float duration = 0.2f)
@@ -90,18 +135,17 @@ public class GameManager : MonoBehaviour
     private async Task ChangePitch(float targetPitch, float duration)
     {
         AudioSource audioSource = BeatManager.Instance.audioSource;
-        float startPitch = BeatManager.Instance.audioSource.pitch;
+        float startPitch = audioSource.pitch;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            BeatManager.Instance.audioSource.pitch = Mathf.Lerp(startPitch, targetPitch, t);
+            audioSource.pitch = Mathf.Lerp(startPitch, targetPitch, t);
             await Task.Yield();
         }
 
-        BeatManager.Instance.audioSource.pitch = targetPitch;
+        audioSource.pitch = targetPitch;
     }
-
 }
