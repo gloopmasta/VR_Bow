@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using System;
 
 [RequireComponent(typeof(LineRenderer))]
-public class LaserBeam : MonoBehaviour
+public class LaserBeam : MonoBehaviour, ITimeScalable
 {
     [Header("Timing Settings")]
     [SerializeField] private float warningTime = 0.5f;
@@ -25,6 +25,8 @@ public class LaserBeam : MonoBehaviour
 
     private Material emissiveMat;
     private const float glowIntensity = 10f;
+
+    private float timeScale = 1f;
 
     private void Start()
     {
@@ -55,6 +57,7 @@ public class LaserBeam : MonoBehaviour
             headToTurn.rotation = lookRotation;
         }
 
+        GameManager.Instance.Register(this);
         FireLaser().Forget();
     }
 
@@ -64,11 +67,11 @@ public class LaserBeam : MonoBehaviour
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
 
-        // Fade-in
+        // Warning phase (fade-in)
         float t = 0f;
         while (t < warningTime)
         {
-            t += Time.deltaTime;
+            t += Time.deltaTime * timeScale;
             float alpha = Mathf.Clamp01(t / warningTime);
 
             Color fadedColor = Color.Lerp(Color.black, warningColor, alpha);
@@ -80,9 +83,9 @@ public class LaserBeam : MonoBehaviour
             await UniTask.Yield();
         }
 
-        // Gap
+        // Gap between warning and active
         lineRenderer.enabled = false;
-        await UniTask.Delay(TimeSpan.FromSeconds(gapTime));
+        await UniTask.Delay(TimeSpan.FromSeconds(gapTime / timeScale));
 
         // Active phase
         lineRenderer.enabled = true;
@@ -99,14 +102,14 @@ public class LaserBeam : MonoBehaviour
             }
         }
 
-        await UniTask.Delay(TimeSpan.FromSeconds(activeTime));
+        await UniTask.Delay(TimeSpan.FromSeconds(activeTime / timeScale));
 
-        // Fade-out phase
+        // Fade-out
         float fadeTime = warningTime;
         float elapsed = 0f;
         while (elapsed < fadeTime)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.deltaTime * timeScale;
             float alpha = Mathf.Clamp01(1f - (elapsed / fadeTime));
 
             Color fadedColor = Color.Lerp(Color.black, activeColor, alpha);
@@ -120,8 +123,18 @@ public class LaserBeam : MonoBehaviour
 
         lineRenderer.enabled = false;
         onLaserComplete?.Invoke();
-        await UniTask.Yield(); // Just to be extra sure fade is done
+        await UniTask.Yield();
         Destroy(gameObject);
+    }
 
+    public void OnTimeScaleChanged(float newScale)
+    {
+        timeScale = newScale;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.Unregister(this);
     }
 }
