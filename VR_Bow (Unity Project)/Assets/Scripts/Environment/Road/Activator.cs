@@ -68,6 +68,7 @@ public class Activator : MonoBehaviour
         if (!player.GetComponent<Player>()) { Debug.Log("no player script found in player collision " + player); return; }
 
         player.GetComponent<Player>().respawnPosition = transform.position; //set respawnPosition to the last checkpoint
+        player.GetComponent<Player>().respawnRotation = transform.rotation.eulerAngles; //set rotation to the last checkpoint
     }
 
 }
