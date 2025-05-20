@@ -8,6 +8,8 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     [SerializeField] private int numberOfLasers = 1;
     [SerializeField] private string spawnedByTag;
 
+    [SerializeField] private bool spinVertically = false; // toggle vertical/horizontal
+
     private GameObject laserPivot;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
     private float nextDamageTime;
@@ -21,9 +23,21 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     {
         // Create pivot object for rotation
         laserPivot = new GameObject("LaserPivot");
-        laserPivot.transform.position = transform.position;
-        laserPivot.transform.rotation = Quaternion.identity;
-        laserPivot.transform.SetParent(null);
+
+        if (spinVertically)
+        {
+            // Attach to this object so you can rotate the prefab in editor
+            laserPivot.transform.SetParent(transform);
+            laserPivot.transform.localPosition = Vector3.zero;
+            laserPivot.transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            // Spawn separately
+            laserPivot.transform.position = transform.position;
+            laserPivot.transform.rotation = Quaternion.identity;
+            laserPivot.transform.SetParent(null);
+        }
 
         float angleStep = 360f / numberOfLasers;
 
@@ -33,7 +47,11 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             laserObj.transform.SetParent(laserPivot.transform);
             laserObj.transform.localPosition = Vector3.zero;
             laserObj.transform.localRotation = Quaternion.identity;
-            laserObj.transform.Rotate(Vector3.up, angleStep * i); // Evenly spaced
+
+            if (spinVertically)
+                laserObj.transform.Rotate(Vector3.right, angleStep * i);  // Spread vertically
+            else
+                laserObj.transform.Rotate(Vector3.up, angleStep * i);     // Spread horizontally
 
             LineRenderer lr = laserObj.AddComponent<LineRenderer>();
             lr.positionCount = 2;
@@ -55,9 +73,17 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
 
     private void Update()
     {
-        // Keep pivot at laser's position and rotate
-        laserPivot.transform.position = transform.position;
-        laserPivot.transform.Rotate(Vector3.up, rotationSpeed * timeScale * Time.deltaTime, Space.World);
+        // Update pivot position if it's world-based
+        if (!spinVertically)
+        {
+            laserPivot.transform.position = transform.position;
+        }
+
+        // Choose axis and space
+        Vector3 axis = spinVertically ? Vector3.right : Vector3.up;
+        Space space = spinVertically ? Space.Self : Space.World;
+
+        laserPivot.transform.Rotate(axis, rotationSpeed * timeScale * Time.deltaTime, space);
 
         for (int i = 0; i < numberOfLasers; i++)
         {
