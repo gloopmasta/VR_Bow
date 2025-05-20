@@ -14,6 +14,7 @@ public class BowShooting : MonoBehaviour
     [Header("Hand Transforms")]
     public Transform leftHand;   // Aiming
     public Transform rightHand;  // Drawing
+    [SerializeField] private Vector3 bowOffsetEuler;
 
     [Header("Draw Settings")]
     public float maxDrawDistance = 0.5f;
@@ -65,7 +66,6 @@ public class BowShooting : MonoBehaviour
     void Update()
     {
         currentFlexValue = 1f - btReader.sensorValue; // Ensure this is between 0 and 1
-
         UpdateBowstring();
 
 
@@ -142,9 +142,10 @@ public class BowShooting : MonoBehaviour
     {
         playerScript.ArrowCount--; //deduct an arrow from the player
         float shootForce = currentFlexValue * maxShootForce;
-        Vector3 shootDirection = leftHand.forward;
+        Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
+        Vector3 shootDirection = shootRotation * Vector3.forward;
+        GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, shootRotation);
 
-        GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
         Arrow arrow = arrowObj.GetComponent<Arrow>();
         if (arrow != null)
             arrow.Launch(shootDirection, shootForce, currentFlexValue);
