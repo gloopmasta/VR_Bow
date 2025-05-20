@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Player))]
-public class BowControls : MonoBehaviour
+public class BowShooting : MonoBehaviour
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
@@ -16,6 +17,11 @@ public class BowControls : MonoBehaviour
 
     [Header("Draw Settings")]
     public float maxDrawDistance = 0.5f;
+    [SerializeField] private float speedToFire = 0.3f;
+    [SerializeField] private float shootCooldown = 0.5f;
+    private float shootTimer = 0f;
+    [SerializeField] private float delta = 0f;
+    [SerializeField] private float minimumTension = 0.4f;
 
     [Header("Trajectory Preview")]
     public LineRenderer trajectoryLine;
@@ -37,117 +43,78 @@ public class BowControls : MonoBehaviour
     public Transform arrowNockPoint;
 
     [Header("Scripts & events")]
-    [SerializeField] private GameSettings settings;
     [SerializeField] private SlowTimeSO slowTimeEvent;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private StateController stateController;
     [SerializeField] private BluetoothReader btReader;
 
     private InputAction triggerAction;
-    private float flexValue = 0f;
-    private bool isDrawing = false;
+    [SerializeField] private float currentFlexValue = 0f;
+    [SerializeField] private float previousFlexValue = 0f;
+    [SerializeField] private bool isDrawing = true;
     private Vector3 drawStartPosition;
     private Player playerScript;
     public bool canShoot;
 
     void OnEnable()
     {
-        if (!settings.useBowController) 
-        { 
-            var gameplayMap = inputActions.FindActionMap("VrPlayerController");
-            triggerAction = gameplayMap.FindAction("RightTrigger");
-
-            gameplayMap.Enable();
-
-            triggerAction.started += _ => StartDrawing();
-            triggerAction.canceled += _ => ReleaseArrow();
-        }
-
-
-
         playerScript = GetComponent<Player>();
     }
 
-    void OnDisable()
-    {
-        if (!settings.useBowController)
-        {
-            triggerAction.started -= _ => StartDrawing();
-            triggerAction.canceled -= _ => ReleaseArrow();
-            triggerAction.Disable();
-        }
-    }
 
     void Update()
     {
-        
-        if (isDrawing)
-        {
-            float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
-            flexValue = Mathf.Clamp01(drawDistance / maxDrawDistance);
-
-            if (bowAnimator != null)
-            {
-                bowAnimator.Play("Charge", 0, flexValue);
-                bowAnimator.speed = 0f;
-            }
-
-            Vector3 launchDir = leftHand.forward;
-            float previewForce = flexValue * maxShootForce;
-            Vector3 launchVel = launchDir * previewForce;
-
-            DrawTrajectory(shootPoint.position, launchVel);
-            Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
-
-            // Update arrow visual position and corrected rotation
-            if (currentVisualArrow != null && playerScript.ArrowCount > 0)
-            {
-                currentVisualArrow.transform.position = rightHand.position;
-                currentVisualArrow.transform.rotation = Quaternion.LookRotation(leftHand.forward) * Quaternion.Euler(-90, 0, 0); // ← corrected rotation
-            }
-        }
-        else
-        {
-            if (trajectoryLine != null && trajectoryLine.enabled)
-                trajectoryLine.enabled = false;
-        }
+        currentFlexValue = 1f - btReader.sensorValue; // Ensure this is between 0 and 1
 
         UpdateBowstring();
-    }
 
 
-    void StartDrawing()
-    {
-        if (playerScript.ArrowCount <= 0 || !canShoot) return;
-
-        
-        isDrawing = true;
-        drawStartPosition = rightHand.position;
-
-        if (trajectoryLine != null)
-            trajectoryLine.enabled = true;
-
-        if (bowstringLine != null)
-            bowstringLine.enabled = true;
-
-        // Spawn visual arrow
-        if (arrowVisualPrefab != null && arrowNockPoint != null)
+        if (!isDrawing && currentFlexValue > 0.05f)
         {
-            currentVisualArrow = Instantiate(arrowVisualPrefab, arrowNockPoint.position, arrowNockPoint.rotation);
+            isDrawing = true;
+            // Additional setup if needed
         }
 
-        Debug.Log("Started drawing bow.");
+
+        delta = currentFlexValue - previousFlexValue;
+
+        if (delta >= speedToFire)
+            Debug.Log("velocity: " + delta);
+
+        
+        if (isDrawing && delta <= speedToFire && Time.time >= shootTimer && previousFlexValue > minimumTension)
+        {
+            ReleaseArrow();
+            shootTimer = Time.time + shootCooldown;
+        }
+
+        previousFlexValue = currentFlexValue;
+
+
+        //    bowAnimator.speed = 0f;
+
+        //if (bowAnimator != null)
+        //{
+        //    bowAnimator.Play("Charge", 0, currentFlexValue);
+        //    bowAnimator.speed = 0f;
+        //}
+
+
     }
-    
+
+
+
+
+
 
     void ReleaseArrow()
     {
-        //if not drawing or player has no arrows -> dont shoot
         if (!isDrawing) return;
 
         Shoot();
         isDrawing = false;
-        flexValue = 0f;
+        currentFlexValue = 0f;
+        previousFlexValue = 0f;
 
         if (trajectoryLine != null)
             trajectoryLine.enabled = false;
@@ -155,26 +122,32 @@ public class BowControls : MonoBehaviour
         if (bowstringLine != null)
             bowstringLine.enabled = false;
 
-        // Destroy visual arrow
         if (currentVisualArrow != null)
         {
             Destroy(currentVisualArrow);
             currentVisualArrow = null;
         }
 
+        if (bowAnimator != null)
+        {
+            bowAnimator.speed = 1f;
+            bowAnimator.SetTrigger(ShootTrigger);
+        }
+
         Debug.Log("Arrow released.");
     }
+
 
     void Shoot()
     {
         playerScript.ArrowCount--; //deduct an arrow from the player
-        float shootForce = flexValue * maxShootForce;
+        float shootForce = currentFlexValue * maxShootForce;
         Vector3 shootDirection = leftHand.forward;
 
         GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
         Arrow arrow = arrowObj.GetComponent<Arrow>();
         if (arrow != null)
-            arrow.Launch(shootDirection, shootForce, flexValue);
+            arrow.Launch(shootDirection, shootForce, currentFlexValue);
 
         if (bowAnimator != null)
         {
@@ -188,7 +161,7 @@ public class BowControls : MonoBehaviour
         if (trajectoryLine == null) return;
 
         trajectoryLine.positionCount = trajectorySteps;
-        bool ignoreGravity = flexValue >= 0.9f;
+        bool ignoreGravity = currentFlexValue >= 0.9f;
 
         for (int i = 0; i < trajectorySteps; i++)
         {
@@ -207,12 +180,34 @@ public class BowControls : MonoBehaviour
 
         bowstringLine.positionCount = 3;
         bowstringLine.SetPosition(0, stringTop.position);
+        bowstringLine.SetPosition(2, stringBottom.position);
 
-        Vector3 middlePoint = isDrawing
-            ? rightHand.position
-            : Vector3.Lerp(stringTop.position, stringBottom.position, 0.5f);
+        Vector3 middlePoint;
+
+        if (isDrawing)
+        {
+            // Calculate the midpoint between stringTop and stringBottom
+            Vector3 midpoint = (stringTop.position + stringBottom.position) * 0.5f;
+
+            // Determine the direction of the local Z-axis
+            Vector3 zDirection = -transform.forward;
+
+            // Define the maximum offset distance along the Z-axis
+            float maxOffset = 0.5f; // Adjust this value as needed
+
+            // Calculate the offset based on currentFlexValue
+            Vector3 offset = zDirection * (currentFlexValue * maxOffset);
+
+            // Apply the offset to the midpoint
+            middlePoint = midpoint + offset;
+        }
+        else
+        {
+            // When not drawing, the middle point is just the midpoint
+            middlePoint = (stringTop.position + stringBottom.position) * 0.5f;
+        }
 
         bowstringLine.SetPosition(1, middlePoint);
-        bowstringLine.SetPosition(2, stringBottom.position);
     }
+
 }

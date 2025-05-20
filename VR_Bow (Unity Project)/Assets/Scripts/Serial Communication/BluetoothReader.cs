@@ -61,7 +61,7 @@ public class BluetoothReader : MonoBehaviour
             if (int.TryParse(line, out int rawValue))
             {
                 sensorValue = Mathf.Clamp01(rawValue / 4095f);
-                Debug.Log($"Received Analog Value: {rawValue}, Normalized: {sensorValue}");
+                //Debug.Log($"Received Analog Value: {rawValue}, Normalized: {sensorValue}");
             }
             else
             {

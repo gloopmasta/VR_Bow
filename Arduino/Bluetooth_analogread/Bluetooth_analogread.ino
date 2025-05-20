@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(analogRead(analogPin));
+  SerialBT.println(analogRead(analogPin));
   
 delay(5);
 }

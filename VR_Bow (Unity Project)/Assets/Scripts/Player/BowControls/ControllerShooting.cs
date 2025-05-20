@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Player))]
-public class BowControls : MonoBehaviour
+public class ControllerShooting : MonoBehaviour
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
@@ -37,7 +38,6 @@ public class BowControls : MonoBehaviour
     public Transform arrowNockPoint;
 
     [Header("Scripts & events")]
-    [SerializeField] private GameSettings settings;
     [SerializeField] private SlowTimeSO slowTimeEvent;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private StateController stateController;
@@ -52,8 +52,6 @@ public class BowControls : MonoBehaviour
 
     void OnEnable()
     {
-        if (!settings.useBowController) 
-        { 
             var gameplayMap = inputActions.FindActionMap("VrPlayerController");
             triggerAction = gameplayMap.FindAction("RightTrigger");
 
@@ -61,7 +59,6 @@ public class BowControls : MonoBehaviour
 
             triggerAction.started += _ => StartDrawing();
             triggerAction.canceled += _ => ReleaseArrow();
-        }
 
 
 
@@ -70,17 +67,14 @@ public class BowControls : MonoBehaviour
 
     void OnDisable()
     {
-        if (!settings.useBowController)
-        {
             triggerAction.started -= _ => StartDrawing();
             triggerAction.canceled -= _ => ReleaseArrow();
             triggerAction.Disable();
-        }
     }
 
     void Update()
     {
-        
+
         if (isDrawing)
         {
             float drawDistance = Vector3.Distance(drawStartPosition, rightHand.position);
@@ -120,7 +114,7 @@ public class BowControls : MonoBehaviour
     {
         if (playerScript.ArrowCount <= 0 || !canShoot) return;
 
-        
+
         isDrawing = true;
         drawStartPosition = rightHand.position;
 
@@ -138,7 +132,7 @@ public class BowControls : MonoBehaviour
 
         Debug.Log("Started drawing bow.");
     }
-    
+
 
     void ReleaseArrow()
     {
