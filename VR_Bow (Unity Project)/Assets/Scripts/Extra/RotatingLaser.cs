@@ -21,6 +21,11 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
 
     private void Start()
     {
+        if (string.IsNullOrEmpty(spawnedByTag))
+        {
+            spawnedByTag = transform.root.tag;
+        }
+
         // Create pivot object for rotation
         laserPivot = new GameObject("LaserPivot");
 
