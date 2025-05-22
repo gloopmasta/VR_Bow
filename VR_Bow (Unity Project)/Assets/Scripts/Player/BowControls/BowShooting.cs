@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.WSA;
 
 public class BowShooting : ShootingMode
 {
@@ -10,6 +11,8 @@ public class BowShooting : ShootingMode
     public Transform shootPoint;
     public float maxShootForce = 50f;
     public InputActionAsset inputActions;
+    private Vector3 storedDirection;
+    [SerializeField] private bool fullCharge = false;
 
     [Header("Hand Transforms")]
     public Transform leftHand;   // Aiming
@@ -28,6 +31,7 @@ public class BowShooting : ShootingMode
     public LineRenderer trajectoryLine;
     public int trajectorySteps = 30;
     public float timeStep = 0.1f;
+    private Vector3 shootDirection;
 
     [Header("Animation")]
     public Animator bowAnimator;
@@ -56,6 +60,8 @@ public class BowShooting : ShootingMode
     private Vector3 drawStartPosition;
     private Player playerScript;
 
+
+
     void OnEnable()
     {
         playerScript = GetComponent<Player>();
@@ -77,10 +83,39 @@ public class BowShooting : ShootingMode
 
         delta = currentFlexValue - previousFlexValue;
 
-        if (delta >= speedToFire)
+        if (delta <= -speedToFire)
             Debug.Log("velocity: " + delta);
 
-        
+        if (isDrawing)
+        {
+            //if (!trajectoryLine.enabled)
+            //    trajectoryLine.enabled = true;
+
+            // Calculate current shooting direction while drawing
+            Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
+            shootDirection = shootRotation * Vector3.forward;
+
+            float previewForce = currentFlexValue * maxShootForce;
+            Vector3 launchVel = shootDirection * previewForce;
+
+            //draw trajectory
+            DrawTrajectory(shootPoint.position, launchVel);
+            Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
+
+            //store direction and speed
+            if (previousFlexValue > 0.95f)
+            {
+                storedDirection = shootDirection; //store the direction
+                fullCharge = true;
+            }
+        }
+        //else
+        //{
+        //    if (trajectoryLine.enabled)
+        //        trajectoryLine.enabled = false;
+        //}
+
+
         if (isDrawing && delta <= speedToFire && Time.time >= shootTimer && previousFlexValue > minimumTension)
         {
             ReleaseArrow();
@@ -89,6 +124,8 @@ public class BowShooting : ShootingMode
 
         previousFlexValue = currentFlexValue;
 
+
+        
 
         //    bowAnimator.speed = 0f;
 
@@ -112,6 +149,7 @@ public class BowShooting : ShootingMode
 
         Shoot();
         isDrawing = false;
+        fullCharge = false;
         currentFlexValue = 0f;
         previousFlexValue = 0f;
 
@@ -142,12 +180,22 @@ public class BowShooting : ShootingMode
         playerScript.ArrowCount--; //deduct an arrow from the player
         float shootForce = currentFlexValue * maxShootForce;
         Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
-        Vector3 shootDirection = shootRotation * Vector3.forward;
+        shootDirection = shootRotation * Vector3.forward;
+
         GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, shootRotation);
 
         Arrow arrow = arrowObj.GetComponent<Arrow>();
-        if (arrow != null)
-            arrow.Launch(shootDirection, shootForce, currentFlexValue);
+
+        if (fullCharge)
+        {
+            if (arrow != null)
+                arrow.Launch(storedDirection, 1f * maxShootForce, 1f); //if full charge, shoot fast
+        }
+        else 
+        {
+            if (arrow != null)
+                arrow.Launch(shootDirection, shootForce, currentFlexValue);
+        }
 
         if (bowAnimator != null)
         {
@@ -158,7 +206,7 @@ public class BowShooting : ShootingMode
 
     void DrawTrajectory(Vector3 startPos, Vector3 startVel)
     {
-        if (trajectoryLine == null) return;
+        //if (trajectoryLine == null) return;
 
         trajectoryLine.positionCount = trajectorySteps;
         bool ignoreGravity = currentFlexValue >= 0.9f;
@@ -176,7 +224,7 @@ public class BowShooting : ShootingMode
 
     void UpdateBowstring()
     {
-        if (bowstringLine == null || stringTop == null || stringBottom == null) return;
+        //if (bowstringLine == null || stringTop == null || stringBottom == null) return;
 
         bowstringLine.positionCount = 3;
         bowstringLine.SetPosition(0, stringTop.position);

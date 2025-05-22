@@ -99,5 +99,27 @@ public class PlayerUIManager : MonoBehaviour
         fadeScreen.SetActive(false);
     }
 
+    public void DisplaySwitchMessage()
+    {
+        Animator animator =  rotateBowPanel.GetComponent<Animator>();
+
+        if (animator != null && rotateBowPanel != null)
+        {
+            rotateBowPanel.SetActive(true);
+            animator.CrossFade("FadeIn", 0f, 1); //enable fadeIn
+            animator.CrossFade("turnBow", 0f, 0); //enable turning animation
+        }
+    }
+    public async void RemoveSwitchMessage()
+    {
+        Animator animator = rotateBowPanel.GetComponent<Animator>();
+
+        if (animator != null && rotateBowPanel != null)
+        {
+            animator.CrossFade("FadeOut", 0f, 1); //fade out animation
+            await UniTask.WaitForSeconds(1f);
+            rotateBowPanel.SetActive(false);
+        }
+    }
 
 }

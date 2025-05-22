@@ -7,6 +7,7 @@ using PandaBT.Runtime;
 using System.Threading.Tasks;
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks.CompilerServices;
 
 public class StateController : MonoBehaviour
 {
@@ -47,14 +48,14 @@ public class StateController : MonoBehaviour
             bowControls.canShoot = true; //reenable being able to shoot
         };
 
-        jumpEvents.OnLand += () => 
-        { 
-            isGrounded = true;  
+        jumpEvents.OnLand += () =>
+        {
+            isGrounded = true;
             usedJumpPad = false;
             GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
         };
-        switchEvents.OnEnterDSSwitchTime += () => 
-        { 
+        switchEvents.OnEnterDSSwitchTime += () =>
+        {
             canEnterSwitchtime = true;
             bowControls.canShoot = true; //reenable being able to shoot
         };
@@ -64,17 +65,19 @@ public class StateController : MonoBehaviour
             usedJumpPad = true;
             isGrounded = false;
             bowControls.canShoot = true; //reenable being able to shoot
-            GetComponent<OffRoadTracker>().enabled = false; //disable when you enter a jumppad
             JumpPadSlowtime().Forget();
         };
 
-        bashEvent.OnLaunchingBash += () => 
-        { 
+        bashEvent.OnLaunchingBash += () =>
+        {
             didLaunchingBash = true;
             bowControls.canShoot = true; //reenable being able to shoot
         };
 
-        levelEvents.OnLevelOneStart += () => GetComponent<OffRoadTracker>().enabled = true; //only enable offroad track when game starts
+        levelEvents.OnLevelOneStart += () =>
+        {
+            AfterStartPressed().Forget();
+        };
     }
 
     
@@ -270,6 +273,24 @@ public class StateController : MonoBehaviour
         //    slowTime.RaiseSlowTimeExit();
         //    player.SlowTime = 0f;
         //}
+    }
+
+    async UniTaskVoid AfterStartPressed()
+    {
+        //if the bow is already horizontal, start, if not display message
+
+        await UniTask.WaitForSeconds(1.5f);
+        if (Mathf.Abs(GetBowTiltAngle() - horAngleTarget) >= tolerance) //bow not horizontal
+        {
+            GetComponent<PlayerUIManager>().DisplaySwitchMessage();
+            await WaitUntilBowHorizontal();
+            GetComponent<PlayerUIManager>().RemoveSwitchMessage();
+        }
+                
+
+
+        driveControls.enabled = true;
+        SetState(PlayerState.Driving);
     }
 
     private async Task<bool> LaunchingBashSlowtime()

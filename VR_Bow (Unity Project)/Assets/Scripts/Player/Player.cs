@@ -113,6 +113,8 @@ public class Player : MonoBehaviour, IDamageable
 
         GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+        
 
         await ui.FadeFromBlackAsync(); //fade out again
 
