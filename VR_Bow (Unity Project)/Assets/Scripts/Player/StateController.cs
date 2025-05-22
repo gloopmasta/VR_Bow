@@ -100,7 +100,7 @@ public class StateController : MonoBehaviour
     
 
     [PandaTask]
-    bool SetState(PlayerState newState)
+    public bool SetState(PlayerState newState)
     {
         if (player.State == newState)
         {

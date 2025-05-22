@@ -1,8 +1,8 @@
 using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
+    [SerializeField] private SlowTimeSO slowTime;
 
     private void Start()
     {
@@ -38,14 +39,97 @@ public class LevelManager : MonoBehaviour
     public GameObject winScreen;
 
 
+
+    [Header("Lose Screen")]
+    public GameObject loseUI;
+    public GameObject loseDome;
+    [SerializeField] private TMPro.TextMeshProUGUI loseScoreText;
+
+    [Header("Win Screen")]
+    public GameObject winUI;
+    public GameObject winDome;
+    [SerializeField] private TMPro.TextMeshProUGUI winScoreText;
+    private bool gameEnded = false;
+    private void Update()
+    {
+
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+        {
+            Debug.Log("W key pressed");
+            WinGame();
+        }
+
+        if (Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            Debug.Log("L key pressed");
+            LoseGame();
+        }
+
+    }
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
+
     public void FinishStartUI()
     {
         startUI.SetActive(false);
-        //add animation here
-
         firstActivator.SetActive(true);
-
         firstRoad.SetActive(true);
-        //activate skybox
+    }
+
+    public async void LoseGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        GameManager.Instance.player.GetComponent<StateController>()?.SetState(PlayerState.Shooting);
+        slowTime.RaiseSlowTimeEnter(0f);
+
+        // Player movement stop
+        var rb = GameManager.Instance.player.GetComponent<Rigidbody>();
+        if (rb != null) rb.velocity = Vector3.zero;
+
+        loseDome.SetActive(true);
+
+        await UniTask.Delay(1000);
+
+        if (loseScoreText != null)
+        {
+            loseScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+        }
+
+        //wait until the coverdome animation is done
+        loseUI.SetActive(true);
+
+    }
+
+
+    public async void WinGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        GameManager.Instance.player.GetComponent<StateController>()?.SetState(PlayerState.Shooting);
+        slowTime.RaiseSlowTimeEnter(0f);
+
+        // Player movement stop
+        var rb = GameManager.Instance.player.GetComponent<Rigidbody>();
+        if (rb != null) rb.velocity = Vector3.zero;
+
+        winDome.SetActive(true);
+
+        if (winScoreText != null)
+        {
+            winScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+        }
+
+
+        await UniTask.Delay(1000);
+        //wait until the coverdome animation is done
+        winUI.SetActive(true);
     }
 }

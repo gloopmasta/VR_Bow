@@ -9,8 +9,6 @@ public class Player : MonoBehaviour, IDamageable
     [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
-    
-    
 
 
     [Header("Player Variables")]
@@ -20,7 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float slowTime;
     [SerializeField] private PlayerState state;
     public bool isBashing;
-    [SerializeField] private int score;
+    public int score;
 
     [Header("Respawn")]
     public Vector3 respawnPosition = Vector3.zero;
@@ -87,8 +85,8 @@ public class Player : MonoBehaviour, IDamageable
 
         if (hp <= 0)
         {
-            //playerEvents.RaiseDeath();
-            // e.g., Disable player, trigger animation, etc.
+            //stop movement en go to shooting state
+            LevelManager.Instance.LoseGame();
         }
     }
 

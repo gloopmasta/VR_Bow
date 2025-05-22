@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderMoreStrictMovement : MonoBehaviour
+public class WanderMoreStrictMovement : MonoBehaviour, ITimeScalable
 {
     private enum WanderState { DrivingStraight, Turning }
 
@@ -18,8 +18,16 @@ public class WanderMoreStrictMovement : MonoBehaviour
     private float stateTimer;
     private Quaternion targetRotation;
 
+    private float currentTimeScale = 1f;
+    private float baseMoveDuration;
+    private float scaledMoveDuration;
+
     private void Start()
     {
+        baseMoveDuration = moveDuration;
+        scaledMoveDuration = baseMoveDuration;
+
+        GameManager.Instance.Register(this);
         EnterDrivingState();
     }
 
@@ -41,7 +49,7 @@ public class WanderMoreStrictMovement : MonoBehaviour
             case WanderState.Turning:
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
-                // Als de rotatie (bijna) bereikt is, terug naar rijden
+                // If the target rotation is reached (or nearly), switch back to driving
                 if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)
                 {
                     EnterDrivingState();
@@ -53,7 +61,7 @@ public class WanderMoreStrictMovement : MonoBehaviour
     private void EnterDrivingState()
     {
         currentState = WanderState.DrivingStraight;
-        stateTimer = moveDuration;
+        stateTimer = scaledMoveDuration;
     }
 
     private void EnterTurningState()
@@ -62,5 +70,17 @@ public class WanderMoreStrictMovement : MonoBehaviour
 
         float randomAngle = Random.Range(-turnAngleRange, turnAngleRange);
         targetRotation = Quaternion.Euler(0f, transform.eulerAngles.y + randomAngle, 0f);
+    }
+
+    public void OnTimeScaleChanged(float newScale)
+    {
+        currentTimeScale = newScale;
+        scaledMoveDuration = baseMoveDuration / newScale;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.Unregister(this);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class ShootProjectile : MonoBehaviour
+public class ShootProjectile : MonoBehaviour, ITimeScalable
 {
     [Header("Projectile Settings")]
     [SerializeField] private GameObject projectilePrefab;
@@ -10,6 +10,10 @@ public class ShootProjectile : MonoBehaviour
     [SerializeField] private bool turnHead = false;
     [SerializeField] private GameObject headToTurn;
     [SerializeField] private float headTurnSpeed = 5f;
+
+
+    private float baseShootingInterval;
+    private float scaledShootingInterval = 1f;
 
     private bool playerInRange = false;
     private float lastShootTime;
@@ -29,7 +33,14 @@ public class ShootProjectile : MonoBehaviour
         {
             player = playerObj.transform;
         }
+
+        baseShootingInterval = shootingInterval;
+        scaledShootingInterval = baseShootingInterval;
+
+        GameManager.Instance.Register(this);
+
     }
+
 
     private void Update()
     {
@@ -43,7 +54,7 @@ public class ShootProjectile : MonoBehaviour
             headToTurn.transform.rotation = Quaternion.Slerp(headToTurn.transform.rotation, targetRotation, Time.deltaTime * headTurnSpeed);
         }
 
-        if (Time.time - lastShootTime >= shootingInterval)
+        if (Time.time - lastShootTime >= scaledShootingInterval)
         {
             Shoot();
             lastShootTime = Time.time;
@@ -102,4 +113,15 @@ public class ShootProjectile : MonoBehaviour
             playerInRange = false;
         }
     }
+
+    public void OnTimeScaleChanged(float newScale)
+    {
+        scaledShootingInterval = baseShootingInterval / newScale;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.Unregister(this);
+    }
+
 }
