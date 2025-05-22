@@ -1087,6 +1087,7 @@ MonoBehaviour:
   isBashing: 0
   score: 0
   respawnPosition: {x: 0, y: 0, z: 0}
+  respawnRotation: {x: 0, y: 0, z: 0}
 --- !u!114 &154189356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,9 +1116,11 @@ MonoBehaviour:
   stringBottom: {fileID: 1917489898}
   arrowVisualPrefab: {fileID: 2334667485402507279, guid: 7dedcff536f0327479a0977721e00190, type: 3}
   arrowNockPoint: {fileID: 1229591245}
+  settings: {fileID: 0}
   slowTimeEvent: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   driveControls: {fileID: 154189352}
   stateController: {fileID: 154189357}
+  btReader: {fileID: 0}
   canShoot: 1
 --- !u!114 &154189357
 MonoBehaviour:
@@ -1133,7 +1136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 154189355}
   playerData: {fileID: 11400000, guid: b474045e9bed7b84390e58e7c2c2ddad, type: 2}
-  bowControls: {fileID: 154189356}
+  gameSettings: {fileID: 0}
+  bowControls: {fileID: 0}
   driveControls: {fileID: 154189352}
   bowModelHandler: {fileID: 313264}
   jumpEvents: {fileID: 11400000, guid: 26d74483eb157844e8e10e07f9e7c3ca, type: 2}
@@ -1862,6 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85f057dbfab1324496fe3622cc6cd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelEvents: {fileID: 0}
 --- !u!65 &270874106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2992,6 +2997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85f057dbfab1324496fe3622cc6cd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelEvents: {fileID: 0}
 --- !u!1 &651985436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,6 +3190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowTimeEvent: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
+  enableTimeScaleTesting: 1
+  toggleTimeKey: 116
+  testSlowTimeFactor: 0.3
   player: {fileID: 154189349}
   enemies: []
 --- !u!4 &679204799
@@ -3213,17 +3222,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfede22c20732b54f9cf2b5b73ce8572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
+  levelEvents: {fileID: 0}
+  slowTime: {fileID: 0}
   coverDome: {fileID: 1450449387}
   startUI: {fileID: 1766818018}
   firstRoad: {fileID: 1804681815}
   firstActivator: {fileID: 107764056}
-  loseUI: {fileID: 571697207}
-  loseDome: {fileID: 884459133}
-  loseScoreText: {fileID: 2061813738}
-  winUI: {fileID: 1482264241}
-  winDome: {fileID: 884459133}
-  winScoreText: {fileID: 1131980214}
+  map: {fileID: 0}
+  winScreen: {fileID: 0}
+  loseUI: {fileID: 0}
+  loseDome: {fileID: 0}
+  loseScoreText: {fileID: 0}
+  winUI: {fileID: 0}
+  winDome: {fileID: 0}
+  winScoreText: {fileID: 0}
 --- !u!114 &679204801
 MonoBehaviour:
   m_ObjectHideFlags: 0

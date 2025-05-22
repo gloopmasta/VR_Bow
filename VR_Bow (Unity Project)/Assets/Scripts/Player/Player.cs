@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
+    [SerializeField] private LevelEventsSO levelEvents;
 
 
     [Header("Player Variables")]
@@ -76,6 +77,12 @@ public class Player : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         arrowHitEvents.OnArrowHitEnemy += IncreaseScore;
+        GameManager.Instance.SetPlayer(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.RemovePlayer();
     }
 
     public void TakeDamage(int amount)
@@ -85,8 +92,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (hp <= 0)
         {
-            //stop movement en go to shooting state
-            LevelManager.Instance.LoseGame();
+            levelEvents.RaiseLevelOneLose(); //lose first level
         }
     }
 

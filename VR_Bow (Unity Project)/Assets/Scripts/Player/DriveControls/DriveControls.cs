@@ -49,6 +49,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] XRControllerData controllerData;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] PlayerDataSO pData;
+    [SerializeField] LevelEventsSO levelEvents;
     private Player player;
 
     // ITimeScalable
@@ -71,12 +72,29 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     {
         if (GameManager.Instance != null)
             GameManager.Instance.Register(this);
+
+        levelEvents.OnLevelOneWin += () => 
+        { 
+            OnTimeScaleChanged(0f); //lock movement for player
+            rb.useGravity = false; //disable gravity
+            rb.velocity = Vector3.zero; //disable movement
+        };
+        levelEvents.OnLevelOneStart += () =>
+        { 
+            OnTimeScaleChanged(1f); // reset movement for player
+            rb.useGravity = true;
+        
+        }; 
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
             GameManager.Instance.Unregister(this);
+
+        levelEvents.OnLevelOneWin -= () => OnTimeScaleChanged(1f); //lock movement for player
+        levelEvents.OnLevelOneStart -= () => OnTimeScaleChanged(1f);
+        
     }
 
     public void OnTimeScaleChanged(float newScale)

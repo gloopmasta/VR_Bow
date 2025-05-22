@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6789922220671107879}
   - component: {fileID: 1072168136606480521}
   - component: {fileID: 6940402082355074906}
+  - component: {fileID: 4352437259450810660}
   m_Layer: 0
   m_Name: Arrow2
   m_TagString: Arrow
@@ -104,7 +105,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -149,6 +150,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4352437259450810660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334667485402507279}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6065861, y: 37.4466, z: 1.1152102}
+  m_Center: {x: -0.0026900768, y: -18.588223, z: 0.4220703}
 --- !u!1001 &3035299798050233558
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("GameManager Update running");
 
         if (!enableTimeScaleTesting) return;
 
@@ -96,6 +95,10 @@ public class GameManager : MonoBehaviour
     public void SetPlayer(GameObject playerObject)
     {
         player = playerObject;
+    }
+    public void RemovePlayer()
+    {
+        player = null;
     }
 
     public void ClearAllEnemies()

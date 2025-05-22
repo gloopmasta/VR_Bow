@@ -13,6 +13,7 @@ public class StateController : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private Player player;
     [SerializeField] private PlayerDataSO playerData;
+    [SerializeField] private LevelEventsSO levelEvents;
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private ShootingMode bowControls;
     [SerializeField] private DriveControls driveControls;
@@ -49,7 +50,8 @@ public class StateController : MonoBehaviour
         jumpEvents.OnLand += () => 
         { 
             isGrounded = true;  
-            usedJumpPad = false;  
+            usedJumpPad = false;
+            GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
         };
         switchEvents.OnEnterDSSwitchTime += () => 
         { 
@@ -62,6 +64,8 @@ public class StateController : MonoBehaviour
             usedJumpPad = true;
             isGrounded = false;
             bowControls.canShoot = true; //reenable being able to shoot
+            GetComponent<OffRoadTracker>().enabled = false; //disable when you enter a jumppad
+            JumpPadSlowtime().Forget();
         };
 
         bashEvent.OnLaunchingBash += () => 
@@ -70,8 +74,7 @@ public class StateController : MonoBehaviour
             bowControls.canShoot = true; //reenable being able to shoot
         };
 
-        //slowTime.OnSlowTimeExit += () => switchTimeActive = false;
-        //slowTime.OnSlowTimeEnter += () => switchTimeActive = true;
+        levelEvents.OnLevelOneStart += () => GetComponent<OffRoadTracker>().enabled = true; //only enable offroad track when game starts
     }
 
     
@@ -183,31 +186,31 @@ public class StateController : MonoBehaviour
 
 
 
-    [PandaTask]
-    public async Task<bool> SlowTime()
-    {
-        try
-        {
-            if (usedJumpPad)
-            {
-                // Explicitly await completion of entire jump pad sequence
-                await JumpPadSlowtime().ConfigureAwait(false);
-            }
-            else if (didLaunchingBash)
-            {
-                // Await full completion of bash slowtime
-                await LaunchingBashSlowtime().ConfigureAwait(false);
-            }
+    //[PandaTask]
+    //public async Task<bool> SlowTime()
+    //{
+    //    try
+    //    {
+    //        if (usedJumpPad)
+    //        {
+    //            // Explicitly await completion of entire jump pad sequence
+    //            await JumpPadSlowtime().ConfigureAwait(false);
+    //        }
+    //        else if (didLaunchingBash)
+    //        {
+    //            // Await full completion of bash slowtime
+    //            await LaunchingBashSlowtime().ConfigureAwait(false);
+    //        }
 
-            return true;
-        }
-        finally
-        {
-            // Reset state flags regardless of completion path
-            usedJumpPad = false;
-            didLaunchingBash = false;
-        }
-    }
+    //        return true;
+    //    }
+    //    finally
+    //    {
+    //        // Reset state flags regardless of completion path
+    //        usedJumpPad = false;
+    //        didLaunchingBash = false;
+    //    }
+    //}
 
     [PandaTask]
     public bool StartSlowTime()
@@ -222,42 +225,51 @@ public class StateController : MonoBehaviour
         return true;
     }
 
-    private async Task<bool> JumpPadSlowtime()
+    private async UniTaskVoid JumpPadSlowtime()
     {
-        using var cts = new CancellationTokenSource();
-        try
-        {
-            float totalSlowTime = playerData.SlowtimeFromJumppad + player.SlowTime;
-            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
-            Debug.Log($"Entered Jumppad slowtime of {totalSlowTime} seconds");
+        slowTime.RaiseSlowTimeEnter(playerData.SlowAmount); //enter slowtime
 
-            // Create both tasks but don't start them yet
-            var landTask = WaitUntilGrounded();
-            var delayTask = Task.Delay(TimeSpan.FromSeconds(totalSlowTime), cts.Token);
+        await UniTask.WaitForSeconds(playerData.SlowtimeFromJumppad + player.SlowTime); //wait for slowtime duration
+       
+        slowTime.RaiseSlowTimeExit(); //exit slowtime
 
-            // Run both tasks concurrently
-            var completedTask = await Task.WhenAny(landTask, delayTask);
+        levelEvents.RaiseLevelOneWin(); //Raise level win
 
-            // Cancel remaining task if needed
-            if (!completedTask.IsCompleted)
-            {
-                cts.Cancel();
-                await Task.WhenAll(landTask, delayTask).ConfigureAwait(false); // Ensure clean cancellation
-            }
 
-            return true;
-        }
-        catch (OperationCanceledException)
-        {
-            // Normal cancellation pathway
-            return true;
-        }
-        finally
-        {
-            // Ensure cleanup happens before returning
-            slowTime.RaiseSlowTimeExit();
-            player.SlowTime = 0f;
-        }
+        //using var cts = new CancellationTokenSource();
+        //try
+        //{
+        //    float totalSlowTime = playerData.SlowtimeFromJumppad + player.SlowTime;
+        //    slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
+        //    Debug.Log($"Entered Jumppad slowtime of {totalSlowTime} seconds");
+
+        //    // Create both tasks but don't start them yet
+        //    var landTask = WaitUntilGrounded();
+        //    var delayTask = Task.Delay(TimeSpan.FromSeconds(totalSlowTime), cts.Token);
+
+        //    // Run both tasks concurrently
+        //    var completedTask = await Task.WhenAny(landTask, delayTask);
+
+        //    // Cancel remaining task if needed
+        //    if (!completedTask.IsCompleted)
+        //    {
+        //        cts.Cancel();
+        //        await Task.WhenAll(landTask, delayTask).ConfigureAwait(false); // Ensure clean cancellation
+        //    }
+
+        //    return true;
+        //}
+        //catch (OperationCanceledException)
+        //{
+        //    // Normal cancellation pathway
+        //    return true;
+        //}
+        //finally
+        //{
+        //    // Ensure cleanup happens before returning
+        //    slowTime.RaiseSlowTimeExit();
+        //    player.SlowTime = 0f;
+        //}
     }
 
     private async Task<bool> LaunchingBashSlowtime()
@@ -385,4 +397,6 @@ public class StateController : MonoBehaviour
 
     //    return gc.IsGrounded(); 
     //}
+
+    
 }
