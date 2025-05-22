@@ -37,9 +37,11 @@ public class BowControls : MonoBehaviour
     public Transform arrowNockPoint;
 
     [Header("Scripts & events")]
+    [SerializeField] private GameSettings settings;
     [SerializeField] private SlowTimeSO slowTimeEvent;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private StateController stateController;
+    [SerializeField] private BluetoothReader btReader;
 
     private InputAction triggerAction;
     private float flexValue = 0f;
@@ -50,24 +52,30 @@ public class BowControls : MonoBehaviour
 
     void OnEnable()
     {
-        var gameplayMap = inputActions.FindActionMap("VrPlayerController");
-        triggerAction = gameplayMap.FindAction("RightTrigger");
+        if (!settings.useBowController) 
+        { 
+            var gameplayMap = inputActions.FindActionMap("VrPlayerController");
+            triggerAction = gameplayMap.FindAction("RightTrigger");
 
-        gameplayMap.Enable();
+            gameplayMap.Enable();
 
-        triggerAction.started += _ => StartDrawing();
-        triggerAction.canceled += _ => ReleaseArrow();
+            triggerAction.started += _ => StartDrawing();
+            triggerAction.canceled += _ => ReleaseArrow();
+        }
 
-        
+
 
         playerScript = GetComponent<Player>();
     }
 
     void OnDisable()
     {
-        triggerAction.started -= _ => StartDrawing();
-        triggerAction.canceled -= _ => ReleaseArrow();
-        triggerAction.Disable();
+        if (!settings.useBowController)
+        {
+            triggerAction.started -= _ => StartDrawing();
+            triggerAction.canceled -= _ => ReleaseArrow();
+            triggerAction.Disable();
+        }
     }
 
     void Update()
@@ -106,6 +114,7 @@ public class BowControls : MonoBehaviour
 
         UpdateBowstring();
     }
+
 
     void StartDrawing()
     {

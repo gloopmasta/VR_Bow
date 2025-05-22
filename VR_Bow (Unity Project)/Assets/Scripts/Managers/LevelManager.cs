@@ -7,7 +7,24 @@ using UnityEngine.InputSystem;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; set; }
+    [SerializeField] LevelEventsSO levelEvents;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
     [SerializeField] private SlowTimeSO slowTime;
+
+    private void Start()
+    {
+        map.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        levelEvents.OnLevelOneStart += () => FinishStartUI();
+    }
 
     [Header("Start Scene")]
     public GameObject coverDome;
@@ -16,6 +33,11 @@ public class LevelManager : MonoBehaviour
     [Header("Level one")]
     public GameObject firstRoad;
     public GameObject firstActivator;
+    public GameObject map;
+
+    [Header("Win Screen")]
+    public GameObject winScreen;
+
 
 
     [Header("Lose Screen")]

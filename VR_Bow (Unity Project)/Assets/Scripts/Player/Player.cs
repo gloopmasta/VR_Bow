@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("Respawn")]
     public Vector3 respawnPosition = Vector3.zero;
+    public Vector3 respawnRotation = Vector3.zero;
 
 
 
@@ -97,9 +98,15 @@ public class Player : MonoBehaviour, IDamageable
         await ui.FadeToBlackAsync(); //wait fade to black
 
         if (respawnPosition != null)
+        { 
             transform.position = respawnPosition;   //reset position
+            transform.rotation = Quaternion.Euler(respawnRotation);
+        }
         else
             Debug.Log("respawnPosition is null");
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity
+        GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
 
         await ui.FadeFromBlackAsync(); //fade out again
 
@@ -130,6 +137,15 @@ public class Player : MonoBehaviour, IDamageable
         //{
         //    launchable.OnBash(gameObject);
         //}
+    }
+
+    void DisableOffRoad()
+    {
+        GetComponent<OffRoadTracker>().enabled = false;
+    }
+    void EnableOffRoad()
+    {
+        GetComponent<OffRoadTracker>().enabled = true;
     }
 }
 

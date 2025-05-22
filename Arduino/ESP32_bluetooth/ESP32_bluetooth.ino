@@ -25,5 +25,5 @@ void loop() {
   Serial.print(", ");
   Serial.println(voltage, 2);
   
-  delay(500); // Send every 500ms
+  delay(5); // Send every 500ms
 }

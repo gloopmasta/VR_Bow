@@ -13,7 +13,8 @@ public class StateController : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private Player player;
     [SerializeField] private PlayerDataSO playerData;
-    [SerializeField] private BowControls bowControls;
+    [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private ShootingMode bowControls;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private BowModelHandler bowModelHandler;
     [SerializeField] private JumpEventsSO jumpEvents;
@@ -76,6 +77,17 @@ public class StateController : MonoBehaviour
     
     private void Start()
     {
+        if (gameSettings.useBowController) //if using bow
+        {
+            bowControls = GetComponent<BowShooting>(); //set bowControls script ot bbow
+            GetComponent<ControllerShooting>().enabled = false; //disable controller
+        }
+        else //if using controllers
+        {
+            bowControls = GetComponent<ControllerShooting>();
+            GetComponent<BowShooting>().enabled = false;
+        }
+
         if (player == null)
         {
             player = GetComponent<Player>();
@@ -123,51 +135,51 @@ public class StateController : MonoBehaviour
     [PandaTask] public bool IsGrounded() { return isGrounded; }
     [PandaTask] public bool IsInAir() { return !isGrounded; }
 
-    [PandaTask]
-    public async Task<bool> SwitchTime()
-    {
-        CancellationTokenSource cts = new CancellationTokenSource();
-        try
-        {
-            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(true);
-            switchTimeActive = true;
-            slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
-            Debug.Log($"Entered switchTime of: {playerData.Switchtime} seconds");
+    //[PandaTask]
+    //public async Task<bool> SwitchTime()
+    //{
+    //    CancellationTokenSource cts = new CancellationTokenSource();
+    //    try
+    //    {
+    //        GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(true);
+    //        switchTimeActive = true;
+    //        slowTime.RaiseSlowTimeEnter(playerData.SlowAmount);
+    //        Debug.Log($"Entered switchTime of: {playerData.Switchtime} seconds");
 
-            // Start both tasks with the shared cancellation token
-            var bowTask = WaitUntilBowVertical(cts.Token); // Pass token to make it cancellable
-            var delayTask = UniTask.Delay(TimeSpan.FromSeconds(playerData.Switchtime), cancellationToken: cts.Token).AsTask();
+    //        // Start both tasks with the shared cancellation token
+    //        var bowTask = WaitUntilBowVertical(cts.Token); // Pass token to make it cancellable
+    //        var delayTask = UniTask.Delay(TimeSpan.FromSeconds(playerData.Switchtime), cancellationToken: cts.Token).AsTask();
 
-            // Wait for any task to complete
-            var completedTask = await Task.WhenAny(bowTask, delayTask);
+    //        // Wait for any task to complete
+    //        var completedTask = await Task.WhenAny(bowTask, delayTask);
 
-            if (completedTask == bowTask && await bowTask)
-            {
-                Debug.Log($"turned bow vertical in the air -> return true");
-                cts.Cancel(); // Cancel delay task
-                return true;
-            }
-            else
-            {
-                Debug.Log("Time ran out -> return false");
-                cts.Cancel(); // Cancel bow task
-                return false;
-            }
-        }
-        //catch (OperationCanceledException)
-        //{
-        //    // Optional: can be used for logging
-        //    Debug.Log("One of the tasks was cancelled.");
-        //    return false;
-        //}
-        finally
-        {
-            GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(false);
-            slowTime.RaiseSlowTimeExit();
-            switchTimeActive = false;
-            cts.Dispose();
-        }
-    }
+    //        if (completedTask == bowTask && await bowTask)
+    //        {
+    //            Debug.Log($"turned bow vertical in the air -> return true");
+    //            cts.Cancel(); // Cancel delay task
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Time ran out -> return false");
+    //            cts.Cancel(); // Cancel bow task
+    //            return false;
+    //        }
+    //    }
+    //    //catch (OperationCanceledException)
+    //    //{
+    //    //    // Optional: can be used for logging
+    //    //    Debug.Log("One of the tasks was cancelled.");
+    //    //    return false;
+    //    //}
+    //    finally
+    //    {
+    //        GetComponent<PlayerUIManager>().rotateBowPanel.SetActive(false);
+    //        slowTime.RaiseSlowTimeExit();
+    //        switchTimeActive = false;
+    //        cts.Dispose();
+    //    }
+    //}
 
 
 
@@ -343,21 +355,12 @@ public class StateController : MonoBehaviour
     }
 
     [PandaTask]
-    public async Task<bool> WaitUntilBowVertical(CancellationToken token)
+    public async Task<bool> WaitUntilBowVertical()
     {
-        try
-        {
-            await UniTask.WaitUntil(() =>
-                Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance || !switchTimeActive,
-                cancellationToken: token);
+        await UniTask.WaitUntil(() =>
+            Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance);
 
-            // If exited due to !switchTimeActive, return false
-            return switchTimeActive;
-        }
-        catch (OperationCanceledException)
-        {
-            return false;
-        }
+        return true;
     }
 
     [PandaTask]
