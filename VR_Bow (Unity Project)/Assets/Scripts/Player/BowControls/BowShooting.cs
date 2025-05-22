@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BowShooting : MonoBehaviour
+public class BowShooting : ShootingMode
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
@@ -55,7 +55,6 @@ public class BowShooting : MonoBehaviour
     [SerializeField] private bool isDrawing = true;
     private Vector3 drawStartPosition;
     private Player playerScript;
-    public bool canShoot;
 
     void OnEnable()
     {

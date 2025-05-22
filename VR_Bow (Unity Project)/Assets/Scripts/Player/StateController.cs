@@ -13,7 +13,8 @@ public class StateController : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private Player player;
     [SerializeField] private PlayerDataSO playerData;
-    [SerializeField] private BowControls bowControls;
+    [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private ShootingMode bowControls;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private BowModelHandler bowModelHandler;
     [SerializeField] private JumpEventsSO jumpEvents;
@@ -76,6 +77,17 @@ public class StateController : MonoBehaviour
     
     private void Start()
     {
+        if (gameSettings.useBowController) //if using bow
+        {
+            bowControls = GetComponent<BowShooting>(); //set bowControls script ot bbow
+            GetComponent<ControllerShooting>().enabled = false; //disable controller
+        }
+        else //if using controllers
+        {
+            bowControls = GetComponent<ControllerShooting>();
+            GetComponent<BowShooting>().enabled = false;
+        }
+
         if (player == null)
         {
             player = GetComponent<Player>();

@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class StartButton : MonoBehaviour
 {
+    [SerializeField] private LevelEventsSO levelEvents;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Arrow")) //if arrow shoots
         {
-           LevelManager.Instance.FinishStartUI();
+           levelEvents.RaiseLevelOneStart();
         }
 
     }

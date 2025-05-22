@@ -6257,7 +6257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751458982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca60abd4b90b01548bc9ac9f094b92ba, type: 3}
   m_Name: 
@@ -6299,7 +6299,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2.2201748
@@ -6351,7 +6351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751458982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bd46cdeb82e7e54e9128f2940339538, type: 3}
   m_Name: 
@@ -6383,13 +6383,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751458982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e11af15ae3fa55a4ca7892b78ee70133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 751458992}
   playerData: {fileID: 11400000, guid: b474045e9bed7b84390e58e7c2c2ddad, type: 2}
+  gameSettings: {fileID: 0}
   bowControls: {fileID: 0}
   driveControls: {fileID: 751458988}
   bowModelHandler: {fileID: 1065466326}
@@ -6415,7 +6416,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751458982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aa03e162cfb4d55a63166e6b4dd4de6, type: 3}
   m_Name: 
@@ -6486,6 +6487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c582676388494fbdf8b427a3aca0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canShoot: 0
   projectilePrefab: {fileID: 2334667485402507279, guid: 7fc1bb16089378a4d9d5a8e176f20e5c, type: 3}
   shootPoint: {fileID: 1611437597}
   maxShootForce: 50
@@ -6514,7 +6516,6 @@ MonoBehaviour:
   currentFlexValue: 0
   previousFlexValue: 0
   isDrawing: 1
-  canShoot: 0
 --- !u!1 &781997857
 GameObject:
   m_ObjectHideFlags: 0

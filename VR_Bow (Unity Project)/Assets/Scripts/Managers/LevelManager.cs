@@ -7,6 +7,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; set; }
+    [SerializeField] LevelEventsSO levelEvents;
 
     private void Awake()
     {
@@ -17,7 +18,12 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         map.SetActive(false);
-}
+    }
+
+    private void OnEnable()
+    {
+        levelEvents.OnLevelOneStart += () => FinishStartUI();
+    }
 
     [Header("Start Scene")]
     public GameObject coverDome;
@@ -27,6 +33,10 @@ public class LevelManager : MonoBehaviour
     public GameObject firstRoad;
     public GameObject firstActivator;
     public GameObject map;
+
+    [Header("Win Screen")]
+    public GameObject winScreen;
+
 
     public void FinishStartUI()
     {

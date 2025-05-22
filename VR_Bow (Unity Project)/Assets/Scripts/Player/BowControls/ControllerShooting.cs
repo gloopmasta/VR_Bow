@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ControllerShooting : MonoBehaviour
+public class ControllerShooting : ShootingMode
 {
     [Header("Arrow & Shooting")]
     public GameObject projectilePrefab;
@@ -48,7 +48,6 @@ public class ControllerShooting : MonoBehaviour
     private bool isDrawing = false;
     private Vector3 drawStartPosition;
     private Player playerScript;
-    public bool canShoot;
 
     void OnEnable()
     {
