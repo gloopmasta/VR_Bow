@@ -8,15 +8,12 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     [SerializeField] private int numberOfLasers = 1;
     [SerializeField] private string spawnedByTag;
 
-    [SerializeField] private bool spinVertically = false; // toggle vertical/horizontal
-
-    private GameObject laserPivot;
-    private List<LineRenderer> lineRenderers = new List<LineRenderer>();
-    private float nextDamageTime;
-
+    [SerializeField] private bool spinVertically = false;
     [SerializeField] private Color laserColor = Color.red;
     [SerializeField] private float glowIntensity = 10f;
 
+    private GameObject laserPivot;
+    private List<Transform> laserTransforms = new List<Transform>();
     private float timeScale = 1f;
 
     private void Start()
@@ -26,23 +23,10 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             spawnedByTag = transform.root.tag;
         }
 
-        // Create pivot object for rotation
         laserPivot = new GameObject("LaserPivot");
-
+        laserPivot.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         if (spinVertically)
-        {
-            // Attach to this object so you can rotate the prefab in editor
             laserPivot.transform.SetParent(transform);
-            laserPivot.transform.localPosition = Vector3.zero;
-            laserPivot.transform.localRotation = Quaternion.identity;
-        }
-        else
-        {
-            // Spawn separately
-            laserPivot.transform.position = transform.position;
-            laserPivot.transform.rotation = Quaternion.identity;
-            laserPivot.transform.SetParent(null);
-        }
 
         float angleStep = 360f / numberOfLasers;
 
@@ -54,9 +38,9 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             laserObj.transform.localRotation = Quaternion.identity;
 
             if (spinVertically)
-                laserObj.transform.Rotate(Vector3.right, angleStep * i);  // Spread vertically
+                laserObj.transform.Rotate(Vector3.right, angleStep * i);
             else
-                laserObj.transform.Rotate(Vector3.up, angleStep * i);     // Spread horizontally
+                laserObj.transform.Rotate(Vector3.up, angleStep * i);
 
             LineRenderer lr = laserObj.AddComponent<LineRenderer>();
             lr.positionCount = 2;
@@ -66,56 +50,42 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             Material emissiveMat = new Material(Shader.Find("Unlit/Color"));
             emissiveMat.SetColor("_Color", laserColor * glowIntensity);
             lr.material = emissiveMat;
-
             lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             lr.receiveShadows = false;
 
-            lineRenderers.Add(lr);
+            BoxCollider box = laserObj.AddComponent<BoxCollider>();
+            box.isTrigger = true;
+            box.center = new Vector3(0, 0, laserLength / 2f);
+            box.size = new Vector3(0.1f, 0.1f, laserLength);
+
+            laserObj.AddComponent<LaserTrigger>().Initialize(this, i);
+
+            laserTransforms.Add(laserObj.transform);
         }
 
-        GameManager.Instance.Register(this);
+        GameManager.Instance?.Register(this);
     }
 
     private void Update()
     {
-        // Update pivot position if it's world-based
         if (!spinVertically)
         {
             laserPivot.transform.position = transform.position;
         }
 
-        // Choose axis and space
         Vector3 axis = spinVertically ? Vector3.right : Vector3.up;
         Space space = spinVertically ? Space.Self : Space.World;
-
         laserPivot.transform.Rotate(axis, rotationSpeed * timeScale * Time.deltaTime, space);
 
         for (int i = 0; i < numberOfLasers; i++)
         {
-            Transform laserTransform = laserPivot.transform.GetChild(i);
-            Vector3 direction = laserTransform.forward;
-            Vector3 start = laserTransform.position;
-            Vector3 end = start + direction * laserLength;
+            Transform t = laserTransforms[i];
+            Vector3 start = t.position;
+            Vector3 end = start + t.forward * laserLength;
 
-            lineRenderers[i].SetPosition(0, start);
-            lineRenderers[i].SetPosition(1, end);
-
-            if (Physics.Raycast(start, direction, out RaycastHit hit, laserLength))
-            {
-                if (Time.time >= nextDamageTime)
-                {
-                    if (spawnedByTag == "Player" && hit.collider.CompareTag("Enemy"))
-                    {
-                        hit.collider.GetComponent<IDamageable>()?.TakeDamage(1);
-                        nextDamageTime = Time.time + 1f / timeScale;
-                    }
-                    else if (spawnedByTag == "Enemy" && hit.collider.CompareTag("Player"))
-                    {
-                        hit.collider.GetComponent<IDamageable>()?.TakeDamage(1);
-                        nextDamageTime = Time.time + 1f / timeScale;
-                    }
-                }
-            }
+            LineRenderer lr = t.GetComponent<LineRenderer>();
+            lr.SetPosition(0, start);
+            lr.SetPosition(1, end);
         }
     }
 
@@ -126,14 +96,39 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
 
     private void OnDestroy()
     {
-        if (laserPivot != null)
+        if (laserPivot != null) Destroy(laserPivot);
+        GameManager.Instance?.Unregister(this);
+    }
+
+    public void HandleTrigger(Collider other, int laserIndex)
+    {
+        if (other.transform.IsChildOf(laserTransforms[laserIndex]))
+            return;
+
+        if (spawnedByTag == "Player" && other.CompareTag("Enemy"))
         {
-            Destroy(laserPivot);
+            other.GetComponent<IDamageable>()?.TakeDamage(1);
+        }
+        else if (spawnedByTag == "Enemy" && other.CompareTag("Player"))
+        {
+            other.GetComponent<IDamageable>()?.TakeDamage(1);
+        }
+    }
+
+    private class LaserTrigger : MonoBehaviour
+    {
+        private RotatingLaser laserParent;
+        private int index;
+
+        public void Initialize(RotatingLaser parent, int idx)
+        {
+            laserParent = parent;
+            index = idx;
         }
 
-        if (GameManager.Instance != null)
+        private void OnTriggerEnter(Collider other)
         {
-            GameManager.Instance.Unregister(this);
+            laserParent?.HandleTrigger(other, index);
         }
     }
 }
