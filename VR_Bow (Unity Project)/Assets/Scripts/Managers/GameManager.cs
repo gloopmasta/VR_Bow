@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("GameManager Update running");
 
         if (!enableTimeScaleTesting) return;
 
