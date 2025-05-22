@@ -112,7 +112,6 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
         else if (spawnedByTag == "Enemy" && other.CompareTag("Player"))
         {
             other.GetComponent<IDamageable>()?.TakeDamage(1);
-            Debug.Log($"Hit Player with laser {laserIndex}");
         }
     }
 
