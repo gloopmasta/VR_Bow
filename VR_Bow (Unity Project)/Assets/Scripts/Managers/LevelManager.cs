@@ -71,6 +71,9 @@ public class LevelManager : MonoBehaviour
     }
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     public void FinishStartUI()
