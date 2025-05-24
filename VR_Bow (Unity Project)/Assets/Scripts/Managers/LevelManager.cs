@@ -48,36 +48,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI winScoreText;
 
     private bool gameEnded = false;
-    //private void Update()
-    //{
-
-    //    if (Keyboard.current.wKey.wasPressedThisFrame)
-    //    {
-    //        Debug.Log("W key pressed");
-    //        WinGame();
-    //    }
-
-    //    if (Keyboard.current.lKey.wasPressedThisFrame)
-    //    {
-    //        Debug.Log("L key pressed");
-    //        LoseGame();
-    //    }
-
-<<<<<<< Updated upstream
-    //}
-    
-    
-=======
-    }
-
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     public void FinishStartUI()
     {
