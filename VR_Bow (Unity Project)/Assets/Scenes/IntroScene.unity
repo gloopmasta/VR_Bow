@@ -354,6 +354,81 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &498136658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498136660}
+  - component: {fileID: 498136659}
+  - component: {fileID: 498136661}
+  m_Layer: 0
+  m_Name: Director
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &498136659
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498136658}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1999731065270229045, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 1789958637}
+  - key: {fileID: -1145716356755870286, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 1601160343}
+  - key: {fileID: -4049098190874167282, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 1552503620}
+  - key: {fileID: 2897985909530567259, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 2085717208}
+  - key: {fileID: -8303827559796160314, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 1552503625}
+  - key: {fileID: 934432401653040763, guid: 516d8318e87f8f046ae18f1d39841b4e, type: 2}
+    value: {fileID: 2085717213}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &498136660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498136658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.000000059604645, y: 1.1100874, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &498136661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498136658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e4efe3b2557c946af482ef50e027e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: 
 --- !u!1 &1151758310
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,8 +624,9 @@ GameObject:
   - component: {fileID: 1552503624}
   - component: {fileID: 1552503623}
   - component: {fileID: 1552503622}
+  - component: {fileID: 1552503625}
   m_Layer: 0
-  m_Name: Sentence2 (1)
+  m_Name: Sentence3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,9 +663,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad00f2dcbab9fc43a52e6b2fca7e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 0}
-  fullText: 
-  characterDelay: 0.05
+  textComponent: {fileID: 1552503623}
+  fullText: 'Mission for Rider:
+
+    Restore the circuit and eliminate the viruses.'
+  characterDelay: 0.02
 --- !u!114 &1552503623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +701,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 50331647
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -691,6 +769,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552503620}
   m_CullTransparentMesh: 1
+--- !u!95 &1552503625
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552503620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1565696070
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +803,7 @@ GameObject:
   - component: {fileID: 1565696072}
   - component: {fileID: 1565696071}
   m_Layer: 0
-  m_Name: StartScreenUI
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,9 +1043,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad00f2dcbab9fc43a52e6b2fca7e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 0}
-  fullText: 
-  characterDelay: 0.05
+  textComponent: {fileID: 1601160345}
+  fullText: "You're being transferred into the system. \nThe RevShot Engine will
+    digitize your consciousness, giving you the power to eliminate the threat from
+    inside."
+  characterDelay: 0.03
 --- !u!1 &1613629220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1440,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789958637}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1444,9 +1545,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad00f2dcbab9fc43a52e6b2fca7e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 0}
-  fullText: 
-  characterDelay: 0.05
+  textComponent: {fileID: 1789958639}
+  fullText: 'Corruption has taken root-
+
+    viruses too small to detect, too advanced
+    to stop.'
+  characterDelay: 0.04
 --- !u!1 &2085717208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,8 +1563,10 @@ GameObject:
   - component: {fileID: 2085717212}
   - component: {fileID: 2085717211}
   - component: {fileID: 2085717210}
+  - component: {fileID: 2085717213}
+  - component: {fileID: 2085717214}
   m_Layer: 0
-  m_Name: Sentence2 (2)
+  m_Name: Sentence4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1497,9 +1603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad00f2dcbab9fc43a52e6b2fca7e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 0}
-  fullText: 
-  characterDelay: 0.05
+  textComponent: {fileID: 2085717211}
+  fullText: The company is not responsible if Rider's bytes return a NullReferenceError.
+  characterDelay: 0.03
 --- !u!114 &2085717211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,7 +1635,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 255
   m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1597,6 +1703,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085717208}
   m_CullTransparentMesh: 1
+--- !u!95 &2085717213
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085717208}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2085717214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085717208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: eee07daa1b628df4f92dbc242b0a585e, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 498136661}
+          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2104880548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1783,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3fac93a7420a1f346aa9af5ebea30843, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.126
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1737,3 +1894,4 @@ SceneRoots:
   - {fileID: 1565696074}
   - {fileID: 110066069}
   - {fileID: 2104880550}
+  - {fileID: 498136660}

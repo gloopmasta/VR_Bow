@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHp: 3
   invulnerableTime: 2
   startingArrowCount: 2
-  maxArrowCount: 6
+  maxArrowCount: 35
   arrowsFromJumppad: 1
   keepArrows: 1
   slowAmount: 0.2
@@ -24,3 +24,6 @@ MonoBehaviour:
   slowtimeFromBash: 2
   maxSlowtime: 15
   keepSlowtime: 0
+  bashActiveTime: 0.8
+  bashCooldown: 1.5
+  bashDamage: 1
