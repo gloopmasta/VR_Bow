@@ -355,6 +355,10 @@ public class StateController : MonoBehaviour
     [PandaTask]
     public async Task<bool> WaitUntilJump()
     {
+        if (!isGrounded)
+        {
+            return true;
+        }
         await UniTask.WaitUntil(() => !isGrounded);
         return true;
     }
@@ -390,6 +394,11 @@ public class StateController : MonoBehaviour
     [PandaTask]
     public async Task<bool> WaitUntilBowVertical()
     {
+        if (Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance)
+        {
+            return true;
+        }
+
         await UniTask.WaitUntil(() =>
             Mathf.Abs(GetBowTiltAngle() - vertAngleTarget) <= tolerance);
 

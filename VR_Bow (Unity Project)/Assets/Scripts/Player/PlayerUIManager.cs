@@ -1,58 +1,83 @@
 using Cysharp.Threading.Tasks;
+using PandaBT;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public class PlayerUIManager : MonoBehaviour
 {
+    [Header("Timing settings")]
+    [SerializeField] private float fadeDuration = 0.5f;
+
     [Header("Player Warning Messages")]
-    public GameObject rotateBowPanel;
     public GameObject fadeScreen;
+
+    [PandaVariable] public GameObject rotateBowPanel;
+    [PandaVariable] public GameObject jumpInstruction;
+    [PandaVariable] public GameObject steerInstruction;
+    [PandaVariable] public GameObject shootInstruction;
 
     [Header("Race UI")]
     public GameObject racePanel;
     public  TextMeshProUGUI timer;
 
-    // Start is called before the first frame update
-    void Start()
+    [PandaTask]
+    public async Task<bool> FadeIn(GameObject panel)
     {
+        panel.SetActive(true); //set panel active
+
+        CanvasGroup  canvasGroup = panel.GetComponent<CanvasGroup>(); //assign canvasgroup
+        if (canvasGroup == null)
+        {
+            Debug.Log("no canvasGroup found in panel " + panel.name);
+            return false;
+        }
         
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+
+        float elapsed = 0f;  //fade in the alpha on cnavas group
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsed / fadeDuration);
+            await UniTask.Yield();
+        }
+
+        canvasGroup.alpha = 1f;
+        return true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public async Task<bool> FadeOut(GameObject panel)
     {
-        
+        CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            Debug.Log("no canvasGroup found in panel " + panel.name);
+            return false;
+        }
+
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(1 - (elapsed / fadeDuration));
+            await UniTask.Yield();
+        }
+
+        canvasGroup.alpha = 0f;
+        panel.SetActive(false); //set panel inactive
+
+        return true;
     }
 
-    //public float FadeToBlack()
-    //{
-
-    //    if(!fadeScreen.GetComponent<Animator>()) { Debug.LogWarning("No animator found in fadePanel"); return 0f; }
-
-    //    fadeScreen.SetActive(true);
-
-    //    Animator animator = fadeScreen.GetComponent<Animator>();
-
-    //    animator.CrossFade("FadeToBlack", 1f);
-
-    //    return animator.GetCurrentAnimatorClipInfo(0).Length;
-    //}
-
-    //public void FadeFromBlack()
-    //{
-
-    //    if (!fadeScreen.GetComponent<Animator>()) { Debug.LogWarning("No animator found in fadePanel"); return; }
-
-
-
-    //    Animator animator = fadeScreen.GetComponent<Animator>();
-
-    //    animator.CrossFade("FadeOutBlack", 1f);
-
-    //    fadeScreen.SetActive(false);
-    //}
 
     public async UniTask FadeToBlackAsync()
     {

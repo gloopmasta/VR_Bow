@@ -63,9 +63,15 @@ public class LevelManager : MonoBehaviour
     //        LoseGame();
     //    }
 
+<<<<<<< Updated upstream
     //}
     
     
+=======
+    }
+
+
+>>>>>>> Stashed changes
 
     public void FinishStartUI()
     {
