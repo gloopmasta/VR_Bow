@@ -15,9 +15,17 @@ public class CalibrateButton : MonoBehaviour
     {
         if (other.CompareTag("Arrow")) //if arrow shoots
         {
-            
+            Calibration().Forget();
         }
 
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 10, 300, 40), "trigger calibration"))
+        {
+            Calibration().Forget();
+        }
     }
 
     public async UniTaskVoid Calibration()
