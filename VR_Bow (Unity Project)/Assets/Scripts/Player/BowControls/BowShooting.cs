@@ -14,6 +14,10 @@ public class BowShooting : ShootingMode
     private Vector3 storedDirection;
     [SerializeField] private bool fullCharge = false;
 
+    [Header("Calibration")]
+    public float minCalibration = 0f;
+    public float maxCalibration = 1f;
+
     [Header("Hand Transforms")]
     public Transform leftHand;   // Aiming
     public Transform rightHand;  // Drawing
@@ -55,6 +59,7 @@ public class BowShooting : ShootingMode
 
     private InputAction triggerAction;
     [SerializeField] private float currentFlexValue = 0f;
+    public float rawFlex = 0f;
     [SerializeField] private float previousFlexValue = 0f;
     [SerializeField] private bool isDrawing = true;
     private Vector3 drawStartPosition;
@@ -70,7 +75,10 @@ public class BowShooting : ShootingMode
 
     void Update()
     {
-        currentFlexValue = 1f - btReader.sensorValue; // Ensure this is between 0 and 1
+        rawFlex = 1f - btReader.sensorValue; // Ensure this is between 0 and 1
+
+        currentFlexValue = Mathf.Clamp01(Mathf.InverseLerp(minCalibration, maxCalibration, rawFlex)); //calibrate
+
         UpdateBowstring();
 
 

@@ -14,6 +14,7 @@ public class PlayerUIManager : MonoBehaviour
     [Header("Player Warning Messages")]
     public GameObject fadeScreen;
 
+    [PandaVariable] public GameObject calibratePanel;
     [PandaVariable] public GameObject rotateBowPanel;
     [PandaVariable] public GameObject jumpInstruction;
     [PandaVariable] public GameObject steerInstruction;
@@ -51,6 +52,7 @@ public class PlayerUIManager : MonoBehaviour
         return true;
     }
 
+    [PandaTask]
     public async Task<bool> FadeOut(GameObject panel)
     {
         CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>();
