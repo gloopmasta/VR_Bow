@@ -11,6 +11,10 @@ public class OffRoadTracker : MonoBehaviour
     private CapsuleCollider playerCollider;
     private bool isOffRoad = false;
     private CancellationTokenSource cts;
+    private CancellationTokenSource offroadCTS;
+    private CancellationTokenSource fadeCTS;
+    private PlayerUIManager uiManager;
+    private GameObject warningPanel;
 
     private void Awake()
     {
@@ -19,26 +23,50 @@ public class OffRoadTracker : MonoBehaviour
         {
             Debug.LogError("CapsuleCollider not found on the player.");
         }
+
+        uiManager = GetComponent<PlayerUIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("PlayerUIManager not found on the player.");
+        }
+        else
+        {
+            warningPanel = uiManager.warningPanel;
+        }
     }
 
     private void Update()
     {
-        if (playerCollider == null) return;
+        if (playerCollider == null || uiManager == null || warningPanel == null) return;
 
         bool currentlyOnRoad = IsOnRoad();
 
         if (!currentlyOnRoad && !isOffRoad)
         {
             isOffRoad = true;
-            cts = new CancellationTokenSource();
-            StartOffRoadCountdown(cts.Token).Forget();
+
+            // Start the 3-second countdown
+            offroadCTS = new CancellationTokenSource();
+            StartOffRoadCountdown(offroadCTS.Token).Forget();
+
+            // Start fade-in
+            fadeCTS?.Cancel();
+            fadeCTS = new CancellationTokenSource();
+            FadeWarningPanelIn(fadeCTS.Token).Forget();
         }
         else if (currentlyOnRoad && isOffRoad)
         {
             isOffRoad = false;
-            cts?.Cancel();
-            cts?.Dispose();
-            cts = null;
+
+            // Cancel countdown
+            offroadCTS?.Cancel();
+            offroadCTS?.Dispose();
+            offroadCTS = null;
+
+            // Start fade-out
+            fadeCTS?.Cancel();
+            fadeCTS = new CancellationTokenSource();
+            FadeWarningPanelOut(fadeCTS.Token).Forget();
         }
     }
 
@@ -64,6 +92,31 @@ public class OffRoadTracker : MonoBehaviour
         catch (OperationCanceledException)
         {
             // Countdown was canceled because the player returned to the road
+        }
+    }
+
+    private async UniTaskVoid FadeWarningPanelIn(CancellationToken token)
+    {
+        try
+        {
+            await UniTask.WaitForSeconds(1f); //wait 0.5 seconds before the message
+            await uiManager.FadeIn(warningPanel, offRoadDuration).AttachExternalCancellation(token); // You can adjust the fade-in duration
+        }
+        catch (OperationCanceledException)
+        {
+            // Fade was canceled
+        }
+    }
+
+    private async UniTaskVoid FadeWarningPanelOut(CancellationToken token)
+    {
+        try
+        {
+            await uiManager.FadeOut(warningPanel, 0.2f).AttachExternalCancellation(token); // You can adjust the fade-out duration
+        }
+        catch (OperationCanceledException)
+        {
+            // Fade was canceled
         }
     }
 }

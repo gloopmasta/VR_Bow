@@ -56,5 +56,7 @@ public class CalibrateButton : MonoBehaviour
         }
 
         shootingScript.maxCalibration = shootingScript.rawFlex;
+
+        await uiManager.FadeOut(uiManager.calibratePanel);
     }
 }
