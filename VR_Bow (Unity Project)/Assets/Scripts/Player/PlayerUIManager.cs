@@ -14,6 +14,8 @@ public class PlayerUIManager : MonoBehaviour
     [Header("Player Warning Messages")]
     public GameObject fadeScreen;
 
+    [PandaVariable] public GameObject calibratePanel;
+    [PandaVariable] public GameObject warningPanel;
     [PandaVariable] public GameObject rotateBowPanel;
     [PandaVariable] public GameObject jumpInstruction;
     [PandaVariable] public GameObject steerInstruction;
@@ -51,6 +53,34 @@ public class PlayerUIManager : MonoBehaviour
         return true;
     }
 
+    public async UniTask<bool> FadeIn(GameObject panel, float duration)
+    {
+        panel.SetActive(true); //set panel active
+
+        CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>(); //assign canvasgroup
+        if (canvasGroup == null)
+        {
+            Debug.Log("no canvasGroup found in panel " + panel.name);
+            return false;
+        }
+
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+
+        float elapsed = 0f;  //fade in the alpha on cnavas group
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsed / duration);
+            await UniTask.Yield();
+        }
+
+        canvasGroup.alpha = 1f;
+        return true;
+    }
+
+    [PandaTask]
     public async Task<bool> FadeOut(GameObject panel)
     {
         CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>();
@@ -69,6 +99,33 @@ public class PlayerUIManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             canvasGroup.alpha = Mathf.Clamp01(1 - (elapsed / fadeDuration));
+            await UniTask.Yield();
+        }
+
+        canvasGroup.alpha = 0f;
+        panel.SetActive(false); //set panel inactive
+
+        return true;
+    }
+
+    public async UniTask<bool> FadeOut(GameObject panel, float duration)
+    {
+        CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            Debug.Log("no canvasGroup found in panel " + panel.name);
+            return false;
+        }
+
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(1 - (elapsed / duration));
             await UniTask.Yield();
         }
 

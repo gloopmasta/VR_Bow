@@ -1,26 +1,28 @@
 #Root sequence
 	#SteeringTutorial
+	#JumpingTutorial
+	#ShootingTutorial
 
-#SteeringTutorial
+#SteeringTutorial sequence
 	WaitUntilSteerMessage
-	FadeIn steerInstruction
+	FadeIn @steerInstruction
 	StartSlowTime
 	Wait 3.0
 	StopSlowTime
-	FadeOut steerInstruction
+	FadeOut @steerInstruction
 
-#JumpingTutorial
+#JumpingTutorial sequence
 	WaitUntilJumpMessage
-	FadeIn jumpInstruction
+	FadeIn @jumpInstruction
 	StartSlowTime
 	race
 		WaitUntilJump
 		Wait 3.0
 	StopSlowTime
-	FadeOut jumpInstruction
+	FadeOut @jumpInstruction
 
-#ShootingTutorial
+#ShootingTutorial sequence
 	WaitUntilShootMessage
-	FadeIn shootInstruction
-	WaiWaitUntilBowVertical
-	FadeOut shootInstruction
+	FadeIn @shootInstruction
+	WaitUntilBowVertical
+	FadeOut @shootInstruction

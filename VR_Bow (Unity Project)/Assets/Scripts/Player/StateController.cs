@@ -52,7 +52,7 @@ public class StateController : MonoBehaviour
         {
             isGrounded = true;
             usedJumpPad = false;
-            GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
+            //GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
         };
         switchEvents.OnEnterDSSwitchTime += () =>
         {
