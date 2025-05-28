@@ -6,15 +6,17 @@ using System;
 
 public class BluetoothReader : MonoBehaviour
 {
-    public string comPort = "COM6";
+    [SerializeField] private GameSettings gameSettings;
+    public string comPort;
     SerialPort serialPort;
     Thread readThread;
     volatile bool isRunning = false;
     ConcurrentQueue<string> dataQueue = new ConcurrentQueue<string>();
     public float sensorValue = 0f;
 
-    void Start()
+    void OnEnable()
     {
+        comPort = gameSettings.comPort;
         try
         {
             serialPort = new SerialPort(comPort, 115200);
