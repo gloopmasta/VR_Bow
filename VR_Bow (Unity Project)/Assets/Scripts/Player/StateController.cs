@@ -64,6 +64,8 @@ public class StateController : MonoBehaviour
         {
             usedJumpPad = true;
             isGrounded = false;
+            SetState(PlayerState.Shooting);
+            GetComponent<OffRoadTracker>().enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
             JumpPadSlowtime().Forget();
         };
@@ -78,6 +80,9 @@ public class StateController : MonoBehaviour
         {
             AfterStartPressed().Forget();
         };
+
+        levelEvents.OnLevelOneLose += () => OnGameEnd();
+        levelEvents.OnLevelOneWin += () => OnGameEnd();
     }
 
     
@@ -288,9 +293,19 @@ public class StateController : MonoBehaviour
         }
                 
 
-
+        
         driveControls.enabled = true;
         SetState(PlayerState.Driving);
+
+        await UniTask.WaitForSeconds(2f);
+
+        GetComponent<OffRoadTracker>().enabled = true;
+    }
+
+    public void OnGameEnd()
+    {
+        GetComponent<OffRoadTracker>().enabled = false;
+        player.invulnerable = true;
     }
 
     private async Task<bool> LaunchingBashSlowtime()

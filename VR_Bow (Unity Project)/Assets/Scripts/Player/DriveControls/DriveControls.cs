@@ -14,7 +14,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     [Header("Speed Settings")]
     public float currentSpeed = 5f;
-    [SerializeField] private Vector3 currentVelocity = Vector3.zero;
+    public Vector3 currentVelocity = Vector3.zero;
     [SerializeField] float maxSpeed = 100f;
     [Range(1.002f, 2f)]
     [SerializeField] float accelerationRate = 1.005f;
@@ -264,6 +264,8 @@ public class DriveControls : MonoBehaviour, ITimeScalable
                 currentVelocity = transform.forward * currentVelocity.magnitude;
             }
         }
+
+        rb.angularVelocity = Vector3.zero; //reset angular velocity to reduce unwanted spinning
     }
 
     void Steer()

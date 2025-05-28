@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0564d4382c339b94c83ba21021ed4300, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
-  useBowController: 1
+  useBowController: 0
   leftHanded: 0

@@ -20,6 +20,7 @@ public class PlayerUIManager : MonoBehaviour
     [PandaVariable] public GameObject jumpInstruction;
     [PandaVariable] public GameObject steerInstruction;
     [PandaVariable] public GameObject shootInstruction;
+    public GameObject damageIndicator;
 
     [Header("Race UI")]
     public GameObject racePanel;

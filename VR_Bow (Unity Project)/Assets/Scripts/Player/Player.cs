@@ -20,11 +20,14 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private PlayerState state;
     public bool isBashing;
     public int score;
+    public bool invulnerable = false;
 
     [Header("Respawn")]
     public Vector3 respawnPosition = Vector3.zero;
     public Vector3 respawnRotation = Vector3.zero;
 
+    [Header("Invulnerability animation")]
+    [SerializeField] Animator vulnerabilityAnimator;
 
 
     public int Hp
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         hp = data.MaxHp;
-        arrowCount = 6/*data.maxArrowCount*/;
+        arrowCount = data.MaxArrowCount;
         slowTime = 4f;
         //fuel = data.MaxFuel;
 
@@ -87,8 +90,19 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
-        hp -= amount;
-        //playerEvents.RaiseDamage(amount);
+        if (invulnerable) 
+        {
+            return;
+        }
+
+        hp -= amount;  //deduct HP
+
+        //animation for indication
+        GetComponent<PlayerUIManager>().damageIndicator.SetActive(false);
+        GetComponent<PlayerUIManager>().damageIndicator.SetActive(true);
+
+        //invulnerability
+        Invulerability().Forget();
 
         if (hp <= 0)
         {
@@ -96,10 +110,23 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public async UniTaskVoid Invulerability()
+    {
+        //vulnerabilityAnimator.enabled = true;
+        //vulnerabilityAnimator.Play("start");  play animation
+
+        invulnerable = true;
+        await UniTask.WaitForSeconds(data.InvulnerableTime);
+        invulnerable = false;
+
+        //vulnerabilityAnimator.enabled = false;//disable animator or end animation
+    }
+
     public async UniTaskVoid Respawn()
     {
         Debug.Log("Player respawned");
         var ui = GetComponent<PlayerUIManager>();
+        var rb = GetComponent<Rigidbody>();
 
         await ui.FadeToBlackAsync(); //wait fade to black
 
@@ -111,10 +138,14 @@ public class Player : MonoBehaviour, IDamageable
         else
             Debug.Log("respawnPosition is null");
 
-        GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity
-        GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
-        transform.rotation = Quaternion.Euler(Vector3.zero);
-        
+        rb.velocity = Vector3.zero; //Reset velocity
+        rb.rotation = Quaternion.Euler(respawnRotation); //Reset velocity
+        rb.angularVelocity = Vector3.zero;
+
+
+        GetComponent<DriveControls>().currentVelocity = Vector3.zero;
+        rb.MoveRotation(Quaternion.Euler(respawnRotation));
+
 
         await ui.FadeFromBlackAsync(); //fade out again
 
