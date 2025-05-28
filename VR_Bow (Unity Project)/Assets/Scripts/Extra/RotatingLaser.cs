@@ -12,8 +12,12 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     [SerializeField] private Color laserColor = Color.red;
     [SerializeField] private float glowIntensity = 10f;
 
+    [SerializeField] private AudioCue humSoundCue;  // <- Dit is nu je AudioCue asset
+
     private GameObject laserPivot;
     private List<Transform> laserTransforms = new List<Transform>();
+    private List<GameObject> soundObjects = new List<GameObject>();
+
     private float timeScale = 1f;
 
     private void Start()
@@ -61,6 +65,15 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             laserObj.AddComponent<LaserTrigger>().Initialize(this, i);
 
             laserTransforms.Add(laserObj.transform);
+
+            // Gebruik AudioCue om geluid te spelen op het midden van elke laser
+            if (SoundEffectManager.Instance != null && humSoundCue != null)
+            {
+                Vector3 soundPos = laserObj.transform.position + laserObj.transform.forward * (laserLength / 2f);
+                GameObject sfx = SoundEffectManager.Instance.Play3D(humSoundCue, soundPos, laserObj.transform, loop: true);
+                if (sfx != null)
+                    soundObjects.Add(sfx);
+            }
         }
 
         GameManager.Instance?.Register(this);
@@ -98,6 +111,13 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     {
         if (laserPivot != null) Destroy(laserPivot);
         GameManager.Instance?.Unregister(this);
+
+        // Vernietig alle sound objects
+        foreach (var sfx in soundObjects)
+        {
+            if (sfx != null)
+                Destroy(sfx);
+        }
     }
 
     public void HandleTrigger(Collider other, int laserIndex)
