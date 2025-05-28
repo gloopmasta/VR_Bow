@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.WSA;
 
 public class BowShooting : ShootingMode
 {
@@ -19,9 +18,9 @@ public class BowShooting : ShootingMode
     public float maxCalibration = 1f;
 
     [Header("Hand Transforms")]
-    public Transform leftHand;   // Aiming
-    public Transform rightHand;  // Drawing
-    [SerializeField] private Vector3 bowOffsetEuler;
+    public Transform leftHand;   // Aiming hand (holds the bow)
+    public Transform rightHand;  // Drawing hand (pulls the string)
+    [SerializeField] private Vector3 bowOffsetEuler; // Optional rotation offset
 
     [Header("Draw Settings")]
     public float maxDrawDistance = 0.5f;
@@ -51,7 +50,7 @@ public class BowShooting : ShootingMode
     private GameObject currentVisualArrow;
     public Transform arrowNockPoint;
 
-    [Header("Scripts & events")]
+    [Header("Scripts & Events")]
     [SerializeField] private SlowTimeSO slowTimeEvent;
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private StateController stateController;
@@ -65,114 +64,104 @@ public class BowShooting : ShootingMode
     private Vector3 drawStartPosition;
     private Player playerScript;
 
+    [Header("Debug Flex Override")]
+    public bool useInspectorSlider = false;
 
+    [Range(0f, 1f)]
+    public float inspectorFlexValue = 0f;
 
     void OnEnable()
     {
         playerScript = GetComponent<Player>();
     }
 
-
     void Update()
     {
-        rawFlex = 1f - btReader.sensorValue; // Ensure this is between 0 and 1
+        // Get current flex value either from inspector or Bluetooth
+        currentFlexValue = useInspectorSlider ? inspectorFlexValue : 1f - btReader.sensorValue;
 
-        currentFlexValue = Mathf.Clamp01(Mathf.InverseLerp(minCalibration, maxCalibration, rawFlex)); //calibrate
+        // Update bowstring visual
 
         UpdateBowstring();
 
-
-        if (!isDrawing && currentFlexValue > 0.05f)
-        {
-            isDrawing = true;
-            // Additional setup if needed
-        }
-
-
+        // Calculate flex change
         delta = currentFlexValue - previousFlexValue;
 
-        if (delta <= -speedToFire)
-            Debug.Log("velocity: " + delta);
+        // Start drawing if tension starts increasing
+        if (!isDrawing && currentFlexValue > 0.05f)
+            isDrawing = true;
 
         if (isDrawing)
         {
-            //if (!trajectoryLine.enabled)
-            //    trajectoryLine.enabled = true;
+            // Show trajectory preview if enough tension
+            if (previousFlexValue > 0.05f && !trajectoryLine.enabled)
+                trajectoryLine.enabled = true;
 
-            // Calculate current shooting direction while drawing
+            // Calculate shooting direction
             Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
             shootDirection = shootRotation * Vector3.forward;
 
-            float previewForce = currentFlexValue * maxShootForce;
+            // Compute preview force and velocity
+            float previewForce = previousFlexValue * maxShootForce;
             Vector3 launchVel = shootDirection * previewForce;
 
-            //draw trajectory
+            // Draw the trajectory prediction
             DrawTrajectory(shootPoint.position, launchVel);
             Debug.DrawRay(shootPoint.position, launchVel.normalized * 0.5f, Color.red);
 
-            //store direction and speed
+            // Store full charge direction
             if (previousFlexValue > 0.95f)
             {
-                storedDirection = shootDirection; //store the direction
+                storedDirection = shootDirection;
                 fullCharge = true;
             }
         }
-        //else
-        //{
-        //    if (trajectoryLine.enabled)
-        //        trajectoryLine.enabled = false;
-        //}
 
-
+        // Check for release condition
         if (isDrawing && delta <= speedToFire && Time.time >= shootTimer && previousFlexValue > minimumTension)
         {
             ReleaseArrow();
             shootTimer = Time.time + shootCooldown;
         }
 
+        // Hide trajectory if not drawing anymore
+        if ((!isDrawing || previousFlexValue < 0.05f) && trajectoryLine.enabled)
+        {
+            trajectoryLine.enabled = false;
+        }
+
         previousFlexValue = currentFlexValue;
-
-
-        
-
-        //    bowAnimator.speed = 0f;
-
-        //if (bowAnimator != null)
-        //{
-        //    bowAnimator.Play("Charge", 0, currentFlexValue);
-        //    bowAnimator.speed = 0f;
-        //}
-
-
     }
-
-
-
-
-
 
     void ReleaseArrow()
     {
         if (!isDrawing) return;
 
+        // Fire the arrow
         Shoot();
+
+        // Reset drawing state
         isDrawing = false;
         fullCharge = false;
         currentFlexValue = 0f;
         previousFlexValue = 0f;
 
+        // Hide trajectory
         if (trajectoryLine != null)
             trajectoryLine.enabled = false;
 
+        // Update bowstring (return to neutral)
         if (bowstringLine != null)
-            bowstringLine.enabled = false;
+            UpdateBowstring();
 
+        // Remove visual arrow
         if (currentVisualArrow != null)
         {
             Destroy(currentVisualArrow);
             currentVisualArrow = null;
         }
 
+        // Trigger animation
         if (bowAnimator != null)
         {
             bowAnimator.speed = 1f;
@@ -182,29 +171,33 @@ public class BowShooting : ShootingMode
         Debug.Log("Arrow released.");
     }
 
-
     void Shoot()
     {
-        playerScript.ArrowCount--; //deduct an arrow from the player
+        // Decrease arrow count
+        playerScript.ArrowCount--;
+
+        // Calculate shoot direction and force
         float shootForce = currentFlexValue * maxShootForce;
         Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
         shootDirection = shootRotation * Vector3.forward;
 
+        // Instantiate arrow
         GameObject arrowObj = Instantiate(projectilePrefab, shootPoint.position, shootRotation);
-
         Arrow arrow = arrowObj.GetComponent<Arrow>();
 
+        // Launch with full or partial force
         if (fullCharge)
         {
             if (arrow != null)
-                arrow.Launch(storedDirection, 1f * maxShootForce, 1f); //if full charge, shoot fast
+                arrow.Launch(storedDirection, maxShootForce, 1f);
         }
-        else 
+        else
         {
             if (arrow != null)
                 arrow.Launch(shootDirection, shootForce, currentFlexValue);
         }
 
+        // Play animation
         if (bowAnimator != null)
         {
             bowAnimator.speed = 1f;
@@ -214,10 +207,8 @@ public class BowShooting : ShootingMode
 
     void DrawTrajectory(Vector3 startPos, Vector3 startVel)
     {
-        //if (trajectoryLine == null) return;
-
         trajectoryLine.positionCount = trajectorySteps;
-        bool ignoreGravity = currentFlexValue >= 0.9f;
+        bool ignoreGravity = previousFlexValue >= 0.9f;
 
         for (int i = 0; i < trajectorySteps; i++)
         {
@@ -232,8 +223,7 @@ public class BowShooting : ShootingMode
 
     void UpdateBowstring()
     {
-        //if (bowstringLine == null || stringTop == null || stringBottom == null) return;
-
+        // Define top and bottom of string
         bowstringLine.positionCount = 3;
         bowstringLine.SetPosition(0, stringTop.position);
         bowstringLine.SetPosition(2, stringBottom.position);
@@ -242,28 +232,20 @@ public class BowShooting : ShootingMode
 
         if (isDrawing)
         {
-            // Calculate the midpoint between stringTop and stringBottom
+            // Calculate midpoint and pull direction based on bow rotation
             Vector3 midpoint = (stringTop.position + stringBottom.position) * 0.5f;
+            Vector3 zDirection = (leftHand.rotation * Quaternion.Euler(bowOffsetEuler)) * Vector3.back;
 
-            // Determine the direction of the local Z-axis
-            Vector3 zDirection = -transform.forward;
-
-            // Define the maximum offset distance along the Z-axis
-            float maxOffset = 0.5f; // Adjust this value as needed
-
-            // Calculate the offset based on currentFlexValue
+            float maxOffset = 0.5f;
             Vector3 offset = zDirection * (currentFlexValue * maxOffset);
-
-            // Apply the offset to the midpoint
             middlePoint = midpoint + offset;
         }
         else
         {
-            // When not drawing, the middle point is just the midpoint
+            // Neutral string position
             middlePoint = (stringTop.position + stringBottom.position) * 0.5f;
         }
 
         bowstringLine.SetPosition(1, middlePoint);
     }
-
 }
