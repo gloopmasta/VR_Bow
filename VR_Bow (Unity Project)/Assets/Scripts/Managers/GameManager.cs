@@ -150,5 +150,6 @@ public class GameManager : MonoBehaviour
         }
 
         audioSource.pitch = targetPitch;
+        BeatManager.Instance.ResetTiming(); // Reset timing after pitch change
     }
 }

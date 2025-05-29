@@ -1,14 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class BeatManager : MonoBehaviour
 {
     private static BeatManager _instance;
-
-    // Lock for thread safety (not strictly necessary for Unity, but shown for completeness)
     private static readonly object _threadLock = new object();
 
     public static BeatManager Instance
@@ -19,16 +14,11 @@ public class BeatManager : MonoBehaviour
             {
                 lock (_threadLock)
                 {
-                    // Try to find an existing instance of the BeatManager
                     _instance = FindObjectOfType<BeatManager>();
-
-                    // If no instance is found, create a new GameObject with the BeatManager component
                     if (_instance == null)
                     {
                         GameObject singletonObject = new GameObject(typeof(BeatManager).Name);
                         _instance = singletonObject.AddComponent<BeatManager>();
-
-                        // Optional: Make the BeatManager persist between scenes
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
@@ -37,19 +27,20 @@ public class BeatManager : MonoBehaviour
         }
     }
 
-
     public delegate void BeatManagerDelegate();
     public static event BeatManagerDelegate OnBeatChange;
 
     [Header("Audio Settings")]
-    public float bpm = 0f; //default value
+    public float bpm = 0f;
     public float beatOffset;
     public AudioSource audioSource;
-    //[SerializeField] private Intervals[] intervals;
     public float sampledTime;
     public float beatCount;
     public int intBeatCount;
     public float heartBeat;
+
+    private float lastReportedPitch = 1f;
+    private float pitchAdjustedTime = 0f;
 
     private void Start()
     {
@@ -57,22 +48,21 @@ public class BeatManager : MonoBehaviour
             bpm = UniBpmAnalyzer.AnalyzeBpm(audioSource.clip);
 
         intBeatCount = 0;
+        lastReportedPitch = audioSource.pitch;
     }
 
     private void Update()
     {
+        // Track pitch-adjusted time
+        if (audioSource.pitch > 0.01f) // Avoid division by zero
+        {
+            pitchAdjustedTime += Time.deltaTime * lastReportedPitch / audioSource.pitch;
+            lastReportedPitch = audioSource.pitch;
+        }
 
-        //foreach (var interval in intervals) 
-        //{
-        //    sampledTime = beatOffset + (audioSource.timeSamples / (audioSource.clip.frequency * interval.GetBeatLength(bpm)) ); //gets time elapsed in beats
-        //    interval.CheckForNewBeat(sampledTime);
-        //}
-
-
-        beatCount = beatOffset + (audioSource.timeSamples / (audioSource.clip.frequency * GetBeatLength())); //gets beats in float
-
-        heartBeat = beatCount - (int)beatCount; //value that resets every time 0-1
-
+        // Calculate beat count using pitch-adjusted time
+        beatCount = beatOffset + (pitchAdjustedTime / GetBeatLength());
+        heartBeat = beatCount - (int)beatCount;
         intBeatCount = (int)beatCount;
 
         CheckForNewBeat();
@@ -85,12 +75,7 @@ public class BeatManager : MonoBehaviour
         if (Mathf.FloorToInt(beatCount) != lastInterval)
         {
             lastInterval = Mathf.FloorToInt(beatCount);
-
-            if (OnBeatChange != null)
-            {
-                OnBeatChange();
-            }
-            //Debug.Log("NOTIFY");
+            OnBeatChange?.Invoke();
         }
     }
 
@@ -99,35 +84,10 @@ public class BeatManager : MonoBehaviour
         return 60f / bpm;
     }
 
-}
-
-//[System.Serializable]
-//public class Intervals
-//{
-//    [SerializeField] public float steps;
-//    [SerializeField] private UnityEvent trigger;
-//    private int lastInterval;
-
-//    public float GetBeatLength(float bpm)
-//    {
-//        return 60f / (bpm * steps); //beats per second STEPS: for half beats
-//    }
-
-//    public void CheckForNewBeat (float interval)
-//    {
-//        if (Mathf.FloorToInt(interval) != lastInterval)//if current interval i sbigger than last interval
-//        {
-//            lastInterval = Mathf.FloorToInt(interval); //lastinterval is now interval
-//            trigger.Invoke();
-//        }
-//    }
-//}
-
-public enum Rating
-{
-    Undetermined,
-    TooEarly,
-    Early,
-    Late,
-    TooLate
+    // Call this when you start playing after a pitch change to reset timing
+    public void ResetTiming()
+    {
+        pitchAdjustedTime = 0f;
+        lastReportedPitch = audioSource.pitch;
+    }
 }
