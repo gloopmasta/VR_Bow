@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1b0a6c70e4b62429d0c63d102b9711, type: 3}
   m_Name: Sound Effect Library
   m_EditorClassIdentifier: 
-  entries:
-  - type: 1
-    cue: {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
+  audioCues:
+  - {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
