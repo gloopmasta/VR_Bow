@@ -324,6 +324,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -850,6 +854,10 @@ PrefabInstance:
     - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3344,7 +3352,7 @@ GameObject:
   - component: {fileID: 488916105}
   m_Layer: 0
   m_Name: LaserTurret (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3386,6 +3394,7 @@ MonoBehaviour:
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
+  humSoundCue: {fileID: 0}
 --- !u!65 &488916106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3637,6 +3646,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3701,7 +3714,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525559847}
   m_Enabled: 1
-  m_Alpha: 0.3984252
+  m_Alpha: 0.69855857
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -3987,6 +4000,10 @@ PrefabInstance:
     - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8867,6 +8884,10 @@ PrefabInstance:
     - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18585,6 +18606,8 @@ MonoBehaviour:
   rawFlex: 0
   previousFlexValue: 0
   isDrawing: 1
+  useInspectorSlider: 0
+  inspectorFlexValue: 0
 --- !u!114 &1613058519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20440,6 +20463,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8919657225651006972, guid: e170de087b242e34cb1a09a6e0b5105f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20471,7 +20498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1804681816
 Transform:
   m_ObjectHideFlags: 0
@@ -24135,7 +24162,7 @@ GameObject:
   - component: {fileID: 7100982584978016906}
   m_Layer: 0
   m_Name: LaserTurret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24599,6 +24626,7 @@ MonoBehaviour:
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
+  humSoundCue: {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
 --- !u!23 &7549786405235595107
 MeshRenderer:
   m_ObjectHideFlags: 0
