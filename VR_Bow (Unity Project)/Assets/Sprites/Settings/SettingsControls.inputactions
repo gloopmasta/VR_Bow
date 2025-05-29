@@ -1,0 +1,34 @@
+{
+    "name": "SettingsControls",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "3f04388e-7d18-41d2-bc5c-41c0a95fcf9d",
+            "actions": [
+                {
+                    "name": "ToggleMenu",
+                    "type": "Button",
+                    "id": "b51634eb-4562-45d4-82cf-545d5ee19db1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89ca7655-3fc9-4ed3-88e4-981e132c1894",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
