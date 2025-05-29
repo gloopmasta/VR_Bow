@@ -7,6 +7,8 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     [SerializeField] private float laserLength = 5f;
     [SerializeField] private int numberOfLasers = 1;
     [SerializeField] private string spawnedByTag;
+    [SerializeField] private bool spinAnimation = false;
+    [SerializeField] private GameObject partToSpin;
 
     [SerializeField] private bool spinVertically = false;
     [SerializeField] private Color laserColor = Color.red;
@@ -89,6 +91,7 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
         Vector3 axis = spinVertically ? Vector3.right : Vector3.up;
         Space space = spinVertically ? Space.Self : Space.World;
         laserPivot.transform.Rotate(axis, rotationSpeed * timeScale * Time.deltaTime, space);
+        partToSpin.transform.Rotate(axis, rotationSpeed * timeScale * Time.deltaTime, space);
 
         for (int i = 0; i < numberOfLasers; i++)
         {

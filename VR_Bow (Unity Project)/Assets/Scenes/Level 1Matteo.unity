@@ -3391,6 +3391,8 @@ MonoBehaviour:
   laserLength: 54
   numberOfLasers: 1
   spawnedByTag: 
+  spinAnimation: 0
+  partToSpin: {fileID: 0}
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
@@ -24097,15 +24099,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6972994892525110064}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.0516836, z: -0, w: 0.99866354}
-  m_LocalPosition: {x: 0, y: 0.85015416, z: 0.022310257}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.29, z: 0.022310257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8047576649752075750}
   - {fileID: 2459399051659910383}
   m_Father: {fileID: 7100982584978016905}
-  m_LocalEulerAnglesHint: {x: 0, y: 5.925, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1586500402023038289
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24166,7 +24168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1922381710554319080
 Transform:
   m_ObjectHideFlags: 0
@@ -24176,7 +24178,7 @@ Transform:
   m_GameObject: {fileID: 4667085653052153853}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1401541, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24192,7 +24194,7 @@ Transform:
   m_GameObject: {fileID: 2393838509381222888}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0038394928, y: 1.2001542, z: 0.8571663}
+  m_LocalPosition: {x: -0.0038394928, y: 0.060000062, z: 0.8571663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24223,14 +24225,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4525090111281393307}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.42539835, z: -0.022310257}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6735567276149408996}
   m_Father: {fileID: 1468583773370989428}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &2819455208457563380
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24598,7 +24600,7 @@ Transform:
   m_GameObject: {fileID: 1700762178496990663}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.2, y: 0, z: 328.6}
+  m_LocalPosition: {x: 36.2, y: 1.116, z: 328.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24623,6 +24625,8 @@ MonoBehaviour:
   laserLength: 54
   numberOfLasers: 1
   spawnedByTag: 
+  spinAnimation: 1
+  partToSpin: {fileID: 6972994892525110064}
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
