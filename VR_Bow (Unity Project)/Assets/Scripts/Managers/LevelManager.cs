@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnEnable()
     {
-        levelEvents.OnLevelOneStart += () => FinishStartUI();
+        levelEvents.OnLevelOneStart += () => FinishStartUI().Forget();
         levelEvents.OnLevelOneLose += () => LoseGame();
         levelEvents.OnLevelOneWin += () => WinGame();
     }
@@ -34,7 +34,8 @@ public class LevelManager : MonoBehaviour
     public GameObject firstActivator;
     public GameObject map;
 
-
+    [Header("Start Screen")]
+    public GameObject startScreenUI;
 
 
     [Header("Lose Screen")]
@@ -49,8 +50,10 @@ public class LevelManager : MonoBehaviour
 
     private bool gameEnded = false;
 
-    public void FinishStartUI()
+    public async UniTaskVoid FinishStartUI()
     {
+        startScreenUI.GetComponent<Animator>().CrossFade("StartScreenFadeOut", 0f);
+        await UniTask.WaitForSeconds(1);
         startUI.SetActive(false);
         firstActivator.SetActive(true);
         firstRoad.SetActive(true);

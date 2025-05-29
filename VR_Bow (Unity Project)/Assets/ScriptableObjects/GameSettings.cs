@@ -8,4 +8,6 @@ public class GameSettings : ScriptableObject
     public bool useBowController = true;
 
     public bool leftHanded = false;
+
+    public string comPort;
 }
