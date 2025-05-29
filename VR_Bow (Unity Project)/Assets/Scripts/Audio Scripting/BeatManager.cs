@@ -42,7 +42,7 @@ public class BeatManager : MonoBehaviour
     public static event BeatManagerDelegate OnBeatChange;
 
     [Header("Audio Settings")]
-    public float bpm;
+    public float bpm = 0f; //default value
     public float beatOffset;
     public AudioSource audioSource;
     //[SerializeField] private Intervals[] intervals;
@@ -53,7 +53,8 @@ public class BeatManager : MonoBehaviour
 
     private void Start()
     {
-        bpm = UniBpmAnalyzer.AnalyzeBpm(audioSource.clip);
+        if (bpm == 0f)
+            bpm = UniBpmAnalyzer.AnalyzeBpm(audioSource.clip);
 
         intBeatCount = 0;
     }
