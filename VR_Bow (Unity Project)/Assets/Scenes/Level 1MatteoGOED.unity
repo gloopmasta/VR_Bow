@@ -5849,9 +5849,9 @@ MonoBehaviour:
   slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   coverDome: {fileID: 1450449387}
   startUI: {fileID: 1766818018}
-  firstRoad: {fileID: 0}
-  firstActivator: {fileID: 0}
-  map: {fileID: 0}
+  firstRoad: {fileID: 1443804047}
+  firstActivator: {fileID: 788650862}
+  map: {fileID: 1219955771}
   startScreenUI: {fileID: 1766818018}
   loseUI: {fileID: 1207412848}
   loseDome: {fileID: 1195060947}
@@ -13001,9 +13001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81ea9f1091014645802fc5183cd7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftController: {fileID: 447510683}
+  leftController: {fileID: 1184709660}
   lockPoint: {fileID: 1525580889}
-  bowOffsetEuler: {x: -32, y: 127, z: 25.5}
+  bowOffsetEuler: {x: 7.35, y: 79.1, z: 396.2}
   maxVisibleRotation: 50
   isLocked: 0
 --- !u!95 &1435753585
@@ -20321,7 +20321,7 @@ MonoBehaviour:
   maxCalibration: 1
   aimingController: {fileID: 1184709660}
   rightHand: {fileID: 1184709660}
-  bowOffsetEuler: {x: 35.2, y: 62.8, z: 50}
+  bowOffsetEuler: {x: 35, y: 0, z: 0}
   maxDrawDistance: 0.5
   speedToFire: -0.25
   shootCooldown: 0.2
