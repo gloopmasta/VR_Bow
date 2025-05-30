@@ -19607,7 +19607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
-  comPort: COM14
+  comPort: COM10
   sensorValue: 0
 --- !u!4 &1574722837
 Transform:
@@ -20273,7 +20273,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613058509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05ecc9e7959477c43848f071f2c00f16, type: 3}
   m_Name: 
@@ -20306,7 +20306,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613058509}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a4c582676388494fbdf8b427a3aca0f, type: 3}
   m_Name: 
@@ -20319,7 +20319,7 @@ MonoBehaviour:
   fullCharge: 0
   minCalibration: 0
   maxCalibration: 1
-  leftHand: {fileID: 447510683}
+  aimingController: {fileID: 1184709660}
   rightHand: {fileID: 1184709660}
   bowOffsetEuler: {x: 35.2, y: 62.8, z: 50}
   maxDrawDistance: 0.5
@@ -20339,7 +20339,7 @@ MonoBehaviour:
   slowTimeEvent: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   driveControls: {fileID: 1613058516}
   stateController: {fileID: 1613058519}
-  btReader: {fileID: 0}
+  btReader: {fileID: 1574722836}
   currentFlexValue: 0
   rawFlex: 0
   previousFlexValue: 0
