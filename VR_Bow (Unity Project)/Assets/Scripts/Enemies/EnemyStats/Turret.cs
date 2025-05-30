@@ -10,6 +10,9 @@ public class Turret : Enemy
     [SerializeField] private SwitchTimeEventsSO switchEvents;
     [SerializeField] private ArrowHitEventsSO arrowHitEvents;
 
+    [Header("Particles")]
+    [SerializeField] private ParticleEffectsLibrary effectsLibrary;
+
     private void Start()
     {
         Hp = maxHP;
@@ -43,6 +46,7 @@ public class Turret : Enemy
 
     protected override void Die()
     {
+        effectsLibrary.PlayParticle(transform.position, effectsLibrary.turretExplode);
         Destroy(gameObject);
         arrowHitEvents?.RaiseScoreHitEnemy(100);
     }

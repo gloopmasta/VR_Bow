@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,7 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private GameSettings gameSettings;
     public VisualTreeAsset uiAsset; 
     private UIDocument uiDocument;
+    private InputAction toggleAction;
 
     private int comValue = 0;
     private bool bowMode = false;
@@ -25,7 +27,12 @@ public class SettingsController : MonoBehaviour
             return;
         }
 
+        uiDocument.enabled = true;
+
         var root = uiDocument.rootVisualElement;
+
+        // Ensure the root starts hidden via style, not GameObject state
+        root.style.display = DisplayStyle.None;
 
         // Query UI elements by their names
         comField = root.Q<TextField>("ComField");
@@ -44,15 +51,12 @@ public class SettingsController : MonoBehaviour
 
         if (restartIntroButton != null)
             restartLevelButton.clicked += RestartIntro;
+
+        toggleAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/escape");
+        toggleAction.performed += ctx => ToggleUI();
+        toggleAction.Enable();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleUI();
-        }
-    }
 
     private void ToggleUI()
     {
@@ -83,7 +87,6 @@ public class SettingsController : MonoBehaviour
 
     private void RestartLevelOne()
     {
-        uiDocument.rootVisualElement.style.display = DisplayStyle.None;
         SceneManager.LoadScene(1);
     }
 

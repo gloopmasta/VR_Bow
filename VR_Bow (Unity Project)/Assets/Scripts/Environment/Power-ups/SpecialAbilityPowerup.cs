@@ -1,7 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEngine;
 
 public class SpecialAbilityPowerup : Powerup

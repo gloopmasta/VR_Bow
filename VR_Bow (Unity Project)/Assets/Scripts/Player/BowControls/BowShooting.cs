@@ -18,7 +18,7 @@ public class BowShooting : ShootingMode
     public float maxCalibration = 1f;
 
     [Header("Hand Transforms")]
-    public Transform leftHand;   // Aiming hand (holds the bow)
+    public Transform aimingController;   // Aiming hand (holds the bow)
     public Transform rightHand;  // Drawing hand (pulls the string)
     [SerializeField] private Vector3 bowOffsetEuler; // Optional rotation offset
 
@@ -98,7 +98,7 @@ public class BowShooting : ShootingMode
                 trajectoryLine.enabled = true;
 
             // Calculate shooting direction
-            Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
+            Quaternion shootRotation = aimingController.rotation * Quaternion.Euler(bowOffsetEuler);
             shootDirection = shootRotation * Vector3.forward;
 
             // Compute preview force and velocity
@@ -178,7 +178,7 @@ public class BowShooting : ShootingMode
 
         // Calculate shoot direction and force
         float shootForce = currentFlexValue * maxShootForce;
-        Quaternion shootRotation = leftHand.rotation * Quaternion.Euler(bowOffsetEuler);
+        Quaternion shootRotation = aimingController.rotation * Quaternion.Euler(bowOffsetEuler);
         shootDirection = shootRotation * Vector3.forward;
 
         // Instantiate arrow
@@ -234,7 +234,7 @@ public class BowShooting : ShootingMode
         {
             // Calculate midpoint and pull direction based on bow rotation
             Vector3 midpoint = (stringTop.position + stringBottom.position) * 0.5f;
-            Vector3 zDirection = (leftHand.rotation * Quaternion.Euler(bowOffsetEuler)) * Vector3.back;
+            Vector3 zDirection = (aimingController.rotation * Quaternion.Euler(bowOffsetEuler)) * Vector3.back;
 
             float maxOffset = 0.5f;
             Vector3 offset = zDirection * (currentFlexValue * maxOffset);
