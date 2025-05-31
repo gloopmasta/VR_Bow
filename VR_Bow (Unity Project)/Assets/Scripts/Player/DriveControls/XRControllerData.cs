@@ -41,4 +41,8 @@ public class XRControllerData : MonoBehaviour
         }
     }
 
+    public InputDevice GetActiveController(bool useRightController)
+    {
+        return useRightController ? _rightController : _leftController;
+    }
 }
