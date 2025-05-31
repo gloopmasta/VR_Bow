@@ -19,7 +19,7 @@ public class BowEmissionController : MonoBehaviour
     [SerializeField] private float idlePulseSpeed = 2f;
 
 
-    private Material bowMaterial;
+    [SerializeField] private Material bowMaterial;
     private Color targetColor;
     private Coroutine flashRoutine;
 

@@ -7935,7 +7935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &669128206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18446,6 +18446,9 @@ MonoBehaviour:
   fullCharge: 0
   minCalibration: 0
   maxCalibration: 1
+  smoothingFactor: 0
+  baseSmoothing: 20
+  maxSmoothing: 5
   aimingController: {fileID: 1184709660}
   rightHand: {fileID: 1184709660}
   bowOffsetEuler: {x: 35, y: -5, z: 0}

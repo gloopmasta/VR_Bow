@@ -24,6 +24,7 @@ public class StateController : MonoBehaviour
     [SerializeField] public SlowTimeSO slowTime;
     [SerializeField] public JumpPadEventSO jumpPadEvent;
     [SerializeField] public BashEventSO bashEvent;
+    [SerializeField] public RumbleManager rumble;
 
     [Header("Bow Rotation")]
     [SerializeField] private Transform bowTransform;
@@ -46,6 +47,7 @@ public class StateController : MonoBehaviour
         {
             isGrounded = false;
             bowControls.canShoot = true; //reenable being able to shoot
+            rumble.StopRumble();
         };
 
         jumpEvents.OnLand += () =>
@@ -53,6 +55,7 @@ public class StateController : MonoBehaviour
             isGrounded = true;
             usedJumpPad = false;
             //GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
+            rumble.StartEngineRumble(0f, 1f, 2f).Forget();
         };
         switchEvents.OnEnterDSSwitchTime += () =>
         {
@@ -67,6 +70,7 @@ public class StateController : MonoBehaviour
             SetState(PlayerState.Shooting);
             GetComponent<OffRoadTracker>().enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
+            rumble.StopRumble();
             JumpPadSlowtime().Forget();
         };
 
@@ -78,6 +82,7 @@ public class StateController : MonoBehaviour
 
         levelEvents.OnLevelOneStart += () =>
         {
+            rumble.StartEngineRumble(0.1f, 1f, 3f).Forget();
             AfterStartPressed().Forget();
         };
 

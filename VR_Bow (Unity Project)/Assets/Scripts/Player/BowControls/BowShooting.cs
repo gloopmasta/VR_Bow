@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,12 @@ public class BowShooting : ShootingMode
     [Header("Calibration")]
     public float minCalibration = 0f;
     public float maxCalibration = 1f;
+
+    [Header("Smoothing")]
+    private Quaternion smoothedRotation;
+    [SerializeField] private float smoothingFactor;
+    [SerializeField] private float baseSmoothing = 0f; // Base smoothing factor
+    [SerializeField] private float maxSmoothing = 20f; // Maximum smoothing factor
 
     [Header("Hand Transforms")]
     public Transform aimingController;   // Aiming hand (holds the bow)
@@ -55,6 +62,7 @@ public class BowShooting : ShootingMode
     [SerializeField] private DriveControls driveControls;
     [SerializeField] private StateController stateController;
     [SerializeField] private BluetoothReader btReader;
+    [SerializeField] private RumbleManager rumble;
 
     private InputAction triggerAction;
     [SerializeField] private float currentFlexValue = 0f;
@@ -73,6 +81,7 @@ public class BowShooting : ShootingMode
     void OnEnable()
     {
         playerScript = GetComponent<Player>();
+        smoothedRotation = aimingController.rotation;
     }
 
     void Update()
@@ -84,8 +93,10 @@ public class BowShooting : ShootingMode
             currentFlexValue = Mathf.Clamp01(Mathf.InverseLerp(minCalibration, maxCalibration, rawFlex));
         }
 
-        // Update bowstring visual
+        
 
+
+        // Update bowstring visual
         UpdateBowstring();
 
         // Calculate flex change
@@ -101,8 +112,13 @@ public class BowShooting : ShootingMode
             if (previousFlexValue > 0.3f && !trajectoryLine.enabled)
                 trajectoryLine.enabled = true;
 
+            // Calculate dynamic smoothing factor based on currentFlexValue
+            smoothingFactor = Mathf.Lerp(baseSmoothing, maxSmoothing, currentFlexValue);
+            // Smoothly interpolate rotation
+            smoothedRotation = Quaternion.Slerp(smoothedRotation, aimingController.rotation, Time.deltaTime * smoothingFactor);
+
             // Calculate shooting direction
-            Quaternion shootRotation = aimingController.rotation * Quaternion.Euler(bowOffsetEuler);
+            Quaternion shootRotation = smoothedRotation * Quaternion.Euler(bowOffsetEuler);
             shootDirection = shootRotation * Vector3.forward;
 
             // Compute preview force and velocity
@@ -220,6 +236,9 @@ public class BowShooting : ShootingMode
             bowAnimator.speed = 1f;
             bowAnimator.SetTrigger(ShootTrigger);
         }
+
+        //start rumble
+        //rumble.RumbleBurst(1f, 1f).Forget();
     }
 
     void DrawTrajectory(Vector3 startPos, Vector3 startVel)

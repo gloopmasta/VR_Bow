@@ -51,6 +51,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] PlayerDataSO pData;
     [SerializeField] LevelEventsSO levelEvents;
     [SerializeField] GameSettings settings;
+    [SerializeField] RumbleManager rumble;
     private Player player;
 
     // ITimeScalable
@@ -152,13 +153,12 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             if (leftVelocity.z >= 2.5f && now >= nextBashTime)
             {
                 Bash();
-                TriggerHapticFeedback();
                 nextBashTime = now + pData.BashCooldown;
             }
-            if (leftVelocity.y >= 2.5f && now >= nextJumpTime && CanJump())
+            if (leftVelocity.y >= 1.5f && now >= nextJumpTime && CanJump())
             {
                 Jump();
-                TriggerHapticFeedback();
+                rumble.RumbleBurst(1f, 0.5f).Forget();
                 nextJumpTime = now + jumpCooldown;
             }
         }
@@ -202,11 +202,13 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     void Drive(float delta)
     {
-       // //slopes
-       // Vector3 moveDirection = groundCheck.IsOnSlope()
-       //? groundCheck.GetSlopeMoveDirection(transform.forward)
-       //: transform.forward;
+        // //slopes
+        // Vector3 moveDirection = groundCheck.IsOnSlope()
+        //? groundCheck.GetSlopeMoveDirection(transform.forward)
+        //: transform.forward;
 
+        //start rumble
+        if (currentVelocity == Vector3.zero) { rumble.StartEngineRumble(0.1f, 1f, 3f).Forget(); }
 
         //if below max speed -> accelerate
         if (currentVelocity.magnitude < maxSpeed)
@@ -234,7 +236,6 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             if (Mathf.Abs(leftVelocity.x) >= 2.5f && now >= nextDriftTime)
             {
                 isDrifting = true;
-                TriggerHapticFeedback();
                 nextDriftTime = now + driftCooldown;
             }
         }
@@ -344,12 +345,12 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
 
 
-    public void TriggerHapticFeedback()
-    {
-        InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        if (leftController.isValid)
-            leftController.SendHapticImpulse(0, 1f, 0.5f);
-    }
+    //public void TriggerHapticFeedback()
+    //{
+    //    InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+    //    if (leftController.isValid)
+    //        leftController.SendHapticImpulse(0, 1f, 0.5f);
+    //}
 }
 //For even smoother transitions:
 
