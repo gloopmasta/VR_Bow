@@ -5849,9 +5849,9 @@ MonoBehaviour:
   slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   coverDome: {fileID: 1450449387}
   startUI: {fileID: 1766818018}
-  firstRoad: {fileID: 0}
-  firstActivator: {fileID: 0}
-  map: {fileID: 0}
+  firstRoad: {fileID: 1443804047}
+  firstActivator: {fileID: 788650862}
+  map: {fileID: 1219955771}
   startScreenUI: {fileID: 1766818018}
   loseUI: {fileID: 1207412848}
   loseDome: {fileID: 1195060947}
@@ -6413,7 +6413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &762166779
 Transform:
   m_ObjectHideFlags: 0
@@ -13001,9 +13001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81ea9f1091014645802fc5183cd7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftController: {fileID: 447510683}
+  leftController: {fileID: 1184709660}
   lockPoint: {fileID: 1525580889}
-  bowOffsetEuler: {x: -32, y: 127, z: 25.5}
+  bowOffsetEuler: {x: 7.35, y: 79.1, z: 396.2}
   maxVisibleRotation: 50
   isLocked: 0
 --- !u!95 &1435753585
@@ -20261,10 +20261,12 @@ MonoBehaviour:
   driftCooldown: 0.57
   steeringSmoothness: 12.56
   deadZone: 30
+  pitch: 0
   controllerData: {fileID: 1613058515}
   groundCheck: {fileID: 1975260924}
   pData: {fileID: 11400000, guid: b474045e9bed7b84390e58e7c2c2ddad, type: 2}
   levelEvents: {fileID: 11400000, guid: fa1da2816dfa9644fbfddedd37d1844f, type: 2}
+  settings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
   timeScale: 1
 --- !u!114 &1613058517
 MonoBehaviour:
@@ -20314,14 +20316,14 @@ MonoBehaviour:
   canShoot: 0
   projectilePrefab: {fileID: 2334667485402507279, guid: 7fc1bb16089378a4d9d5a8e176f20e5c, type: 3}
   shootPoint: {fileID: 967321052}
-  maxShootForce: 50
+  maxShootForce: 100
   inputActions: {fileID: -944628639613478452, guid: 586d4d8b1fc63634eb78ac78f74cd542, type: 3}
   fullCharge: 0
   minCalibration: 0
   maxCalibration: 1
   aimingController: {fileID: 1184709660}
   rightHand: {fileID: 1184709660}
-  bowOffsetEuler: {x: 35.2, y: 62.8, z: 50}
+  bowOffsetEuler: {x: 35, y: 0, z: 0}
   maxDrawDistance: 0.5
   speedToFire: -0.25
   shootCooldown: 0.2
@@ -20370,7 +20372,7 @@ MonoBehaviour:
   slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   jumpPadEvent: {fileID: 11400000, guid: 68f056c01717c0940894b9d0559c77a2, type: 2}
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
-  bowTransform: {fileID: 447510683}
+  bowTransform: {fileID: 1184709660}
   vertAngleTarget: 0
   horAngleTarget: -90
   tolerance: 20

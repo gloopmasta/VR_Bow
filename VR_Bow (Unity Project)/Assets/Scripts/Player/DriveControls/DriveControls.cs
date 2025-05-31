@@ -43,20 +43,28 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] float steeringSmoothness = 5f;
     [SerializeField] float deadZone = 20f;
     private float lastSteeringInput;
-    private float pitch;
+    [SerializeField] private float pitch;
 
     [Header("Scripts & References")]
     [SerializeField] XRControllerData controllerData;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] PlayerDataSO pData;
     [SerializeField] LevelEventsSO levelEvents;
+    [SerializeField] GameSettings settings;
     private Player player;
 
     // ITimeScalable
     public float timeScale = 1f;
 
+    //steering
+    private InputDevice controller;
+
     private void Awake()
     {
+        //controller right or left
+        controller = settings.rightSteeringController ? 
+            controllerData._leftController : controllerData._rightController;
+
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -120,7 +128,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     private void UpdateControllerData()
     {
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
+        if (controller.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
             float now = Time.time * timeScale;
             if (leftVelocity.z >= 2.5f && now >= nextBashTime)
@@ -200,7 +208,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     {
         if (isDrifting) { HandleDrifting(); return; }
 
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
+        if (controller.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
             float now = Time.time * timeScale;
             if (Mathf.Abs(leftVelocity.x) >= 2.5f && now >= nextDriftTime)
@@ -214,7 +222,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     private void HandleDrifting()
     {
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        if (controller.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
             if (Mathf.Abs(pitch) > deadZone + rotOffset)
                 currentTurnSpeed = driftSpeed;
@@ -228,7 +236,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     void Steer(float delta)
     {
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        if (controller.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
             Vector3 euler = deviceRotation.eulerAngles;
             pitch = euler.x + rotOffset;
@@ -270,7 +278,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
     void Steer()
     {
-        if (controllerData._leftController.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
+        if (controller.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation))
         {
             Vector3 eulerRotation = deviceRotation.eulerAngles;
 

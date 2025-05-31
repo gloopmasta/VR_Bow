@@ -77,8 +77,12 @@ public class BowShooting : ShootingMode
 
     void Update()
     {
-        // Get current flex value either from inspector or Bluetooth
-        currentFlexValue = useInspectorSlider ? inspectorFlexValue : 1f - btReader.sensorValue;
+        if (useInspectorSlider) { currentFlexValue = inspectorFlexValue; }
+        else 
+        {
+            rawFlex = 1f - btReader.sensorValue;
+            currentFlexValue = Mathf.Clamp01(Mathf.InverseLerp(minCalibration, maxCalibration, rawFlex));
+        }
 
         // Update bowstring visual
 
