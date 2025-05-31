@@ -92,13 +92,13 @@ public class BowShooting : ShootingMode
         delta = currentFlexValue - previousFlexValue;
 
         // Start drawing if tension starts increasing
-        if (!isDrawing && currentFlexValue > 0.05f)
+        if (!isDrawing && currentFlexValue > 0.3f)
             isDrawing = true;
 
         if (isDrawing)
         {
             // Show trajectory preview if enough tension
-            if (previousFlexValue > 0.05f && !trajectoryLine.enabled)
+            if (previousFlexValue > 0.3f && !trajectoryLine.enabled)
                 trajectoryLine.enabled = true;
 
             // Calculate shooting direction
@@ -129,7 +129,6 @@ public class BowShooting : ShootingMode
         {
             BowVisualEvents.OnBowIdle?.Invoke();
         }
-
 
         // Check for release condition
         if (isDrawing && delta <= speedToFire && Time.time >= shootTimer && previousFlexValue > minimumTension)

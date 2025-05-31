@@ -51,7 +51,7 @@ public class Activator : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.CrossFade("Powerup spawn", 0);
+            animator.CrossFade("Powerup spawn", 0f);
         }
     }
 
@@ -59,7 +59,7 @@ public class Activator : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.CrossFade("Powerup collect", 0);
+            animator.CrossFade("Powerup collect", 0f);
         }
     }
 

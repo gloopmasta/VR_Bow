@@ -99,7 +99,7 @@ public class OffRoadTracker : MonoBehaviour
     {
         try
         {
-            await UniTask.WaitForSeconds(1f); //wait 0.5 seconds before the message
+            await UniTask.WaitForSeconds(1f).AttachExternalCancellation(token); //wait 0.5 seconds before the message
             await uiManager.FadeIn(warningPanel, offRoadDuration).AttachExternalCancellation(token); // You can adjust the fade-in duration
         }
         catch (OperationCanceledException)

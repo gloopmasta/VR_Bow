@@ -9029,7 +9029,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525559847}
   m_Enabled: 1
-  m_Alpha: 0.3984252
+  m_Alpha: 0.13881052
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -14048,8 +14048,36 @@ PrefabInstance:
       value: Checkpoint (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1930891655966940510, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930891655966940510, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930891655966940510, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_TagString
+      value: Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455302868446907166, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227851879870857247, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241460135830639267, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420036570005438308, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420036570005438308, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6521251906269208823, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14090,6 +14118,14 @@ PrefabInstance:
     - target: {fileID: 6521251906269208823, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734343724213569584, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552752972258640992, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25742,7 +25778,7 @@ MonoBehaviour:
   rawFlex: 0
   previousFlexValue: 0
   isDrawing: 1
-  useInspectorSlider: 1
+  useInspectorSlider: 0
   inspectorFlexValue: 0
 --- !u!114 &1613058519
 MonoBehaviour:
