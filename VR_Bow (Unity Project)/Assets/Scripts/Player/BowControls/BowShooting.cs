@@ -121,6 +121,16 @@ public class BowShooting : ShootingMode
             }
         }
 
+        if (isDrawing && currentFlexValue > 0.05f)
+        {
+            BowVisualEvents.OnChargeLevelChanged?.Invoke(currentFlexValue);
+        }
+        else
+        {
+            BowVisualEvents.OnBowIdle?.Invoke();
+        }
+
+
         // Check for release condition
         if (isDrawing && delta <= speedToFire && Time.time >= shootTimer && previousFlexValue > minimumTension)
         {
@@ -141,8 +151,12 @@ public class BowShooting : ShootingMode
     {
         if (!isDrawing) return;
 
+
         // Fire the arrow
         Shoot();
+
+        BowVisualEvents.OnArrowReleased?.Invoke();
+
 
         // Reset drawing state
         isDrawing = false;
