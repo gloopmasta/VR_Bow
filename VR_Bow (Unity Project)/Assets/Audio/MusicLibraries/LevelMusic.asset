@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f089d7df3123d1f449428620bd7cfde4, type: 3}
-  m_Name: Particle Effects Library
+  m_Script: {fileID: 11500000, guid: 8a3afad08cbd6be45a76a3984f4caf1c, type: 3}
+  m_Name: LevelMusic
   m_EditorClassIdentifier: 
-  arrow: {fileID: 0}
-  turretExplode: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
+  songList:
+  - clip: {fileID: 8300000, guid: ff70a02beaae9424c9c08d3c69b7b2e3, type: 3}
+    songName: Confession
+    artistName: LudoWic
+    bpm: 94
+    volume: 1
+    offset: 0

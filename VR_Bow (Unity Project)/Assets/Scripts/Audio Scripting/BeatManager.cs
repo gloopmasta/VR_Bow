@@ -12,22 +12,14 @@ public class BeatManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                lock (_threadLock)
-                {
-                    _instance = FindObjectOfType<BeatManager>();
-                    if (_instance == null)
-                    {
-                        GameObject singletonObject = new GameObject(typeof(BeatManager).Name);
-                        _instance = singletonObject.AddComponent<BeatManager>();
-                        DontDestroyOnLoad(singletonObject);
-                    }
-                }
+                _instance = FindObjectOfType<BeatManager>();
             }
             return _instance;
         }
     }
 
-    public delegate void BeatManagerDelegate();
+
+public delegate void BeatManagerDelegate();
     public static event BeatManagerDelegate OnBeatChange;
 
     [Header("Audio Settings")]
@@ -38,18 +30,46 @@ public class BeatManager : MonoBehaviour
     public float beatCount;
     public int intBeatCount;
     public float heartBeat;
+    public MusicLibrary songs;
 
     private float lastReportedPitch = 1f;
     private float pitchAdjustedTime = 0f;
 
-    private void Start()
+    private void Awake()
     {
-        if (bpm == 0f)
+        Debug.Log("BeatManager Awake");
+        Debug.Log($"AudioSource assigned: {audioSource != null}");
+        Debug.Log($"AudioClip in AudioSource: {(audioSource != null ? audioSource.clip?.name : "No AudioSource")}");
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject); // Enforce one instance per scene
+            return;
+        }
+
+        _instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null && bpm == 0f)
+        {
             bpm = UniBpmAnalyzer.AnalyzeBpm(audioSource.clip);
+        }
 
         intBeatCount = 0;
-        lastReportedPitch = audioSource.pitch;
+        lastReportedPitch = audioSource != null ? audioSource.pitch : 1f;
     }
+
+    private void Start()
+    {
+        //audioSource.
+        //if (audioSource != null && audioSource.clip == null && songs != null)
+        //{
+        //    Debug.Log("Restoring AudioClip after scene reload");
+        //    audioSource.clip = songToPlay;
+        //}
+    }
+
 
     private void Update()
     {
