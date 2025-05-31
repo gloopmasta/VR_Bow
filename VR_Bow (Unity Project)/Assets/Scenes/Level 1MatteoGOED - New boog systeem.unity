@@ -2748,6 +2748,37 @@ Transform:
   - {fileID: 345362935}
   m_Father: {fileID: 635525652}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &428145479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7887406159070847470, guid: aa4531fbd1f3c7a4db45daaf6078867b, type: 3}
+  m_PrefabInstance: {fileID: 2145388148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &428145481 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8695280154574259666, guid: aa4531fbd1f3c7a4db45daaf6078867b, type: 3}
+  m_PrefabInstance: {fileID: 2145388148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &428145483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428145479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bffaee92a8c6684e8d5cfc9d240d8ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowRenderer: {fileID: 428145481}
+  idleColor: {r: 0, g: 0, b: 0, a: 1}
+  chargingColor: {r: 0, g: 0, b: 1, a: 1}
+  shootColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.2
+  lerpSpeed: 5
+  idleColorA: {r: 0, g: 1, b: 0, a: 1}
+  idleColorB: {r: 1, g: 1, b: 1, a: 1}
+  idlePulseSpeed: 2
 --- !u!1 &431264457
 GameObject:
   m_ObjectHideFlags: 0
@@ -24197,6 +24228,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa4531fbd1f3c7a4db45daaf6078867b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1822126324}
+    - targetCorrespondingSourceObject: {fileID: 7887406159070847470, guid: aa4531fbd1f3c7a4db45daaf6078867b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 428145483}
   m_SourcePrefab: {fileID: 100100000, guid: aa4531fbd1f3c7a4db45daaf6078867b, type: 3}
 --- !u!1 &2146499923
 GameObject:

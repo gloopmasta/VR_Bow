@@ -13,6 +13,12 @@ public class BowEmissionController : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float lerpSpeed = 5f;
 
+    private bool isIdlePulsing = false;
+    [SerializeField] private Color idleColorA = Color.green;
+    [SerializeField] private Color idleColorB = Color.white;
+    [SerializeField] private float idlePulseSpeed = 2f;
+
+
     private Material bowMaterial;
     private Color targetColor;
     private Coroutine flashRoutine;
@@ -37,26 +43,42 @@ public class BowEmissionController : MonoBehaviour
     private void Update()
     {
         Color currentColor = bowMaterial.GetColor("_EmissionColor");
-        Color newColor = Color.Lerp(currentColor, targetColor, Time.deltaTime * lerpSpeed);
-        bowMaterial.SetColor("_EmissionColor", newColor);
+
+        if (isIdlePulsing)
+        {
+            float t = (Mathf.Sin(Time.time * idlePulseSpeed) + 1f) / 2f;
+            Color pulseColor = Color.Lerp(idleColorA, idleColorB, t);
+            bowMaterial.SetColor("_EmissionColor", pulseColor);
+        }
+        else
+        {
+            Color newColor = Color.Lerp(currentColor, targetColor, Time.deltaTime * lerpSpeed);
+            bowMaterial.SetColor("_EmissionColor", newColor);
+        }
     }
+
 
     private void HandleChargeLevelChanged(float value)
     {
+        isIdlePulsing = false;
         targetColor = Color.Lerp(shootColor, chargingColor, value);
     }
 
     private void HandleArrowReleased()
     {
+        isIdlePulsing = false;
+
         if (flashRoutine != null)
             StopCoroutine(flashRoutine);
         flashRoutine = StartCoroutine(FlashColor());
     }
 
+
     private void HandleIdle()
     {
-        targetColor = idleColor;
+        isIdlePulsing = true;
     }
+
 
     private IEnumerator FlashColor()
     {
