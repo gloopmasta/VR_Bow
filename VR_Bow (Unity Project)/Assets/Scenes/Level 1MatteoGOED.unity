@@ -23350,10 +23350,11 @@ MonoBehaviour:
   shootColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.2
   lerpSpeed: 5
+  emissionIntensity: 5
   idleColorA: {r: 0, g: 1, b: 0, a: 1}
   idleColorB: {r: 1, g: 1, b: 1, a: 1}
   idlePulseSpeed: 2
-  bowMaterial: {fileID: 0}
+  bowMaterial: {fileID: 2100000, guid: e332456bfcfe5644e8837aa14312ff88, type: 2}
 --- !u!23 &1883271039
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29518,6 +29519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowevents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
+  isEngineRumbling: 0
 --- !u!1 &2000592683
 GameObject:
   m_ObjectHideFlags: 0
