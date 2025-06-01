@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: e98d9a4451bef594c953dd400997e347
+  - enabled: 1
     path: Assets/Scenes/Level 1MatteoGOED.unity
     guid: 247475bc940001943b7ae091b8283aad
   m_configObjects:

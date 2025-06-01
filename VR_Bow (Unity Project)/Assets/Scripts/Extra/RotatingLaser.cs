@@ -13,6 +13,7 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     [SerializeField] private bool spinVertically = false;
     [SerializeField] private Color laserColor = Color.red;
     [SerializeField] private float glowIntensity = 10f;
+    [SerializeField] private Material laserMat;
 
     [SerializeField] private AudioCue humSoundCue;  // <- Dit is nu je AudioCue asset
 
@@ -21,6 +22,16 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
     private List<GameObject> soundObjects = new List<GameObject>();
 
     private float timeScale = 1f;
+
+    private void Awake()
+    {
+        laserPivot = new GameObject("LaserPivot");
+        laserPivot.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+
+        if (spinVertically)
+            laserPivot.transform.SetParent(transform);
+    }
+
 
     private void Start()
     {
@@ -53,9 +64,8 @@ public class RotatingLaser : MonoBehaviour, ITimeScalable
             lr.startWidth = 0.1f;
             lr.endWidth = 0.1f;
 
-            Material emissiveMat = new Material(Shader.Find("Unlit/Color"));
-            emissiveMat.SetColor("_Color", laserColor * glowIntensity);
-            lr.material = emissiveMat;
+            
+            lr.material = laserMat;
             lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             lr.receiveShadows = false;
 

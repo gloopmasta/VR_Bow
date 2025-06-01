@@ -5178,7 +5178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &604146813
 Transform:
   m_ObjectHideFlags: 0
@@ -5218,6 +5218,7 @@ MonoBehaviour:
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
+  laserMat: {fileID: 2100000, guid: e344fb4ec0f98d446a34698b22b93725, type: 2}
   humSoundCue: {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
 --- !u!65 &604146815
 BoxCollider:
@@ -5256,7 +5257,7 @@ MonoBehaviour:
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
   effectsLibrary: {fileID: 11400000, guid: edbaef1f2f01598479620cf3de1bb598, type: 2}
-  explosionSoundCue: {fileID: 0}
+  explosionSoundCue: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
 --- !u!1001 &605874570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30501,6 +30502,7 @@ MonoBehaviour:
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
+  laserMat: {fileID: 2100000, guid: e344fb4ec0f98d446a34698b22b93725, type: 2}
   humSoundCue: {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
 --- !u!65 &2023553659
 BoxCollider:
