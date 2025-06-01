@@ -67,6 +67,11 @@ public class SoundEffectManager : MonoBehaviour
         source.pitch = cue.pitch;
         source.loop = loop;
 
+        // Apply 3D sound settings from the AudioCue
+        source.minDistance = cue.minDistance;
+        source.maxDistance = cue.maxDistance;
+        source.rolloffMode = cue.rolloffMode;
+
         source.Play();
 
         if (!loop)
@@ -74,4 +79,5 @@ public class SoundEffectManager : MonoBehaviour
 
         return audioObj;
     }
+
 }
