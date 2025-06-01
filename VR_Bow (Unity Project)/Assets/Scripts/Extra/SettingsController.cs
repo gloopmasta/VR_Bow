@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class SettingsController : MonoBehaviour
 {
     [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private CalibrateButton calibrateScript;
     public VisualTreeAsset uiAsset; 
     private UIDocument uiDocument;
     private InputAction toggleAction;
@@ -15,6 +16,7 @@ public class SettingsController : MonoBehaviour
 
     private TextField comField;
     private Toggle bowToggle;
+    private Button calibrateButton;
     private Button restartLevelButton;
     private Button restartIntroButton;
 
@@ -37,6 +39,7 @@ public class SettingsController : MonoBehaviour
         // Query UI elements by their names
         comField = root.Q<TextField>("ComField");
         bowToggle = root.Q<Toggle>("BowMode");
+        calibrateButton = root.Q<Button>("Calibrate");
         restartLevelButton = root.Q<Button>("RestartLevel1");
         restartIntroButton = root.Q<Button>("RestartIntro");
 
@@ -46,11 +49,14 @@ public class SettingsController : MonoBehaviour
         if (bowToggle != null)
             bowToggle.RegisterValueChangedCallback(evt => gameSettings.useBowController = evt.newValue);
 
+        if (calibrateButton != null)
+            calibrateButton.clicked += () => calibrateScript.Calibration().Forget();
+
         if (restartLevelButton != null)
             restartLevelButton.clicked += RestartLevelOne;
 
         if (restartIntroButton != null)
-            restartLevelButton.clicked += RestartIntro;
+            restartIntroButton.clicked += RestartIntro;
 
         toggleAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/escape");
         toggleAction.performed += ctx => ToggleUI();
@@ -87,13 +93,15 @@ public class SettingsController : MonoBehaviour
 
     private void RestartLevelOne()
     {
-        SceneManager.LoadScene(1);
+        Debug.Log("pressed reste level 1, resetting level 1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void RestartIntro()
     {
+        Debug.Log("pressed reste intro, resetting intro");
         uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-        //SceneManager.LoadScene("IntroScene");
+        SceneManager.LoadScene(0);
     }
 
     // Optional: expose comValue and bowMode

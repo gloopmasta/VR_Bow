@@ -24,13 +24,13 @@ public class EnableTargetPractise : MonoBehaviour
 
     }
 
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 25, 300, 40), "trigger targets"))
-        {
-            ActivateTargets();
-        }
-    }
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(10, 25, 300, 40), "trigger targets"))
+    //    {
+    //        ActivateTargets();
+    //    }
+    //}
 
     void ActivateTargets()
     {

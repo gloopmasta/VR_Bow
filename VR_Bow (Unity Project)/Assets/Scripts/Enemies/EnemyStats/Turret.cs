@@ -13,6 +13,9 @@ public class Turret : Enemy
     [Header("Particles")]
     [SerializeField] private ParticleEffectsLibrary effectsLibrary;
 
+    [Header("Sound effects")]
+    [SerializeField] private AudioCue explosionSoundCue;
+
     private void Start()
     {
         Hp = maxHP;
@@ -46,9 +49,21 @@ public class Turret : Enemy
 
     protected override void Die()
     {
+        //particles
         effectsLibrary.PlayParticle(transform.position, effectsLibrary.turretExplode);
-        Destroy(gameObject);
+
+        
+
+        //score
         arrowHitEvents?.RaiseScoreHitEnemy(100);
+
+        // Gebruik AudioCue om geluid te spelen op het midden van elke laser
+        if (SoundEffectManager.Instance != null && explosionSoundCue != null)
+        {
+            SoundEffectManager.Instance.Play3D(explosionSoundCue, transform.position);
+        }
+
+        Destroy(gameObject);
     }
 }
 

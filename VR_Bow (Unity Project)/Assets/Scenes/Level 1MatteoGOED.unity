@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5252,6 +5256,7 @@ MonoBehaviour:
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
   effectsLibrary: {fileID: 11400000, guid: edbaef1f2f01598479620cf3de1bb598, type: 2}
+  explosionSoundCue: {fileID: 0}
 --- !u!1001 &605874570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6139,6 +6144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
+  calibrateScript: {fileID: 1335713223}
   uiAsset: {fileID: 9197481963319205126, guid: 9a3147129616bce4691e6eaedb9f9172, type: 3}
 --- !u!1 &679204797
 GameObject:
@@ -6353,6 +6359,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.8
       objectReference: {fileID: 0}
+    - target: {fileID: 6762279591600737253, guid: 4c7d3e73b0684e24b936a0dacddbad95, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6796,6 +6806,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6762279591600737253, guid: 4c7d3e73b0684e24b936a0dacddbad95, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18657,7 +18671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1443804048
 Transform:
   m_ObjectHideFlags: 0
@@ -19383,6 +19397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21703,6 +21721,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.06
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23287,6 +23309,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30462,6 +30488,7 @@ MonoBehaviour:
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
   effectsLibrary: {fileID: 11400000, guid: edbaef1f2f01598479620cf3de1bb598, type: 2}
+  explosionSoundCue: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
 --- !u!1 &2039983429
 GameObject:
   m_ObjectHideFlags: 0
@@ -30589,6 +30616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31260,6 +31291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8843257446877640853, guid: 27268ff85664adf4383589f375198392, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31322,6 +31357,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6762279591600737253, guid: 4c7d3e73b0684e24b936a0dacddbad95, type: 3}
+      propertyPath: explosionSoundCue
+      value: 
+      objectReference: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
