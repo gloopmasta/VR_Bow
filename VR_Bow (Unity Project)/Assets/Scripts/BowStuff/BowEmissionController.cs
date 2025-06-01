@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BowEmissionController : MonoBehaviour
 {
+    [SerializeField] BowEventsSO bowEvents;
+
     [Header("Renderer & Material")]
     [SerializeField] private Renderer bowRenderer;
 
@@ -32,16 +34,16 @@ public class BowEmissionController : MonoBehaviour
         targetColor = idleColor;
         bowMaterial.SetColor("_EmissionColor", idleColor * emissionIntensity);
 
-        BowVisualEvents.OnChargeLevelChanged += HandleChargeLevelChanged;
-        BowVisualEvents.OnArrowReleased += HandleArrowReleased;
-        BowVisualEvents.OnBowIdle += HandleIdle;
+        bowEvents.OnChargeLevelChanged += HandleChargeLevelChanged;
+        bowEvents.OnArrowReleased += HandleArrowReleased;
+        bowEvents.OnBowIdle += HandleIdle;
     }
 
     private void OnDisable()
     {
-        BowVisualEvents.OnChargeLevelChanged -= HandleChargeLevelChanged;
-        BowVisualEvents.OnArrowReleased -= HandleArrowReleased;
-        BowVisualEvents.OnBowIdle -= HandleIdle;
+        bowEvents.OnChargeLevelChanged -= HandleChargeLevelChanged;
+        bowEvents.OnArrowReleased -= HandleArrowReleased;
+        bowEvents.OnBowIdle -= HandleIdle;
     }
 
     private void Update()

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae04159a11632f4fb95526b39acea3a, type: 3}
-  m_Name: ShootingCueHigh
+  m_Name: BowChargeCue
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 97ae92b67b35bd74b9d48b4c422e0f75, type: 3}
+  - {fileID: 8300000, guid: 36e1e3b8ce9401648866926ec01fcf74, type: 3}
   volume: 1
   pitch: 1
   minDistance: 1

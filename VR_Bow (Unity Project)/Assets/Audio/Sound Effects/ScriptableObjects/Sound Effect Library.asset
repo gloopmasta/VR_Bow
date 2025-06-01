@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCues:
   - {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
+  - {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
+  - {fileID: 11400000, guid: 5cdca70cb8efda245ba13b4e33945c0f, type: 2}
+  - {fileID: 11400000, guid: 803815909ed17ef448cac4d80807d693, type: 2}

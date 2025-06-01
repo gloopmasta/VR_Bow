@@ -63,6 +63,7 @@ public class BowShooting : ShootingMode
     [SerializeField] private StateController stateController;
     [SerializeField] private BluetoothReader btReader;
     [SerializeField] private RumbleManager rumble;
+    [SerializeField] private BowEventsSO bowEvents;
 
     private InputAction triggerAction;
     [SerializeField] private float currentFlexValue = 0f;
@@ -139,11 +140,11 @@ public class BowShooting : ShootingMode
 
         if (isDrawing && currentFlexValue > 0.05f)
         {
-            BowVisualEvents.OnChargeLevelChanged?.Invoke(currentFlexValue);
+            bowEvents.OnChargeLevelChanged?.Invoke(currentFlexValue);
         }
         else
         {
-            BowVisualEvents.OnBowIdle?.Invoke();
+            bowEvents.OnBowIdle?.Invoke();
         }
 
         // Check for release condition
@@ -170,7 +171,7 @@ public class BowShooting : ShootingMode
         // Fire the arrow
         Shoot();
 
-        BowVisualEvents.OnArrowReleased?.Invoke();
+        bowEvents.OnArrowReleased?.Invoke();
 
 
         // Reset drawing state

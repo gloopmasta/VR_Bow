@@ -5836,6 +5836,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543139171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &637519518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637519519}
+  - component: {fileID: 637519520}
+  m_Layer: 0
+  m_Name: Bow Sound Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &637519519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637519518}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1594173657}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637519520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637519518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6ff2a881b03204db5744fd30f5ac27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowEvents: {fileID: 11400000, guid: 1f5d4a6b5c0a3c94fa8b04f8e5b34461, type: 2}
+  chargeCue: {fileID: 11400000, guid: 803815909ed17ef448cac4d80807d693, type: 2}
+  shootCue: {fileID: 11400000, guid: 5cdca70cb8efda245ba13b4e33945c0f, type: 2}
 --- !u!1 &647972750
 GameObject:
   m_ObjectHideFlags: 0
@@ -14789,7 +14836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1083559884
 Transform:
   m_ObjectHideFlags: 0
@@ -14817,7 +14864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab78c6a454e2a6409c251372ea3cd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSource: {fileID: 0}
+  audioPoolSize: 10
   library: {fileID: 11400000, guid: 37f9791271ad6004dbf317b24bc6cf4f, type: 2}
 --- !u!1 &1086176053
 GameObject:
@@ -20774,6 +20821,7 @@ Transform:
   - {fileID: 1401418564}
   - {fileID: 483445847}
   - {fileID: 1883271037}
+  - {fileID: 637519519}
   m_Father: {fileID: 2000025736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1594173658
@@ -23839,6 +23887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bffaee92a8c6684e8d5cfc9d240d8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bowEvents: {fileID: 11400000, guid: 1f5d4a6b5c0a3c94fa8b04f8e5b34461, type: 2}
   bowRenderer: {fileID: 1883271039}
   idleColor: {r: 0, g: 0, b: 0, a: 1}
   chargingColor: {r: 0, g: 0, b: 1, a: 1}
@@ -29889,6 +29938,7 @@ MonoBehaviour:
   stateController: {fileID: 2000025733}
   btReader: {fileID: 1574722836}
   rumble: {fileID: 2000025737}
+  bowEvents: {fileID: 11400000, guid: 1f5d4a6b5c0a3c94fa8b04f8e5b34461, type: 2}
   currentFlexValue: 0
   rawFlex: 0
   previousFlexValue: 0

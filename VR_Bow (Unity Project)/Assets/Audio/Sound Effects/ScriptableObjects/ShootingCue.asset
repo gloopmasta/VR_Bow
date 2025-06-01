@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae04159a11632f4fb95526b39acea3a, type: 3}
-  m_Name: ShootingCueLow
+  m_Name: ShootingCue
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 97ae92b67b35bd74b9d48b4c422e0f75, type: 3}
+  - {fileID: 8300000, guid: 542a9f57b505ac8458cfd78e34b6b47d, type: 3}
+  - {fileID: 8300000, guid: 2e1022320df85104da15cdb7084a8b92, type: 3}
   volume: 1
-  pitch: 0.66
+  pitch: 1
   minDistance: 1
   maxDistance: 50
   rolloffMode: 1
