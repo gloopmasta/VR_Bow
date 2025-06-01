@@ -16,3 +16,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 365ab3e7fcd510045a2944607ec2bac7, type: 3}
   volume: 10
   pitch: 1
+  minDistance: 1
+  maxDistance: 5000
+  rolloffMode: 0
