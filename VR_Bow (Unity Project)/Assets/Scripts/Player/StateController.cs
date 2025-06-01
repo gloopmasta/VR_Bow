@@ -47,6 +47,7 @@ public class StateController : MonoBehaviour
         {
             isGrounded = false;
             bowControls.canShoot = true; //reenable being able to shoot
+            GetComponent<OffRoadTracker>().enabled = false; //disable offroadtracker
             rumble.StopRumble();
         };
 
@@ -310,6 +311,7 @@ public class StateController : MonoBehaviour
     public void OnGameEnd()
     {
         GetComponent<OffRoadTracker>().enabled = false;
+        GetComponent<Rigidbody>().useGravity = false;
         player.invulnerable = true;
     }
 

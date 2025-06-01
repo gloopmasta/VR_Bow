@@ -197,7 +197,8 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         //rb.AddForce(transform.forward * 200, ForceMode.Impulse);
 
         //Custom launch
-        CustomPhysics.MoveWithDecelerationAndSlowPhase(rb, transform.up, (launchHeight / accelerationDuration) * 3f, pData.SlowAmount * 10, accelerationDuration, player.SlowTime - accelerationDuration).Forget();
+        //CustomPhysics.MoveWithDecelerationAndSlowPhase(rb, transform.up, (launchHeight / accelerationDuration) * 3f, pData.SlowAmount * 10, accelerationDuration, player.SlowTime - accelerationDuration).Forget();
+        CustomPhysics.MoveWithDecelerationAndSlowPhase(rb, transform.up, (launchHeight / accelerationDuration), pData.SlowAmount, 3f, pData.SlowtimeFromJumppad).Forget();
     }
 
     void Drive(float delta)

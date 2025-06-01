@@ -20,7 +20,7 @@ MonoBehaviour:
   keepArrows: 1
   slowAmount: 0.2
   switchtime: 3
-  slowtimeFromJumppad: 4
+  slowtimeFromJumppad: 15
   slowtimeFromBash: 2
   maxSlowtime: 15
   keepSlowtime: 0

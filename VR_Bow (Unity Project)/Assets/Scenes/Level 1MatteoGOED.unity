@@ -742,9 +742,9 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -15023,7 +15023,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.243
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -18648,11 +18648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2783750913751181362, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.55
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18660,7 +18660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.5
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalRotation.w
