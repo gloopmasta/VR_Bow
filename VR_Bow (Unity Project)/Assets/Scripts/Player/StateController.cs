@@ -25,6 +25,7 @@ public class StateController : MonoBehaviour
     [SerializeField] public JumpPadEventSO jumpPadEvent;
     [SerializeField] public BashEventSO bashEvent;
     [SerializeField] public RumbleManager rumble;
+    [SerializeField] private OffRoadTracker offRoad;
 
     [Header("Bow Rotation")]
     [SerializeField] private Transform bowTransform;
@@ -43,11 +44,13 @@ public class StateController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (this == null) return;
+
         jumpEvents.OnJump += () =>
         {
             isGrounded = false;
             //bowControls.canShoot = true; //reenable being able to shoot
-            GetComponent<OffRoadTracker>().enabled = false; //disable offroadtracker
+            //offRoad.enabled = false; //disable offroadtracker
             //rumble.StopRumble();
         };
 
@@ -55,7 +58,7 @@ public class StateController : MonoBehaviour
         {
             isGrounded = true;
             usedJumpPad = false;
-            //GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
+            //offRoad.enabled = true; //enable offroadtracker
             //rumble.StartEngineRumble(0f, 1f, 2f).Forget();
         };
         switchEvents.OnEnterDSSwitchTime += () =>
@@ -71,7 +74,7 @@ public class StateController : MonoBehaviour
             isGrounded = false;
             SetState(PlayerState.Shooting);
             driveControls.enabled = false;
-            GetComponent<OffRoadTracker>().enabled = false;
+            offRoad.enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
             //rumble.StopRumble();
             JumpPadSlowtime().Forget();
@@ -307,12 +310,12 @@ public class StateController : MonoBehaviour
 
         await UniTask.WaitForSeconds(2f);
 
-        GetComponent<OffRoadTracker>().enabled = true;
+        offRoad.enabled = true;
     }
 
     public void OnGameEnd()
     {
-        GetComponent<OffRoadTracker>().enabled = false;
+        offRoad.enabled = false;
         //GetComponent<Rigidbody>().useGravity = false;
         //Debug.Log("gravity set to off");
         player.invulnerable = true;

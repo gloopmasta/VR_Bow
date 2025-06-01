@@ -93,8 +93,7 @@ public class SettingsController : MonoBehaviour
 
     private void RestartLevelOne()
     {
-        Debug.Log("pressed reste level 1, resetting level 1");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     private void RestartIntro()

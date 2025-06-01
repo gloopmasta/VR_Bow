@@ -5214,11 +5214,11 @@ MonoBehaviour:
   numberOfLasers: 1
   spawnedByTag: Enemy
   spinAnimation: 1
-  partToSpin: {fileID: 0}
+  partToSpin: {fileID: 1705370130}
   spinVertically: 0
   laserColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 10
-  humSoundCue: {fileID: 0}
+  humSoundCue: {fileID: 11400000, guid: 52595677d5ec95b4198aaa7598ba8716, type: 2}
 --- !u!65 &604146815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5852,7 +5852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &637519519
 Transform:
   m_ObjectHideFlags: 0
@@ -6474,7 +6474,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713703029}
   m_Enabled: 1
-  m_Alpha: 0.35334972
+  m_Alpha: 0.765775
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -14836,7 +14836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1083559884
 Transform:
   m_ObjectHideFlags: 0
@@ -19055,7 +19055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2783750913751181362, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29970,6 +29970,7 @@ MonoBehaviour:
   jumpPadEvent: {fileID: 11400000, guid: 68f056c01717c0940894b9d0559c77a2, type: 2}
   bashEvent: {fileID: 11400000, guid: 54eed41944f2b2d4bbb6fbc27ff327fb, type: 2}
   rumble: {fileID: 2000025737}
+  offRoad: {fileID: 2000025725}
   bowTransform: {fileID: 1983072756}
   vertAngleTarget: 0
   horAngleTarget: -90
