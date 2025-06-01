@@ -50,7 +50,7 @@ public static class CustomPhysics
             await UniTask.Yield(PlayerLoopTiming.FixedUpdate);
         }
 
-        rb.isKinematic = false; // Re-enable physics interactions
+        //rb.isKinematic = false; // Re-enable physics interactions
     }
 
 

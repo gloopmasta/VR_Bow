@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
-        slowTime.RaiseSlowTimeEnter(0f);
+        //slowTime.RaiseSlowTimeEnter(0f); //SHOULD ALREADY BE IN SLOWTIME
 
         winDome.SetActive(true);
 

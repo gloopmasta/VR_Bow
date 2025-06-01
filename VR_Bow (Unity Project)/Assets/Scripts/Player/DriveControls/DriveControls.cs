@@ -98,15 +98,24 @@ public class DriveControls : MonoBehaviour, ITimeScalable
             GameManager.Instance.Register(this);
 
         levelEvents.OnLevelOneWin += () => 
-        { 
+        {
+            Debug.Log("levelOneWin called from DriveControls, disabling gravity");
             OnTimeScaleChanged(0f); //lock movement for player
             rb.useGravity = false; //disable gravity
-            rb.velocity = Vector3.zero; //disable movement
+            rb.isKinematic = true;
+            //rb.velocity = Vector3.zero; //disable movement
+        };
+        levelEvents.OnLevelOneLose += () =>
+        {
+            Debug.Log("levelOneLose called from DriveControls, disabling gravity");
+            OnTimeScaleChanged(0f); //lock movement for player
+            rb.useGravity = false; //disable gravity
+            rb.isKinematic = true;
+            //rb.velocity = Vector3.zero; //disable movement
         };
         levelEvents.OnLevelOneStart += () =>
-        { 
+        {
             OnTimeScaleChanged(1f); // reset movement for player
-            rb.useGravity = true;
         
         }; 
     }

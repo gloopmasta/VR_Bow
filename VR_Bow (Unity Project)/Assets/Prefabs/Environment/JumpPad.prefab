@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3893896576298746267}
   - component: {fileID: 439565595183468829}
   - component: {fileID: 983599228897809215}
+  - component: {fileID: 1608166718046099656}
   m_Layer: 0
   m_Name: JumpPad
   m_TagString: Untagged
@@ -73,6 +74,27 @@ CapsuleCollider:
   m_Height: 10.1
   m_Direction: 1
   m_Center: {x: 0, y: 2.79, z: 0.17897923}
+--- !u!95 &1608166718046099656
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783750913751181362}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4a430e05c645fda4e92e3bc523b94234, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &192702066348152783
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6032,7 +6032,7 @@ MonoBehaviour:
   flashIntensity: 1.21
   colorFadeDuration: 0.5
   slowTimeColor: {r: 0, g: 0, b: 1, a: 1}
-  scoreColor: {r: 1, g: 0.7855901, b: 0.6839622, a: 1}
+  scoreColor: {r: 1, g: 0, b: 0, a: 1}
   slowTimeEvents: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
 --- !u!1 &648227864
@@ -19082,7 +19082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2783750913751181362, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3893896576298746267, guid: e822928ccede0b34ea72b2fc42d7e24d, type: 3}
       propertyPath: m_LocalPosition.x

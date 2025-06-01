@@ -46,7 +46,7 @@ public class StateController : MonoBehaviour
         jumpEvents.OnJump += () =>
         {
             isGrounded = false;
-            bowControls.canShoot = true; //reenable being able to shoot
+            //bowControls.canShoot = true; //reenable being able to shoot
             GetComponent<OffRoadTracker>().enabled = false; //disable offroadtracker
             rumble.StopRumble();
         };
@@ -66,6 +66,7 @@ public class StateController : MonoBehaviour
 
         jumpPadEvent.OnEnterJumpPad += () =>
         {
+            Debug.Log("enterJumpPad triggered from statemanager");
             usedJumpPad = true;
             isGrounded = false;
             SetState(PlayerState.Shooting);
@@ -243,9 +244,9 @@ public class StateController : MonoBehaviour
     {
         slowTime.RaiseSlowTimeEnter(playerData.SlowAmount); //enter slowtime
 
-        await UniTask.WaitForSeconds(playerData.SlowtimeFromJumppad + player.SlowTime); //wait for slowtime duration
+        await UniTask.WaitForSeconds(playerData.SlowtimeFromJumppad + 3f/*decceleration duration*/); //wait for slowtime duration
        
-        slowTime.RaiseSlowTimeExit(); //exit slowtime
+        //slowTime.RaiseSlowTimeExit(); //exit slowtime
 
         levelEvents.RaiseLevelOneWin(); //Raise level win
 
@@ -311,7 +312,8 @@ public class StateController : MonoBehaviour
     public void OnGameEnd()
     {
         GetComponent<OffRoadTracker>().enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        //GetComponent<Rigidbody>().useGravity = false;
+        //Debug.Log("gravity set to off");
         player.invulnerable = true;
     }
 
