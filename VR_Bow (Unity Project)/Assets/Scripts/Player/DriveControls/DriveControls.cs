@@ -218,7 +218,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         //: transform.forward;
 
         //start rumble
-        if (currentVelocity == Vector3.zero) { rumble.StartEngineRumble(0.1f, 1f, 3f).Forget(); }
+        //if (currentVelocity == Vector3.zero) { rumble.StartEngineRumble(0.1f, 1f, 3f).Forget(); }
 
         //if below max speed -> accelerate
         if (currentVelocity.magnitude < maxSpeed)

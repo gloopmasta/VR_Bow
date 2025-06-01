@@ -33,6 +33,26 @@ public class BluetoothReader : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        isRunning = false;
+        if (readThread != null && readThread.IsAlive)
+        {
+            readThread.Join();
+        }
+
+        if (serialPort != null)
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
+            }
+            serialPort.Dispose();
+        }
+
+        Debug.Log("Serial port closed and resources cleaned up.");
+    }
+
     void ReadSerial()
     {
         while (isRunning)

@@ -48,7 +48,7 @@ public class StateController : MonoBehaviour
             isGrounded = false;
             //bowControls.canShoot = true; //reenable being able to shoot
             GetComponent<OffRoadTracker>().enabled = false; //disable offroadtracker
-            rumble.StopRumble();
+            //rumble.StopRumble();
         };
 
         jumpEvents.OnLand += () =>
@@ -56,7 +56,7 @@ public class StateController : MonoBehaviour
             isGrounded = true;
             usedJumpPad = false;
             //GetComponent<OffRoadTracker>().enabled = true; //enable offroadtracker
-            rumble.StartEngineRumble(0f, 1f, 2f).Forget();
+            //rumble.StartEngineRumble(0f, 1f, 2f).Forget();
         };
         switchEvents.OnEnterDSSwitchTime += () =>
         {
@@ -70,9 +70,10 @@ public class StateController : MonoBehaviour
             usedJumpPad = true;
             isGrounded = false;
             SetState(PlayerState.Shooting);
+            driveControls.enabled = false;
             GetComponent<OffRoadTracker>().enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
-            rumble.StopRumble();
+            //rumble.StopRumble();
             JumpPadSlowtime().Forget();
         };
 
@@ -84,7 +85,7 @@ public class StateController : MonoBehaviour
 
         levelEvents.OnLevelOneStart += () =>
         {
-            rumble.StartEngineRumble(0.1f, 1f, 3f).Forget();
+            //rumble.StartEngineRumble(0.1f, 1f, 3f).Forget();
             AfterStartPressed().Forget();
         };
 
