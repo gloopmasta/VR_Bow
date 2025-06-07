@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930891655966940510, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6521251906269208823, guid: 09888e02369bb954ba8d3536cbded1f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5909,7 +5909,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647972750}
-  m_Enabled: 1
+  m_Enabled: 0
   m_VideoClip: {fileID: 32900000, guid: dbce63340854aac46b5b377c89c06525, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
@@ -6147,7 +6147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &669128206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15525,7 +15525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef35ac79894cfa4479f325a156ad5f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 94
+  bpm: 100
   beatOffset: 0
   audioSource: {fileID: 1169013837}
   sampledTime: 0
@@ -18719,7 +18719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1443804048
 Transform:
   m_ObjectHideFlags: 0
@@ -23122,7 +23122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1766818019
 MonoBehaviour:
   m_ObjectHideFlags: 0
