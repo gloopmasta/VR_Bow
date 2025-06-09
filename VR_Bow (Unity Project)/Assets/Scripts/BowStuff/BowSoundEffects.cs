@@ -10,9 +10,9 @@ public class BowSoundEffects : MonoBehaviour
     [SerializeField] private AudioCue chargeCue;
     [SerializeField] private AudioCue shootCue;
 
-    private float chargeDiff = 0f;
-    private float newCharge = 0f;
-    private float oldCharge = 0f;
+    //private float chargeDiff = 0f;
+    //private float newCharge = 0f;
+    //private float oldCharge = 0f;
 
     private void OnEnable()
     {

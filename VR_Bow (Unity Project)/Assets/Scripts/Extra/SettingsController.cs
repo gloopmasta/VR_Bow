@@ -7,6 +7,7 @@ public class SettingsController : MonoBehaviour
 {
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private CalibrateButton calibrateScript;
+    [SerializeField] private LevelEventsSO levelEvents;
     public VisualTreeAsset uiAsset; 
     private UIDocument uiDocument;
     private InputAction toggleAction;
@@ -93,7 +94,7 @@ public class SettingsController : MonoBehaviour
 
     private void RestartLevelOne()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        levelEvents.RaiseLevelOneRestart();
     }
 
     private void RestartIntro()

@@ -70,11 +70,14 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
+        ResetStats();
+    }
+
+    public void ResetStats()
+    {
         hp = data.MaxHp;
         arrowCount = data.MaxArrowCount;
         slowTime = 4f;
-        //fuel = data.MaxFuel;
-
     }
 
     private void OnEnable()
@@ -148,8 +151,21 @@ public class Player : MonoBehaviour, IDamageable
 
 
         await ui.FadeFromBlackAsync(); //fade out again
+    }
 
+    public void ResetPosition()
+    {
+        var rb = GetComponent<Rigidbody>();
 
+        transform.position = Vector3.zero;   //reset position
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+
+        rb.position = Vector3.zero;
+        rb.velocity = Vector3.zero; //Reset velocity
+        rb.rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
+        rb.angularVelocity = Vector3.zero;
+
+        rb.MoveRotation(Quaternion.Euler(respawnRotation));
     }
 
     public void IncreaseScore(int ammount)

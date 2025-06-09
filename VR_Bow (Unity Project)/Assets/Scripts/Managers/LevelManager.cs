@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
         levelEvents.OnLevelOneStart += () => FinishStartUI().Forget();
         levelEvents.OnLevelOneLose += () => LoseGame();
         levelEvents.OnLevelOneWin += () => WinGame();
+        levelEvents.OnLevelOneRestart += () => RestartLevel();
     }
 
     [Header("Start Scene")]
@@ -30,9 +31,12 @@ public class LevelManager : MonoBehaviour
     public GameObject startUI;
 
     [Header("Level one")]
-    public GameObject firstRoad;
-    public GameObject firstActivator;
-    public GameObject map;
+    [SerializeField] private GameObject mapPrefab;
+    private GameObject currentMap;
+
+    private GameObject firstRoad;
+    private GameObject firstActivator;
+    private GameObject map;
 
     [Header("Start Screen")]
     public GameObject startScreenUI;
@@ -50,6 +54,13 @@ public class LevelManager : MonoBehaviour
 
     private bool gameEnded = false;
 
+    private void Start()
+    {
+        currentMap = Instantiate(mapPrefab);
+        UpdateLevelReferences(currentMap);
+    }
+
+
     public async UniTaskVoid FinishStartUI()
     {
         startScreenUI.GetComponent<Animator>().CrossFade("StartScreenFadeOut", 0f);
@@ -57,6 +68,12 @@ public class LevelManager : MonoBehaviour
         startUI.SetActive(false);
         firstActivator.SetActive(true);
         firstRoad.SetActive(true);
+    }
+
+    public void EnableStartUI()
+    {
+        startUI.SetActive(true);
+        startScreenUI.GetComponent<Animator>().CrossFade("StartScreenFadeIn", 0f);
     }
 
     public async void LoseGame()
@@ -103,4 +120,43 @@ public class LevelManager : MonoBehaviour
         //wait until the coverdome animation is done
         winUI.SetActive(true);
     }
+
+    public async void RestartLevel()
+    {
+        var uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
+        var playerScript = GameManager.Instance.player.GetComponent<Player>();
+        await uiManager.FadeToBlackAsync(); // fade to black
+
+        // Destroy the old map
+        if (currentMap != null) Destroy(currentMap);
+
+        // Instantiate new one
+        currentMap = Instantiate(mapPrefab);
+        UpdateLevelReferences(currentMap);
+
+        GameManager.Instance.player.GetComponent<DriveControls>().enabled = false;
+        // Reset player
+        playerScript.ResetPosition();
+        playerScript.ResetStats();
+
+        await uiManager.FadeFromBlackAsync(); // fade from black
+        winDome?.SetActive(false);
+
+        EnableStartUI();
+    }
+
+
+    private void UpdateLevelReferences(GameObject newMap)
+    {
+        map = newMap;
+        var mapRoot = currentMap.GetComponent<MapRoot>();
+        firstRoad = mapRoot.firstRoad;
+        firstActivator = mapRoot.firstActivator;
+
+
+        // Optionally: Add error logging
+        if (firstRoad == null) Debug.LogError("FirstRoad not found in new map.");
+        if (firstActivator == null) Debug.LogError("FirstActivator not found in new map.");
+    }
+
 }
