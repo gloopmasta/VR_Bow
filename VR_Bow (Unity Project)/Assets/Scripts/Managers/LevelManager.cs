@@ -131,11 +131,17 @@ public class LevelManager : MonoBehaviour
         // Destroy the old map
         if (currentMap != null) Destroy(currentMap);
 
+        winDome?.SetActive(false);
+        winUI?.SetActive(false);
+        loseUI?.SetActive(false);
+        slowTime.RaiseSlowTimeExit();
+
         // Instantiate new one
         currentMap = Instantiate(mapPrefab);
         UpdateLevelReferences(currentMap);
 
         GameManager.Instance.player.GetComponent<DriveControls>().enabled = false; //disable drive controls
+        GameManager.Instance.player.GetComponent<OffRoadTracker>().enabled = false; //disable drive controls
         // Reset player
         playerScript.ResetPosition();
         playerScript.ResetStats();

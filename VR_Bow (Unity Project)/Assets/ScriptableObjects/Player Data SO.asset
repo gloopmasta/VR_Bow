@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00268a2330a91a449839677a1a9cea8, type: 3}
   m_Name: Player Data SO
   m_EditorClassIdentifier: 
-  maxHp: 3
+  maxHp: 5
   invulnerableTime: 2
   startingArrowCount: 2
   maxArrowCount: 35

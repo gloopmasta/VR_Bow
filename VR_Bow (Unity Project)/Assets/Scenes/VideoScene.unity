@@ -2955,6 +2955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4caa1fd68c5a6b45aaf68cb945a25bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelEvents: {fileID: 0}
 --- !u!65 &406453628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6193,6 +6194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
   calibrateScript: {fileID: 1335713223}
+  levelEvents: {fileID: 0}
   uiAsset: {fileID: 9197481963319205126, guid: 9a3147129616bce4691e6eaedb9f9172, type: 3}
 --- !u!1 &679204797
 GameObject:
@@ -6261,9 +6263,7 @@ MonoBehaviour:
   slowTime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   coverDome: {fileID: 1450449387}
   startUI: {fileID: 1766818018}
-  firstRoad: {fileID: 1443804047}
-  firstActivator: {fileID: 788650862}
-  map: {fileID: 1219955771}
+  mapPrefab: {fileID: 0}
   startScreenUI: {fileID: 1766818018}
   loseUI: {fileID: 1329947726}
   loseDome: {fileID: 79662743}
@@ -23122,7 +23122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1766818019
 MonoBehaviour:
   m_ObjectHideFlags: 0
