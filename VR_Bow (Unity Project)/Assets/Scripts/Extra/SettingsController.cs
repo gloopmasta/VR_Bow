@@ -1,3 +1,4 @@
+using PandaBT;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ public class SettingsController : MonoBehaviour
 
     private TextField comField;
     private Toggle bowToggle;
+    private Toggle tutorialToggle;
     private Button calibrateButton;
     private Button restartLevelButton;
     private Button restartIntroButton;
@@ -40,6 +42,7 @@ public class SettingsController : MonoBehaviour
         // Query UI elements by their names
         comField = root.Q<TextField>("ComField");
         bowToggle = root.Q<Toggle>("BowMode");
+        tutorialToggle = root.Q<Toggle>("Tutorial");
         calibrateButton = root.Q<Button>("Calibrate");
         restartLevelButton = root.Q<Button>("RestartLevel1");
         restartIntroButton = root.Q<Button>("RestartIntro");
@@ -49,6 +52,9 @@ public class SettingsController : MonoBehaviour
 
         if (bowToggle != null)
             bowToggle.RegisterValueChangedCallback(evt => gameSettings.useBowController = evt.newValue);
+
+        if (tutorialToggle != null)
+            bowToggle.RegisterValueChangedCallback(evt => GameManager.Instance.player.GetComponent<PandaBehaviour>().enabled = evt.newValue);
 
         if (calibrateButton != null)
             calibrateButton.clicked += () => calibrateScript.Calibration().Forget();

@@ -1,4 +1,8 @@
-#Root sequence
+#Root race
+	WaitUntilTutorialRestart
+	#TutorialSequence
+
+#TutorialSequence sequence
 	#SteeringTutorial
 	#JumpingTutorial
 	#ShootingTutorial

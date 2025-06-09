@@ -20754,7 +20754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scripts:
   - {fileID: -5453058477560777752, guid: 522a5f5d0b414614a9bb3e0d3669fd10, type: 3}
-  autoReset: 0
+  autoReset: 1
   tickOn: 0
   customTickOnInterval: 1
   repeatRetryOnSameTick: 0

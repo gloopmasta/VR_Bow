@@ -125,6 +125,7 @@ public class LevelManager : MonoBehaviour
     {
         var uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
         var playerScript = GameManager.Instance.player.GetComponent<Player>();
+
         await uiManager.FadeToBlackAsync(); // fade to black
 
         // Destroy the old map
@@ -134,10 +135,12 @@ public class LevelManager : MonoBehaviour
         currentMap = Instantiate(mapPrefab);
         UpdateLevelReferences(currentMap);
 
-        GameManager.Instance.player.GetComponent<DriveControls>().enabled = false;
+        GameManager.Instance.player.GetComponent<DriveControls>().enabled = false; //disable drive controls
         // Reset player
         playerScript.ResetPosition();
         playerScript.ResetStats();
+        GameManager.Instance.player.GetComponent<Tutorial>().RestartTutorial();
+
 
         await uiManager.FadeFromBlackAsync(); // fade from black
         winDome?.SetActive(false);
