@@ -92,6 +92,8 @@ public class StateController : MonoBehaviour
             AfterStartPressed().Forget();
         };
 
+        levelEvents.OnLevelOneRestart += () => offRoad.enabled = false;
+
         levelEvents.OnLevelOneLose += () => OnGameEnd();
         levelEvents.OnLevelOneWin += () => OnGameEnd();
     }
@@ -318,7 +320,6 @@ public class StateController : MonoBehaviour
         offRoad.enabled = false;
         //GetComponent<Rigidbody>().useGravity = false;
         //Debug.Log("gravity set to off");
-        player.invulnerable = true;
     }
 
     private async Task<bool> LaunchingBashSlowtime()

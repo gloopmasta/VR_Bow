@@ -8,6 +8,7 @@ public class OffRoadTracker : MonoBehaviour
     [SerializeField] private float offRoadDuration = 3f;
     [SerializeField] private LayerMask roadLayerMask;
 
+    private bool disabled = true;
     private CapsuleCollider playerCollider;
     private bool isOffRoad = false;
     private CancellationTokenSource cts;

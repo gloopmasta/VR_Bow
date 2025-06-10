@@ -131,6 +131,12 @@ public class LevelManager : MonoBehaviour
         // Destroy the old map
         if (currentMap != null) Destroy(currentMap);
 
+
+        //Vector3 targetRotation = new Vector3(0f, Camera.main.transform.rotation.y, 0f); // get camera y rotation
+
+        //currentMap.transform.rotation = Quaternion.Euler(targetRotation);
+        //startScreenUI.transform.rotation = currentMap.transform.rotation;
+
         winDome?.SetActive(false);
         winUI?.SetActive(false);
         loseUI?.SetActive(false);

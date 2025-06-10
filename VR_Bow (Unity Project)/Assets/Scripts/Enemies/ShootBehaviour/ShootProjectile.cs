@@ -69,7 +69,7 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
             return;
         }
 
-        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, Quaternion.identity, transform);
 
         if (projectileInstance.TryGetComponent<Rocket>(out var rocket))
         {

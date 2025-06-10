@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PandaBT;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -78,12 +79,16 @@ public class Player : MonoBehaviour, IDamageable
         hp = data.MaxHp;
         arrowCount = data.MaxArrowCount;
         slowTime = 4f;
+        score = 0;
+        
     }
 
     private void OnEnable()
     {
         arrowHitEvents.OnArrowHitEnemy += IncreaseScore;
         GameManager.Instance.SetPlayer(gameObject);
+
+        levelEvents.OnLevelOneStart += () => invulnerable = false; // damageable again after level starts
     }
 
     private void OnDisable()
@@ -165,7 +170,7 @@ public class Player : MonoBehaviour, IDamageable
         rb.rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
         rb.angularVelocity = Vector3.zero;
 
-        rb.MoveRotation(Quaternion.Euler(respawnRotation));
+        rb.MoveRotation(Quaternion.Euler(Vector3.zero));
     }
 
     public void IncreaseScore(int ammount)

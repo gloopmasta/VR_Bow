@@ -4,8 +4,10 @@ public class WinScreenRotation : MonoBehaviour
 {
     private void OnEnable()
     {
-        Vector3 targetRotation = new Vector3(0f, Camera.main.transform.rotation.y, 0f); // get camera y rotation
+        // Make the screen face the player (but stay upright)
+        Vector3 lookDirection = Camera.main.transform.position - transform.position;
+        lookDirection.y = 0; // Keep the screen upright (don't tilt up/down)
 
-        transform.rotation = Quaternion.Euler(targetRotation);
+        transform.rotation = Quaternion.LookRotation(lookDirection);
     }
 }
