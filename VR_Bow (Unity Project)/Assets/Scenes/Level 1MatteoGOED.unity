@@ -4060,6 +4060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9df049b3f8c4524fa50634262b68676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noIntroBuildName: NoIntro.exe
 --- !u!1 &676764856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4934,6 +4935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: {fileID: 506019467}
   copy: {fileID: 0}
+  timeLimit: 60
+  timerText: {fileID: 514402646}
+  timerUI: {fileID: 2048029835}
 --- !u!1 &743283106
 GameObject:
   m_ObjectHideFlags: 0

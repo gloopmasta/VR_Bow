@@ -15,11 +15,11 @@ public class StartButton : MonoBehaviour
 
     }
 
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 10, 300, 40), "start game"))
-        {
-            levelEvents.RaiseLevelOneStart();
-        }
-    }
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(10, 10, 300, 40), "start game"))
+    //    {
+    //        levelEvents.RaiseLevelOneStart();
+    //    }
+    //}
 }
