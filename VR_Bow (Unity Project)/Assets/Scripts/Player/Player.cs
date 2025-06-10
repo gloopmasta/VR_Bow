@@ -114,6 +114,9 @@ public class Player : MonoBehaviour, IDamageable
             SoundEffectManager.Instance.Play(takeDamageCue);
         }
 
+        //rumble
+        GetComponent<RumbleManager>().RumbleBurst(1f, 0.5f).Forget();
+
         //animation for indication
         GetComponent<PlayerUIManager>().damageIndicator.SetActive(false);
         GetComponent<PlayerUIManager>().damageIndicator.SetActive(true);
