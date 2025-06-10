@@ -117,8 +117,15 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         levelEvents.OnLevelOneStart += () =>
         {
             OnTimeScaleChanged(1f); // reset movement for player
-        
-        }; 
+            rb.useGravity = true; //disable gravity
+            rb.isKinematic = false;
+        };
+        levelEvents.OnLevelOneRestart += () =>
+        {
+            OnTimeScaleChanged(1f); // reset movement for player
+            rb.useGravity = true; //disable gravity
+            rb.isKinematic = false;
+        };
     }
 
     private void OnDisable()
@@ -190,6 +197,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     bool CanJump()
     {
         GroundCheck gc = GetComponentInChildren<GroundCheck>();
+        Debug.Log("Player can jump: " + gc.IsGrounded());
         return gc != null && gc.IsGrounded();
     }
 
