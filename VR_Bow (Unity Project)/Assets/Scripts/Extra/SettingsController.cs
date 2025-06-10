@@ -8,6 +8,7 @@ public class SettingsController : MonoBehaviour
 {
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private CalibrateButton calibrateScript;
+    [SerializeField] private GameHardReset hardReset;
     [SerializeField] private LevelEventsSO levelEvents;
     public VisualTreeAsset uiAsset; 
     private UIDocument uiDocument;
@@ -105,9 +106,11 @@ public class SettingsController : MonoBehaviour
 
     private void RestartIntro()
     {
-        Debug.Log("pressed reste intro, resetting intro");
-        uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-        SceneManager.LoadScene(0);
+        //Debug.Log("pressed reste intro, resetting intro");
+        //uiDocument.rootVisualElement.style.display = DisplayStyle.None;
+        //SceneManager.LoadScene(0);
+
+        hardReset.HardResetGame();
     }
 
     // Optional: expose comValue and bowMode

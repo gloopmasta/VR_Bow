@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    [SerializeField] float lauchStrength = 400f;
+    [SerializeField] float lauchStrength = 8f;
     public SwitchTimeEventsSO switchEvents;
     public SlowTimeSO slowtime;
     public JumpPadEventSO jpEvent;
@@ -23,7 +23,7 @@ public class JumpPad : MonoBehaviour
     {
         DriveControls playerDriveScript = player.GetComponent<DriveControls>();
 
-        playerDriveScript.Launch(15f, 1f);
+        playerDriveScript.Launch(lauchStrength, 1f);
         //switchEvents.RaiseEnterDSSwitchTime();
         //Debug.Log("Jumppad called enter DS switch time -> should be active now");
         jpEvent.RaiseEnterJumpPad();
