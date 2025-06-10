@@ -131,6 +131,7 @@ public class LevelManager : MonoBehaviour
         // Destroy the old map
         if (currentMap != null) Destroy(currentMap);
 
+        gameEnded = false;
 
         //Vector3 targetRotation = new Vector3(0f, Camera.main.transform.rotation.y, 0f); // get camera y rotation
 
@@ -147,7 +148,7 @@ public class LevelManager : MonoBehaviour
         UpdateLevelReferences(currentMap);
 
         GameManager.Instance.player.GetComponent<DriveControls>().enabled = false; //disable drive controls
-        GameManager.Instance.player.GetComponent<OffRoadTracker>().enabled = false; //disable drive controls
+        //GameManager.Instance.player.GetComponent<OffRoadTracker>().enabled = false; //disable drive controls
         // Reset player
         playerScript.ResetPosition();
         playerScript.ResetStats();

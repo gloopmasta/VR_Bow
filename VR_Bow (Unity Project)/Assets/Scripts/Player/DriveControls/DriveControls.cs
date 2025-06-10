@@ -157,7 +157,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
         if (activeController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            Debug.Log("controller velocity data: " + leftVelocity.ToString());
+            //Debug.Log("controller velocity data: " + leftVelocity.ToString());
             float now = Time.time * timeScale;
             if (leftVelocity.z >= 2.5f && now >= nextBashTime)
             {

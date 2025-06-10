@@ -141,6 +141,7 @@ public class Player : MonoBehaviour, IDamageable
         if (respawnPosition != null)
         { 
             transform.position = respawnPosition;   //reset position
+            rb.position = respawnPosition;
             transform.rotation = Quaternion.Euler(respawnRotation);
         }
         else
@@ -160,6 +161,9 @@ public class Player : MonoBehaviour, IDamageable
 
     public void ResetPosition()
     {
+        respawnPosition = Vector3.zero;
+        respawnRotation = Vector3.zero;
+
         var rb = GetComponent<Rigidbody>();
 
         transform.position = Vector3.zero;   //reset position
@@ -167,10 +171,12 @@ public class Player : MonoBehaviour, IDamageable
 
         rb.position = Vector3.zero;
         rb.velocity = Vector3.zero; //Reset velocity
-        rb.rotation = Quaternion.Euler(Vector3.zero); //Reset velocity
+        rb.rotation = Quaternion.Euler(respawnRotation); //Reset velocity
         rb.angularVelocity = Vector3.zero;
 
-        rb.MoveRotation(Quaternion.Euler(Vector3.zero));
+        GetComponent<DriveControls>().currentVelocity = Vector3.zero;
+
+        rb.MoveRotation(Quaternion.Euler(respawnRotation));
     }
 
     public void IncreaseScore(int ammount)
@@ -201,11 +207,11 @@ public class Player : MonoBehaviour, IDamageable
 
     void DisableOffRoad()
     {
-        GetComponent<OffRoadTracker>().enabled = false;
+        //GetComponent<OffRoadTracker>().enabled = false;
     }
     void EnableOffRoad()
     {
-        GetComponent<OffRoadTracker>().enabled = true;
+        //GetComponent<OffRoadTracker>().enabled = true;
     }
 }
 

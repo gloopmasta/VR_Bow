@@ -25,7 +25,7 @@ public class StateController : MonoBehaviour
     [SerializeField] public JumpPadEventSO jumpPadEvent;
     [SerializeField] public BashEventSO bashEvent;
     [SerializeField] public RumbleManager rumble;
-    [SerializeField] private OffRoadTracker offRoad;
+    //[SerializeField] private OffRoadTracker offRoad;
 
     [Header("Bow Rotation")]
     [SerializeField] private Transform bowTransform;
@@ -74,7 +74,7 @@ public class StateController : MonoBehaviour
             isGrounded = false;
             SetState(PlayerState.Shooting);
             driveControls.enabled = false;
-            offRoad.enabled = false;
+            //offRoad.enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
             //rumble.StopRumble();
             JumpPadSlowtime().Forget();
@@ -92,7 +92,7 @@ public class StateController : MonoBehaviour
             AfterStartPressed().Forget();
         };
 
-        levelEvents.OnLevelOneRestart += () => offRoad.enabled = false;
+        //levelEvents.OnLevelOneRestart += () => offRoad.enabled = false;
 
         levelEvents.OnLevelOneLose += () => OnGameEnd();
         levelEvents.OnLevelOneWin += () => OnGameEnd();
@@ -310,14 +310,14 @@ public class StateController : MonoBehaviour
         driveControls.enabled = true;
         SetState(PlayerState.Driving);
 
-        await UniTask.WaitForSeconds(2f);
+        //await UniTask.WaitForSeconds(2f);
 
-        offRoad.enabled = true;
+        //offRoad.enabled = true;
     }
 
     public void OnGameEnd()
     {
-        offRoad.enabled = false;
+        //offRoad.enabled = false;
         //GetComponent<Rigidbody>().useGravity = false;
         //Debug.Log("gravity set to off");
     }
@@ -384,10 +384,10 @@ public class StateController : MonoBehaviour
     [PandaTask]
     public async Task<bool> WaitUntilJump()
     {
-        if (!isGrounded)
-        {
-            return true;
-        }
+        //if (!isGrounded)
+        //{
+        //    return true;
+        //}
         await UniTask.WaitUntil(() => !isGrounded);
         return true;
     }
