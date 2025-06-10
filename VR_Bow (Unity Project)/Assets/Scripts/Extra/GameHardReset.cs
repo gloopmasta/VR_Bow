@@ -4,35 +4,66 @@ using System.IO;
 
 public class GameHardReset : MonoBehaviour
 {
+    [Tooltip("Filename of the no-intro version (e.g. 'Game_NoIntro.exe')")]
+    public string noIntroBuildName = "NoIntro.exe"; // Set this in Inspector
+
     public void HardResetGame()
     {
 #if UNITY_STANDALONE
-        RestartStandaloneBuild();
+        RestartToNoIntroBuild();
 #else
-        // Fallback for platforms that don't support process restart
-        Debug.LogWarning("Hard reset not supported on this platform. Reloading scene instead.");
+        Debug.LogWarning("Hard reset not supported. Reloading scene instead.");
 #endif
     }
 
-    private void RestartStandaloneBuild()
+    private void RestartToNoIntroBuild()
     {
-        string executablePath = GetExecutablePath();
-        if (File.Exists(executablePath))
-        {
-            // Launch new instance
-            Process.Start(executablePath);
+        string noIntroPath = Path.Combine(
+            Directory.GetParent(Application.dataPath).FullName, // Build folder
+            noIntroBuildName
+        );
 
-            // Close current instance
+        if (File.Exists(noIntroPath))
+        {
+            // Launch no-intro version
+            Process.Start(noIntroPath);
+
+            // Close current game
             Application.Quit();
 
-            // Force kill in case Quit() fails
+            // Force quit if needed
+            System.Threading.Thread.Sleep(1000); // Give time for new process to launch
             Process.GetCurrentProcess().Kill();
         }
         else
         {
-
+            //Debug.LogError($"No-intro build not found at: {noIntroPath}");
+            // Fallback to regular restart
+            Process.Start(Application.dataPath.Replace("_Data", ".exe"));
+            Application.Quit();
         }
     }
+
+
+    //private void RestartStandaloneBuild()
+    //{
+    //    string executablePath = GetExecutablePath();
+    //    if (File.Exists(executablePath))
+    //    {
+    //        // Launch new instance
+    //        Process.Start(executablePath);
+
+    //        // Close current instance
+    //        Application.Quit();
+
+    //        // Force kill in case Quit() fails
+    //        Process.GetCurrentProcess().Kill();
+    //    }
+    //    else
+    //    {
+
+    //    }
+    //}
 
     private string GetExecutablePath()
     {
