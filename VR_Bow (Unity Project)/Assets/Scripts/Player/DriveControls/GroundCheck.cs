@@ -34,7 +34,7 @@ public class GroundCheck : MonoBehaviour
         if (groundColliders.Contains(other))
         {
             groundColliders.Remove(other);
-            jumpEvents.RaiseJump();
+            //jumpEvents.RaiseJump();
         }
     }
 

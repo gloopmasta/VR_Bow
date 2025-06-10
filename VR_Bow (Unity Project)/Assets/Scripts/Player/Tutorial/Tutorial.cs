@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
+    private  bool restartTutorial = false;
+
     public bool steeringActivated = false;
     public bool steeringLearned = false;
 
@@ -15,6 +17,34 @@ public class Tutorial : MonoBehaviour
 
     public bool shootingActivated = false;
     public bool shootingLearned = false;
+
+    public void ResetTutorialStatus()
+    {
+        steeringActivated = false;
+        steeringLearned = false;
+
+        jumpingActivated = false;
+        jumpingLearned = false;
+
+        shootingActivated = false;
+        shootingLearned = false;
+    }
+
+    public void RestartTutorial()
+    {
+        restartTutorial = true;
+    }
+
+    [PandaTask]
+    public async Task<bool> WaitUntilTutorialRestart()
+    {
+        await UniTask.WaitUntil(() => restartTutorial);
+        restartTutorial = false;
+        ResetTutorialStatus();
+        return true;
+
+    }
+
 
     [PandaTask] public async Task<bool> WaitUntilSteerMessage()
     {

@@ -22,7 +22,7 @@ public class CalibrateButton : MonoBehaviour
 
     //private void OnGUI()
     //{
-    //    if (GUI.Button(new Rect(10, 10, 300, 40), "trigger calibration"))
+    //    if (GUI.Button(new Rect(10, 40, 300, 40), "trigger calibration"))
     //    {
     //        Calibration().Forget();
     //    }
@@ -33,6 +33,8 @@ public class CalibrateButton : MonoBehaviour
         BowShooting shootingScript = GameManager.Instance.player.GetComponent<BowShooting>();
         PlayerUIManager uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
         TextMeshProUGUI tmpText = uiManager.calibratePanel.GetComponentInChildren<TextMeshProUGUI>();
+
+        DisableBoxColliders();
 
         tmpText.text = unchargedText + duration.ToString(); //change text
         await uiManager.FadeIn(uiManager.calibratePanel); // Fade in calirate panel
@@ -58,5 +60,45 @@ public class CalibrateButton : MonoBehaviour
         shootingScript.maxCalibration = shootingScript.rawFlex;
 
         await uiManager.FadeOut(uiManager.calibratePanel);
+
+        await UniTask.WaitForSeconds(2f);
+        
+        EnableBoxColliders(); //re-enable box colliders after 2 sec
+    }
+
+    public void DisableBoxColliders()
+    {
+        // Disable this object's BoxCollider
+        if (TryGetComponent<BoxCollider>(out var myCollider))
+        {
+            myCollider.enabled = false;
+        }
+
+        // Disable all children BoxColliders of the parent
+        if (transform.parent != null)
+        {
+            foreach (var collider in transform.parent.GetComponentsInChildren<BoxCollider>(true))
+            {
+                collider.enabled = false;
+            }
+        }
+    }
+
+    public void EnableBoxColliders()
+    {
+        // Enable this object's BoxCollider
+        if (TryGetComponent<BoxCollider>(out var myCollider))
+        {
+            myCollider.enabled = true;
+        }
+
+        // Enable all children BoxColliders of the parent
+        if (transform.parent != null)
+        {
+            foreach (var collider in transform.parent.GetComponentsInChildren<BoxCollider>(true))
+            {
+                collider.enabled = true;
+            }
+        }
     }
 }

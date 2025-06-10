@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PandaBT;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -28,6 +29,9 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("Invulnerability animation")]
     [SerializeField] Animator vulnerabilityAnimator;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioCue takeDamageCue;
 
 
     public int Hp
@@ -70,17 +74,24 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
+        ResetStats();
+    }
+
+    public void ResetStats()
+    {
         hp = data.MaxHp;
         arrowCount = data.MaxArrowCount;
         slowTime = 4f;
-        //fuel = data.MaxFuel;
-
+        score = 0;
+        
     }
 
     private void OnEnable()
     {
         arrowHitEvents.OnArrowHitEnemy += IncreaseScore;
         GameManager.Instance.SetPlayer(gameObject);
+
+        levelEvents.OnLevelOneStart += () => invulnerable = false; // damageable again after level starts
     }
 
     private void OnDisable()
@@ -96,6 +107,15 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         hp -= amount;  //deduct HP
+
+        //Sound effect
+        if (SoundEffectManager.Instance != null && takeDamageCue != null)
+        {
+            SoundEffectManager.Instance.Play(takeDamageCue);
+        }
+
+        //rumble
+        GetComponent<RumbleManager>().RumbleBurst(1f, 0.5f).Forget();
 
         //animation for indication
         GetComponent<PlayerUIManager>().damageIndicator.SetActive(false);
@@ -133,6 +153,7 @@ public class Player : MonoBehaviour, IDamageable
         if (respawnPosition != null)
         { 
             transform.position = respawnPosition;   //reset position
+            rb.position = respawnPosition;
             transform.rotation = Quaternion.Euler(respawnRotation);
         }
         else
@@ -148,8 +169,26 @@ public class Player : MonoBehaviour, IDamageable
 
 
         await ui.FadeFromBlackAsync(); //fade out again
+    }
 
+    public void ResetPosition()
+    {
+        respawnPosition = Vector3.zero;
+        respawnRotation = Vector3.zero;
 
+        var rb = GetComponent<Rigidbody>();
+
+        transform.position = Vector3.zero;   //reset position
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+
+        rb.position = Vector3.zero;
+        rb.velocity = Vector3.zero; //Reset velocity
+        rb.rotation = Quaternion.Euler(respawnRotation); //Reset velocity
+        rb.angularVelocity = Vector3.zero;
+
+        GetComponent<DriveControls>().currentVelocity = Vector3.zero;
+
+        rb.MoveRotation(Quaternion.Euler(respawnRotation));
     }
 
     public void IncreaseScore(int ammount)
@@ -180,11 +219,11 @@ public class Player : MonoBehaviour, IDamageable
 
     void DisableOffRoad()
     {
-        GetComponent<OffRoadTracker>().enabled = false;
+        //GetComponent<OffRoadTracker>().enabled = false;
     }
     void EnableOffRoad()
     {
-        GetComponent<OffRoadTracker>().enabled = true;
+        //GetComponent<OffRoadTracker>().enabled = true;
     }
 }
 

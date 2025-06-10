@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
         levelEvents.OnLevelOneStart += () => FinishStartUI().Forget();
         levelEvents.OnLevelOneLose += () => LoseGame();
         levelEvents.OnLevelOneWin += () => WinGame();
+        levelEvents.OnLevelOneRestart += () => RestartLevel();
     }
 
     [Header("Start Scene")]
@@ -30,9 +31,12 @@ public class LevelManager : MonoBehaviour
     public GameObject startUI;
 
     [Header("Level one")]
-    public GameObject firstRoad;
-    public GameObject firstActivator;
-    public GameObject map;
+    [SerializeField] private GameObject mapPrefab;
+    private GameObject currentMap;
+
+    private GameObject firstRoad;
+    private GameObject firstActivator;
+    private GameObject map;
 
     [Header("Start Screen")]
     public GameObject startScreenUI;
@@ -42,13 +46,22 @@ public class LevelManager : MonoBehaviour
     public GameObject loseUI;
     public GameObject loseDome;
     [SerializeField] private TMPro.TextMeshProUGUI loseScoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI loseScoreText2;
 
     [Header("Win Screen")]
     public GameObject winUI;
     public GameObject winDome;
     [SerializeField] private TMPro.TextMeshProUGUI winScoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI winScoreText2;
 
     private bool gameEnded = false;
+
+    private void Start()
+    {
+        currentMap = Instantiate(mapPrefab);
+        UpdateLevelReferences(currentMap);
+    }
+
 
     public async UniTaskVoid FinishStartUI()
     {
@@ -57,6 +70,12 @@ public class LevelManager : MonoBehaviour
         startUI.SetActive(false);
         firstActivator.SetActive(true);
         firstRoad.SetActive(true);
+    }
+
+    public void EnableStartUI()
+    {
+        startUI.SetActive(true);
+        startScreenUI.GetComponent<Animator>().CrossFade("StartScreenFadeIn", 0f);
     }
 
     public async void LoseGame()
@@ -76,6 +95,7 @@ public class LevelManager : MonoBehaviour
         if (loseScoreText != null)
         {
             loseScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            loseScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
         }
 
         //wait until the coverdome animation is done
@@ -97,10 +117,67 @@ public class LevelManager : MonoBehaviour
         if (winScoreText != null)
         {
             winScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            winScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
         }
 
         //await UniTask.Delay(1000);
         //wait until the coverdome animation is done
         winUI.SetActive(true);
     }
+
+    public async void RestartLevel()
+    {
+        Debug.Log("Player pressed a restart button");
+        var uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
+        var playerScript = GameManager.Instance.player.GetComponent<Player>();
+
+        await uiManager.FadeToBlackAsync(); // fade to black
+
+        // Destroy the old map
+        if (currentMap != null) Destroy(currentMap);
+
+        gameEnded = false;
+
+        //Vector3 targetRotation = new Vector3(0f, Camera.main.transform.rotation.y, 0f); // get camera y rotation
+
+        //currentMap.transform.rotation = Quaternion.Euler(targetRotation);
+        //startScreenUI.transform.rotation = currentMap.transform.rotation;
+
+        winDome?.SetActive(false);
+        winUI?.SetActive(false);
+        loseUI?.SetActive(false);
+        slowTime.RaiseSlowTimeExit();
+
+        // Instantiate new one
+        currentMap = Instantiate(mapPrefab);
+        UpdateLevelReferences(currentMap);
+
+        GameManager.Instance.player.GetComponent<DriveControls>().enabled = false; //disable drive controls
+        //GameManager.Instance.player.GetComponent<OffRoadTracker>().enabled = false; //disable drive controls
+        // Reset player
+        playerScript.ResetPosition();
+        playerScript.ResetStats();
+        GameManager.Instance.player.GetComponent<Tutorial>().RestartTutorial();
+
+
+        await uiManager.FadeFromBlackAsync(); // fade from black
+        winDome?.SetActive(false);
+
+        EnableStartUI();
+    }
+
+
+    private void UpdateLevelReferences(GameObject newMap)
+    {
+        map = newMap;
+        var mapRoot = currentMap.GetComponent<MapRoot>();
+        firstRoad = mapRoot.firstRoad;
+        firstActivator = mapRoot.firstActivator;
+
+
+        // Optionally: Add error logging
+        if (firstRoad == null) Debug.LogError("FirstRoad not found in new map.");
+        if (firstActivator == null) Debug.LogError("FirstActivator not found in new map.");
+    }
+
 }

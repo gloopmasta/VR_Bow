@@ -7,7 +7,11 @@ public class OffRoadTracker : MonoBehaviour
 {
     [SerializeField] private float offRoadDuration = 3f;
     [SerializeField] private LayerMask roadLayerMask;
+    [SerializeField] private LevelEventsSO levelEvents;
+    [SerializeField] private JumpPadEventSO jumpPadEvent;
 
+
+    [SerializeField] private bool isEnabled = false;
     private CapsuleCollider playerCollider;
     private bool isOffRoad = false;
     private CancellationTokenSource cts;
@@ -35,9 +39,36 @@ public class OffRoadTracker : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        levelEvents.OnLevelOneStart += () => isEnabled = true; //when starting the level -> enable
+        levelEvents.OnLevelOneLose += () => isEnabled = false;
+        levelEvents.OnLevelOneWin += () => isEnabled = false;
+        levelEvents.OnLevelOneRestart += () => isEnabled = false;
+        jumpPadEvent.OnEnterJumpPad += () => isEnabled = false; //entering a jumppad -> disable
+    }
+
     private void Update()
     {
         if (playerCollider == null || uiManager == null || warningPanel == null) return;
+
+        // If disabled, force-cancel all operations and hide the warning
+        if (!isEnabled)
+        {
+            if (isOffRoad || warningPanel.activeSelf) // Only act if the warning was active
+            {
+                isOffRoad = false;
+                offroadCTS?.Cancel();
+                offroadCTS?.Dispose();
+                offroadCTS = null;
+
+                fadeCTS?.Cancel();
+                fadeCTS?.Dispose();
+                fadeCTS = new CancellationTokenSource();
+                FadeWarningPanelOut(fadeCTS.Token).Forget(); // Force fade-out
+            }
+            return; // Skip further checks
+        }
 
         bool currentlyOnRoad = IsOnRoad();
 

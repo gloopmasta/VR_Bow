@@ -46,6 +46,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] private float pitch;
 
     [Header("Scripts & References")]
+    [SerializeField] JumpEventsSO jumpEvents;
     [SerializeField] XRControllerData controllerData;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] PlayerDataSO pData;
@@ -116,8 +117,15 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         levelEvents.OnLevelOneStart += () =>
         {
             OnTimeScaleChanged(1f); // reset movement for player
-        
-        }; 
+            rb.useGravity = true; //disable gravity
+            rb.isKinematic = false;
+        };
+        levelEvents.OnLevelOneRestart += () =>
+        {
+            OnTimeScaleChanged(1f); // reset movement for player
+            rb.useGravity = true; //disable gravity
+            rb.isKinematic = false;
+        };
     }
 
     private void OnDisable()
@@ -157,7 +165,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
 
         if (activeController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 leftVelocity))
         {
-            Debug.Log("controller velocity data: " + leftVelocity.ToString());
+            //Debug.Log("controller velocity data: " + leftVelocity.ToString());
             float now = Time.time * timeScale;
             if (leftVelocity.z >= 2.5f && now >= nextBashTime)
             {
@@ -189,12 +197,14 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     bool CanJump()
     {
         GroundCheck gc = GetComponentInChildren<GroundCheck>();
+        Debug.Log("Player can jump: " + gc.IsGrounded());
         return gc != null && gc.IsGrounded();
     }
 
     void Jump()
     {
         rb.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+        jumpEvents.RaiseJump();
     }
 
     public void Launch(float launchHeight, float accelerationDuration)

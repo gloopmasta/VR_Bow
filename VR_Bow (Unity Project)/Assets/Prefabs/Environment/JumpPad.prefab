@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962042f459452e44f8d92013dbb72118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lauchStrength: 400
+  lauchStrength: 8
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   slowtime: {fileID: 11400000, guid: 207af8cf5465ae74c8b9170b2e13dad8, type: 2}
   jpEvent: {fileID: 11400000, guid: 68f056c01717c0940894b9d0559c77a2, type: 2}

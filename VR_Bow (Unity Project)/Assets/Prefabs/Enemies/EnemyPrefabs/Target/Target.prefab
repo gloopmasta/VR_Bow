@@ -55,6 +55,7 @@ MonoBehaviour:
   switchEvents: {fileID: 11400000, guid: e53ac0323faea8445aa116efde91a13b, type: 2}
   arrowHitEvents: {fileID: 11400000, guid: a1abc5f59dc2baf4188777edb8a6d415, type: 2}
   effectsLibrary: {fileID: 11400000, guid: edbaef1f2f01598479620cf3de1bb598, type: 2}
+  explosionSoundCue: {fileID: 11400000, guid: a695ce339c625854b993462220461f1a, type: 2}
 --- !u!65 &1832644314163113538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,8 +75,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5901603}
+  m_Center: {x: -0.000002112779, y: 0, z: 0.54507834}
 --- !u!1 &1848644617633274208
 GameObject:
   m_ObjectHideFlags: 0

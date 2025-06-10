@@ -1,7 +1,12 @@
-#Root sequence
+#Root race
+	WaitUntilTutorialRestart
+	#TutorialSequence
+
+#TutorialSequence sequence
 	#SteeringTutorial
 	#JumpingTutorial
 	#ShootingTutorial
+	WaitUntilTutorialRestart //wait to prevent it from looping
 
 #SteeringTutorial sequence
 	WaitUntilSteerMessage

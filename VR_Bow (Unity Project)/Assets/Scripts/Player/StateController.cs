@@ -25,7 +25,7 @@ public class StateController : MonoBehaviour
     [SerializeField] public JumpPadEventSO jumpPadEvent;
     [SerializeField] public BashEventSO bashEvent;
     [SerializeField] public RumbleManager rumble;
-    [SerializeField] private OffRoadTracker offRoad;
+    //[SerializeField] private OffRoadTracker offRoad;
 
     [Header("Bow Rotation")]
     [SerializeField] private Transform bowTransform;
@@ -74,7 +74,7 @@ public class StateController : MonoBehaviour
             isGrounded = false;
             SetState(PlayerState.Shooting);
             driveControls.enabled = false;
-            offRoad.enabled = false;
+            //offRoad.enabled = false;
             bowControls.canShoot = true; //reenable being able to shoot
             //rumble.StopRumble();
             JumpPadSlowtime().Forget();
@@ -89,8 +89,11 @@ public class StateController : MonoBehaviour
         levelEvents.OnLevelOneStart += () =>
         {
             //rumble.StartEngineRumble(0.1f, 1f, 3f).Forget();
+            isGrounded = true;
             AfterStartPressed().Forget();
         };
+
+        levelEvents.OnLevelOneRestart += () => isGrounded = true;
 
         levelEvents.OnLevelOneLose += () => OnGameEnd();
         levelEvents.OnLevelOneWin += () => OnGameEnd();
@@ -308,17 +311,16 @@ public class StateController : MonoBehaviour
         driveControls.enabled = true;
         SetState(PlayerState.Driving);
 
-        await UniTask.WaitForSeconds(2f);
+        //await UniTask.WaitForSeconds(2f);
 
-        offRoad.enabled = true;
+        //offRoad.enabled = true;
     }
 
     public void OnGameEnd()
     {
-        offRoad.enabled = false;
+        //offRoad.enabled = false;
         //GetComponent<Rigidbody>().useGravity = false;
         //Debug.Log("gravity set to off");
-        player.invulnerable = true;
     }
 
     private async Task<bool> LaunchingBashSlowtime()
@@ -383,10 +385,10 @@ public class StateController : MonoBehaviour
     [PandaTask]
     public async Task<bool> WaitUntilJump()
     {
-        if (!isGrounded)
-        {
-            return true;
-        }
+        //if (!isGrounded)
+        //{
+        //    return true;
+        //}
         await UniTask.WaitUntil(() => !isGrounded);
         return true;
     }
@@ -446,7 +448,7 @@ public class StateController : MonoBehaviour
     //public bool IsAimingBow() { return BowInputDetector.IsAiming(); }
     //public bool IsGrounded() 
     //{
-    //    GroundCheck gc = GetComponentInChildren<GroundCheck>();
+    //    GroundCheck gc = GetComponent<GroundCheck>();
     //    if (gc == null)
     //    {
     //        Debug.LogError("no GrounCheck script found in children for StateController");

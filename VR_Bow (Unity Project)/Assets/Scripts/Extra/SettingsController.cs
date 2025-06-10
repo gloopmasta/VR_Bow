@@ -1,3 +1,4 @@
+using PandaBT;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,8 @@ public class SettingsController : MonoBehaviour
 {
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private CalibrateButton calibrateScript;
+    [SerializeField] private GameHardReset hardReset;
+    [SerializeField] private LevelEventsSO levelEvents;
     public VisualTreeAsset uiAsset; 
     private UIDocument uiDocument;
     private InputAction toggleAction;
@@ -16,6 +19,7 @@ public class SettingsController : MonoBehaviour
 
     private TextField comField;
     private Toggle bowToggle;
+    private Toggle tutorialToggle;
     private Button calibrateButton;
     private Button restartLevelButton;
     private Button restartIntroButton;
@@ -39,6 +43,7 @@ public class SettingsController : MonoBehaviour
         // Query UI elements by their names
         comField = root.Q<TextField>("ComField");
         bowToggle = root.Q<Toggle>("BowMode");
+        tutorialToggle = root.Q<Toggle>("Tutorial");
         calibrateButton = root.Q<Button>("Calibrate");
         restartLevelButton = root.Q<Button>("RestartLevel1");
         restartIntroButton = root.Q<Button>("RestartIntro");
@@ -48,6 +53,9 @@ public class SettingsController : MonoBehaviour
 
         if (bowToggle != null)
             bowToggle.RegisterValueChangedCallback(evt => gameSettings.useBowController = evt.newValue);
+
+        if (tutorialToggle != null)
+            bowToggle.RegisterValueChangedCallback(evt => GameManager.Instance.player.GetComponent<PandaBehaviour>().enabled = evt.newValue);
 
         if (calibrateButton != null)
             calibrateButton.clicked += () => calibrateScript.Calibration().Forget();
@@ -93,14 +101,16 @@ public class SettingsController : MonoBehaviour
 
     private void RestartLevelOne()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        levelEvents.RaiseLevelOneRestart();
     }
 
     private void RestartIntro()
     {
-        Debug.Log("pressed reste intro, resetting intro");
-        uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-        SceneManager.LoadScene(0);
+        //Debug.Log("pressed reste intro, resetting intro");
+        //uiDocument.rootVisualElement.style.display = DisplayStyle.None;
+        //SceneManager.LoadScene(0);
+
+        hardReset.HardResetGame();
     }
 
     // Optional: expose comValue and bowMode

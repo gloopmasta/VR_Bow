@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae04159a11632f4fb95526b39acea3a, type: 3}
-  m_Name: ExplosionCue
+  m_Name: Take damage cue
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 9956da392d6aadc49b5e152033d14c1f, type: 3}
-  volume: 1
+  - {fileID: 8300000, guid: fa86a74d56cd53b4faadbaa18b668c66, type: 3}
+  volume: 2.6
   pitch: 1
   minDistance: 1
-  maxDistance: 250.9
-  rolloffMode: 1
+  maxDistance: 50
+  rolloffMode: 0
