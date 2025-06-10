@@ -30,6 +30,9 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Invulnerability animation")]
     [SerializeField] Animator vulnerabilityAnimator;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioCue takeDamageCue;
+
 
     public int Hp
     {
@@ -104,6 +107,12 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         hp -= amount;  //deduct HP
+
+        //Sound effect
+        if (SoundEffectManager.Instance != null && takeDamageCue != null)
+        {
+            SoundEffectManager.Instance.Play(takeDamageCue);
+        }
 
         //animation for indication
         GetComponent<PlayerUIManager>().damageIndicator.SetActive(false);

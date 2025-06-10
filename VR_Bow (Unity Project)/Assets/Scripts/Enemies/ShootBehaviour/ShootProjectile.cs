@@ -11,6 +11,9 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
     [SerializeField] private GameObject headToTurn;
     [SerializeField] private float headTurnSpeed = 5f;
 
+    [Header("Sound Effect")]
+    [SerializeField] private AudioCue projectileShootCue;
+
 
     private float baseShootingInterval;
     private float scaledShootingInterval = 1f;
@@ -67,6 +70,11 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
         {
             Debug.LogWarning("ShootProjectile: No projectile prefab assigned.");
             return;
+        }
+
+        if (SoundEffectManager.Instance != null && projectileShootCue != null)
+        {
+            SoundEffectManager.Instance.Play3D(projectileShootCue, transform.position, transform);
         }
 
         GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, Quaternion.identity, transform);

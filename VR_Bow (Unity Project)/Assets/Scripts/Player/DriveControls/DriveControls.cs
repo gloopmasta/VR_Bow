@@ -46,6 +46,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] private float pitch;
 
     [Header("Scripts & References")]
+    [SerializeField] JumpEventsSO jumpEvents;
     [SerializeField] XRControllerData controllerData;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] PlayerDataSO pData;
@@ -195,6 +196,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     void Jump()
     {
         rb.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+        jumpEvents.RaiseJump();
     }
 
     public void Launch(float launchHeight, float accelerationDuration)

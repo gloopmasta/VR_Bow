@@ -89,10 +89,11 @@ public class StateController : MonoBehaviour
         levelEvents.OnLevelOneStart += () =>
         {
             //rumble.StartEngineRumble(0.1f, 1f, 3f).Forget();
+            isGrounded = true;
             AfterStartPressed().Forget();
         };
 
-        //levelEvents.OnLevelOneRestart += () => offRoad.enabled = false;
+        levelEvents.OnLevelOneRestart += () => isGrounded = true;
 
         levelEvents.OnLevelOneLose += () => OnGameEnd();
         levelEvents.OnLevelOneWin += () => OnGameEnd();
@@ -447,7 +448,7 @@ public class StateController : MonoBehaviour
     //public bool IsAimingBow() { return BowInputDetector.IsAiming(); }
     //public bool IsGrounded() 
     //{
-    //    GroundCheck gc = GetComponentInChildren<GroundCheck>();
+    //    GroundCheck gc = GetComponent<GroundCheck>();
     //    if (gc == null)
     //    {
     //        Debug.LogError("no GrounCheck script found in children for StateController");

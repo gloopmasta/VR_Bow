@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour
 
     public async void RestartLevel()
     {
+        Debug.Log("Player pressed a restart button");
         var uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
         var playerScript = GameManager.Instance.player.GetComponent<Player>();
 
