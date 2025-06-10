@@ -46,11 +46,13 @@ public class LevelManager : MonoBehaviour
     public GameObject loseUI;
     public GameObject loseDome;
     [SerializeField] private TMPro.TextMeshProUGUI loseScoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI loseScoreText2;
 
     [Header("Win Screen")]
     public GameObject winUI;
     public GameObject winDome;
     [SerializeField] private TMPro.TextMeshProUGUI winScoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI winScoreText2;
 
     private bool gameEnded = false;
 
@@ -93,6 +95,7 @@ public class LevelManager : MonoBehaviour
         if (loseScoreText != null)
         {
             loseScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            loseScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
         }
 
         //wait until the coverdome animation is done
@@ -114,6 +117,7 @@ public class LevelManager : MonoBehaviour
         if (winScoreText != null)
         {
             winScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            winScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
         }
 
         //await UniTask.Delay(1000);

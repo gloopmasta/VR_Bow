@@ -4202,9 +4202,11 @@ MonoBehaviour:
   loseUI: {fileID: 1329947726}
   loseDome: {fileID: 79662743}
   loseScoreText: {fileID: 1335754115}
+  loseScoreText2: {fileID: 1423681770}
   winUI: {fileID: 798937144}
   winDome: {fileID: 79662743}
   winScoreText: {fileID: 1523485841}
+  winScoreText2: {fileID: 2085135502}
 --- !u!1 &705156489
 GameObject:
   m_ObjectHideFlags: 0
@@ -22480,7 +22482,7 @@ MonoBehaviour:
   bowOffsetEuler: {x: 35, y: -5, z: 0}
   maxDrawDistance: 0.5
   speedToFire: -0.15
-  shootCooldown: 0.2
+  shootCooldown: 0.5
   delta: 0
   minimumTension: 0.4
   trajectoryLine: {fileID: 1594173660}

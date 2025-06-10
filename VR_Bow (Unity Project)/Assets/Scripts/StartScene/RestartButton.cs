@@ -10,7 +10,7 @@ public class RestartButton : MonoBehaviour
         Debug.Log("something entered the restart button: " + other.name);
         if (other.CompareTag("Arrow")) // als de arrow dit object raakt
         {
-            Debug.Log("it was arrow -> raiseLevelOneStart");
+            Debug.Log("it was arrow -> raiseLevelOneRestart");
             levelEvents.RaiseLevelOneRestart();
         }
     }
