@@ -77,6 +77,7 @@ public class Player : MonoBehaviour, IDamageable
         ResetStats();
     }
 
+
     public void ResetStats()
     {
         hp = data.MaxHp;
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour, IDamageable
         //Sound effect
         if (SoundEffectManager.Instance != null && takeDamageCue != null)
         {
-            SoundEffectManager.Instance.Play(takeDamageCue);
+            SoundEffectManager.Instance.Play3D(takeDamageCue,transform.position, transform);
         }
 
         //rumble

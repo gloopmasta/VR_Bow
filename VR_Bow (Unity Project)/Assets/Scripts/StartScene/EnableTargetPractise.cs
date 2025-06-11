@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Diagnostics;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class EnableTargetPractise : MonoBehaviour
 {
@@ -10,98 +12,134 @@ public class EnableTargetPractise : MonoBehaviour
     [SerializeField] private GameObject copy;
 
     [Header("Timer Settings")]
-    [SerializeField] private float timeLimit = 60f; // 1 minute (customizable)
-    [SerializeField] private TMP_Text timerText;   // Assign in Inspector
-    [SerializeField] private GameObject timerUI;   // Assign in Inspector
+    [SerializeField] private float timeLimit = 60f;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private float resultsDisplayTime = 2f;
+    //[SerializeField] private GameObject screenTimer;
+    [SerializeField] private TMP_Text worldTimer;
+    [SerializeField] private GameObject startScreenUI;
 
     private Stopwatch timer = new Stopwatch();
-    private bool isChallengeActive = false;
-    private Coroutine timerCoroutine;
-
-    private void OnEnable()
-    {
-        copy = Instantiate(targets);
-        targets.SetActive(false);
-        copy.SetActive(false);
-    }
+    private bool isChallengeActive;
+    private CancellationTokenSource cts;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Arrow") && !isChallengeActive)
         {
-            ActivateTargets();
-            StartTimer();
+            StartChallenge().Forget();
         }
     }
 
-    void ActivateTargets()
-    {
-        if (copy != null)
-            Destroy(copy);
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(10, 40, 300, 40), "trigger targets"))
+    //    {
+    //        StartChallenge().Forget();
+    //    }
+    //}
 
+    private async UniTaskVoid StartChallenge()
+    {
+        // Cleanup any existing challenge
+        await CleanupExistingChallenge();
+
+        startScreenUI.GetComponent<Animator>().CrossFade("StartScreenFadeOut", 0f);
+        await UniTask.WaitForSeconds(1);
+        startScreenUI.SetActive(false);
+
+        //screenTimer.SetActive(true);
+
+        // Setup new challenge
         copy = Instantiate(targets);
         copy.SetActive(true);
         isChallengeActive = true;
+        cts = new CancellationTokenSource();
+
+        // Run concurrent tasks
+        await UniTask.WhenAll(
+            RunTimer(cts.Token),
+            MonitorTargets(cts.Token)
+        );
     }
 
-    void StartTimer()
+    private async UniTask CleanupExistingChallenge()
     {
-        timerUI.SetActive(true);
-        timer.Reset();
-        timer.Start();
-
-        if (timerCoroutine != null)
-            StopCoroutine(timerCoroutine);
-
-        timerCoroutine = StartCoroutine(UpdateTimerUI());
-    }
-
-    void StopTimer(bool success)
-    {
-        timerUI.SetActive(false);
-        timer.Stop();
-        isChallengeActive = false;
-
-        if (timerCoroutine != null)
-            StopCoroutine(timerCoroutine);
-
-        if (success)
-            timerText.text = $"Completed in: {timer.Elapsed.TotalSeconds:F2}s!";
-        else
-            timerText.text = "Time's up!";
-    }
-
-    IEnumerator UpdateTimerUI()
-    {
-        float startTime = (float)timer.Elapsed.TotalSeconds;
-
-        while (isChallengeActive)
+        if (copy != null)
         {
-            float elapsed = (float)timer.Elapsed.TotalSeconds;
-            float remaining = Mathf.Max(0, timeLimit - elapsed);
+            Destroy(copy);
+            await UniTask.Yield(); // Allow one frame for destruction
+        }
 
-            // Update UI (e.g., "00:59")
-            timerText.text = $"{Mathf.FloorToInt(remaining / 60):00}:{Mathf.FloorToInt(remaining % 60):00}";
-
-            // Timeout after 1 minute
-            if (elapsed >= timeLimit)
-            {
-                StopTimer(false);
-                break;
-            }
-
-            // Check if all targets are destroyed
-            if (AreAllTargetsDestroyed())
-            {
-                StopTimer(true);
-                break;
-            }
-
-            yield return null;
+        if (cts != null)
+        {
+            cts.Cancel();
+            cts.Dispose();
         }
     }
 
-    bool AreAllTargetsDestroyed()
+    private async UniTask RunTimer(CancellationToken token)
+    {
+        timer.Restart();
+
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                float remaining = Mathf.Max(0, timeLimit - (float)timer.Elapsed.TotalSeconds);
+                timerText.text = $"{(float)timer.Elapsed.TotalSeconds:F2}"; // Shows "12.345" seconds
+
+                if (remaining <= 0)
+                {
+                    //screenTimer.SetActive(false);
+                    HandleTimeOut();
+                    break;
+                }
+
+                await UniTask.Yield();
+            }
+        }
+        finally
+        {
+            timer.Stop();
+        }
+    }
+
+    private void HandleTimeOut()
+    {
+        worldTimer.text = "00:00"; // Timeout display
+        startScreenUI.SetActive(true);
+        isChallengeActive = false;
+        copy.SetActive(false);
+        cts?.Cancel();
+    }
+
+    private async UniTask MonitorTargets(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            await UniTask.Yield();
+
+            if (AreAllTargetsDestroyed())
+            {
+                float completionTime = (float)timer.Elapsed.TotalSeconds;
+                timerText.text = $"Clear! Time: {completionTime:F2}s";
+
+                await UniTask.Delay((int)(resultsDisplayTime * 1000), cancellationToken: token);
+
+                worldTimer.text = $"{completionTime:F2}";
+                startScreenUI.SetActive(true);
+                
+                
+
+                isChallengeActive = false;
+                cts?.Cancel();
+                break;
+            }
+        }
+    }
+
+    private bool AreAllTargetsDestroyed()
     {
         if (copy == null) return true;
 
@@ -111,5 +149,11 @@ public class EnableTargetPractise : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private void OnDisable()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
     }
 }
