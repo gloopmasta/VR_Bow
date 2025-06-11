@@ -172,8 +172,21 @@ public class DriveControls : MonoBehaviour, ITimeScalable
                 Bash();
                 nextBashTime = now + pData.BashCooldown;
             }
+            if (leftVelocity.y >= 1.5f)
+            {
+                Debug.Log("controller velocity up enough to jump");
+            }
+            if (leftVelocity.y >= 1.5f && now >= nextJumpTime)
+            {
+                Debug.Log("controller velocity up  AND nextjumptime goed");
+            }
+            if (leftVelocity.y >= 1.5f  && CanJump())
+            {
+                Debug.Log("controller velocity up  AND and canjump true");
+            }
             if (leftVelocity.y >= 1.5f && now >= nextJumpTime && CanJump())
             {
+                Debug.Log("player should jump here");
                 Jump();
                 rumble.RumbleBurst(1f, 0.5f).Forget();
                 nextJumpTime = now + jumpCooldown;

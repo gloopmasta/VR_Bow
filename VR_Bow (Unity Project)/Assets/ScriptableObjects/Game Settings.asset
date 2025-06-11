@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Game Settings
   m_EditorClassIdentifier: 
   useBowController: 1
+  rightSteeringController: 1
   leftHanded: 0
-  comPort: COM10
+  comPort: COM4
