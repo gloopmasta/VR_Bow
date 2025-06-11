@@ -8,6 +8,9 @@ public class BowModelHandler : MonoBehaviour
     [SerializeField] private float maxVisibleRotation = 50f; // If needed
     public bool isLocked;
 
+    [SerializeField] LineRenderer trajectoryLineRenderer;
+    
+
     void LateUpdate()
     {
         if (isLocked)

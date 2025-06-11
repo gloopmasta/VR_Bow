@@ -64,6 +64,12 @@ public class BowShooting : ShootingMode
     [SerializeField] private BluetoothReader btReader;
     [SerializeField] private RumbleManager rumble;
     [SerializeField] private BowEventsSO bowEvents;
+    [SerializeField] private LevelEventsSO levelEvents;
+    [SerializeField] private JumpPadEventSO jumpPadEvent;
+    public bool trajectoryEnabled = true;
+
+
+    
 
     private InputAction triggerAction;
     [SerializeField] private float currentFlexValue = 0f;
@@ -79,10 +85,21 @@ public class BowShooting : ShootingMode
     [Range(0f, 1f)]
     public float inspectorFlexValue = 0f;
 
+
     void OnEnable()
     {
         playerScript = GetComponent<Player>();
         smoothedRotation = aimingController.rotation;
+
+
+        //Events for line renderer
+        levelEvents.OnLevelOneStart += () => trajectoryEnabled = false;
+
+        levelEvents.OnLevelOneLose += () => trajectoryEnabled = true;
+        levelEvents.OnLevelOneWin += () => trajectoryEnabled = true;
+        levelEvents.OnLevelOneRestart += () => trajectoryEnabled = true;
+
+        jumpPadEvent.OnEnterJumpPad += () => trajectoryEnabled = true;
     }
 
     void Update()
@@ -110,7 +127,7 @@ public class BowShooting : ShootingMode
         if (isDrawing)
         {
             // Show trajectory preview if enough tension
-            if (previousFlexValue > 0.3f && !trajectoryLine.enabled)
+            if (previousFlexValue > 0.3f && !trajectoryLine.enabled && trajectoryEnabled)
                 trajectoryLine.enabled = true;
 
             // Calculate dynamic smoothing factor based on currentFlexValue
@@ -155,7 +172,7 @@ public class BowShooting : ShootingMode
         }
 
         // Hide trajectory if not drawing anymore
-        if ((!isDrawing || previousFlexValue < 0.05f) && trajectoryLine.enabled)
+        if ((!isDrawing || previousFlexValue < 0.05f || !trajectoryEnabled) && trajectoryLine.enabled)
         {
             trajectoryLine.enabled = false;
         }

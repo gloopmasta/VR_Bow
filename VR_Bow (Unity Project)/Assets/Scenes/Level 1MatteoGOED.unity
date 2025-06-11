@@ -3049,6 +3049,7 @@ MonoBehaviour:
   bowOffsetEuler: {x: 7.35, y: 79.1, z: 396.2}
   maxVisibleRotation: 50
   isLocked: 0
+  trajectoryLineRenderer: {fileID: 0}
 --- !u!23 &543139173
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4702,7 +4703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: {fileID: 506019467}
   copy: {fileID: 0}
-  timeLimit: 10
+  timeLimit: 60
   timerText: {fileID: 514402646}
   resultsDisplayTime: 2
   worldTimer: {fileID: 1541007924}
@@ -14752,7 +14753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
-  comPort: COM4
+  comPort: COM10
   sensorValue: 0
 --- !u!4 &1574722837
 Transform:
@@ -14829,6 +14830,7 @@ MonoBehaviour:
   bowOffsetEuler: {x: 7.35, y: 79.1, z: 396.2}
   maxVisibleRotation: 50
   isLocked: 0
+  trajectoryLineRenderer: {fileID: 0}
 --- !u!95 &1594173659
 Animator:
   serializedVersion: 5
@@ -22358,6 +22360,9 @@ MonoBehaviour:
   btReader: {fileID: 1574722836}
   rumble: {fileID: 2000025737}
   bowEvents: {fileID: 11400000, guid: 1f5d4a6b5c0a3c94fa8b04f8e5b34461, type: 2}
+  levelEvents: {fileID: 11400000, guid: fa1da2816dfa9644fbfddedd37d1844f, type: 2}
+  jumpPadEvent: {fileID: 11400000, guid: 68f056c01717c0940894b9d0559c77a2, type: 2}
+  trajectoryEnabled: 1
   currentFlexValue: 0
   rawFlex: 0
   previousFlexValue: 0

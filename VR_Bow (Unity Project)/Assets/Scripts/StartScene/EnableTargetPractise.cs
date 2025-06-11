@@ -153,7 +153,18 @@ public class EnableTargetPractise : MonoBehaviour
 
     private void OnDisable()
     {
-        cts?.Cancel();
-        cts?.Dispose();
+        // Only cancel if not already disposed
+        if (cts != null && !cts.IsCancellationRequested)
+        {
+            try
+            {
+                cts?.Cancel();
+            }
+            finally
+            {
+                cts?.Dispose();
+                cts = null; // Clear the reference
+            }
+        }
     }
 }
