@@ -31,7 +31,8 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
         trigger.isTrigger = true;
         trigger.radius = detectionRange;
 
-        GameObject playerObj = GameObject.FindWithTag("Player");
+        GameObject playerObj = GameObject.FindWithTag("Core");
+
         if (playerObj != null)
         {
             player = playerObj.transform;
@@ -47,6 +48,8 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
 
     private void Update()
     {
+        Debug.Assert(playerInRange, "player Not in range");
+        
         if (!playerInRange || isLaserActive) return;
 
         // Smoothly rotate head toward player if using prediction mode
@@ -108,7 +111,7 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Core"))
         {
             playerInRange = true;
         }
@@ -116,7 +119,7 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Core"))
         {
             playerInRange = false;
         }

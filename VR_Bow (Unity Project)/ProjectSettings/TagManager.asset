@@ -11,6 +11,7 @@ TagManager:
   - Arrow
   - Slope
   - Road
+  - Core
   layers:
   - Default
   - TransparentFX
