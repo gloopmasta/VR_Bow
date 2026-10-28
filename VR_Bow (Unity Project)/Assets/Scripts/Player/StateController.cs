@@ -102,15 +102,31 @@ public class StateController : MonoBehaviour
     
     private void Start()
     {
+        var bowShooting = GetComponent<BowShooting>();
+        var controllerShooting = GetComponent<ControllerShooting>();
+
         if (gameSettings.useBowController) //if using bow
         {
-            bowControls = GetComponent<BowShooting>(); //set bowControls script ot bbow
-            GetComponent<ControllerShooting>().enabled = false; //disable controller
+            bowControls = bowShooting;
+            controllerShooting.enabled = false;
         }
         else //if using controllers
         {
-            bowControls = GetComponent<ControllerShooting>();
-            GetComponent<BowShooting>().enabled = false;
+            bowControls = controllerShooting;
+            bowShooting.enabled = false;
+        }
+
+        bowTransform = gameSettings.useBowController ? bowShooting.aimingController : controllerShooting.leftHand;
+
+        var bowModel = bowShooting.bowAnimator != null
+            ? bowShooting.bowAnimator.GetComponent<BowModelHandler>() : null;
+        var controllerModel = controllerShooting.bowAnimator != null
+            ? controllerShooting.bowAnimator.GetComponent<BowModelHandler>() : null;
+        if (bowModel != null && controllerModel != null && bowModel != controllerModel)
+        {
+            bowModel.gameObject.SetActive(gameSettings.useBowController);
+            controllerModel.gameObject.SetActive(!gameSettings.useBowController);
+            bowModelHandler = gameSettings.useBowController ? bowModel : controllerModel;
         }
 
         if (player == null)

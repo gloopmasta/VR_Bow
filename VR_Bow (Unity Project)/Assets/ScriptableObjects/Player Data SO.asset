@@ -24,6 +24,6 @@ MonoBehaviour:
   slowtimeFromBash: 2
   maxSlowtime: 15
   keepSlowtime: 0
-  bashActiveTime: 0.8
+  bashActiveTime: 4.99
   bashCooldown: 1.5
   bashDamage: 1

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ShootProjectile : MonoBehaviour, ITimeScalable
@@ -18,7 +18,7 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
     private float baseShootingInterval;
     private float scaledShootingInterval = 1f;
 
-    private bool playerInRange = false;
+    private bool playerInRange = true;
     private float lastShootTime;
     private bool isLaserActive = false;
 
@@ -49,7 +49,7 @@ public class ShootProjectile : MonoBehaviour, ITimeScalable
     private void Update()
     {
         Debug.Assert(playerInRange, "player Not in range");
-        
+
         if (!playerInRange || isLaserActive) return;
 
         // Smoothly rotate head toward player if using prediction mode
