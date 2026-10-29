@@ -135,7 +135,7 @@ public class StateController : MonoBehaviour
             Debug.Assert(player != null, "no Player script attached or injected");
         }
 
-        SetState(PlayerState.Driving);
+        SetState(PlayerState.Dashing);
     }
 
     
@@ -152,7 +152,7 @@ public class StateController : MonoBehaviour
         // Manage Scripts
         switch (newState)
         {
-            case PlayerState.Driving:
+            case PlayerState.Dashing:
                 driveControls.canDrive = true;
                 bowControls.enabled = false;
                 bowModelHandler.isLocked = true;
@@ -169,7 +169,7 @@ public class StateController : MonoBehaviour
     }
 
     [PandaTask] public bool IsShootingMode() { return player.State == PlayerState.Shooting; }
-    [PandaTask] public bool IsDrivingMode() { return player.State == PlayerState.Driving; }
+    [PandaTask] public bool IsDrivingMode() { return player.State == PlayerState.Dashing; }
     [PandaTask] public bool IsSwitchTime() { return switchTimeActive; }
     [PandaTask] public bool ActivateSwitchTime() { switchTimeActive = true; return true; }
     [PandaTask] public bool DisableSwitchTime() { switchTimeActive = false; return true; }
@@ -325,7 +325,7 @@ public class StateController : MonoBehaviour
 
         
         driveControls.enabled = true;
-        SetState(PlayerState.Driving);
+        SetState(PlayerState.Dashing);
 
         //await UniTask.WaitForSeconds(2f);
 
@@ -365,7 +365,7 @@ public class StateController : MonoBehaviour
     {
         // Assuming bow tilts up on local X axis
         float angle = bowTransform.localEulerAngles.z;
-        // Normalize angle to 0–180 for comparison
+        // Normalize angle to 0ï¿½180 for comparison
         if (angle > 180f) angle -= 360f;
         return angle;
     }

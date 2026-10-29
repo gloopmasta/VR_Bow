@@ -27,7 +27,7 @@ public class Turret : Enemy
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (player != null && player.IsBashing)
+            if (player != null && player.IsDashing)
             {
                 TakeDamage(1);
                 Rigidbody rb = GetComponent<Rigidbody>();

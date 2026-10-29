@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, IDamageable
     //[SerializeField] private float fuel;
     [SerializeField] private float slowTime;
     [SerializeField] private PlayerState state;
-    public bool isBashing;
+    public bool isDashing;
     public int score;
     public bool invulnerable = false;
 
@@ -60,10 +60,10 @@ public class Player : MonoBehaviour, IDamageable
         get { return state; }
         set { state = value; }
     }
-    public bool IsBashing
+    public bool IsDashing
     {
-        get { return isBashing; }
-        set { isBashing = value; }
+        get { return isDashing; }
+        set { isDashing = value; }
     }
     public int Score
     {
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour, IDamageable
         //{
         //    jp.Activate(gameObject);
         //}
-        //if (other.TryGetComponent<Launchable>(out var launchable) && isBashing) //if player interacts with a launchable and is bashing
+        //if (other.TryGetComponent<Launchable>(out var launchable) && isDashing) //if player interacts with a launchable and is bashing
         //{
         //    launchable.OnBash(gameObject);
         //}

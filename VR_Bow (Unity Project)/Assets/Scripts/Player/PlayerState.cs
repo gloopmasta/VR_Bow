@@ -1,5 +1,5 @@
 public enum PlayerState
 {
-    Driving,
+    Dashing,
     Shooting,
 }

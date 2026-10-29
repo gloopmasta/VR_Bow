@@ -45,7 +45,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7620659195859584102}
   - component: {fileID: 3276401792143483861}
-  - component: {fileID: 6609245710280563601}
   m_Layer: 11
   m_Name: circuitry (65)
   m_TagString: Road
@@ -120,27 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6609245710280563601
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72601004930452813}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &85335599941332410
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3121950742370033483}
   - component: {fileID: 1054610119960630063}
-  - component: {fileID: 4037276661318113335}
   m_Layer: 11
   m_Name: circuitry (1)
   m_TagString: Road
@@ -332,27 +309,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4037276661318113335
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155442750182043135}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &173788859112581023
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +460,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4407623190514985714}
   - component: {fileID: 102669490851899364}
-  - component: {fileID: 5052743008770272309}
   m_Layer: 11
   m_Name: circuitry (41)
   m_TagString: Road
@@ -579,27 +534,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5052743008770272309
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260538809849823109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &323653668451223966
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +690,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -774,7 +708,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8025215192537261477}
   - component: {fileID: 3943312751330429883}
-  - component: {fileID: 1174977130969004440}
   m_Layer: 11
   m_Name: circuitry (114)
   m_TagString: Road
@@ -849,27 +782,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1174977130969004440
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396842840478003266}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &397225278329430258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3916000899124227379}
   - component: {fileID: 1219354494225344039}
-  - component: {fileID: 5678546147013841469}
   m_Layer: 11
   m_Name: circuitry (43)
   m_TagString: Road
@@ -1307,27 +1218,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5678546147013841469
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494909737393179885}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &524550814455598804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,8 +1245,8 @@ Transform:
   m_GameObject: {fileID: 524550814455598804}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.7036421, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 20.642418, z: 100}
+  m_LocalPosition: {x: -0, y: 2.51, z: 0}
+  m_LocalScale: {x: 2.7037406, y: 11.6, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
@@ -1389,7 +1279,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1456,7 +1346,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7718118108393367296}
   - component: {fileID: 7373534579313436005}
-  - component: {fileID: 1333089615410991942}
   m_Layer: 11
   m_Name: circuitry (36)
   m_TagString: Road
@@ -1531,27 +1420,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1333089615410991942
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572835100054390746}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &664731553376346068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,7 +1677,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7746318950875104751}
   - component: {fileID: 2583800158473208955}
-  - component: {fileID: 1165543144792645191}
   m_Layer: 11
   m_Name: circuitry (67)
   m_TagString: Road
@@ -1884,27 +1751,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1165543144792645191
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805576299984026681}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &821222573388793073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +1901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9163545591501885965}
   - component: {fileID: 8868932266951999319}
-  - component: {fileID: 1730181381355712187}
   m_Layer: 11
   m_Name: circuitry (105)
   m_TagString: Road
@@ -2130,27 +1975,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1730181381355712187
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858223675847207316}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &897203833991542635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,7 +1985,6 @@ GameObject:
   m_Component:
   - component: {fileID: 617370273392433710}
   - component: {fileID: 3495900041791800196}
-  - component: {fileID: 7197491028233443788}
   m_Layer: 11
   m_Name: circuitry (52)
   m_TagString: Road
@@ -2236,27 +2059,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7197491028233443788
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897203833991542635}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &898966690153062690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2175,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4984092180692510287}
   - component: {fileID: 6822220999718214767}
-  - component: {fileID: 2213291694162388054}
   m_Layer: 11
   m_Name: circuitry (99)
   m_TagString: Road
@@ -2448,27 +2249,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2213291694162388054
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915612929328298136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &940537986245199749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,7 +2505,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7090081437341526102}
   - component: {fileID: 941577001041070959}
-  - component: {fileID: 8730319823462712180}
   m_Layer: 11
   m_Name: circuitry (73)
   m_TagString: Road
@@ -2800,27 +2579,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8730319823462712180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996334553798365615}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1017250962754481154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,7 +2589,6 @@ GameObject:
   m_Component:
   - component: {fileID: 64797665450230272}
   - component: {fileID: 6416919532624792270}
-  - component: {fileID: 4549657080214543204}
   m_Layer: 11
   m_Name: circuitry (3)
   m_TagString: Road
@@ -2906,27 +2663,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4549657080214543204
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017250962754481154}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1054172565043991887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,7 +2673,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5338736049381876714}
   - component: {fileID: 3152161185540723568}
-  - component: {fileID: 5190928789384068387}
   m_Layer: 11
   m_Name: circuitry (10)
   m_TagString: Road
@@ -3012,27 +2747,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5190928789384068387
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054172565043991887}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1132193365056955388
 GameObject:
   m_ObjectHideFlags: 0
@@ -3059,7 +2773,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.41, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7422020652395127451}
@@ -3080,7 +2794,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5629895200518711257}
   - component: {fileID: 6405667868012734615}
-  - component: {fileID: 8886410420714768750}
   m_Layer: 11
   m_Name: circuitry (32)
   m_TagString: Road
@@ -3155,27 +2868,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8886410420714768750
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143149793632780303}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1168392777915001179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,8 +3002,8 @@ Transform:
   m_GameObject: {fileID: 1185210775578273333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8299999, z: 0}
-  m_LocalScale: {x: 1.28, y: 1.28, z: 1.28}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4682701529132459644}
@@ -3680,7 +3372,6 @@ GameObject:
   m_Component:
   - component: {fileID: 333980626591979077}
   - component: {fileID: 5102415064370018781}
-  - component: {fileID: 3467466205425107164}
   m_Layer: 11
   m_Name: circuitry (78)
   m_TagString: Road
@@ -3755,27 +3446,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3467466205425107164
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261787809192362928}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1277473288648797677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,7 +4039,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 3.3310997, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 16.642418, z: 100}
+  m_LocalScale: {x: 2.7037406, y: 15.21, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
@@ -4402,7 +4072,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4646,7 +4316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9058650118463039310}
   - component: {fileID: 1284276100832399289}
-  - component: {fileID: 7209397165970032414}
   m_Layer: 11
   m_Name: circuitry (42)
   m_TagString: Road
@@ -4721,27 +4390,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7209397165970032414
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447429086259337268}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1480876449029009965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4894,7 +4542,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1542324417307248836}
   - component: {fileID: 5239381481703573375}
-  - component: {fileID: 1514889068190308696}
   m_Layer: 11
   m_Name: circuitry (15)
   m_TagString: Road
@@ -4969,27 +4616,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1514889068190308696
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657929463685139878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1665848607862502821
 GameObject:
   m_ObjectHideFlags: 0
@@ -5000,7 +4626,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4488026395839355100}
   - component: {fileID: 2282228133596270632}
-  - component: {fileID: 3763545305538404576}
   m_Layer: 11
   m_Name: circuitry (119)
   m_TagString: Road
@@ -5075,27 +4700,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3763545305538404576
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665848607862502821}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1669011216889307837
 GameObject:
   m_ObjectHideFlags: 0
@@ -5212,7 +4816,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9145195051579891439}
   - component: {fileID: 222244097043511738}
-  - component: {fileID: 387757260649222729}
   m_Layer: 11
   m_Name: circuitry (118)
   m_TagString: Road
@@ -5287,27 +4890,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &387757260649222729
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708254735583599535}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1734678777391623994
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,7 +5112,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7972143778910596627}
   - component: {fileID: 2337129202827507524}
-  - component: {fileID: 7175488005208121541}
   m_Layer: 11
   m_Name: circuitry (79)
   m_TagString: Road
@@ -5605,27 +5186,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7175488005208121541
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768818028334967570}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &1771866007185900818
 GameObject:
   m_ObjectHideFlags: 0
@@ -6131,7 +5691,6 @@ GameObject:
   m_Component:
   - component: {fileID: 457511852246249431}
   - component: {fileID: 909421911975404757}
-  - component: {fileID: 6021464668526465540}
   m_Layer: 11
   m_Name: circuitry (47)
   m_TagString: Road
@@ -6206,27 +5765,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6021464668526465540
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113046392885044012}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2118624329653101289
 GameObject:
   m_ObjectHideFlags: 0
@@ -6255,7 +5793,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 3.3310997, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 16.642418, z: 100}
+  m_LocalScale: {x: 2.7037406, y: 9.8, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
@@ -6288,7 +5826,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6426,7 +5964,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9114441950934135170}
   - component: {fileID: 3153601442700554713}
-  - component: {fileID: 3259856617920099990}
   m_Layer: 11
   m_Name: circuitry (13)
   m_TagString: Road
@@ -6501,27 +6038,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3259856617920099990
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2186992770413943759}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2188753033518749222
 GameObject:
   m_ObjectHideFlags: 0
@@ -6744,7 +6260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 547392707000338602}
   - component: {fileID: 5510344129233131416}
-  - component: {fileID: 2239775990367662965}
   m_Layer: 11
   m_Name: circuitry (27)
   m_TagString: Road
@@ -6819,27 +6334,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2239775990367662965
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257387521386261007}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2295773678486719365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,7 +6450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2436809732353001525}
   - component: {fileID: 8438867013200858490}
-  - component: {fileID: 5742025179063492762}
   m_Layer: 11
   m_Name: circuitry (8)
   m_TagString: Road
@@ -7031,27 +6524,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5742025179063492762
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2343244275349317544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2437138614608761707
 GameObject:
   m_ObjectHideFlags: 0
@@ -7062,7 +6534,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9059576072399546112}
   - component: {fileID: 1821039729883141748}
-  - component: {fileID: 4664135065652855249}
   m_Layer: 11
   m_Name: circuitry (45)
   m_TagString: Road
@@ -7137,27 +6608,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4664135065652855249
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2437138614608761707}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2470119408233521692
 GameObject:
   m_ObjectHideFlags: 0
@@ -7168,7 +6618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3535724120347573796}
   - component: {fileID: 2757348922561649322}
-  - component: {fileID: 5867678114648757247}
   m_Layer: 11
   m_Name: circuitry (20)
   m_TagString: Road
@@ -7243,27 +6692,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5867678114648757247
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2470119408233521692}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2534251057225825878
 GameObject:
   m_ObjectHideFlags: 0
@@ -7274,7 +6702,6 @@ GameObject:
   m_Component:
   - component: {fileID: 510438677041814552}
   - component: {fileID: 4674218342556403282}
-  - component: {fileID: 7639029211805338524}
   m_Layer: 11
   m_Name: circuitry (98)
   m_TagString: Road
@@ -7349,27 +6776,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7639029211805338524
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2534251057225825878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2582263662363713672
 GameObject:
   m_ObjectHideFlags: 0
@@ -7698,7 +7104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4875304058618064912}
   - component: {fileID: 3463781199674256183}
-  - component: {fileID: 3824782510827998831}
   m_Layer: 11
   m_Name: circuitry (12)
   m_TagString: Road
@@ -7773,27 +7178,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3824782510827998831
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2638448431342868013}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2722937460231974206
 GameObject:
   m_ObjectHideFlags: 0
@@ -7980,13 +7364,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2791430259197558177}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 1.2981292, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 16.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.85, y: 23.698025, z: 142.39532}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7009613955095747964
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8015,7 +7399,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8047,7 +7431,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3946514022742925182}
   - component: {fileID: 3051174702685596476}
-  - component: {fileID: 9026281375201161391}
   m_Layer: 11
   m_Name: circuitry (111)
   m_TagString: Road
@@ -8122,27 +7505,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &9026281375201161391
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2833591725121748665}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2851232098095131479
 GameObject:
   m_ObjectHideFlags: 0
@@ -8153,7 +7515,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3469555365876230339}
   - component: {fileID: 3189505317462564028}
-  - component: {fileID: 181926333550356970}
   m_Layer: 11
   m_Name: circuitry (49)
   m_TagString: Road
@@ -8228,27 +7589,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &181926333550356970
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2851232098095131479}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2875834631690452927
 GameObject:
   m_ObjectHideFlags: 0
@@ -8259,7 +7599,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5442076779483036045}
   - component: {fileID: 1069844717773557113}
-  - component: {fileID: 5033837642126323981}
   m_Layer: 11
   m_Name: circuitry (66)
   m_TagString: Road
@@ -8334,27 +7673,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5033837642126323981
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2875834631690452927}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &2881611198924852445
 GameObject:
   m_ObjectHideFlags: 0
@@ -8646,7 +7964,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6665910235758302350}
   - component: {fileID: 4890881028200300917}
-  - component: {fileID: 1787308580686109660}
   m_Layer: 11
   m_Name: circuitry (40)
   m_TagString: Road
@@ -8721,27 +8038,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1787308580686109660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3002266864521669851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3033695998028818144
 GameObject:
   m_ObjectHideFlags: 0
@@ -8752,7 +8048,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4428912290940402489}
   - component: {fileID: 500849189200221879}
-  - component: {fileID: 1184113887597896841}
   m_Layer: 11
   m_Name: circuitry (37)
   m_TagString: Road
@@ -8827,27 +8122,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1184113887597896841
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3033695998028818144}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3050671834989008581
 GameObject:
   m_ObjectHideFlags: 0
@@ -8858,7 +8132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 527768824519068648}
   - component: {fileID: 576400762701385332}
-  - component: {fileID: 778914652801248069}
   m_Layer: 11
   m_Name: circuitry (31)
   m_TagString: Road
@@ -8933,27 +8206,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &778914652801248069
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3050671834989008581}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3080328480359629707
 GameObject:
   m_ObjectHideFlags: 0
@@ -9106,7 +8358,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5439324709732224597}
   - component: {fileID: 2125901873221679420}
-  - component: {fileID: 6127982915970511276}
   m_Layer: 11
   m_Name: circuitry (60)
   m_TagString: Road
@@ -9181,27 +8432,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6127982915970511276
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094069820727491621}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3112423018768757428
 GameObject:
   m_ObjectHideFlags: 0
@@ -9212,7 +8442,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1857529742277498500}
   - component: {fileID: 2872006574209817822}
-  - component: {fileID: 7175313160200075213}
   m_Layer: 11
   m_Name: circuitry (54)
   m_TagString: Road
@@ -9287,27 +8516,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7175313160200075213
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3112423018768757428}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3147791901172262445
 GameObject:
   m_ObjectHideFlags: 0
@@ -9318,7 +8526,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3284341274219900668}
   - component: {fileID: 674060921431763422}
-  - component: {fileID: 4460004875445561219}
   m_Layer: 11
   m_Name: circuitry (102)
   m_TagString: Road
@@ -9393,27 +8600,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4460004875445561219
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3147791901172262445}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3182928443292844355
 GameObject:
   m_ObjectHideFlags: 0
@@ -9530,7 +8716,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6851119420567210521}
   - component: {fileID: 2638382611524430809}
-  - component: {fileID: 6527472012737398015}
   m_Layer: 11
   m_Name: circuitry (96)
   m_TagString: Road
@@ -9605,27 +8790,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6527472012737398015
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3192795781060391928}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3315703820918310627
 GameObject:
   m_ObjectHideFlags: 0
@@ -10129,7 +9293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1431647123846678955}
   - component: {fileID: 5582415499190343574}
-  - component: {fileID: 3677183739339945722}
   m_Layer: 11
   m_Name: circuitry (59)
   m_TagString: Road
@@ -10204,27 +9367,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3677183739339945722
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3500753094631422923}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3602252473393865655
 GameObject:
   m_ObjectHideFlags: 0
@@ -10269,7 +9411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8134880826537086921}
   - component: {fileID: 3563521189116168381}
-  - component: {fileID: 8490383791828181287}
   m_Layer: 11
   m_Name: circuitry (2)
   m_TagString: Road
@@ -10344,27 +9485,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8490383791828181287
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619785167535354477}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3636273489255865192
 GameObject:
   m_ObjectHideFlags: 0
@@ -10587,7 +9707,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7062502052981194174}
   - component: {fileID: 3765805161523777274}
-  - component: {fileID: 6588172977579075188}
   m_Layer: 11
   m_Name: circuitry (39)
   m_TagString: Road
@@ -10662,27 +9781,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6588172977579075188
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3763229597746596300}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3881570047232805898
 GameObject:
   m_ObjectHideFlags: 0
@@ -10693,7 +9791,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4880969287191221666}
   - component: {fileID: 1107870865439347859}
-  - component: {fileID: 712571324968827267}
   m_Layer: 11
   m_Name: circuitry (91)
   m_TagString: Road
@@ -10768,27 +9865,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &712571324968827267
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881570047232805898}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3911198388298480407
 GameObject:
   m_ObjectHideFlags: 0
@@ -10799,7 +9875,6 @@ GameObject:
   m_Component:
   - component: {fileID: 95628781428316953}
   - component: {fileID: 4029829599113201026}
-  - component: {fileID: 8961803851105532895}
   m_Layer: 11
   m_Name: circuitry (21)
   m_TagString: Road
@@ -10874,27 +9949,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8961803851105532895
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3911198388298480407}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &3923227228322929458
 GameObject:
   m_ObjectHideFlags: 0
@@ -11151,7 +10205,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3086113335273496161}
   - component: {fileID: 5397981080473741688}
-  - component: {fileID: 8009985897944696238}
   m_Layer: 11
   m_Name: circuitry (16)
   m_TagString: Road
@@ -11226,27 +10279,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8009985897944696238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032989461042691955}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4042099879238073862
 GameObject:
   m_ObjectHideFlags: 0
@@ -11292,7 +10324,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9170097573679594941}
   - component: {fileID: 4602863306992191527}
-  - component: {fileID: 674734227671554}
   m_Layer: 11
   m_Name: circuitry (61)
   m_TagString: Road
@@ -11367,27 +10398,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &674734227671554
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4057380990177576559}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4098454235303132108
 GameObject:
   m_ObjectHideFlags: 0
@@ -11504,7 +10514,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2290438246040329416}
   - component: {fileID: 2885200304331100608}
-  - component: {fileID: 4050481944338525580}
   m_Layer: 11
   m_Name: circuitry (69)
   m_TagString: Road
@@ -11579,27 +10588,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4050481944338525580
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138894212874338482}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4169345214052888911
 GameObject:
   m_ObjectHideFlags: 0
@@ -11732,8 +10720,8 @@ Transform:
   m_GameObject: {fileID: 4180669215245709759}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 5.6099997, z: -0.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 8.67, z: -0.03}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3437442616568585215}
@@ -11770,7 +10758,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6243599064947139743}
   - component: {fileID: 9092955032091464852}
-  - component: {fileID: 3275657949311416033}
   m_Layer: 11
   m_Name: circuitry (113)
   m_TagString: Road
@@ -11845,27 +10832,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3275657949311416033
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4226866668643954942}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4228990457764252495
 GameObject:
   m_ObjectHideFlags: 0
@@ -11876,7 +10842,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1643079293687826767}
   - component: {fileID: 4556163786600816136}
-  - component: {fileID: 8897115121875469121}
   m_Layer: 11
   m_Name: circuitry (5)
   m_TagString: Road
@@ -11951,27 +10916,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8897115121875469121
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4228990457764252495}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4235264888501365741
 GameObject:
   m_ObjectHideFlags: 0
@@ -11982,7 +10926,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7985443638145179451}
   - component: {fileID: 3329590101001569062}
-  - component: {fileID: 3467388248984371202}
   m_Layer: 11
   m_Name: circuitry (94)
   m_TagString: Road
@@ -12057,27 +11000,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3467388248984371202
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235264888501365741}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4262633058702917017
 GameObject:
   m_ObjectHideFlags: 0
@@ -12088,7 +11010,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4468631552796674091}
   - component: {fileID: 3818685859509612477}
-  - component: {fileID: 3775880838122128426}
   m_Layer: 11
   m_Name: circuitry (117)
   m_TagString: Road
@@ -12163,27 +11084,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3775880838122128426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4262633058702917017}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4265862294620802565
 GameObject:
   m_ObjectHideFlags: 0
@@ -12194,7 +11094,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4096815655792855404}
   - component: {fileID: 3549041194354368802}
-  - component: {fileID: 5516327453243203523}
   m_Layer: 11
   m_Name: circuitry (51)
   m_TagString: Road
@@ -12269,27 +11168,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5516327453243203523
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4265862294620802565}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4282320351529947487
 GameObject:
   m_ObjectHideFlags: 0
@@ -12475,7 +11353,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6880036698249962819}
   - component: {fileID: 2699369809957066070}
-  - component: {fileID: 5076451690973492570}
   m_Layer: 11
   m_Name: circuitry (6)
   m_TagString: Road
@@ -12550,27 +11427,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5076451690973492570
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411572353958087694}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4436159213355691800
 GameObject:
   m_ObjectHideFlags: 0
@@ -12633,9 +11489,9 @@ Transform:
   m_GameObject: {fileID: 4451191903278179785}
   serializedVersion: 2
   m_LocalRotation: {x: 1.5888267e-15, y: 1, z: -0.000000021855694, w: 0.0000000754979}
-  m_LocalPosition: {x: -0, y: 4, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 18.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 4.34, z: 0}
+  m_LocalScale: {x: 2, y: 9.468364, z: 73.971596}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12667,7 +11523,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12734,7 +11590,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4648311559299516205}
   - component: {fileID: 3840822486366527044}
-  - component: {fileID: 8760066562298738832}
   m_Layer: 11
   m_Name: circuitry (18)
   m_TagString: Road
@@ -12809,27 +11664,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8760066562298738832
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488191554082538357}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4522448597634786320
 GameObject:
   m_ObjectHideFlags: 0
@@ -12946,7 +11780,6 @@ GameObject:
   m_Component:
   - component: {fileID: 170332697494904490}
   - component: {fileID: 6712604252890873208}
-  - component: {fileID: 2325265752153407053}
   m_Layer: 11
   m_Name: circuitry (77)
   m_TagString: Road
@@ -13021,27 +11854,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2325265752153407053
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543769558592057195}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4570781374260079311
 GameObject:
   m_ObjectHideFlags: 0
@@ -13052,7 +11864,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9071602981514027873}
   - component: {fileID: 7118931132943331489}
-  - component: {fileID: 1497444192171183069}
   m_Layer: 11
   m_Name: circuitry (50)
   m_TagString: Road
@@ -13127,27 +11938,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1497444192171183069
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4570781374260079311}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4670538449438666265
 GameObject:
   m_ObjectHideFlags: 0
@@ -13158,7 +11948,6 @@ GameObject:
   m_Component:
   - component: {fileID: 345306358544327045}
   - component: {fileID: 9151688654061442312}
-  - component: {fileID: 748821165783854050}
   m_Layer: 11
   m_Name: circuitry (88)
   m_TagString: Road
@@ -13233,27 +12022,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &748821165783854050
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4670538449438666265}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4695925452302439839
 GameObject:
   m_ObjectHideFlags: 0
@@ -13264,7 +12032,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2414780641104442106}
   - component: {fileID: 7534506873254469047}
-  - component: {fileID: 5987927480933129770}
   m_Layer: 11
   m_Name: circuitry (14)
   m_TagString: Road
@@ -13339,27 +12106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5987927480933129770
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4695925452302439839}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4700678677029000362
 GameObject:
   m_ObjectHideFlags: 0
@@ -13476,7 +12222,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6707199549713953801}
   - component: {fileID: 7153211653123928636}
-  - component: {fileID: 1792040532982437936}
   m_Layer: 11
   m_Name: circuitry (110)
   m_TagString: Road
@@ -13551,27 +12296,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1792040532982437936
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4754824891107867028}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4757667706582039035
 GameObject:
   m_ObjectHideFlags: 0
@@ -14112,7 +12836,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6632688937080527129}
   - component: {fileID: 887518412244536108}
-  - component: {fileID: 1233848222102241408}
   m_Layer: 11
   m_Name: circuitry (7)
   m_TagString: Road
@@ -14187,27 +12910,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1233848222102241408
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4856534278226937786}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &4897627803909908280
 GameObject:
   m_ObjectHideFlags: 0
@@ -14642,7 +13344,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5879990949859779241}
   - component: {fileID: 331994146027565638}
-  - component: {fileID: 3141433844869714048}
   m_Layer: 11
   m_Name: circuitry (85)
   m_TagString: Road
@@ -14717,27 +13418,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3141433844869714048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5060156087141825014}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5077861569864269378
 GameObject:
   m_ObjectHideFlags: 0
@@ -15028,7 +13708,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5851121221507688701}
   - component: {fileID: 6833509802163781346}
-  - component: {fileID: 7798436418437095712}
   m_Layer: 11
   m_Name: circuitry (17)
   m_TagString: Road
@@ -15103,27 +13782,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7798436418437095712
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5138623328063446603}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5146983948903653048
 GameObject:
   m_ObjectHideFlags: 0
@@ -15276,7 +13934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5067110205370595576}
   - component: {fileID: 191517152028993920}
-  - component: {fileID: 1036499086369899105}
   m_Layer: 11
   m_Name: circuitry (84)
   m_TagString: Road
@@ -15351,27 +14008,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1036499086369899105
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5173005787639682726}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5197235168140423057
 GameObject:
   m_ObjectHideFlags: 0
@@ -15382,7 +14018,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3217231610123853234}
   - component: {fileID: 6571843501114416584}
-  - component: {fileID: 6376248841836892345}
   m_Layer: 11
   m_Name: circuitry (90)
   m_TagString: Road
@@ -15457,27 +14092,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6376248841836892345
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5197235168140423057}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5261378689363334207
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,7 +14102,6 @@ GameObject:
   m_Component:
   - component: {fileID: 364088160815108915}
   - component: {fileID: 4342404402365301847}
-  - component: {fileID: 7779136941975210835}
   m_Layer: 11
   m_Name: circuitry (93)
   m_TagString: Road
@@ -15563,27 +14176,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7779136941975210835
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261378689363334207}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5268984980182969611
 GameObject:
   m_ObjectHideFlags: 0
@@ -15700,7 +14292,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1810481856796393371}
   - component: {fileID: 7430283701450076766}
-  - component: {fileID: 2597142123212184509}
   m_Layer: 11
   m_Name: circuitry (74)
   m_TagString: Road
@@ -15775,27 +14366,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2597142123212184509
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270494561522615513}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5285044856106909086
 GameObject:
   m_ObjectHideFlags: 0
@@ -15806,7 +14376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9024335594718230738}
   - component: {fileID: 1893403705780345720}
-  - component: {fileID: 1828344721016110919}
   m_Layer: 11
   m_Name: circuitry (80)
   m_TagString: Road
@@ -15881,27 +14450,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1828344721016110919
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5285044856106909086}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5319856563247885203
 GameObject:
   m_ObjectHideFlags: 0
@@ -16124,7 +14672,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3059057738040413863}
   - component: {fileID: 5425934123028537875}
-  - component: {fileID: 8946746319200074100}
   m_Layer: 11
   m_Name: circuitry (22)
   m_TagString: Road
@@ -16199,27 +14746,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8946746319200074100
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5391882464534165002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5431577107131079975
 GameObject:
   m_ObjectHideFlags: 0
@@ -16267,7 +14793,6 @@ GameObject:
   m_Component:
   - component: {fileID: 407734920404005631}
   - component: {fileID: 7938710288119510472}
-  - component: {fileID: 7779534446494533335}
   m_Layer: 11
   m_Name: circuitry (63)
   m_TagString: Road
@@ -16342,27 +14867,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7779534446494533335
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5461187609444195140}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5468102782737940171
 GameObject:
   m_ObjectHideFlags: 0
@@ -16620,7 +15124,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3988213538056555163}
   - component: {fileID: 2637010437209274085}
-  - component: {fileID: 1885857021307842100}
   m_Layer: 11
   m_Name: circuitry (81)
   m_TagString: Road
@@ -16695,27 +15198,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1885857021307842100
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552442680156064967}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5611263117040468983
 GameObject:
   m_ObjectHideFlags: 0
@@ -16726,7 +15208,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6195292198775642931}
   - component: {fileID: 8619488324796910217}
-  - component: {fileID: 2635105691741986248}
   m_Layer: 11
   m_Name: circuitry (92)
   m_TagString: Road
@@ -16801,27 +15282,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2635105691741986248
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5611263117040468983}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5648184469299768050
 GameObject:
   m_ObjectHideFlags: 0
@@ -16832,7 +15292,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1179243607934837970}
   - component: {fileID: 2281893384729393868}
-  - component: {fileID: 8657231972365679870}
   m_Layer: 11
   m_Name: circuitry (103)
   m_TagString: Road
@@ -16907,27 +15366,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8657231972365679870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5648184469299768050}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5651524539957548326
 GameObject:
   m_ObjectHideFlags: 0
@@ -16938,7 +15376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7610150333791856078}
   - component: {fileID: 4312013913492013111}
-  - component: {fileID: 6976310258140350838}
   m_Layer: 11
   m_Name: circuitry (95)
   m_TagString: Road
@@ -17013,27 +15450,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6976310258140350838
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5651524539957548326}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5672959415682814445
 GameObject:
   m_ObjectHideFlags: 0
@@ -17044,7 +15460,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5797395899667569695}
   - component: {fileID: 5219230025633250007}
-  - component: {fileID: 5588126547885892598}
   m_Layer: 11
   m_Name: circuitry (75)
   m_TagString: Road
@@ -17119,27 +15534,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5588126547885892598
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5672959415682814445}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5674248161858600928
 GameObject:
   m_ObjectHideFlags: 0
@@ -17220,7 +15614,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2523714957250531968}
   - component: {fileID: 4696027185925100258}
-  - component: {fileID: 4862432489321859179}
   m_Layer: 11
   m_Name: circuitry (68)
   m_TagString: Road
@@ -17295,27 +15688,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4862432489321859179
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5714329126901872424}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5716109214521343217
 GameObject:
   m_ObjectHideFlags: 0
@@ -17326,7 +15698,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1618876150268915568}
   - component: {fileID: 4771649104653543190}
-  - component: {fileID: 9137529918782881098}
   m_Layer: 11
   m_Name: circuitry (56)
   m_TagString: Road
@@ -17401,27 +15772,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &9137529918782881098
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5716109214521343217}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5726895421795217367
 GameObject:
   m_ObjectHideFlags: 0
@@ -17432,7 +15782,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1150327817107087319}
   - component: {fileID: 1019522968315887672}
-  - component: {fileID: 6328993804225979103}
   m_Layer: 11
   m_Name: circuitry (9)
   m_TagString: Road
@@ -17507,27 +15856,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6328993804225979103
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5726895421795217367}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5770479079224439369
 GameObject:
   m_ObjectHideFlags: 0
@@ -17538,7 +15866,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6118051457584869383}
   - component: {fileID: 3488936283060105710}
-  - component: {fileID: 1923560731037314834}
   m_Layer: 11
   m_Name: circuitry (24)
   m_TagString: Road
@@ -17613,27 +15940,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1923560731037314834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5770479079224439369}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5770528012664959283
 GameObject:
   m_ObjectHideFlags: 0
@@ -17644,7 +15950,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4118831727565608367}
   - component: {fileID: 4864013341411696503}
-  - component: {fileID: 8394670610738915900}
   m_Layer: 11
   m_Name: circuitry (57)
   m_TagString: Road
@@ -17719,27 +16024,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8394670610738915900
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5770528012664959283}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5778616555464216617
 GameObject:
   m_ObjectHideFlags: 0
@@ -17856,7 +16140,6 @@ GameObject:
   m_Component:
   - component: {fileID: 105048505169186388}
   - component: {fileID: 5755367742712349271}
-  - component: {fileID: 2911878523639468129}
   m_Layer: 11
   m_Name: circuitry (29)
   m_TagString: Road
@@ -17931,27 +16214,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2911878523639468129
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5873126144317309807}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5888629183542093318
 GameObject:
   m_ObjectHideFlags: 0
@@ -17962,7 +16224,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7861362324294081578}
   - component: {fileID: 7166800557997026076}
-  - component: {fileID: 9159636859091555252}
   m_Layer: 11
   m_Name: circuitry (86)
   m_TagString: Road
@@ -18037,27 +16298,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &9159636859091555252
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5888629183542093318}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5951613951581298987
 GameObject:
   m_ObjectHideFlags: 0
@@ -18068,7 +16308,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6485271533459116688}
   - component: {fileID: 8524106329662982160}
-  - component: {fileID: 1720543790623610120}
   m_Layer: 11
   m_Name: circuitry (26)
   m_TagString: Road
@@ -18143,27 +16382,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1720543790623610120
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5951613951581298987}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &5963354380328021163
 GameObject:
   m_ObjectHideFlags: 0
@@ -18492,7 +16710,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4042872859072123987}
   - component: {fileID: 7306179769438405542}
-  - component: {fileID: 4585908675852012879}
   m_Layer: 11
   m_Name: circuitry (115)
   m_TagString: Road
@@ -18567,27 +16784,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4585908675852012879
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6010444320789509830}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6029406866145619289
 GameObject:
   m_ObjectHideFlags: 0
@@ -18810,7 +17006,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5819191588352908404}
   - component: {fileID: 1360483073906493068}
-  - component: {fileID: 1792981514909141156}
   m_Layer: 11
   m_Name: circuitry (34)
   m_TagString: Road
@@ -18885,27 +17080,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1792981514909141156
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6086956130529099997}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6125673103429898018
 GameObject:
   m_ObjectHideFlags: 0
@@ -19057,7 +17231,6 @@ GameObject:
   m_Component:
   - component: {fileID: 600785144102918641}
   - component: {fileID: 6122140192014428700}
-  - component: {fileID: 5265613876970845870}
   m_Layer: 11
   m_Name: circuitry (58)
   m_TagString: Road
@@ -19132,27 +17305,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5265613876970845870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6127620342958809004}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6227541649725313234
 GameObject:
   m_ObjectHideFlags: 0
@@ -19269,7 +17421,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1443489020675553283}
   - component: {fileID: 5744230649695387134}
-  - component: {fileID: 2428550870118714611}
   m_Layer: 11
   m_Name: circuitry (4)
   m_TagString: Road
@@ -19344,27 +17495,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2428550870118714611
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262952680226931182}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6351670531420962999
 GameObject:
   m_ObjectHideFlags: 0
@@ -19410,7 +17540,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5868079129736718613}
   - component: {fileID: 1577544760063202315}
-  - component: {fileID: 5606324484415077703}
   m_Layer: 11
   m_Name: circuitry (44)
   m_TagString: Road
@@ -19485,27 +17614,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5606324484415077703
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6399764575150327777}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6402060738013626578
 GameObject:
   m_ObjectHideFlags: 0
@@ -19744,13 +17852,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6430685914541622603}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 1.2981292, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 16.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.82, y: 23.513363, z: 141.28574}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1188828289833314462
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19779,7 +17887,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19969,8 +18077,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 20.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5.54, y: 42.296585, z: 204.9013}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20002,7 +18110,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20140,7 +18248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4994908016365094877}
   - component: {fileID: 5698419746416484425}
-  - component: {fileID: 1221904404219802104}
   m_Layer: 11
   m_Name: circuitry
   m_TagString: Road
@@ -20215,27 +18322,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1221904404219802104
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6547276055726892853}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6552518015351613164
 GameObject:
   m_ObjectHideFlags: 0
@@ -20386,7 +18472,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4651179363374530180}
   - component: {fileID: 6352622460395684326}
-  - component: {fileID: 8850945136471534261}
   m_Layer: 11
   m_Name: circuitry (64)
   m_TagString: Road
@@ -20461,27 +18546,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8850945136471534261
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6673492473587792553}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6681632552317394177
 GameObject:
   m_ObjectHideFlags: 0
@@ -20492,7 +18556,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4314681069870508610}
   - component: {fileID: 4286011670432973340}
-  - component: {fileID: 5915231990227479005}
   m_Layer: 11
   m_Name: circuitry (83)
   m_TagString: Road
@@ -20567,27 +18630,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5915231990227479005
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681632552317394177}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6691081355789464391
 GameObject:
   m_ObjectHideFlags: 0
@@ -20616,8 +18658,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0.64293325, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 18.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4.59, y: 31.648266, z: 169.7648}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20649,7 +18691,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20893,7 +18935,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3243802435505258651}
   - component: {fileID: 7244672622213625151}
-  - component: {fileID: 4532947188220677741}
   m_Layer: 11
   m_Name: circuitry (76)
   m_TagString: Road
@@ -20968,27 +19009,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4532947188220677741
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848083959764353904}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &6876833011592211484
 GameObject:
   m_ObjectHideFlags: 0
@@ -21015,13 +19035,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6876833011592211484}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 20.642418, z: 100}
+  m_LocalScale: {x: 5.54, y: 44.03, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &3541982414007414473
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -21050,7 +19070,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21099,9 +19119,9 @@ Transform:
   m_GameObject: {fileID: 6900583702381088150}
   serializedVersion: 2
   m_LocalRotation: {x: 1.5888267e-15, y: 1, z: -0.000000021855694, w: 0.0000000754979}
-  m_LocalPosition: {x: -0, y: 4, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 18.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 4.11, z: 0}
+  m_LocalScale: {x: 2, y: 7.9149604, z: 73.971596}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21133,7 +19153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21164,6 +19184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8831672816548692454}
+  - component: {fileID: 5730535371800507542}
   m_Layer: 0
   m_Name: CoolFloor
   m_TagString: Untagged
@@ -21306,6 +19327,27 @@ Transform:
   - {fileID: 4889184336273180575}
   m_Father: {fileID: 3404843221266586057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5730535371800507542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965383883884045207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 214.66, y: 1, z: 200.57}
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!1 &7010829106797846980
 GameObject:
   m_ObjectHideFlags: 0
@@ -21316,7 +19358,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5420536958157454480}
   - component: {fileID: 5807121484823930990}
-  - component: {fileID: 1273185778099486817}
   m_Layer: 11
   m_Name: circuitry (48)
   m_TagString: Road
@@ -21391,27 +19432,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1273185778099486817
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010829106797846980}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7076677406155460821
 GameObject:
   m_ObjectHideFlags: 0
@@ -21740,7 +19760,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4513145411553962691}
   - component: {fileID: 5157098421908815588}
-  - component: {fileID: 4919231313657411880}
   m_Layer: 11
   m_Name: circuitry (87)
   m_TagString: Road
@@ -21815,27 +19834,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4919231313657411880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198721565109382664}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7199913774830321681
 GameObject:
   m_ObjectHideFlags: 0
@@ -22058,7 +20056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5519297585497421787}
   - component: {fileID: 3631631434047558468}
-  - component: {fileID: 4811091454089267651}
   m_Layer: 11
   m_Name: circuitry (71)
   m_TagString: Road
@@ -22133,27 +20130,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4811091454089267651
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7233337741977107889}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7256100886013389950
 GameObject:
   m_ObjectHideFlags: 0
@@ -22164,7 +20140,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4779330834189426093}
   - component: {fileID: 2982595984443726896}
-  - component: {fileID: 1120231935686687403}
   m_Layer: 11
   m_Name: circuitry (53)
   m_TagString: Road
@@ -22239,27 +20214,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1120231935686687403
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7256100886013389950}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7313312385909692213
 GameObject:
   m_ObjectHideFlags: 0
@@ -22270,7 +20224,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4841496296953133513}
   - component: {fileID: 324252393257825104}
-  - component: {fileID: 3304230863206782197}
   m_Layer: 11
   m_Name: circuitry (25)
   m_TagString: Road
@@ -22345,27 +20298,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3304230863206782197
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7313312385909692213}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7334629196320219962
 GameObject:
   m_ObjectHideFlags: 0
@@ -22482,7 +20414,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5446221113591881194}
   - component: {fileID: 7983703516716600233}
-  - component: {fileID: 7241298429537176806}
   m_Layer: 11
   m_Name: circuitry (72)
   m_TagString: Road
@@ -22557,27 +20488,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7241298429537176806
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339187898490897656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7402102240388358747
 GameObject:
   m_ObjectHideFlags: 0
@@ -22606,7 +20516,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 2.7036421, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 20.642418, z: 100}
+  m_LocalScale: {x: 2.7037406, y: 11.68, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4349104177156590445}
@@ -22639,7 +20549,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22671,7 +20581,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8089551830128446924}
   - component: {fileID: 7694540236060611073}
-  - component: {fileID: 2782811602338362842}
   m_Layer: 11
   m_Name: circuitry (97)
   m_TagString: Road
@@ -22746,27 +20655,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2782811602338362842
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7426127428815629654}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7519457218779524774
 GameObject:
   m_ObjectHideFlags: 0
@@ -22777,7 +20665,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4985840851233530683}
   - component: {fileID: 4022284346443358863}
-  - component: {fileID: 1782919956991795798}
   m_Layer: 11
   m_Name: circuitry (100)
   m_TagString: Road
@@ -22852,27 +20739,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1782919956991795798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7519457218779524774}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7573435546360844303
 GameObject:
   m_ObjectHideFlags: 0
@@ -23095,7 +20961,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6582294624742972388}
   - component: {fileID: 3956727411400605887}
-  - component: {fileID: 7408251692610935087}
   m_Layer: 11
   m_Name: circuitry (11)
   m_TagString: Road
@@ -23170,27 +21035,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7408251692610935087
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7763628014902044632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7767305387416668496
 GameObject:
   m_ObjectHideFlags: 0
@@ -23413,7 +21257,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4889184336273180575}
   - component: {fileID: 7601822676372489886}
-  - component: {fileID: 2529919426310939859}
   m_Layer: 11
   m_Name: circuitry (108)
   m_TagString: Road
@@ -23488,27 +21331,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2529919426310939859
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7835741525342669640}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7844372841602922456
 GameObject:
   m_ObjectHideFlags: 0
@@ -23555,7 +21377,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2435911105365814101}
   - component: {fileID: 7664254487695714821}
-  - component: {fileID: 3320562751408380974}
   m_Layer: 11
   m_Name: circuitry (70)
   m_TagString: Road
@@ -23630,27 +21451,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3320562751408380974
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863737773161362180}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &7895442578134136509
 GameObject:
   m_ObjectHideFlags: 0
@@ -23695,7 +21495,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4361462270164048005}
   - component: {fileID: 2142410086478570402}
-  - component: {fileID: 7165719691122367820}
   m_Layer: 11
   m_Name: circuitry (30)
   m_TagString: Road
@@ -23770,27 +21569,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7165719691122367820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8014748608464692129}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8049167795363921413
 GameObject:
   m_ObjectHideFlags: 0
@@ -24331,7 +22109,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3530115371672143808}
   - component: {fileID: 5705015710444450639}
-  - component: {fileID: 3485741833839137398}
   m_Layer: 11
   m_Name: circuitry (35)
   m_TagString: Road
@@ -24406,27 +22183,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3485741833839137398
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8228826867747048222}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8292546672606233916
 GameObject:
   m_ObjectHideFlags: 0
@@ -24543,7 +22299,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7163376113008892517}
   - component: {fileID: 2534413782734133387}
-  - component: {fileID: 8763243699674614803}
   m_Layer: 11
   m_Name: circuitry (33)
   m_TagString: Road
@@ -24618,27 +22373,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8763243699674614803
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8295079740141701431}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8306852171743437486
 GameObject:
   m_ObjectHideFlags: 0
@@ -24649,7 +22383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6309552860482786041}
   - component: {fileID: 7015032561739451941}
-  - component: {fileID: 5568607106621116003}
   m_Layer: 11
   m_Name: circuitry (28)
   m_TagString: Road
@@ -24724,27 +22457,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5568607106621116003
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8306852171743437486}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8317736998792091432
 GameObject:
   m_ObjectHideFlags: 0
@@ -24861,7 +22573,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3750629030861399703}
   - component: {fileID: 1095913106452818160}
-  - component: {fileID: 2686047672329793089}
   m_Layer: 11
   m_Name: circuitry (23)
   m_TagString: Road
@@ -24936,27 +22647,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &2686047672329793089
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8382604188165286653}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8452445899220877818
 GameObject:
   m_ObjectHideFlags: 0
@@ -24967,7 +22657,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2665716223287571098}
   - component: {fileID: 912978921827243584}
-  - component: {fileID: 5978132765606410549}
   m_Layer: 11
   m_Name: circuitry (106)
   m_TagString: Road
@@ -25042,27 +22731,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5978132765606410549
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8452445899220877818}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8463090170317160356
 GameObject:
   m_ObjectHideFlags: 0
@@ -25391,7 +23059,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7937052088485663678}
   - component: {fileID: 5031257023652576018}
-  - component: {fileID: 7705113408123787538}
   m_Layer: 11
   m_Name: circuitry (109)
   m_TagString: Road
@@ -25466,27 +23133,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7705113408123787538
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8541448607458295230}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8560509323415862897
 GameObject:
   m_ObjectHideFlags: 0
@@ -25497,7 +23143,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2695200760930556228}
   - component: {fileID: 8051791125497668206}
-  - component: {fileID: 5737594183288200651}
   m_Layer: 11
   m_Name: circuitry (112)
   m_TagString: Road
@@ -25572,27 +23217,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5737594183288200651
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8560509323415862897}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8565247573248628413
 GameObject:
   m_ObjectHideFlags: 0
@@ -25621,8 +23245,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0.64293325, z: 0}
-  m_LocalScale: {x: 2.7037406, y: 18.642418, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4.57, y: 31.510365, z: 169.02509}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3437442616568585215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25654,7 +23278,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be0e6b1d77c3ad8439ed3855bdf871f0, type: 2}
+  - {fileID: 2100000, guid: 8eef237973f5bc448802acce23e02161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25686,7 +23310,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8630068953843467484}
   - component: {fileID: 3506844222714641855}
-  - component: {fileID: 5175803321276274928}
   m_Layer: 11
   m_Name: circuitry (89)
   m_TagString: Road
@@ -25761,27 +23384,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5175803321276274928
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8575245133284366782}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8598632975406789004
 GameObject:
   m_ObjectHideFlags: 0
@@ -25792,7 +23394,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4981887455661570733}
   - component: {fileID: 4429081125242888034}
-  - component: {fileID: 8341634612415747964}
   m_Layer: 11
   m_Name: circuitry (101)
   m_TagString: Road
@@ -25867,27 +23468,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8341634612415747964
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8598632975406789004}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8611306135739068866
 GameObject:
   m_ObjectHideFlags: 0
@@ -25934,7 +23514,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1652253998464307652}
   - component: {fileID: 979031619094351122}
-  - component: {fileID: 9081638770920454508}
   m_Layer: 11
   m_Name: circuitry (62)
   m_TagString: Road
@@ -26009,27 +23588,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &9081638770920454508
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8615802258850969188}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8656953869011142896
 GameObject:
   m_ObjectHideFlags: 0
@@ -26040,7 +23598,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3516395515067813624}
   - component: {fileID: 8669225034677984269}
-  - component: {fileID: 1767300709141624903}
   m_Layer: 11
   m_Name: circuitry (46)
   m_TagString: Road
@@ -26115,27 +23672,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1767300709141624903
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656953869011142896}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8657406968406283064
 GameObject:
   m_ObjectHideFlags: 0
@@ -26570,7 +24106,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1553807146563011076}
   - component: {fileID: 3730125641852977076}
-  - component: {fileID: 1037654644734563468}
   m_Layer: 11
   m_Name: circuitry (19)
   m_TagString: Road
@@ -26645,27 +24180,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1037654644734563468
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8734946150437271011}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8739099378279181851
 GameObject:
   m_ObjectHideFlags: 0
@@ -26783,7 +24297,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7709497860021432655}
   - component: {fileID: 4610229358249921077}
-  - component: {fileID: 6373073618238397112}
   m_Layer: 11
   m_Name: circuitry (107)
   m_TagString: Road
@@ -26858,27 +24371,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6373073618238397112
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8829115155501384946}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8852778141188994443
 GameObject:
   m_ObjectHideFlags: 0
@@ -27101,7 +24593,6 @@ GameObject:
   m_Component:
   - component: {fileID: 787195649504094818}
   - component: {fileID: 7579275033748485823}
-  - component: {fileID: 7377388007461627482}
   m_Layer: 11
   m_Name: circuitry (82)
   m_TagString: Road
@@ -27176,27 +24667,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7377388007461627482
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8942616232281367405}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &8954944993821789192
 GameObject:
   m_ObjectHideFlags: 0
@@ -27453,7 +24923,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4675490604938886528}
   - component: {fileID: 1705038823069226449}
-  - component: {fileID: 8400006926719897636}
   m_Layer: 11
   m_Name: circuitry (38)
   m_TagString: Road
@@ -27528,27 +24997,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8400006926719897636
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012558435284703651}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &9048665682003699402
 GameObject:
   m_ObjectHideFlags: 0
@@ -27665,7 +25113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2756447617295569626}
   - component: {fileID: 6142423429448172150}
-  - component: {fileID: 927738918819244002}
   m_Layer: 11
   m_Name: circuitry (55)
   m_TagString: Road
@@ -27740,27 +25187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &927738918819244002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9050221228568363264}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &9107425134902125039
 GameObject:
   m_ObjectHideFlags: 0
@@ -28089,7 +25515,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8580571253986726615}
   - component: {fileID: 5202611367085864194}
-  - component: {fileID: 1355162426912924072}
   m_Layer: 11
   m_Name: circuitry (104)
   m_TagString: Road
@@ -28164,27 +25589,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1355162426912924072
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9154015904811824321}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &9165796690519218036
 GameObject:
   m_ObjectHideFlags: 0
@@ -28195,7 +25599,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1242118427518497725}
   - component: {fileID: 2125426722569100923}
-  - component: {fileID: 3184463732147669956}
   m_Layer: 11
   m_Name: circuitry (116)
   m_TagString: Road
@@ -28270,27 +25673,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3184463732147669956
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165796690519218036}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.78, y: 23.637522, z: 5.8}
-  m_Center: {x: 0, y: 0, z: -2.63}
 --- !u!1 &9218044844986631978
 GameObject:
   m_ObjectHideFlags: 0

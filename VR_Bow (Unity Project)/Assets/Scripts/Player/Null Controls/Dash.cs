@@ -41,7 +41,6 @@ public class Dash : MonoBehaviour
     {
         UpdateDashPossible();
         
-        if(!dashPosssible) return;
 
         UpdateControllerData();
     }
@@ -74,7 +73,7 @@ public class Dash : MonoBehaviour
         if (activeController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 controllerVelocity))
         {
             float now = Time.time;
-            if (dashPosssible && controllerVelocity.z >= 2.5f && now >= nextDashTime)
+            if (dashPosssible && controllerVelocity.z >= 2.5f && now >= nextDashTime  && dashPosssible)
             {
                 StartDash();
                 nextDashTime = now + pData.BashCooldown;
@@ -90,8 +89,8 @@ public class Dash : MonoBehaviour
 
     private async UniTaskVoid MakeBashActive()
     {
-        player.isBashing = true;
+        player.isDashing = true;
         await UniTask.WaitForSeconds(pData.BashActiveTime);
-        player.isBashing = false;
+        player.isDashing = false;
     }
 }

@@ -26,7 +26,7 @@ public class Launchable : MonoBehaviour
 
     public void OnBash(GameObject player)
     {
-        if (!player.GetComponent<Player>().isBashing) //if player is not bashing 
+        if (!player.GetComponent<Player>().isDashing) //if player is not bashing 
         {
             return;
         }

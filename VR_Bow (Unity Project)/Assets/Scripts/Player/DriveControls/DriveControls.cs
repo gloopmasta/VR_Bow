@@ -202,9 +202,9 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     
     private async UniTaskVoid MakeBashActive()
     {
-        player.isBashing = true;
+        player.isDashing = true;
         await UniTask.WaitForSeconds(pData.BashActiveTime); //make bash active for however long it is in settings
-        player.isBashing = false;
+        player.isDashing = false;
     }
 
     bool CanJump()
