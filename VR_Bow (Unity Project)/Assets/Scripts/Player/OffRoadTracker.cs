@@ -118,7 +118,7 @@ public class OffRoadTracker : MonoBehaviour
         try
         {
             await UniTask.Delay(TimeSpan.FromSeconds(offRoadDuration), cancellationToken: token);
-            GetComponent<Player>().Respawn().Forget();
+            GetComponent<IPlayerRuntime>().Respawn().Forget();
         }
         catch (OperationCanceledException)
         {

@@ -94,8 +94,8 @@ public class LevelManager : MonoBehaviour
 
         if (loseScoreText != null)
         {
-            loseScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
-            loseScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            loseScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<IPlayerRuntime>().Score;
+            loseScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<IPlayerRuntime>().Score;
         }
 
         //wait until the coverdome animation is done
@@ -116,8 +116,8 @@ public class LevelManager : MonoBehaviour
 
         if (winScoreText != null)
         {
-            winScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
-            winScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<Player>().Score;
+            winScoreText.text = "Score: " + GameManager.Instance.player.GetComponent<IPlayerRuntime>().Score;
+            winScoreText2.text = "Score: " + GameManager.Instance.player.GetComponent<IPlayerRuntime>().Score;
         }
 
         //await UniTask.Delay(1000);
@@ -129,7 +129,7 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Player pressed a restart button");
         var uiManager = GameManager.Instance.player.GetComponent<PlayerUIManager>();
-        var playerScript = GameManager.Instance.player.GetComponent<Player>();
+        var playerScript = GameManager.Instance.player.GetComponent<IPlayerRuntime>();
 
         await uiManager.FadeToBlackAsync(); // fade to black
 
@@ -152,7 +152,8 @@ public class LevelManager : MonoBehaviour
         currentMap = Instantiate(mapPrefab);
         UpdateLevelReferences(currentMap);
 
-        GameManager.Instance.player.GetComponent<DriveControls>().enabled = false; //disable drive controls
+        var driveControls = GameManager.Instance.player.GetComponent<DriveControls>();
+        if (driveControls != null) driveControls.enabled = false;
         //GameManager.Instance.player.GetComponent<OffRoadTracker>().enabled = false; //disable drive controls
         // Reset player
         playerScript.ResetPosition();

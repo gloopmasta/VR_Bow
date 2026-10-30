@@ -47,7 +47,7 @@ public class ControllerShooting : ShootingMode
     private float flexValue = 0f;
     private bool isDrawing = false;
     private Vector3 drawStartPosition;
-    private Player playerScript;
+    private IPlayerRuntime playerScript;
 
     void OnEnable()
     {
@@ -61,7 +61,7 @@ public class ControllerShooting : ShootingMode
 
 
 
-        playerScript = GetComponent<Player>();
+        playerScript = GetComponent<IPlayerRuntime>();
     }
 
     void OnDisable()

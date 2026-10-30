@@ -65,11 +65,12 @@ public class Activator : MonoBehaviour
 
     private void SetPlayerRespawnPoint(GameObject player)
     {
-        if (!player.GetComponent<Player>()) { Debug.Log("no player script found in player collision " + player); return; }
+        var playerRuntime = player.GetComponent<IPlayerRuntime>();
+        if (playerRuntime == null) { Debug.Log("no player script found in player collision " + player); return; }
 
-        player.GetComponent<Player>().respawnPosition = transform.position; //set respawnPosition to the last checkpoint
-        player.GetComponent<Player>().respawnRotation = transform.rotation.eulerAngles; //set rotation to the last checkpoint
+        playerRuntime.RespawnPosition = transform.position;
+        playerRuntime.RespawnRotation = transform.rotation.eulerAngles;
     }
 
 }
- 
+

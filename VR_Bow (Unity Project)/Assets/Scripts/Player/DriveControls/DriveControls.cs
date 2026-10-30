@@ -7,7 +7,7 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Theme.Primitives;
 
-[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Rigidbody))]
 public class DriveControls : MonoBehaviour, ITimeScalable
 {
     private Rigidbody rb;
@@ -53,7 +53,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     [SerializeField] LevelEventsSO levelEvents;
     [SerializeField] GameSettings settings;
     [SerializeField] RumbleManager rumble;
-    private Player player;
+    private IPlayerRuntime player;
 
     // ITimeScalable
     public float timeScale = 1f;
@@ -71,7 +71,7 @@ public class DriveControls : MonoBehaviour, ITimeScalable
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.mass = 50f;
 
-        player = GetComponent<Player>();
+        player = GetComponent<IPlayerRuntime>();
 
         groundCheck = GetComponent<GroundCheck>();
     }
@@ -202,9 +202,9 @@ public class DriveControls : MonoBehaviour, ITimeScalable
     
     private async UniTaskVoid MakeBashActive()
     {
-        player.isDashing = true;
+        player.IsDashing = true;
         await UniTask.WaitForSeconds(pData.BashActiveTime); //make bash active for however long it is in settings
-        player.isDashing = false;
+        player.IsDashing = false;
     }
 
     bool CanJump()

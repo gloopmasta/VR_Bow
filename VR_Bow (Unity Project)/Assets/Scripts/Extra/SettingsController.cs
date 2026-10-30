@@ -55,7 +55,11 @@ public class SettingsController : MonoBehaviour
             bowToggle.RegisterValueChangedCallback(evt => gameSettings.useBowController = evt.newValue);
 
         if (tutorialToggle != null)
-            bowToggle.RegisterValueChangedCallback(evt => GameManager.Instance.player.GetComponent<PandaBehaviour>().enabled = evt.newValue);
+            tutorialToggle.RegisterValueChangedCallback(evt =>
+            {
+                var behaviour = GameManager.Instance.player.GetComponent<PandaBehaviour>();
+                if (behaviour != null) behaviour.enabled = evt.newValue;
+            });
 
         if (calibrateButton != null)
             calibrateButton.clicked += () => calibrateScript.Calibration().Forget();

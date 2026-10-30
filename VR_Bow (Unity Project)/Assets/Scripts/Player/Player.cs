@@ -5,7 +5,7 @@ using PandaBT;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IPlayerRuntime, IDamageable
 {
     [Header("ScriptableObjects")]
     [SerializeField] private PlayerDataSO data;
@@ -64,6 +64,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         get { return isDashing; }
         set { isDashing = value; }
+    }
+    public Vector3 RespawnPosition
+    {
+        get { return respawnPosition; }
+        set { respawnPosition = value; }
+    }
+    public Vector3 RespawnRotation
+    {
+        get { return respawnRotation; }
+        set { respawnRotation = value; }
     }
     public int Score
     {

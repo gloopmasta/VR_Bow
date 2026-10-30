@@ -77,7 +77,7 @@ public class BowShooting : ShootingMode
     [SerializeField] private float previousFlexValue = 0f;
     [SerializeField] private bool isDrawing = true;
     private Vector3 drawStartPosition;
-    private Player playerScript;
+    private IPlayerRuntime playerScript;
 
     [Header("Debug Flex Override")]
     public bool useInspectorSlider = false;
@@ -88,7 +88,7 @@ public class BowShooting : ShootingMode
 
     void OnEnable()
     {
-        playerScript = GetComponent<Player>();
+        playerScript = GetComponent<IPlayerRuntime>();
         smoothedRotation = aimingController.rotation;
 
 

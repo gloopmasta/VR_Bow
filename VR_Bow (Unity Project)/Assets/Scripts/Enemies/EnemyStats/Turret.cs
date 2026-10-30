@@ -26,7 +26,7 @@ public class Turret : Enemy
         // React to Player bash
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
+            IPlayerRuntime player = other.GetComponent<IPlayerRuntime>();
             if (player != null && player.IsDashing)
             {
                 TakeDamage(1);

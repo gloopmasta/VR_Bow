@@ -9,7 +9,7 @@ public class AddArrowPowerup : Powerup
 
     protected override void ApplyEffect(GameObject player)
     {
-        var playerScript = player.GetComponent<Player>();
+        var playerScript = player.GetComponent<IPlayerRuntime>();
         if (playerScript != null)
         {
             playerScript.ArrowCount += arrowsToAdd;
