@@ -4,7 +4,8 @@ using UnityEngine;
 public class BowMode : MonoBehaviour
 {
     [SerializeField] private Transform leftControllerTransform;
-    [SerializeField] private float dashTiltThreshold = -60f;
+    [SerializeField] private float thresholdWhileShooting = -60f;
+    [SerializeField] private float thresholdWhileDashing = -15f;
     [SerializeField] private ShootingMode shootingMode;
     [SerializeField] private BowModelHandler bowModelHandler;
 
@@ -20,17 +21,29 @@ public class BowMode : MonoBehaviour
 
     private void Update()
     {
-        PlayerState newState = PlayerState.Shooting;
-        if (leftControllerTransform != null &&
-            Mathf.DeltaAngle(0f, leftControllerTransform.localEulerAngles.z) <= dashTiltThreshold)
+        PlayerState? newState = null;
+
+        // different threshholds based on wether dashing or shooting
+        switch (state)
         {
-            newState = PlayerState.Dashing;
-            Debug.Log($"Entered dashing state + {leftControllerTransform.localEulerAngles.z}");
+            case PlayerState.Dashing:
+                if (leftControllerTransform != null && Mathf.DeltaAngle(0f, leftControllerTransform.localEulerAngles.z) > thresholdWhileDashing)
+                {
+                    newState = PlayerState.Shooting;
+                }
+                break;
+
+            case PlayerState.Shooting:
+                if (leftControllerTransform != null && Mathf.DeltaAngle(0f, leftControllerTransform.localEulerAngles.z) <= thresholdWhileShooting)
+                {
+                    newState = PlayerState.Dashing;
+                }
+                break;
         }
 
-        if (State != newState)
+        if (State != newState && newState != null)
         {
-            state = newState;
+            state = newState ?? PlayerState.Dashing; //apply new state if different
             ApplyState();
         }
     }

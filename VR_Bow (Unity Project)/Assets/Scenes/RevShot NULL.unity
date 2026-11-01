@@ -11150,7 +11150,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ff70a02beaae9424c9c08d3c69b7b2e3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: aa87677b703649242b63a66e33a9d0c1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.243
   m_Pitch: 1
@@ -11255,7 +11255,7 @@ MonoBehaviour:
   beatCount: 0
   intBeatCount: 0
   heartBeat: 0
-  songs: {fileID: 11400000, guid: 5506d749879860b46a7280790b402b91, type: 2}
+  songs: {fileID: 11400000, guid: 9e9f4ed12ead3d6409ba99dcd9563365, type: 2}
 --- !u!4 &1169013839
 Transform:
   m_ObjectHideFlags: 0
@@ -17175,8 +17175,23 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: db33230d9151b0b4ebef25437e31c352, type: 2}
   pData: {fileID: 11400000, guid: b474045e9bed7b84390e58e7c2c2ddad, type: 2}
   nextDashTime: 3.08
-  dashStrength: 591.8
+  dashStrength: 1200
+  dashTriggerSpeed: 2.5
   rumble: {fileID: 2000025737}
+  rotOffset: 0
+  steeringDeadZone: 8
+  steeringSmoothness: 5
+  maxTurnSpeed: 4
+  maxDashTurn: 5
+  headTransform: {fileID: 1571954339}
+  leftControllerTransform: {fileID: 1001975622}
+  rightControllerTransform: {fileID: 1983072756}
+  shoulderDrop: 0.2
+  minimumArmReach: 0.4
+  verticalDeadZone: 12
+  fullSteeringAngle: 45
+  maxDashPitch: 10
+  pitchSteeringSpeed: 30
 --- !u!114 &2000025739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17190,7 +17205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftControllerTransform: {fileID: 1001975622}
-  dashTiltThreshold: -60
+  thresholdWhileShooting: -60
+  thresholdWhileDashing: -25
   shootingMode: {fileID: 2000025731}
   bowModelHandler: {fileID: 0}
   state: 1
@@ -18355,6 +18371,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404843221266586057, guid: f7726ce3f0cf55d45a10aaed83665f5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366260586267099923, guid: f7726ce3f0cf55d45a10aaed83665f5d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
